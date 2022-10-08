@@ -38,4 +38,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(8080, () => {
+  console.log('El servidor de la terminal de mendoza esta corriendo');
+});
 module.exports = app;
