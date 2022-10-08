@@ -1,13 +1,42 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const app = express();
+const path = require("path");
+const publicPath = path.resolve('../public');
+const methodOverride = require('method-override');
+const session = require('express-session');
+const cookies = require('cookie-parser');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//session
+app.use(session({
+  secret: 'Es un secreto nuestro',
+  resave: false,
+  saveUninitialized: false,
+}))
 
-var app = express();
+app.use(cookies());
+
+// app.use(userLoggedOwner);
+// app.use(userLoggedPlayer);
+
+app.use(express.static('public'));
+app.use(express.static(publicPath));
+app.use(express.urlencoded({
+  extended: false
+}));
+app.set('view engine', 'ejs');
+app.set('views', path.resolve('src/views'));
+app.use(methodOverride('_method'));
+app.use(cors());
+app.use(bodyParser.json());
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
