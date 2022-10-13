@@ -10,7 +10,9 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  margin-left: 11%;
+  margin-top: -4%;
 }
 .botonera-inicial {
   width: 20%;
