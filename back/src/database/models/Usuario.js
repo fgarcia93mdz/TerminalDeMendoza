@@ -24,7 +24,7 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.STRING(200),
       allowNull: false
     },
-    roles: dataTypes.BIGINT(10),
+    roles_id: dataTypes.BIGINT(11),
 
   };
   let config = {
@@ -35,6 +35,19 @@ module.exports = (sequelize, dataTypes) => {
     // deletedAt: false
   }
   const Usuario = sequelize.define(alias, cols, config);
+
+  Usuario.associate = function (models) {
+
+    Usuario.belongsTo(models.Rol, {
+      as: "rol_usuario",
+      foreignKey: "roles_id"
+    })
+
+    Usuario.hasMany(models.RegistroAdministrativo, {
+      as: "registro_usuario",
+      foreignKey: "usuarios_id"
+    })
+  }
 
   return Usuario
 }
