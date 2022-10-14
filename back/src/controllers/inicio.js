@@ -6,9 +6,17 @@ const {
 const {
   Sequelize
 } = require('sequelize');
-// Login
+
+// encriptacion de la contraseña
 const bcryptjs = require('bcryptjs');
 
+// Llamado a la base de datos 
+const db = require('../database/models')
+
+// Modelo de DB
+const Usuario = db.Usuario;
+
+// Login
 const ControllerInicioUsuario = {
 
   login: (req, res, next) => {
