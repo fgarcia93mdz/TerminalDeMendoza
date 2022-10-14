@@ -30,8 +30,8 @@ const upload = multer({
 const ControllerInicioUsuario = require('../controllers/inicio')
 
 /* Home con inicio de sesion */
-
-router.post('/inicio/ingresoUsuario', ControllerInicioUsuario.login);
+router.get('/', ControllerInicioUsuario.inicio)
+router.post('/ingresoUsuario', ControllerInicioUsuario.login);
 
 
 module.exports = router;

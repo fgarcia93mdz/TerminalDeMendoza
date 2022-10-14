@@ -19,6 +19,11 @@ const Usuario = db.Usuario;
 // Login
 const ControllerInicioUsuario = {
 
+  inicio: (req, res, next) => {
+    res.render('index', {
+  
+})
+  },
   login: (req, res, next) => {
     
 }
