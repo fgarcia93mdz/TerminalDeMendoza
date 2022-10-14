@@ -3,7 +3,7 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* background-size: cover; */
+   background-size: cover;
   font-family: "Bangers", cursive;
 }
 .html {
@@ -29,7 +29,7 @@ body {
   -moz-box-shadow: 10px 10px 64px 0px rgba(102, 100, 98, 0.75);
   margin: 50px auto;
 }
-.contenedor-mayor {
+/* .contenedor-mayor {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -37,7 +37,7 @@ body {
   font-size: 20px;
   width: 100%;
   padding: 20px;
-}
+} */
 
 .container {
   min-width: fit-content;
@@ -63,6 +63,7 @@ body {
   padding: 1.9rem 1.2rem;
   text-align: center;
   background: #a8a6a6;
+  border-radius: 10%;
 }
 
 /*Inputs*/
@@ -144,7 +145,7 @@ input {
 }
 
 @media (min-width: 768px) {
-  .contenedor-mayor {
+  /* .contenedor-mayor {
     width: 370px;
     background: #edebeb;
     border: 2px solid rgb(0, 0, 0);
@@ -153,5 +154,15 @@ input {
     -webkit-box-shadow: 10px 10px 64px 0px rgba(58, 58, 58, 0.75);
     -moz-box-shadow: 10px 10px 64px 0px rgba(102, 100, 98, 0.75);
     height: 510px;
+  } */
+  .html{
+    margin-left: 6%;
+    margin-top: -5%;
+  }
+}
+@media(min-width: 1024px) {
+  .html {
+    margin-left: 11%;
+    margin-top: -4%;
   }
 }

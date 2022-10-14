@@ -18,8 +18,6 @@ app.use(session({
 
 app.use(cookies());
 
-// app.use(userLoggedOwner);
-// app.use(userLoggedPlayer);
 
 app.use(express.static('public'));
 app.use(express.static(publicPath));
@@ -48,7 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/inicio', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
