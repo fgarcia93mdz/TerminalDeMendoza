@@ -2,14 +2,14 @@ module.exports =  {
   "development": {
     "username": "root",
     "password": "root",
-    "database": "database_development",
+    "database": "terminal_mendoza",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "root",
-    "database": "database_test",
+    "database": "terminal_mendoza",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
