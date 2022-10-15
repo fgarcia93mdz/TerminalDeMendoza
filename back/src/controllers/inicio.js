@@ -24,6 +24,7 @@ const ControllerInicioUsuario = {
 
     })
   },
+  // Se inicia el proceos de login (ingreso) donde se busca al usuario en la base de datos, se hace una comparacion de contrasena encriptada y segun el resultado se redirecciona o se devuelve valores con el error
   login: (req, res, next) => {
 
     Usuario.findOne({
@@ -46,7 +47,7 @@ const ControllerInicioUsuario = {
             })
           }
 
-          return res.redirect("/welcome")
+          return res.redirect("/ingreso")
 
         }
 
@@ -68,15 +69,30 @@ const ControllerInicioUsuario = {
       });
     })
   },
+  // Direccionamos al usuario a la pagina de ingreso, donde se valida su rol.
   redirect: (req, res) => {
-
-    res.render("usuarios/welcome", {
-       userLogged: req.session.userLogged
+    const userLogged = req.session.userLogged
+      res.render("usuarios/welcome",{
+      userLogged
      });
-
   },
 
+  redirectRole: (req, res) => {
+    const userLogged = req.session.userLogged
 
+    if (userLogged.roles_id === 1) {
+      res.send("Hola, estas ingresando al área de Administración")
+    } else if (userLogged.roles_id === 2) {
+      res.send("Hola, estas ingresando al área de Recursos Humanos")
+    } else if (userLogged.roles_id === 3) {
+      res.send("Hola, estas ingresando al área de Contabilidad")
+    } else if (userLogged.roles_id === 4) {
+      res.send("Hola, estas ingresando al área de Operador de seguridad")
+    }
+    else {
+      res.send("No tienes permiso para ingresar a esta vista")
+    }
+  },
 
 
 

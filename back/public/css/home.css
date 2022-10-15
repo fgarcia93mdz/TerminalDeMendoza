@@ -3,7 +3,7 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-   background-size: cover;
+   /* background-size: cover; */
   font-family: "Bangers", cursive;
 }
 .html {
@@ -13,6 +13,9 @@ body {
   justify-content: start;
   margin-left: 11%;
   margin-top: -4%;
+}
+.text-danger {
+    margin-top: 4%;
 }
 .botonera-inicial {
   width: 20%;
@@ -54,7 +57,7 @@ body {
 .recordar {
   font-size: 15px;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: -10px;
   color: white;
 }
 /* From uiverse.io by @alexruix */

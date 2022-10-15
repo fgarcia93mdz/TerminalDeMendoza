@@ -1,5 +1,5 @@
 body {
-  background-image: url(../img/logo/logo.svg);
+  background-image: url(../img/fotosTerminal/terminal-front.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -20,7 +20,7 @@ body {
 .container{
 
   position: relative;
-  top: 490px;
-   background-color: rgba(141, 141, 141, 0.338);
+  top: 740px;
+   background-color: rgba(255, 253, 253, 0.338);
    border-radius: 100px
 }
