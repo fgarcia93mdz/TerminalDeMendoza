@@ -1,11 +1,13 @@
 nav {
-    width: 100vw;
+    width: 100%;
     height: 100px;
     background-color: rgb(26, 79, 224);
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: whitesmoke;
+    position: sticky;
+    top: 0;
 }
 
 h3 {

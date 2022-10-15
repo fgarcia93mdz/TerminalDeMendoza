@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import ArrivalsBoard from './pages/board-tv/ArrivalsBoard'
 import DeparturesBoard from './pages/board-tv/DeparturesBoard'
 import Login from './pages/login/Login'
+import Footer from './components/footer/Footer';
 
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
 
         </Routes>
       </div>
+
+      <Footer />
     </div>
   );
 }
