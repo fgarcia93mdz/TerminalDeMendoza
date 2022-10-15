@@ -8,7 +8,7 @@ const session = require('express-session');
 const cookies = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const tableRouter = require('./routes/tables')
+const platformRouter = require('./routes/platform')
 
 // Session
 app.use(session({
@@ -36,6 +36,8 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+// Home 
+const homeRouter = require('./routes/index');
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,14 +49,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Home 
-const homeRouter = require('./routes/index');
-app.use('/', homeRouter);
 
 
 // Routes
+app.use('/', homeRouter);
 app.use('/users', usersRouter);
-app.use('/api/tablero', tableRouter) 
+app.use('/api/plataforma', platformRouter) 
 
 
 // Catch 404 and forward to error handler
