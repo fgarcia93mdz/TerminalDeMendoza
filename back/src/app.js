@@ -8,11 +8,7 @@ const session = require('express-session');
 const cookies = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
-
-
-// API
-// const apiRoutes = require('./routes/tables')
+const tableRouter = require('./routes/tables')
 
 // Session
 app.use(session({
@@ -58,7 +54,7 @@ app.use('/', homeRouter);
 
 // Routes
 app.use('/users', usersRouter);
-app.use('/api', apiRouter) 
+app.use('/api/tablero', tableRouter) 
 
 
 // Catch 404 and forward to error handler
@@ -78,6 +74,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(8080, () => {
-  console.log('El servidor de la terminal de mendoza esta corriendo');
+  console.log('El servidor de la terminal de mendoza esta corriendo en puerto http://localhost:8080');
 });
 module.exports = app;
