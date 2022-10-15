@@ -8,6 +8,7 @@ import ArrivalsBoard from './pages/board-tv/ArrivalsBoard'
 import DeparturesBoard from './pages/board-tv/DeparturesBoard'
 import Login from './pages/login/Login'
 import Footer from './components/footer/Footer';
+import CustomizedTables from './components/table/Table';
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
 
         </Routes>
       </div>
+
+      <CustomizedTables />
 
       <Footer />
     </div>
