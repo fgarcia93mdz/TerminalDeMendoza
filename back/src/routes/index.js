@@ -32,6 +32,7 @@ const ControllerInicioUsuario = require('../controllers/inicio')
 /* Home con inicio de sesion */
 router.get('/', ControllerInicioUsuario.inicio)
 router.post('/ingresoUsuario', ControllerInicioUsuario.login);
+
 // Pre ingreso para saber roles 
 router.get('/welcome', ControllerInicioUsuario.redirect);
 

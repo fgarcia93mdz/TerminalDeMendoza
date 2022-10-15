@@ -46,7 +46,7 @@ const ControllerInicioUsuario = {
             })
           }
 
-          return res.redirect("/register/userPlayer/welcome")
+          return res.redirect("/welcome")
 
         }
 
@@ -70,9 +70,9 @@ const ControllerInicioUsuario = {
   },
   redirect: (req, res) => {
 
-    res.render("partial/register/redireccion2", {
-      userLogged: req.session.userLogged
-    });
+    res.render("usuarios/welcome", {
+       userLogged: req.session.userLogged
+     });
 
   },
 
