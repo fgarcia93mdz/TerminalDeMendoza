@@ -6,6 +6,10 @@ const {
 const {
   Sequelize
 } = require('sequelize');
+// Validaciones
+const {
+  validationResult
+} = require('express-validator');
 
 // encriptacion de la contraseña
 const bcryptjs = require('bcryptjs');
@@ -123,7 +127,6 @@ const ControllerInicioUsuario = {
       where: { id: userId }
     })
     let roles = Rol.findAll({
-
     })
     Promise
       .all([usuario, roles])
@@ -132,7 +135,72 @@ const ControllerInicioUsuario = {
           userId,
           usuario, roles
         })
+      })
+  },
+  agregarUsuario: (req, res) => {
+    let roles = Rol.findAll()
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
     })
+    Promise
+      .all([roles, usuario])
+      .then(([roles, usuario]) => {
+        const resultValidation = validationResult(req);
+        if (resultValidation.errors.length > 0) {
+          return res.render('usuarios/nuevoUsuario', {
+            errors: resultValidation.mapped(),
+            oldData: req.body,
+            roles,
+            usuario
+          });
+        }
+    })
+    let usuarioDB = Usuario.findOne({
+      where: { usuario: req.body.usuario }
+    }).then((userInDB) => {
+      let roles = Rol.findAll()
+      const userLogged = req.session.userLogged
+      let usuario = Usuario.findOne({
+        where: { id: userLogged.id }
+      })
+      Promise
+        .all([usuarioDB, roles,usuario])
+        .then(([usuarioDB, roles,usuario]) => {
+          if (userInDB != null) {
+            return res.render('usuarios/nuevoUsuario', {
+              errors: {
+                usuario: {
+                  msg: 'Este usuario ya está registrado, intenta con otro'
+                }
+              },
+              oldData: req.body,
+              roles,
+              usuarioDB, usuario
+
+            });
+          } else {
+            Usuario.create({
+              nombre: req.body.nombre,
+              apellido: req.body.apellido,
+              usuario: req.body.usuario,
+              password: bcryptjs.hashSync(req.body.password, 10),
+              roles_id: req.body.rol,
+              estado_password: 0
+            }).then(()=> {
+              return res.redirect('/ingreso/sector/recursosHumanos');
+            }) 
+          }
+        })
+    })
+    // Promise
+    //   .all([usuario, roles])
+    //   .then(([usuario, roles]) => {
+    //     res.render('usuarios/nuevoUsuario', {
+    //       userId,
+    //       usuario, roles
+    //     })
+    //   })
   }
 
 
