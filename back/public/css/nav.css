@@ -49,8 +49,8 @@ line-height: 1.2 !important;
 .usuario {
   float: right !important;
 }
-.topnav a:hover {
-text-decoration: none !important;
+.opciones{
+  margin-left: 10px;
 }
 .input-icon {
   width: 2em;
