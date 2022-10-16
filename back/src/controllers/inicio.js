@@ -15,6 +15,7 @@ const db = require('../database/models')
 
 // Modelo de DB
 const Usuario = db.Usuario;
+const Rol = db.Rol;
 
 // Login
 const ControllerInicioUsuario = {
@@ -77,9 +78,9 @@ const ControllerInicioUsuario = {
   // Direccionamos al usuario a la pagina de ingreso, donde se valida su rol.
   redirect: (req, res) => {
     const userLogged = req.session.userLogged
-      res.render("usuarios/welcome",{
+    res.render("usuarios/welcome", {
       userLogged
-     });
+    });
   },
 
   redirectRole: (req, res) => {
@@ -100,9 +101,38 @@ const ControllerInicioUsuario = {
   },
   rrhh: (req, res) => {
     const userLogged = req.session.userLogged
-    res.render("usuarios/recursosHumanos", {
-      userLogged
-    });
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let usuarios = Usuario.findAll({
+      include: ['rol_usuario'],
+    })
+    Promise
+      .all([usuarios, usuario])
+      .then(([usuarios, usuario]) => {
+
+        res.render("usuarios/recursosHumanos", {
+          userLogged,
+          usuarios, usuario
+        });
+      })
+  },
+  nuevoUsuario: (req, res) => {
+    const userId = req.params.id
+    let usuario = Usuario.findOne({
+      where: { id: userId }
+    })
+    let roles = Rol.findAll({
+
+    })
+    Promise
+      .all([usuario, roles])
+      .then(([usuario, roles]) => {
+        res.render('usuarios/nuevoUsuario', {
+          userId,
+          usuario, roles
+        })
+    })
   }
 
 

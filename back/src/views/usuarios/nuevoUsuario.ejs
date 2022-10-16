@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Nuevo Usuario</title>
+
+  <link rel="shortcut icon" href="/img/logo/logo.svg" style="border-radius: 100;" />
+
+
+  <!--=====================================
+	PLUGINS DE CSS
+	======================================-->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam&family=Roboto&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/22284035c9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/rrhh.css">
+  <link rel="stylesheet" href="/css/altadeusuario.css">
+</head>
+
+<body>
+
+  <%- include('../partial/navRrhhAlta') %>
+  <br>
+   <h2 style="text-align: center">REGISTRO DE UN NUEVO USUARIO</h2>
+  <% if(usuario.estado_password === 0) { %>
+  <a href="">
+    <h3
+      style="color: red; background-color:rgba(188, 187, 187, 0.721); border-radius: 10px; width: 100%; text-decoration:none">
+      Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes de cambiar la contraseña predeterminada
+      que generó recursos humanos antes de continuar </h3>
+  </a>
+  <% } else { %>
+  <h6 style="text-align: center; color: red">* Le recordamos que todos los campos son obligatorio</h6>
+  <br>
+  
+<div class="container">
+  <form action="/action_page.php">
+    <label for="fname">Nombre</label>
+    <input type="text" id="fname" name="nombre">
+
+    <label for="lname">Apellido</label>
+    <input type="text" id="lname" name="apellido">
+
+    <label for="lname">Usuario</label>
+    <input type="text" id="lname" name="usuario">
+
+    <label for="lname">Contraseña <span style="color:red">(el valor es predeterminado para todos los usuarios)</span></label>
+    <input type="text" id="lname" name="password" value="123$">
+
+    <label for="country">Rol</label>
+    <select id="country" name="country">
+       <option value="" disabled selected>Seleccionar</option>
+      <% roles.forEach(roles => { %>
+        <option value="<%= roles.id %>"><%= roles.rol %></option>
+        <% }) %>  
+    </select>
+    <input type="submit" value="Registrar Usuario">
+  </form>
+</div>
+<% } %>
+
+
+
+  <script src="/js/nav.js"></script>
+</body>
+
+</html>

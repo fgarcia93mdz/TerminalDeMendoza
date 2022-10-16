@@ -25,6 +25,7 @@ module.exports = (sequelize, dataTypes) => {
       allowNull: false
     },
     roles_id: dataTypes.BIGINT(11),
+    estado_password: dataTypes.BIGINT(2),
 
   };
   let config = {
