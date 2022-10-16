@@ -35,6 +35,8 @@ router.post('/ingresoUsuario', ControllerInicioUsuario.login);
 
 // Pre ingreso para saber roles 
 router.get('/ingreso', ControllerInicioUsuario.redirect);
+router.get('/logout', ControllerInicioUsuario.logout);
 router.get('/ingreso/sector', ControllerInicioUsuario.redirectRole);
+router.get('/ingreso/sector/recursosHumanos', ControllerInicioUsuario.rrhh);
 
 module.exports = router;

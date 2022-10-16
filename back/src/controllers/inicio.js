@@ -69,6 +69,11 @@ const ControllerInicioUsuario = {
       });
     })
   },
+  logout: (req, res) => {
+    res.clearCookie('userEmail');
+    req.session.destroy();
+    return res.redirect("/")
+  },
   // Direccionamos al usuario a la pagina de ingreso, donde se valida su rol.
   redirect: (req, res) => {
     const userLogged = req.session.userLogged
@@ -83,9 +88,7 @@ const ControllerInicioUsuario = {
     if (userLogged.roles_id === 1) {
       res.send("Hola, estas ingresando al área de Administración")
     } else if (userLogged.roles_id === 2) {
-      res.render("usuarios/recursosHumanos", {
-        userLogged
-      });
+      res.redirect("/ingreso/sector/recursosHumanos")
     } else if (userLogged.roles_id === 3) {
       res.send("Hola, estas ingresando al área de Contabilidad")
     } else if (userLogged.roles_id === 4) {
@@ -95,6 +98,12 @@ const ControllerInicioUsuario = {
       res.send("No tienes permiso para ingresar a esta vista")
     }
   },
+  rrhh: (req, res) => {
+    const userLogged = req.session.userLogged
+    res.render("usuarios/recursosHumanos", {
+      userLogged
+    });
+  }
 
 
 
