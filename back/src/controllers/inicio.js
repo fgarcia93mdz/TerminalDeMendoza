@@ -83,7 +83,9 @@ const ControllerInicioUsuario = {
     if (userLogged.roles_id === 1) {
       res.send("Hola, estas ingresando al área de Administración")
     } else if (userLogged.roles_id === 2) {
-      res.send("Hola, estas ingresando al área de Recursos Humanos")
+      res.render("usuarios/recursosHumanos", {
+        userLogged
+      });
     } else if (userLogged.roles_id === 3) {
       res.send("Hola, estas ingresando al área de Contabilidad")
     } else if (userLogged.roles_id === 4) {
