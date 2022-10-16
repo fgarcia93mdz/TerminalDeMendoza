@@ -1,3 +1,6 @@
+body{
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #0089cf;
@@ -13,6 +16,18 @@
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+.topnav h1 {
+  float: left;
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 1px 0px;
+  font-weight: 500 !important;
+line-height: 1.2 !important;
 }
 
 /* Change the color of links on hover */
@@ -33,6 +48,9 @@
 }
 .usuario {
   float: right !important;
+}
+.topnav a:hover {
+text-decoration: none !important;
 }
 .input-icon {
   width: 2em;
