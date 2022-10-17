@@ -49,27 +49,26 @@
   <br>
 
   <div class="container">
-    <form action='/ingreso/sector/recursosHumanos/:id/nuevoUsuario/agregarUsuario' method="POST"
-      enctype="multipart/form-data">
+    <form action='/ingreso/sector/recursosHumanos/:id/nuevoUsuario/agregarUsuario' method="POST">
       <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" name="nombre" <%= locals.errors && errors.nombre ? 'is-invalid' : null %>
-        value="<%= locals.oldData ? oldData.nombre : null %> ">
-        <% if (locals.errors && errors.nombre) { %>
-        <div class="text-danger msg">
-          <%= errors.nombre.msg %>
-        </div> 
-        <br>
-        <% } %>
+      <input type="text" id="nombre" name="nombre" <%= locals.errors && errors.nombre ? 'is-invalid' : null %>"
+        value="<%= locals.oldData ? oldData.nombre : null %> " required>
+      <% if (locals.errors && errors.nombre) { %>
+      <div class="text-danger msg">
+        <%= errors.nombre.msg %>
+      </div>
+      <br>
+      <% } %>
 
       <label for="apellido">Apellido</label>
-      <input type="text" id="apellido" name="apellido" <%= locals.errors && errors.apellido ? 'is-invalid' : null %>
-        value="<%= locals.oldData ? oldData.apellido : null %> ">
-        <% if (locals.errors && errors.apellido) { %>
-        <div class="text-danger msg">
-          <%= errors.apellido.msg %>
-        </div>
-        <br>
-        <% } %>
+      <input type="text" id="apellido" name="apellido" <%= locals.errors && errors.apellido ? 'is-invalid' : null %>"
+        value="<%= locals.oldData ? oldData.apellido : null %> " required>
+      <% if (locals.errors && errors.apellido) { %>
+      <div class="text-danger msg">
+        <%= errors.apellido.msg %>
+      </div>
+      <br>
+      <% } %>
 
       <label for="password">Contraseña <span style="color:red">(el valor es predeterminado para todos los
           usuarios)</span></label>
@@ -90,8 +89,8 @@
       <% } %>
 
       <label for="usuario">Usuario</label>
-      <input type="text" id="usuario" name="usuario" <%= locals.errors && errors.usuario ? 'is-invalid' : null %>
-        value="<%= locals.oldData ? oldData.usuario : null %> ">
+      <input type="text" id="usuario" name="usuario" <%= locals.errors && errors.usuario ? 'is-invalid' : null %>"
+        value="<%= locals.oldData ? oldData.usuario : null %> " required>
       <% if (locals.errors && errors.usuario) { %>
       <div class="text-danger msg">
         <%= errors.usuario.msg %>

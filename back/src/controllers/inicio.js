@@ -177,7 +177,8 @@ const ControllerInicioUsuario = {
               },
               oldData: req.body,
               roles,
-              usuarioDB, usuario
+              usuarioDB,
+              usuario
 
             });
           } else {
