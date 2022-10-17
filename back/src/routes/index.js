@@ -52,5 +52,8 @@ router.get('/ingreso/sector/recursosHumanos', ControllerInicioUsuario.rrhh);
 router.get('/ingreso/sector/recursosHumanos/:id/nuevoUsuario', validations, ControllerInicioUsuario.nuevoUsuario);
   // Nuevo Usuario
 router.post('/ingreso/sector/recursosHumanos/:id/nuevoUsuario/agregarUsuario', validations, ControllerInicioUsuario.agregarUsuario);
+  // Cambiar contraseña
+router.get('/ingreso/sector/:id/cambiarClave', validations, ControllerInicioUsuario.viejaContraseña);
+router.post('/ingreso/sector/:id/cambioDeClave', validations, ControllerInicioUsuario.cambiarClave);
 
 module.exports = router;

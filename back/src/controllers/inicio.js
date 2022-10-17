@@ -79,6 +79,7 @@ const ControllerInicioUsuario = {
     req.session.destroy();
     return res.redirect("/")
   },
+
   // Direccionamos al usuario a la pagina de ingreso, donde se valida su rol.
   redirect: (req, res) => {
     const userLogged = req.session.userLogged
@@ -155,7 +156,7 @@ const ControllerInicioUsuario = {
             usuario
           });
         }
-    })
+      })
     let usuarioDB = Usuario.findOne({
       where: { usuario: req.body.usuario }
     }).then((userInDB) => {
@@ -165,8 +166,8 @@ const ControllerInicioUsuario = {
         where: { id: userLogged.id }
       })
       Promise
-        .all([usuarioDB, roles,usuario])
-        .then(([usuarioDB, roles,usuario]) => {
+        .all([usuarioDB, roles, usuario])
+        .then(([usuarioDB, roles, usuario]) => {
           if (userInDB != null) {
             return res.render('usuarios/nuevoUsuario', {
               errors: {
@@ -187,20 +188,44 @@ const ControllerInicioUsuario = {
               password: bcryptjs.hashSync(req.body.password, 10),
               roles_id: req.body.rol,
               estado_password: 0
-            }).then(()=> {
+            }).then(() => {
               return res.redirect('/ingreso/sector/recursosHumanos');
-            }) 
+            })
           }
         })
     })
-    // Promise
-    //   .all([usuario, roles])
-    //   .then(([usuario, roles]) => {
-    //     res.render('usuarios/nuevoUsuario', {
-    //       userId,
-    //       usuario, roles
-    //     })
-    //   })
+  },
+  cambiarClave: (req, res) => {
+    const userLogged = req.session.userLogged
+    console.log("🚀 ~ file: inicio.js ~ line 200 ~ userLogged", userLogged)
+    if (userLogged) {
+      let isOkPassword = bcryptjs.compareSync(req.body.password, userLogged.password);
+      console.log("🚀 ~ file: inicio.js ~ line 202 ~ isOkPassword", isOkPassword)
+      if (isOkPassword == true) {
+        Usuario.update({
+          password: bcryptjs.hashSync(req.body.nuevaClave, 10),
+          estado_password: 1
+        }, {
+          where: { id: userLogged.id }
+        }).then(() => {
+          return res.redirect("/ingreso")
+        })
+      }
+    }
+
+  },
+  viejaContraseña: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    Promise
+      .all([usuario])
+      .then(([usuario]) => {
+        res.render('usuarios/cambiarClave', {
+          usuario
+        })
+      })
   }
 
 
