@@ -35,14 +35,14 @@
 
   <%- include('../partial/navRrhh') %>
   <br>
+
   <h2 style="text-align: center">GESTIÓN DE USUARIOS</h2>
-  <br>
   <% if(usuario.estado_password === 0) { %>
     <a href="">
       <h3 style="color: red; background-color:rgba(188, 187, 187, 0.721); border-radius: 10px; width: 100%; text-decoration:none"> Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes de cambiar la contraseña predeterminada que generó recursos humanos antes de continuar </h3>
     </a>
   <% } else { %>
-    <br><br>
+    <br>
     <table>
       <tr>
         <th>Nombre</th>
