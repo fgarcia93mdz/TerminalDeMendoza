@@ -58,7 +58,7 @@
         <td><%- usuarios.apellido %></td>
         <td><%- usuarios.usuario %></td>
         <td style="text-align:center"><%- usuarios.rol_usuario.rol %></td>
-        <% if (usuarios.rol_usuario.id === 1) { %>
+        <% if (usuarios.rol_usuario.id <= 2) { %>
         <td style="text-align:center"> - </td>
         <td style="text-align:center"> - </td>
         <% } else { %>
