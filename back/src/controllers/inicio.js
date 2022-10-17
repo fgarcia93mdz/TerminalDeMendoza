@@ -227,7 +227,11 @@ const ControllerInicioUsuario = {
           usuario
         })
       })
-  }
+  },
+  informe:(req, res=>{
+    res.render('usuarios/seguridad')
+  })
+
 
 
 

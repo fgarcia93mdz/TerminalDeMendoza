@@ -55,5 +55,7 @@ router.post('/ingreso/sector/recursosHumanos/:id/nuevoUsuario/agregarUsuario', v
   // Cambiar contraseña
 router.get('/ingreso/sector/:id/cambiarClave', validations, ControllerInicioUsuario.viejaContraseña);
 router.post('/ingreso/sector/:id/cambioDeClave', validations, ControllerInicioUsuario.cambiarClave);
-
+  // Informe seguridad
+  router.get('/ingreso/sector/:id/seguridad', ControllerInicioUsuario.informe);
+  router.post('/ingreso/sector/:id/seguridad', ControllerInicioUsuario.informe);
 module.exports = router;
