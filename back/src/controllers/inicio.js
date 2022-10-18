@@ -234,7 +234,8 @@ const ControllerInicioUsuario = {
         })
       })
   },
-  informe: (req, res) => {
+  registroInforme: (req, res) => {
+    // Hay que hacer el create, no hay que darle bolilla hasta que lo vea (Franco)
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
@@ -247,7 +248,7 @@ const ControllerInicioUsuario = {
         })
       })
   },
-  registroInforme: (req, res) => {
+   informe: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
