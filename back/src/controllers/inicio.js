@@ -20,6 +20,11 @@ const db = require('../database/models')
 // Modelo de DB
 const Usuario = db.Usuario;
 const Rol = db.Rol;
+const Empresa = db.Empresa;
+const Servicio = db.Servicio;
+const Plataforma = db.Plataforma;
+const Estado = db.Estado;
+
 
 // Login
 const ControllerInicioUsuario = {
@@ -98,6 +103,7 @@ const ControllerInicioUsuario = {
     } else if (userLogged.roles_id === 3) {
       res.send("Hola, estas ingresando al área de Contabilidad")
     } else if (userLogged.roles_id === 4) {
+      res.redirect("/ingreso/sector/seguridad")
       res.send("Hola, estas ingresando al área de Operador de seguridad")
     }
     else {
@@ -228,9 +234,36 @@ const ControllerInicioUsuario = {
         })
       })
   },
-  informe:(req, res=>{
-    res.render('usuarios/seguridad')
-  })
+  informe: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    Promise
+      .all([usuario])
+      .then(([usuario]) => {
+        res.render('formularios/seguridad', {
+          usuario
+        })
+      })
+  },
+  registroInforme: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let empresa = Empresa.findAll();
+    let servicio = Servicio.findAll();
+    let plataforma = Plataforma.findAll();
+    let estado = Estado.findAll();
+    Promise
+      .all([usuario, empresa, servicio, plataforma,estado])
+      .then(([usuario, empresa, servicio, plataforma,estado]) => {
+        res.render('formularios/seguridad', {
+          usuario, empresa, servicio, plataforma, estado
+        })
+      })
+  }
 
 
 

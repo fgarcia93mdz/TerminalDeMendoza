@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 // Se usa para cargar de fotos 
 const upload = multer({
   storage: storage
-}); 
+});
 //Validaciones para el formulario 
 const validations = [
   body("nombre").notEmpty().withMessage('Tienes que escribir un nombre'),
@@ -50,12 +50,19 @@ router.get('/ingreso/sector', ControllerInicioUsuario.redirectRole);
 // Area de Recursos humanos
 router.get('/ingreso/sector/recursosHumanos', ControllerInicioUsuario.rrhh);
 router.get('/ingreso/sector/recursosHumanos/:id/nuevoUsuario', validations, ControllerInicioUsuario.nuevoUsuario);
-  // Nuevo Usuario
+// Nuevo Usuario
 router.post('/ingreso/sector/recursosHumanos/:id/nuevoUsuario/agregarUsuario', validations, ControllerInicioUsuario.agregarUsuario);
-  // Cambiar contraseña
+
+// Cambiar contraseña
 router.get('/ingreso/sector/:id/cambiarClave', validations, ControllerInicioUsuario.viejaContraseña);
 router.post('/ingreso/sector/:id/cambioDeClave', validations, ControllerInicioUsuario.cambiarClave);
-  // Informe seguridad
-  router.get('/ingreso/sector/:id/seguridad', ControllerInicioUsuario.informe);
-  router.post('/ingreso/sector/:id/seguridad', ControllerInicioUsuario.informe);
+
+// Formulario de seguridad
+router.get('/ingreso/sector/seguridad', ControllerInicioUsuario.informe);
+router.post('/ingreso/sector/seguridad/:id/registroInforme', ControllerInicioUsuario.registroInforme);
+
+
+
+
+
 module.exports = router;
