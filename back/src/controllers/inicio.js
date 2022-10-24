@@ -16,7 +16,8 @@ const bcryptjs = require('bcryptjs');
 
 // Llamado a la base de datos 
 const db = require('../database/models')
-
+// Hora actual
+const horaActual = require('../../public/js/horaActual')
 // Modelo de DB
 const Usuario = db.Usuario;
 const Rol = db.Rol;
@@ -24,6 +25,7 @@ const Empresa = db.Empresa;
 const Servicio = db.Servicio;
 const Plataforma = db.Plataforma;
 const Estado = db.Estado;
+const RegistroTorre = db.RegistroAdministrativo
 
 
 // Login
@@ -235,16 +237,42 @@ const ControllerInicioUsuario = {
       })
   },
   registroInforme: (req, res) => {
+    
+        
+      
     // Hay que hacer el create, no hay que darle bolilla hasta que lo vea (Franco)
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
+    let horaActual = horaActual
+    let empresa = Empresa.findAll();
+    let servicio = Servicio.findAll();
+    let plataforma = Plataforma.findAll();
+    let estado = Estado.findAll();
     Promise
-      .all([usuario])
-      .then(([usuario]) => {
-        res.render('formularios/seguridad', {
-          usuario
+      .all([usuario, empresa, servicio, plataforma, estado, horaActual])
+      .then(([usuario, empresa, servicio, plataforma, estado, horaActual]) => {
+        const resultValidation = validationResult(req);
+        if (resultValidation.errors.length > 0) {
+          return res.render('formularios/seguridad', {
+            errors: resultValidation.mapped(),
+            oldData: req.body,
+            usuario, empresa, servicio, plataforma, estado, horaActual
+          });
+        }
+      }).then(() => {
+        RegistroTorre.create({
+          fecha_ingreso: req.body.fecha,
+          hora_ingreso: req.body.hora,
+          interno: req.body.interno,
+          empresa_id: req.body.empresa,
+          servicios_id: req.body.servicio,
+          usuarios_id: req.body.usuario,
+          plataformas_id: req.body.plataforma,
+          estado_id: req.body.estado
+        }).then(() => {
+          return res.redirect("/ingreso/sector/seguridad")
         })
       })
   },
@@ -253,15 +281,16 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
+    let hora = horaActual
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado])
-      .then(([usuario, empresa, servicio, plataforma,estado]) => {
+      .all([usuario, empresa, servicio, plataforma,estado, hora])
+      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
         res.render('formularios/seguridad', {
-          usuario, empresa, servicio, plataforma, estado
+          usuario, empresa, servicio, plataforma, estado, hora
         })
       })
   }
