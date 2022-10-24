@@ -17,15 +17,15 @@ module.exports = (sequelize, dataTypes) => {
       },
       interno: {
         type: dataTypes.INTEGER,
-        allowNull: false
+        
       },
       fecha_salida: {
         type: dataTypes.DATE,
-        allowNull: false
+        
       },
       hora_salida: {
         type: dataTypes.TIME,
-        allowNull: false
+        
       },
       empresa_id: dataTypes.BIGINT(11),
       servicios_id: dataTypes.BIGINT(11),
