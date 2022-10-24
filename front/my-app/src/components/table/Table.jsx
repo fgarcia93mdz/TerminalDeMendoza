@@ -8,7 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+// import { useSelector } from 'react-redux';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
+
+
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -28,47 +32,73 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  name,
-  calories,
-  fat,
-  carbs,
-  protein,
-) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+// const rows = [
+//   {
+//     "id": 1,
+//     "empresa": "flecha-bus",
+//     "siglas": "fb",
+//     "img": "img1"
+//   },
+//   {
+//     "id": 2,
+//     "empresa": "andesmar",
+//     "siglas": "adm",
+//     "img": "img2"
+//   },
+//   {
+//     "id": 3,
+//     "empresa": "jovi-bus",
+//     "siglas": "jvb",
+//     "img": "img3"
+//   },
+//   {
+//     "id": 4,
+//     "empresa": "nuevo expreso",
+//     "siglas": "ne",
+//     "img": "img4"
+//   },
+//   {
+//     "id": 5,
+//     "empresa": "cuchuflito",
+//     "siglas": "cft",
+//     "img": "img5"
+//   }
+// ];
 
-export default function CustomizedTables() {
+export default function GenericTable( {props} ) {
+
+  // const colectivosRedux  = useSelector(state => state.estado);
+
+  // console.log('data:', colectivosRedux)
+  if(props){
+    console.log('PROPSS table:', props)
+  }
+  
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Horario de salida</StyledTableCell>
+            <StyledTableCell align="center">Horario estimado</StyledTableCell>
+            <StyledTableCell align="center">Destino</StyledTableCell>
+            <StyledTableCell align="center">Empresa</StyledTableCell>
+            <StyledTableCell align="center">Plataforma</StyledTableCell>
+            <StyledTableCell align="center">Estado</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {props && props.map((row) => (
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="center">{row.empresa}</StyledTableCell>
+              <StyledTableCell align="center">{row.img}</StyledTableCell>
+              <StyledTableCell align="center">{row.siglas}</StyledTableCell>
+              <StyledTableCell align="center">{row.id}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

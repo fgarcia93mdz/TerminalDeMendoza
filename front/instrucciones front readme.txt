@@ -28,4 +28,8 @@ ESTRUCTURA DEL PROYECTO:
 .
 .
 ../pages -> adentro va a haber carpetas con cada pagina seccion 	    de la app y con su hoja de estilo
+
+MATERIAL UI 
+
+Material ui es una libreria parecida a Bootstrap
 		

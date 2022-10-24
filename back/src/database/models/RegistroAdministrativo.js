@@ -32,7 +32,7 @@ module.exports = (sequelize, dataTypes) => {
       usuarios_id: dataTypes.BIGINT(11),
       plataformas_id: dataTypes.BIGINT(11),
       estado_id: dataTypes.BIGINT(11),
-  
+      
     };
     let config = {
       tableName: 'registro_administrativo',
