@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 25-10-2022 a las 22:54:08
+-- Tiempo de generación: 25-10-2022 a las 23:30:27
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -34,14 +34,14 @@ CREATE TABLE `empresa` (
   `empresa` varchar(45) NOT NULL,
   `siglas` varchar(45) NOT NULL,
   `img` varchar(100) DEFAULT NULL,
-  `cuilt` varchar(100) NOT NULL
+  `cuit` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`, `cuilt`) VALUES
+INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`, `cuit`) VALUES
 (1, 'Andesmar', 'AND', NULL, '1544-45555-47'),
 (2, 'Iselin', 'ISL', NULL, '20-4457-88'),
 (3, 'San juan viajes', 'SJV', NULL, '20-379955-74');
@@ -115,7 +115,8 @@ CREATE TABLE `registro_administrativo` (
 INSERT INTO `registro_administrativo` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`) VALUES
 (1, '2022-10-25', '19:45:00', 120, 1, 1, 2, 2, 1, NULL, NULL),
 (2, '2022-10-25', '19:50:00', 0, 3, 4, 2, 1, 3, NULL, NULL),
-(3, '0022-10-25', '19:49:00', 1522, 3, 2, 2, 3, 1, NULL, NULL);
+(3, '0022-10-25', '19:49:00', 1522, 3, 2, 2, 3, 1, NULL, NULL),
+(4, '2022-10-25', '19:55:00', 0, 1, 4, 2, 1, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -264,7 +265,7 @@ ALTER TABLE `plataformas`
 -- AUTO_INCREMENT de la tabla `registro_administrativo`
 --
 ALTER TABLE `registro_administrativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
