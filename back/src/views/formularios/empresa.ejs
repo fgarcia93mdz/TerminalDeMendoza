@@ -7,6 +7,8 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/empresa.css" />
+
 </head>
 <body>
     <header>
@@ -14,12 +16,32 @@
     </header>
 
     <main>
-      <form action="">
-         <label for="">Empresa</label>
-         <input type="text">
+    <div class="formulario">
+      <h1>Añadir nueva empresa</h1>
+      <form action="" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="">Empresa:</label>
+            <input type="text">
+        </div>
 
-         <button type="submit"></button>
+        <div>
+            <label for="">Siglas:</label>
+            <input type="text">
+        </div>
+
+        <div>
+            <label for="">CUIT:</label>
+            <input type="text">
+        </div>
+
+        <div>
+            <label for="">Imagen:</label>
+            <input type="file">
+        </div>        
+
+         <button type="submit" class="enviar">AÑADIR</button>
       </form>
+    </div>
     </main>
 
 
