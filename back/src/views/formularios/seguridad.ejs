@@ -29,17 +29,13 @@
     <link rel="stylesheet" href="/css/rrhh.css" />
     <link rel="stylesheet" href="/css/altadeusuario.css" />
     <link rel="stylesheet" href="/css/reloj.css" />
+    
 </head>
 
 <body onload="startTime()">
     <%- include('../partial/navSeguridad') %>
 
-        <div id="clockdate">
-            <div class="clockdate-wrapper">
-                <div id="clock"></div>
-                <div id="date"></div>
-            </div>
-        </div>
+    <%- include('../partial/reloj') %>
     <br>
     <h2 style="text-align: center">REGISTRO DE UN NUEVO INGRESO</h2>
     <% if(usuario.estado_password===0) { %>
