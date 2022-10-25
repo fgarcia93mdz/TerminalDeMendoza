@@ -103,7 +103,7 @@ const ControllerInicioUsuario = {
     } else if (userLogged.roles_id === 2) {
       res.redirect("/ingreso/sector/recursosHumanos")
     } else if (userLogged.roles_id === 3) {
-      res.send("Hola, estas ingresando al área de Contabilidad")
+      res.redirect("/ingreso/sector/contabilidad")
     } else if (userLogged.roles_id === 4) {
       res.redirect("/ingreso/sector/seguridad")
       res.send("Hola, estas ingresando al área de Operador de seguridad")
@@ -293,8 +293,45 @@ const ControllerInicioUsuario = {
           usuario, empresa, servicio, plataforma, estado, hora
         })
       })
-  }
+  },
+  contabilidad: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let hora = horaActual
+    let empresa = Empresa.findAll();
+    let servicio = Servicio.findAll();
+    let plataforma = Plataforma.findAll();
+    let estado = Estado.findAll();
+    Promise
+      .all([usuario, empresa, servicio, plataforma,estado, hora])
+      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
+        res.render('usuarios/contabilidad', {
+          usuario, empresa, servicio, plataforma, estado, hora
+        })
+      })
 
+  },
+  empresa: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let hora = horaActual
+    let empresa = Empresa.findAll();
+    let servicio = Servicio.findAll();
+    let plataforma = Plataforma.findAll();
+    let estado = Estado.findAll();
+    Promise
+      .all([usuario, empresa, servicio, plataforma,estado, hora])
+      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
+        res.render('formularios/empresa', {
+          usuario, empresa, servicio, plataforma, estado, hora
+        })
+      })
+
+  }
 
 
 
