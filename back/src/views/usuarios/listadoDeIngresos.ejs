@@ -48,12 +48,15 @@
         <br>
         <table>
           <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Usuario</th>
-            <th style="width: 20%; text-align:center">Rol</th>
-            <th style="width: 1%; text-align:center">Editar</th>
-            <th style="width: 1%; text-align:center">Eliminar</th>
+            <th>Fecha Ingreso</th>
+            <th>Hora Ingreso</th>
+            <th>Interno</th>
+            <th>Empresa</th>
+            <th>Servicio</th>
+            <th>Plataforma</th>
+            <th>Estado</th>
+            <th>Fecha Salida</th>
+            <th>Hora Salida</th>
           </tr>
           <% ingresos.forEach(ingresos=> { %>
             <tr>
@@ -66,8 +69,23 @@
               <td>
                 <%- ingresos.interno %>
               </td>
-              <td style="text-align:center">
-                <%- ingresos.empresa_id %>
+              <td>
+                <%- ingresos.registro_empresa.siglas %>
+              </td>
+              <td>
+                <%- ingresos.registro_servicio.tipo_servicio %>
+              </td>
+              <td>
+                <%- ingresos.registro_plataforma.plataforma %>
+              </td>
+              <td>
+                <%- ingresos.registro_estado.tipo %>
+              </td>
+              <td>
+                <%- ingresos.fecha_salida %>
+              </td>
+              <td>
+                <%- ingresos.hora_salida %>
               </td>
             </tr>
             <% }) %>

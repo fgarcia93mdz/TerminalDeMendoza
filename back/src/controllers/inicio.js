@@ -296,7 +296,9 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
-    let ingresos = RegistroTorre.findAll()
+    let ingresos = RegistroTorre.findAll({
+      include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado']
+    })
     Promise
       .all([usuario, ingresos])
       .then(([usuario, ingresos]) => {
