@@ -34,24 +34,28 @@
 
 <body>
 
-  <%- include('../partial/navRrhh') %>
-  <br><br><br><br>
-  
-  <div class="container">
-    <form action='/ingreso/sector/<%- usuario.id %>/cambioDeClave' method="POST">
-      <label for="nuevaClave">Antigua contraseña</label>
-      <input type="text" id="password" name="password" placeholder="Si es su primer cambio de contraseña la predeterminada es 123$">
-      <label for="nuevaClave">Nueva contraseña</label>
-      <input type="text" id="nuevaClave" name="nuevaClave" required>
-      <button type="submit">
-        Cambiar Contraseña
-      </button>
+  <% if (usuario.roles_id === 4 ) { %>
+    <%- include('../partial/navSeguridad') %>
+      <% } else if (usuario.roles_id === 2) { %>
+        <%- include('../partial/navRrhh') %>
+          <% } %>
+              <br><br><br><br>
+             
+              <div class="container">
+                <form action='/ingreso/sector/<%- usuario.id %>/cambioDeClave' method="POST">
+                  <label for="nuevaClave">Antigua contraseña</label>
+                  <input type="text" id="password" name="password"
+                    placeholder="Si es su primer cambio de contraseña la predeterminada es 123$">
+                  <label for="nuevaClave">Nueva contraseña</label>
+                  <input type="text" id="nuevaClave" name="nuevaClave" required>
+                  <button type="submit">
+                    Cambiar Contraseña
+                  </button>
+                </form>
+              </div>
 
-    </form>
-  </div>
 
-
-  <script src="/js/nav.js"></script>
+              <script src="/js/nav.js"></script>
 </body>
 
 </html>

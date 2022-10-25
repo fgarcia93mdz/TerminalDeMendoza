@@ -206,10 +206,10 @@ const ControllerInicioUsuario = {
   },
   cambiarClave: (req, res) => {
     const userLogged = req.session.userLogged
-    console.log("🚀 ~ file: inicio.js ~ line 200 ~ userLogged", userLogged)
+    
     if (userLogged) {
       let isOkPassword = bcryptjs.compareSync(req.body.password, userLogged.password);
-      console.log("🚀 ~ file: inicio.js ~ line 202 ~ isOkPassword", isOkPassword)
+      
       if (isOkPassword == true) {
         Usuario.update({
           password: bcryptjs.hashSync(req.body.nuevaClave, 10),
@@ -245,20 +245,20 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
-    let horaActual = horaActual
+    
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma, estado, horaActual])
-      .then(([usuario, empresa, servicio, plataforma, estado, horaActual]) => {
+      .all([usuario, empresa, servicio, plataforma, estado, ])
+      .then(([usuario, empresa, servicio, plataforma, estado, ]) => {
         const resultValidation = validationResult(req);
         if (resultValidation.errors.length > 0) {
           return res.render('formularios/seguridad', {
             errors: resultValidation.mapped(),
             oldData: req.body,
-            usuario, empresa, servicio, plataforma, estado, horaActual
+            usuario, empresa, servicio, plataforma, estado, 
           });
         }
       }).then(() => {
@@ -281,16 +281,16 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
-    let hora = horaActual
+    
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado, hora])
-      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
+      .all([usuario, empresa, servicio, plataforma,estado, ])
+      .then(([usuario, empresa, servicio, plataforma,estado, ]) => {
         res.render('formularios/seguridad', {
-          usuario, empresa, servicio, plataforma, estado, hora
+          usuario, empresa, servicio, plataforma, estado, 
         })
       })
   }
