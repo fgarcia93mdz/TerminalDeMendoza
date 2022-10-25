@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 25-10-2022 a las 21:30:17
+-- Tiempo de generación: 25-10-2022 a las 22:54:08
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -33,17 +33,18 @@ CREATE TABLE `empresa` (
   `id` int(11) NOT NULL,
   `empresa` varchar(45) NOT NULL,
   `siglas` varchar(45) NOT NULL,
-  `img` varchar(100) DEFAULT NULL
+  `img` varchar(100) DEFAULT NULL,
+  `cuilt` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`) VALUES
-(1, 'Andesmar', 'AND', NULL),
-(2, 'Iselin', 'ISL', NULL),
-(3, 'San juan viajes', 'SJV', NULL);
+INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`, `cuilt`) VALUES
+(1, 'Andesmar', 'AND', NULL, '1544-45555-47'),
+(2, 'Iselin', 'ISL', NULL, '20-4457-88'),
+(3, 'San juan viajes', 'SJV', NULL, '20-379955-74');
 
 -- --------------------------------------------------------
 
@@ -82,12 +83,10 @@ CREATE TABLE `plataformas` (
 --
 
 INSERT INTO `plataformas` (`id`, `plataforma`, `servicios_id`) VALUES
-(1, '1', 1),
-(2, '2', 1),
-(3, '3', 2),
-(4, '4', 2),
-(5, '5', 2),
-(6, '6', 1);
+(1, '0', 4),
+(2, '1', 1),
+(3, '2', 2),
+(4, '3', 3);
 
 -- --------------------------------------------------------
 
@@ -108,6 +107,15 @@ CREATE TABLE `registro_administrativo` (
   `fecha_salida` date DEFAULT NULL,
   `hora_salida` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `registro_administrativo`
+--
+
+INSERT INTO `registro_administrativo` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`) VALUES
+(1, '2022-10-25', '19:45:00', 120, 1, 1, 2, 2, 1, NULL, NULL),
+(2, '2022-10-25', '19:50:00', 0, 3, 4, 2, 1, 3, NULL, NULL),
+(3, '0022-10-25', '19:49:00', 1522, 3, 2, 2, 3, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -150,7 +158,8 @@ CREATE TABLE `servicios` (
 INSERT INTO `servicios` (`id`, `siglas`, `tipo_servicio`) VALUES
 (1, 'SMD', 'Servicio de media distancia'),
 (2, 'SLD', 'Servicio de larga distancia'),
-(3, 'SLC', 'Servicio de corta distancia');
+(3, 'SLC', 'Servicio de corta distancia'),
+(4, 'SE', 'Servicio externo');
 
 -- --------------------------------------------------------
 
@@ -173,7 +182,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `password`, `roles_id`, `estado_password`) VALUES
-(1, 'Clara', 'Dardanelli', 'cdardanelli', '$2a$10$masn/IRSjpofNznTU0cnU.11UATeHdVUCLCTdrE/MyJCbuLpIgO.u', 2, 1);
+(1, 'Clara', 'Dardanelli', 'cdardanelli', '$2a$10$masn/IRSjpofNznTU0cnU.11UATeHdVUCLCTdrE/MyJCbuLpIgO.u', 2, 1),
+(2, 'Franco Gaston ', 'Garcia', 'fggarcia', '$2a$10$TE85n3qBtmUh4rx8K8oV.eeYM6jy3cXp2tMJ.Pz2f0OMQ0jU.PuRu', 4, 1);
 
 --
 -- Índices para tablas volcadas
@@ -254,7 +264,7 @@ ALTER TABLE `plataformas`
 -- AUTO_INCREMENT de la tabla `registro_administrativo`
 --
 ALTER TABLE `registro_administrativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -266,13 +276,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
