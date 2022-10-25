@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 08-10-2022 a las 13:06:55
+-- Tiempo de generación: 25-10-2022 a las 21:30:17
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -29,7 +29,6 @@ USE `terminal_mendoza`;
 -- Estructura de tabla para la tabla `empresa`
 --
 
-DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE `empresa` (
   `id` int(11) NOT NULL,
   `empresa` varchar(45) NOT NULL,
@@ -37,17 +36,34 @@ CREATE TABLE `empresa` (
   `img` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`) VALUES
+(1, 'Andesmar', 'AND', NULL),
+(2, 'Iselin', 'ISL', NULL),
+(3, 'San juan viajes', 'SJV', NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `estado`
 --
 
-DROP TABLE IF EXISTS `estado`;
 CREATE TABLE `estado` (
   `id` int(11) NOT NULL,
   `tipo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `estado`
+--
+
+INSERT INTO `estado` (`id`, `tipo`) VALUES
+(1, 'En plataforma'),
+(2, 'Fuera de plataforma'),
+(3, 'Servicio sin plataforma');
 
 -- --------------------------------------------------------
 
@@ -55,12 +71,23 @@ CREATE TABLE `estado` (
 -- Estructura de tabla para la tabla `plataformas`
 --
 
-DROP TABLE IF EXISTS `plataformas`;
 CREATE TABLE `plataformas` (
   `id` int(11) NOT NULL,
   `plataforma` varchar(45) DEFAULT NULL,
   `servicios_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `plataformas`
+--
+
+INSERT INTO `plataformas` (`id`, `plataforma`, `servicios_id`) VALUES
+(1, '1', 1),
+(2, '2', 1),
+(3, '3', 2),
+(4, '4', 2),
+(5, '5', 2),
+(6, '6', 1);
 
 -- --------------------------------------------------------
 
@@ -68,7 +95,6 @@ CREATE TABLE `plataformas` (
 -- Estructura de tabla para la tabla `registro_administrativo`
 --
 
-DROP TABLE IF EXISTS `registro_administrativo`;
 CREATE TABLE `registro_administrativo` (
   `id` int(11) NOT NULL,
   `fecha_ingreso` date NOT NULL,
@@ -89,11 +115,21 @@ CREATE TABLE `registro_administrativo` (
 -- Estructura de tabla para la tabla `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
   `rol` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `rol`) VALUES
+(1, 'Administración'),
+(2, 'Recursos Humanos'),
+(3, 'Contabilidad'),
+(4, 'Operador de Seguridad'),
+(5, 'Informes');
 
 -- --------------------------------------------------------
 
@@ -101,12 +137,20 @@ CREATE TABLE `roles` (
 -- Estructura de tabla para la tabla `servicios`
 --
 
-DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE `servicios` (
   `id` int(11) NOT NULL,
   `siglas` varchar(45) NOT NULL,
   `tipo_servicio` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id`, `siglas`, `tipo_servicio`) VALUES
+(1, 'SMD', 'Servicio de media distancia'),
+(2, 'SLD', 'Servicio de larga distancia'),
+(3, 'SLC', 'Servicio de corta distancia');
 
 -- --------------------------------------------------------
 
@@ -114,15 +158,22 @@ CREATE TABLE `servicios` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `usuario` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `roles_id` int(11) NOT NULL
+  `password` varchar(200) NOT NULL,
+  `roles_id` int(11) NOT NULL,
+  `estado_password` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `password`, `roles_id`, `estado_password`) VALUES
+(1, 'Clara', 'Dardanelli', 'cdardanelli', '$2a$10$masn/IRSjpofNznTU0cnU.11UATeHdVUCLCTdrE/MyJCbuLpIgO.u', 2, 1);
 
 --
 -- Índices para tablas volcadas
@@ -185,43 +236,43 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `plataformas`
 --
 ALTER TABLE `plataformas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_administrativo`
 --
 ALTER TABLE `registro_administrativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
