@@ -237,10 +237,7 @@ const ControllerInicioUsuario = {
       })
   },
   registroInforme: (req, res) => {
-    
-        
-      
-    // Hay que hacer el create, no hay que darle bolilla hasta que lo vea (Franco)
+
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
@@ -294,6 +291,22 @@ const ControllerInicioUsuario = {
         })
       })
   },
+  ingresos: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let ingresos = RegistroTorre.findAll()
+    Promise
+      .all([usuario, ingresos])
+      .then(([usuario, ingresos]) => {
+        res.render('usuarios/listadoDeIngresos', {
+          usuario, ingresos
+        })
+      })
+   },
+   
+   // Comienza la parte de contabilidad, la cual es la que manipula los datos que se van a agregar a las tablas de uso de la torre
   contabilidad: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({

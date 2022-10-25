@@ -18,7 +18,7 @@ module.exports = (sequelize, dataTypes) => {
     img: {
       type: dataTypes.STRING(200),
     },
-    ciut: {
+    cuit: {
       type: dataTypes.STRING(100),
       allowNull: false
     }
