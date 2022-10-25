@@ -61,6 +61,9 @@ router.post('/ingreso/sector/:id/cambioDeClave', validations, ControllerInicioUs
 router.get('/ingreso/sector/seguridad', ControllerInicioUsuario.informe);
 router.post('/ingreso/sector/seguridad/:id/registroInforme', ControllerInicioUsuario.registroInforme);
 
+// Contabilidad
+router.get('/ingreso/sector/contabilidad', ControllerInicioUsuario.contabilidad)
+router.get('/ingreso/sector/contabilidad/empresa', ControllerInicioUsuario.empresa)
 
 
 
