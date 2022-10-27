@@ -74,6 +74,10 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(8080, () => {
-  console.log('El servidor de la terminal de mendoza esta corriendo en puerto http://localhost:8080');
+  console.log('API Routes Availables')
+  console.log('/api/plataforma/arribos - GET')
+  console.log('/api/plataforma/partidas - GET')
+  console.log('/api/plataforma/locales - GET')
+  console.log('Terminal Server running at http://localhost:8080');
 });
 module.exports = app;

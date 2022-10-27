@@ -1,0 +1,34 @@
+
+    .container {
+        margin: auto;
+        width: 100%;
+        height: auto;
+    }
+
+  .info {
+    height: auto;
+  }
+
+  .icono {
+    height: 83px;
+    width: 91px;
+  }
+
+  .texto {
+    color: #0E3460;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .iconoYHora {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    align-items: center;
+  }
+
+  .hora {
+    font-size: 93px;
+    color: #1C40C0;
+    font-weight: 400;
+  }

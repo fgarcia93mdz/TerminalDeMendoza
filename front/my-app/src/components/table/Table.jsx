@@ -11,60 +11,47 @@ import Paper from '@mui/material/Paper';
 // import { useSelector } from 'react-redux';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-
-
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    // backgroundColor: theme.palette.common.black,
+    backgroundColor: "#0E315A",
+    height: "102px",
+    // color: theme.palette.common.white,
   },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+  [`&.${tableCellClasses.body}`]: {},
+  [`&.${tableCellClasses.root}`]: {
+    borderBottom: "none",
+    fontSize: 24,
+    color: "white",
+    fontWeight: "bold",
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
+  "&:nth-of-type(odd)": {
+    backgroundColor: "#1C68C0",
+  },
+  "&:nth-of-type(even)": {
+    backgroundColor: "#124178",
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
+  height: '77px'
 }));
 
 
-// const rows = [
-//   {
-//     "id": 1,
-//     "empresa": "flecha-bus",
-//     "siglas": "fb",
-//     "img": "img1"
-//   },
-//   {
-//     "id": 2,
-//     "empresa": "andesmar",
-//     "siglas": "adm",
-//     "img": "img2"
-//   },
-//   {
-//     "id": 3,
-//     "empresa": "jovi-bus",
-//     "siglas": "jvb",
-//     "img": "img3"
-//   },
-//   {
-//     "id": 4,
-//     "empresa": "nuevo expreso",
-//     "siglas": "ne",
-//     "img": "img4"
-//   },
-//   {
-//     "id": 5,
-//     "empresa": "cuchuflito",
-//     "siglas": "cft",
-//     "img": "img5"
-//   }
-// ];
+const styles = {
+  cajaFoto: {
+    width: '152px',
+    height: '56px',
+    border: '1px solid white',
+    color: 'black',
+    margin: 'auto',
+    overflow: 'hidden'
+  }
+}
+
 
 export default function GenericTable( {props} ) {
 
@@ -78,29 +65,46 @@ export default function GenericTable( {props} ) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Horario de salida</StyledTableCell>
-            <StyledTableCell align="center">Horario estimado</StyledTableCell>
-            <StyledTableCell align="center">Destino</StyledTableCell>
-            <StyledTableCell align="center">Empresa</StyledTableCell>
-            <StyledTableCell align="center">Plataforma</StyledTableCell>
-            <StyledTableCell align="center">Estado</StyledTableCell>
+            <StyledTableCell align="center">DESTINO</StyledTableCell>
+            <StyledTableCell align="center">
+              HORARIO<br></br>SALIDA
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              HORARIO<br></br>ESTIMADO
+            </StyledTableCell>
+            <StyledTableCell align="center">EMPRESA</StyledTableCell>
+            <StyledTableCell align="center">PLAT</StyledTableCell>
+            <StyledTableCell align="center">ESTADO</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props && props.map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.id}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.empresa}</StyledTableCell>
-              <StyledTableCell align="center">{row.img}</StyledTableCell>
-              <StyledTableCell align="center">{row.siglas}</StyledTableCell>
-              <StyledTableCell align="center">{row.id}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {props &&
+            props.map((row) => (
+              <StyledTableRow key={row.id}>
+                <StyledTableCell align="center">{row.destino}</StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.horarioSalida}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.horarioEstimado}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <div className="box" style={styles.cajaFoto}>
+                    <img
+                      src={require("../../assets/img/flechaBus.png")}
+                      alt=""
+                    />
+                  </div>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.plataforma}
+                </StyledTableCell>
+                <StyledTableCell align="center">{row.estado}</StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -1,8 +1,9 @@
-import  GenericTable from '../../components/table/Table';
 import React from 'react';
+import GenericTable from '../../components/table/Table';
+
+import './ArrivalsBoard.styles.css';
 
 import { useSelector } from 'react-redux';
-
 
 const ArrivalsBoard = () => {
 
@@ -11,9 +12,13 @@ const ArrivalsBoard = () => {
     console.log('data:', colectivosRedux)
 
     return (
-        <div>
+      <>
+        <div className="container" >
+          <div>
             <GenericTable props={colectivosRedux} />
+          </div>
         </div>
+      </>
     );
 }
 
