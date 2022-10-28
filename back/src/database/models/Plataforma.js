@@ -11,10 +11,6 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.STRING(45),
         allowNull: false
       },
-      capacidad: {
-        type: dataTypes.INTEGER,
-        allowNull: false
-      },
       servicios_id: dataTypes.BIGINT(11),
   
     };

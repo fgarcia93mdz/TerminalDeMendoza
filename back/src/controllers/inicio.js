@@ -16,6 +16,8 @@ const bcryptjs = require('bcryptjs');
 
 // Llamado a la base de datos 
 const db = require('../database/models')
+//Fecha actual 
+const date = require('../../public/js/fechaActualMenosUnDia')
 // Hora actual
 const horaActual = require('../../public/js/horaActual')
 // Modelo de DB
@@ -206,10 +208,10 @@ const ControllerInicioUsuario = {
   },
   cambiarClave: (req, res) => {
     const userLogged = req.session.userLogged
-    
+
     if (userLogged) {
       let isOkPassword = bcryptjs.compareSync(req.body.password, userLogged.password);
-      
+
       if (isOkPassword == true) {
         Usuario.update({
           password: bcryptjs.hashSync(req.body.nuevaClave, 10),
@@ -242,20 +244,20 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
-    
+
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma, estado, ])
-      .then(([usuario, empresa, servicio, plataforma, estado, ]) => {
+      .all([usuario, empresa, servicio, plataforma, estado,])
+      .then(([usuario, empresa, servicio, plataforma, estado,]) => {
         const resultValidation = validationResult(req);
         if (resultValidation.errors.length > 0) {
           return res.render('formularios/seguridad', {
             errors: resultValidation.mapped(),
             oldData: req.body,
-            usuario, empresa, servicio, plataforma, estado, 
+            usuario, empresa, servicio, plataforma, estado,
           });
         }
       }).then(() => {
@@ -273,32 +275,37 @@ const ControllerInicioUsuario = {
         })
       })
   },
-   informe: (req, res) => {
+  informe: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
     
-    let empresa = Empresa.findAll();
+    let empresas = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado, ])
-      .then(([usuario, empresa, servicio, plataforma,estado, ]) => {
+      .all([usuario, empresas, servicio, plataforma,estado, ])
+      .then(([usuario, empresas, servicio, plataforma,estado, ]) => {
         res.render('formularios/seguridad', {
-          usuario, empresa, servicio, plataforma, estado, 
+          usuario, empresas, servicio, plataforma, estado, 
         })
       })
   },
   ingresos: (req, res) => {
+    let diaHoy = date
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
     let ingresos = RegistroTorre.findAll({
-      include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado']
-    })
+      include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
+      where: { fecha_ingreso: { [Op.gt]: diaHoy } }, order: [
+        ['id', 'DESC'],
+      ]
+    }
+    )
     Promise
       .all([usuario, ingresos])
       .then(([usuario, ingresos]) => {
@@ -306,24 +313,30 @@ const ControllerInicioUsuario = {
           usuario, ingresos
         })
       })
-   },
-   
-   // Comienza la parte de contabilidad, la cual es la que manipula los datos que se van a agregar a las tablas de uso de la torre
+  },
+
+  // Comienza la parte de contabilidad, la cual es la que manipula los datos que se van a agregar a las tablas de uso de la torre
   contabilidad: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
+    let usuarios = Usuario.findAll({
+      include: ['rol_usuario'],
+    })
+
     let hora = horaActual
-    let empresa = Empresa.findAll();
+    let empresas = Empresa.findAll({
+      include: []
+    });
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado, hora])
-      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
+      .all([usuarios, usuario, empresas, servicio, plataforma,estado, hora])
+      .then(([usuarios, usuario, empresas, servicio, plataforma,estado, hora]) => {
         res.render('usuarios/contabilidad', {
-          usuario, empresa, servicio, plataforma, estado, hora
+          usuarios, usuario, empresas, servicio, plataforma, estado, hora
         })
       })
 
@@ -339,8 +352,8 @@ const ControllerInicioUsuario = {
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado, hora])
-      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
+      .all([usuario, empresa, servicio, plataforma, estado, hora])
+      .then(([usuario, empresa, servicio, plataforma, estado, hora]) => {
         res.render('formularios/empresa', {
           usuario, empresa, servicio, plataforma, estado, hora
         })
