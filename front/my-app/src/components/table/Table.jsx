@@ -86,7 +86,7 @@ export default function GenericTable( {props} ) {
               <StyledTableRow key={row.id}>
                 <StyledTableCell align="center">{row.destino}</StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.horarioSalida}
+                  {row.horario_salida}
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   {row.horarioEstimado}

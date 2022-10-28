@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 // creo el estado inicial y las props
-const estadoInicialSlice = {
-  id: 1,
-  empresa: "cuchuflito",
-  siglas: "cft",
-  img: "img5",
-  destino: "RETIRO",
-  horarioSalida: "23:25",
-  horarioEstimado: "23:25",
-  plataforma: "5",
-  estado: "PARTIO"
-};
+// const estadoInicialSlice = {
+//   id: 1,
+//   empresa: "cuchuflito",
+//   siglas: "cft",
+//   img: "img5",
+//   destino: "RETIRO",
+//   horarioSalida: "23:25",
+//   horarioEstimado: "23:25",
+//   plataforma: "5",
+//   estado: "PARTIO"
+// };
 
 const colectivos = [
   {
@@ -182,11 +182,6 @@ const colectivos = [
   },
 ];
 
-// "id": 5,
-//     "empresa": "cuchuflito",
-//     "siglas": "cft",
-//     "img": "img5"
-
 
 export const estadoGlobalSlice = createSlice({
 
@@ -209,6 +204,11 @@ export const estadoGlobalSlice = createSlice({
         setImg: function(state, action){
             state.img = action.payload
         },
+
+        setPlataforma: function(state, action){
+
+            state.plataforma = action.payload
+        }
 
         // setHoraArribo: function(state, action){
         //     state.setHoraArribo = action.payload

@@ -10,20 +10,19 @@ let sequelize = require('sequelize');
 const platformController = {
 
     locals: function(req,res){
-
-        let empresas = db.Empresa.findAll()
-        
-        empresas.then( (data) => {
-            res.json(data)
-        })
-        .catch( error => console.log(error))
-
-     
        
     },
 
     arrivals: function(req,res){
-        res.json('== PLATAFORMA ARRIBOS ==')
+
+        let register = db.RegistroAdministrativo.findAll({
+            include: [{ association: 'registro_empresa', attributes: [] }]})
+        
+        register.then( (data) => {
+            res.json(data)
+        })
+        .catch( error => console.log(error))
+
     },
 
     depratures: function(req,res){

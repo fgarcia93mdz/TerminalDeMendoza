@@ -67,7 +67,7 @@ module.exports = (sequelize, dataTypes) => {
         as: "registro_plataforma",
         foreignKey: "plataformas_id"
       })
-     }
+    }
   
     return RegistroAdministrativo
   }
