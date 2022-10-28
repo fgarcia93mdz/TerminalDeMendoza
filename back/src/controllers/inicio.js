@@ -279,15 +279,15 @@ const ControllerInicioUsuario = {
       where: { id: userLogged.id }
     })
     
-    let empresa = Empresa.findAll();
+    let empresas = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado, ])
-      .then(([usuario, empresa, servicio, plataforma,estado, ]) => {
+      .all([usuario, empresas, servicio, plataforma,estado, ])
+      .then(([usuario, empresas, servicio, plataforma,estado, ]) => {
         res.render('formularios/seguridad', {
-          usuario, empresa, servicio, plataforma, estado, 
+          usuario, empresas, servicio, plataforma, estado, 
         })
       })
   },
@@ -314,16 +314,22 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
+    let usuarios = Usuario.findAll({
+      include: ['rol_usuario'],
+    })
+
     let hora = horaActual
-    let empresa = Empresa.findAll();
+    let empresas = Empresa.findAll({
+      include: []
+    });
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma,estado, hora])
-      .then(([usuario, empresa, servicio, plataforma,estado, hora]) => {
+      .all([usuarios, usuario, empresas, servicio, plataforma,estado, hora])
+      .then(([usuarios, usuario, empresas, servicio, plataforma,estado, hora]) => {
         res.render('usuarios/contabilidad', {
-          usuario, empresa, servicio, plataforma, estado, hora
+          usuarios, usuario, empresas, servicio, plataforma, estado, hora
         })
       })
 

@@ -26,3 +26,12 @@ input{
     background-color: rgb(45, 80, 255);
     color: white;
 }
+
+.enviar:hover{
+    background-color: rgb(60, 231, 171);
+}
+
+.button{
+    text-align: center;
+    padding-top: 20px;
+}

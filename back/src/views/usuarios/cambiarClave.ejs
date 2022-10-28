@@ -38,7 +38,9 @@
     <%- include('../partial/navSeguridad') %>
       <% } else if (usuario.roles_id === 2) { %>
         <%- include('../partial/navRrhh') %>
-          <% } %>
+          <% } else if (usuario.roles_id === 3) { %>
+        <%- include('../partial/navContContraseña') %>
+          <% }%>
               <br><br><br><br>
               <div class="container">
                 <form action='/ingreso/sector/<%- usuario.id %>/cambioDeClave' method="POST">
