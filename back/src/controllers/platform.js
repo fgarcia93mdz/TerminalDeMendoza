@@ -15,8 +15,13 @@ const platformController = {
 
     arrivals: function(req,res){
 
-        let register = db.RegistroAdministrativo.findAll({
-            include: [{ association: 'registro_empresa', attributes: [] }]})
+        let register = db.RegistroAdministrativo.findAll(
+            {include: [
+                {association: "registro_empresa"},
+                {association: "registro_estado"},
+                {association: "registro_servicio"} 
+            ]},
+        )
         
         register.then( (data) => {
             res.json(data)

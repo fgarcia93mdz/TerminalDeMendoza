@@ -75,9 +75,9 @@ app.use(function(err, req, res, next) {
 
 app.listen(8080, () => {
   console.log('API Routes Availables')
-  console.log('/api/plataforma/arribos - GET')
-  console.log('/api/plataforma/partidas - GET')
-  console.log('/api/plataforma/locales - GET')
+  console.log('http://localhost:8080/api/plataforma/arribos - Arrival GET')
+  console.log('http://localhost:8080/api/plataforma/partidas - GET')
+  console.log('http://localhost:8080/api/plataforma/locales - GET')
   console.log('Terminal Server running at http://localhost:8080');
 });
 module.exports = app;

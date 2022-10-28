@@ -1,3 +1,5 @@
+import { CircularProgress } from '@mui/material';
+import { Stack } from '@mui/system';
 import React, { useEffect } from 'react';
 import GenericTable from '../../components/table/Table';
 
@@ -33,6 +35,13 @@ const ArrivalsBoard = () => {
       <>
         <div className="container" >
           <div>
+            {estado.length === 0 && 
+              <Stack justifyContent={'center'} alignItems={'center'} height={'40vh'}>
+
+                <CircularProgress />
+              </Stack>
+            }
+
             {estado.length > 0 && <GenericTable props={estado} />}
             {/* <GenericTable props={estado} /> */}
           </div>

@@ -12,17 +12,17 @@ import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    // backgroundColor: theme.palette.common.black,
     backgroundColor: "#0E315A",
-    height: "102px",
-    // color: theme.palette.common.white,
+    height: "80px",
   },
   [`&.${tableCellClasses.body}`]: {},
   [`&.${tableCellClasses.root}`]: {
     borderBottom: "none",
-    fontSize: 24,
+    fontSize: 20,
     color: "white",
     fontWeight: "bold",
+    padding: "10px",
+    marginLeft: '2rem'
   },
 }));
 
@@ -37,7 +37,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
-  height: '77px'
+  height: '77px',
+  paddingLeft: '2rem'
 }));
 
 
@@ -73,7 +74,7 @@ export default function GenericTable( {props} ) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ fontSize: '1rem' }} aria-label="customized table">
+      <Table sx={{ fontSize: '20px' }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">DESTINO</StyledTableCell>
@@ -89,6 +90,7 @@ export default function GenericTable( {props} ) {
           </TableRow>
         </TableHead>
         <TableBody>
+          
           {props &&
             props.map((row) => (
               <StyledTableRow key={row.id}>
