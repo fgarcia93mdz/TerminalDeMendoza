@@ -54,6 +54,14 @@ const styles = {
 
 
 export default function GenericTable( {props} ) {
+  
+  // const HOUR_ESTIMATED 
+  // const HOUR_ARRIVAL
+  // const HOUR_DEPARTURE
+  // const COMPANY
+  // const IMG
+  // const STATE
+
 
   // const colectivosRedux  = useSelector(state => state.estado);
 
@@ -65,7 +73,7 @@ export default function GenericTable( {props} ) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ }} aria-label="customized table">
+      <Table sx={{ fontSize: '1rem' }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">DESTINO</StyledTableCell>
@@ -84,12 +92,12 @@ export default function GenericTable( {props} ) {
           {props &&
             props.map((row) => (
               <StyledTableRow key={row.id}>
-                <StyledTableCell align="center">{row.destino}</StyledTableCell>
+                <StyledTableCell align="center">{row.registro_empresa.empresa}</StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.horario_salida}
+                  {row.hora_salida}
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.horarioEstimado}
+                  {row.hora_estimada}
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <div className="box" style={styles.cajaFoto}>
@@ -100,9 +108,10 @@ export default function GenericTable( {props} ) {
                   </div>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.plataforma}
+                 Plat. {row.plataformas_id}
                 </StyledTableCell>
-                <StyledTableCell align="center">{row.estado}</StyledTableCell>
+               
+                <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
               </StyledTableRow>
             ))}
         </TableBody>

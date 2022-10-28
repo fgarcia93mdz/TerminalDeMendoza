@@ -28,6 +28,8 @@ h3 a:hover {
 }
 
 ul {
+    margin:0;
+    padding:0;
     display: flex;
 }
 
@@ -51,4 +53,11 @@ li a:hover {
     color: black;
     text-decoration: underline;
 
+}
+
+.hour {
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+    color: #1c68c0
 }
