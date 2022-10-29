@@ -92,9 +92,9 @@
             <label for="empresa">Empresa: </label>
             <select id="empresa" name="empresa" <%=locals.errors && errors.empresa ? 'is-invalid' : null %>" >
                 <option value="" disabled selected> Seleccionar </option>
-                <% empresa.forEach(empresa=> { %>
-                <option value="<%= empresa.id %>">
-                    <%= empresa.siglas %> - <%= empresa.empresa %>
+                <% empresas.forEach(empresas=> { %>
+                <option value="<%= empresas.id %>">
+                    <%= empresas.siglas %> - <%= empresas.empresa %>
                 </option>
                 <% }) %>
             </select>
