@@ -108,7 +108,8 @@ const ControllerInicioUsuario = {
       res.redirect("/ingreso/sector/contabilidad")
     } else if (userLogged.roles_id === 4) {
       res.redirect("/ingreso/sector/seguridad")
-      res.send("Hola, estas ingresando al área de Operador de seguridad")
+    } else if (userLogged.roles_id === 5) {
+      res.redirect("/ingreso/informes/listadoDeIngresos")
     }
     else {
       res.send("No tienes permiso para ingresar a esta vista")
@@ -359,6 +360,27 @@ const ControllerInicioUsuario = {
         })
       })
 
+  },
+  informesListado: (req, res) => {
+    let diaHoy = date
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let ingresos = RegistroTorre.findAll({
+      include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
+      where: { fecha_ingreso: { [Op.gt]: diaHoy } }, order: [
+        ['id', 'DESC'],
+      ]
+    }
+    )
+    Promise
+      .all([usuario, ingresos])
+      .then(([usuario, ingresos]) => {
+        res.render('formularios/listadoParaInformes', {
+          usuario, ingresos
+        })
+      })
   }
 
 

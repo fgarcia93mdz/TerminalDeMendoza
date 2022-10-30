@@ -66,6 +66,8 @@ router.get('/ingreso/sector/seguridad/ingresos', ControllerInicioUsuario.ingreso
 router.get('/ingreso/sector/contabilidad', ControllerInicioUsuario.contabilidad)
 router.get('/ingreso/sector/contabilidad/empresa', ControllerInicioUsuario.empresa)
 
+// Informes
+router.get('/ingreso/informes/listadoDeIngresos', ControllerInicioUsuario.informesListado);
 
 
 
