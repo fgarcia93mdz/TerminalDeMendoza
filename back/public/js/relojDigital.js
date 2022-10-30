@@ -21,8 +21,10 @@ function startTime() {
   var date = curWeekDay + " " + curDay + "/" + curMonth + "/" + curYear;
   document.getElementById("date").innerHTML = date;
 
-  var time = setTimeout(function () { startTime() }, 500);
+  var time = setTimeout(function () { startTime() }, 500,);
+  
 }
+
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i;

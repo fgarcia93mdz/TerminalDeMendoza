@@ -68,6 +68,10 @@ router.get('/ingreso/sector/contabilidad/empresa', ControllerInicioUsuario.empre
 
 // Informes
 router.get('/ingreso/informes/listadoDeIngresos', ControllerInicioUsuario.informesListado);
+router.get('/ingreso/informes/:id/ingresoAModificar', ControllerInicioUsuario.ingresoAModificar);
+router.post('/ingreso/informes/:id/modificarIngreso', ControllerInicioUsuario.modificarIngreso);
+router.post('/ingreso/informes/:id/modificarEgreso', ControllerInicioUsuario.modificarEgreso);
+
 
 
 

@@ -113,11 +113,8 @@
             <label for="estado">Estado: </label>
             <select id="estado" name="estado" <%=locals.errors && errors.estado ? 'is-invalid' : null %>">
                 <option value="" disabled selected> Seleccionar </option>
-                <% estado.forEach(estado=> { %>
-                <option value="<%= estado.id %>">
-                    <%= estado.tipo %>
-                </option>
-                <% }) %>
+                <option value="2">Ingresando</option>
+                <option value="3">Sin servicio de plataforma</option>
             </select>
 
             <label for="destino">Destino / Servicio: </label>
@@ -130,6 +127,7 @@
     </div>
     <% } %>
     <script src="/js/relojDigital.js"></script>
+    
 </body>
 
 </html>

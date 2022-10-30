@@ -14,7 +14,7 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-      tableName: 'Estado',
+      tableName: 'estado',
       timestamps: false
     }
     const Estado = sequelize.define(alias, cols, config);
@@ -22,7 +22,7 @@ module.exports = (sequelize, dataTypes) => {
     Estado.associate = function (models) {
   
       Estado.hasMany(models.RegistroAdministrativo, {
-        as: "registro_estado",
+        as: "estado_registro",
         foreignKey: "estado_id"
       })
 
