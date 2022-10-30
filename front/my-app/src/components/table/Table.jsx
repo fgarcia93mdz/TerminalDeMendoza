@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import imgCompany from "../../assets/img/empresas/iselin.png"
 
 // import { useSelector } from 'react-redux';
 
@@ -78,13 +79,14 @@ export default function GenericTable( {props} ) {
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">DESTINO</StyledTableCell>
+            <StyledTableCell align="center">INTERNO</StyledTableCell>
+            <StyledTableCell align="center">EMPRESA</StyledTableCell>
             <StyledTableCell align="center">
               HORARIO<br></br>SALIDA
             </StyledTableCell>
             <StyledTableCell align="center">
-              HORARIO<br></br>ESTIMADO
+              
             </StyledTableCell>
-            <StyledTableCell align="center">EMPRESA</StyledTableCell>
             <StyledTableCell align="center">PLAT</StyledTableCell>
             <StyledTableCell align="center">ESTADO</StyledTableCell>
           </TableRow>
@@ -94,17 +96,16 @@ export default function GenericTable( {props} ) {
           {props &&
             props.map((row) => (
               <StyledTableRow key={row.id}>
+                <StyledTableCell align="center">{row.destino}</StyledTableCell>
+                <StyledTableCell align="center">{row.interno}</StyledTableCell>
                 <StyledTableCell align="center">{row.registro_empresa.empresa}</StyledTableCell>
                 <StyledTableCell align="center">
                   {row.hora_salida}
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.hora_estimada}
-                </StyledTableCell>
-                <StyledTableCell align="center">
                   <div className="box" style={styles.cajaFoto}>
                     <img
-                      src={require("../../assets/img/flechaBus.png")}
+                      src={imgCompany}
                       alt=""
                     />
                   </div>
@@ -112,7 +113,6 @@ export default function GenericTable( {props} ) {
                 <StyledTableCell align="center">
                  Plat. {row.plataformas_id}
                 </StyledTableCell>
-               
                 <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
               </StyledTableRow>
             ))}

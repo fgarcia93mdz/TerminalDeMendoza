@@ -29,7 +29,7 @@ const NavBar = () => {
                     <li> <Link to='/tablero-partidas' > TABLERO PARTIDAS </Link> </li>
                     <li> <Link to='/login' > LOGIN </Link> </li>
                 </ul> */}
-                <p className="hour" >23:52</p>
+                <p className="hour" >18:00</p>
             </Stack>
         </>
        
