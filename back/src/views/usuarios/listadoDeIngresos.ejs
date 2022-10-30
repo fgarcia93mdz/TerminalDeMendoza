@@ -34,65 +34,64 @@
 <body>
 
   <%- include('../partial/navSeguridadListado') %>
-    <br>
+  <br>
 
-    <h2 style="text-align: center">LISTADO DE INGRESOS</h2>
-    <% if(usuario.estado_password===0) { %>
-      <a href="/ingreso/sector/<%- usuario.id %>/cambiarClave">
-        <h3
-          style="color: red; background-color:rgba(188, 187, 187, 0.721); border-radius: 10px; width: 100%; text-decoration:none">
-          Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes de cambiar la contraseña
-            predeterminada que generó recursos humanos antes de continuar </h3>
-      </a>
-      <% } else { %>
-        <br>
-        <table>
-          <tr>
-            <th>Fecha Ingreso</th>
-            <th>Hora Ingreso</th>
-            <th>Interno</th>
-            <th>Empresa</th>
-            <th>Servicio</th>
-            <th>Plataforma</th>
-            <th>Estado</th>
-            <th>Fecha Salida</th>
-            <th>Hora Salida</th>
-          </tr>
-          <% ingresos.forEach(ingresos=> { %>
-            <tr>
-              <td>
-                <%- ingresos.fecha_ingreso %>
-              </td>
-              <td>
-                <%- ingresos.hora_ingreso %>
-              </td>
-              <td>
-                <%- ingresos.interno %>
-              </td>
-              <td>
-                <%- ingresos.registro_empresa.siglas %>
-              </td>
-              <td>
-                <%- ingresos.registro_servicio.tipo_servicio %>
-              </td>
-              <td>
-                <%- ingresos.registro_plataforma.plataforma %>
-              </td>
-              <td>
-                <%- ingresos.registro_estado.tipo %>
-              </td>
-              <td>
-                <%- ingresos.fecha_salida %>
-              </td>
-              <td>
-                <%- ingresos.hora_salida %>
-              </td>
-            </tr>
-            <% }) %>
-        </table>
-        <% } %>
+  <h2 style="text-align: center">LISTADO DE INGRESOS</h2>
+  <% if(usuario.estado_password===0) { %>
+  <a href="/ingreso/sector/<%- usuario.id %>/cambiarClave">
+    <h3
+      style="color: red; background-color:rgba(188, 187, 187, 0.721); border-radius: 10px; width: 100%; text-decoration:none">
+      Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes de cambiar la contraseña
+      predeterminada que generó recursos humanos antes de continuar </h3>
+  </a>
+  <% } else { %>
+  <br>
+  <table>
+    
+    <tr>
+      <th style="text-align:center">Fecha Ingreso</th>
+      <th style="text-align:center">Hora Ingreso</th>
+      <th style="text-align:center">Interno</th>
+      <th style="text-align:center">Empresa</th>
+      <th style="text-align:center">Tipo de Servicio</th>
+      <th style="text-align:center">Destino / Servicio</th>
+      <th style="text-align:center">Estado</th>
+      <th style="text-align:center">Hora Salida</th>
+    </tr>
+    <% ingresos.forEach(ingresos => { %>
+      <% if(ingresos.estado_id != 1) {%> 
+    <tr>
+      <td style="text-align: center">
+        <%- ingresos.fecha_ingreso %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.hora_ingreso %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.interno %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.registro_empresa.empresa %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.registro_servicio.tipo_servicio %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.destino %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.registro_estado.tipo %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.hora_salida %>
+      </td>
+    </tr>
+    <% } %>
+    <% }) %>
 
-          <script src="/js/nav.js"></script>
+  </table>
+<% } %> 
+  <script src="/js/nav.js"></script>
 </body>
 
 </html>

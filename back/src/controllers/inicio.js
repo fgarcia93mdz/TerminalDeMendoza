@@ -268,8 +268,8 @@ const ControllerInicioUsuario = {
           empresa_id: req.body.empresa,
           servicios_id: req.body.servicio,
           usuarios_id: req.body.usuario,
-          plataformas_id: req.body.plataforma,
-          estado_id: req.body.estado
+          estado_id: req.body.estado,
+          destino: req.body.destino
         }).then(() => {
           return res.redirect("/ingreso/sector/seguridad")
         })
