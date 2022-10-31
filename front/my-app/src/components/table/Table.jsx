@@ -105,7 +105,7 @@ export default function GenericTable( {props} ) {
                 <StyledTableCell align="center">
                   <div className="box" style={styles.cajaFoto}>
                     <img
-                      src={imgCompany}
+                      src={require("../../assets/img/empresas/" + row.registro_empresa.img)}
                       alt=""
                     />
                   </div>
