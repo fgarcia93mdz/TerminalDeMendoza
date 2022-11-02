@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
 
-import NavBar from './components/navbar/NavBar';
+import NavBar2 from './components/navbar/NavBar2';
 
 import Home from './pages/home/Home';
 import ArrivalsBoard from './pages/board-tv/ArrivalsBoard'
@@ -14,7 +14,7 @@ import Footer from './components/footer/Footer';
 function App() {
   return (
     <div>
-      <NavBar />
+      <NavBar2 />
 
       <div className="App">
         <Routes >
