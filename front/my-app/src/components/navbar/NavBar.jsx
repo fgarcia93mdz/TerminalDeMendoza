@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 import { Box, Stack } from '@mui/system';
 
 const NavBar = () => {
-    return (
+    return (<nav>
         <>
         
   
@@ -32,7 +32,7 @@ const NavBar = () => {
                 <p className="hour" >23:52</p>
             </Stack>
         </>
-       
+       </nav>
     );
 }
 
