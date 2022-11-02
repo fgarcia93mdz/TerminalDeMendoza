@@ -10,6 +10,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const platformRouter = require('./routes/platform')
 
+const authRouter = require('./routes/auth');
+
 // Session
 app.use(session({
   secret: 'Es un secreto nuestro',
@@ -55,6 +57,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/api/plataforma', platformRouter) 
+
+app.use('/auth', authRouter);
 
 
 // Catch 404 and forward to error handler
