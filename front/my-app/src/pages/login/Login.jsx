@@ -3,7 +3,7 @@ import './login.css';
 
 const Login = () => {
     return (
-        <body>    
+           
         <div className='login'>
             <h1 className='azul bienvenido'>Bienvenido</h1>
 
@@ -22,11 +22,11 @@ const Login = () => {
                 </div>
 
                 <div>
-                <a href='' className='cambiar-cont'>Olvidé mi contraseña</a>
+                <a href='#' className='cambiar-cont'>Olvidé mi contraseña</a>
                 </div>
             </form>
         </div>
-        </body>
+        
     );
 }
 
