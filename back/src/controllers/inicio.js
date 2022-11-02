@@ -108,7 +108,8 @@ const ControllerInicioUsuario = {
       res.redirect("/ingreso/sector/contabilidad")
     } else if (userLogged.roles_id === 4) {
       res.redirect("/ingreso/sector/seguridad")
-      res.send("Hola, estas ingresando al área de Operador de seguridad")
+    } else if (userLogged.roles_id === 5) {
+      res.redirect("/ingreso/informes/listadoDeIngresos")
     }
     else {
       res.send("No tienes permiso para ingresar a esta vista")
@@ -268,8 +269,9 @@ const ControllerInicioUsuario = {
           empresa_id: req.body.empresa,
           servicios_id: req.body.servicio,
           usuarios_id: req.body.usuario,
-          plataformas_id: req.body.plataforma,
-          estado_id: req.body.estado
+          plataformas_id: 1,
+          estado_id: req.body.estado,
+          destino: req.body.destino
         }).then(() => {
           return res.redirect("/ingreso/sector/seguridad")
         })
@@ -280,16 +282,16 @@ const ControllerInicioUsuario = {
     let usuario = Usuario.findOne({
       where: { id: userLogged.id }
     })
-    
+
     let empresas = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresas, servicio, plataforma,estado, ])
-      .then(([usuario, empresas, servicio, plataforma,estado, ]) => {
+      .all([usuario, empresas, servicio, plataforma, estado,])
+      .then(([usuario, empresas, servicio, plataforma, estado,]) => {
         res.render('formularios/seguridad', {
-          usuario, empresas, servicio, plataforma, estado, 
+          usuario, empresas, servicio, plataforma, estado,
         })
       })
   },
@@ -333,8 +335,8 @@ const ControllerInicioUsuario = {
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuarios, usuario, empresas, servicio, plataforma,estado, hora])
-      .then(([usuarios, usuario, empresas, servicio, plataforma,estado, hora]) => {
+      .all([usuarios, usuario, empresas, servicio, plataforma, estado, hora])
+      .then(([usuarios, usuario, empresas, servicio, plataforma, estado, hora]) => {
         res.render('usuarios/contabilidad', {
           usuarios, usuario, empresas, servicio, plataforma, estado, hora
         })
@@ -359,7 +361,98 @@ const ControllerInicioUsuario = {
         })
       })
 
+  },
+  informesListado: (req, res) => {
+    let diaHoy = date
+    let hora = horaActual
+    console.log("🚀 ~ file: inicio.js ~ line 367 ~ hora", hora)
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let ingresos = RegistroTorre.findAll({
+      include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
+      where: { fecha_ingreso: { [Op.gt]: diaHoy } }, order: [
+        ['hora_salida', 'DESC'],
+      ]
+    }
+    )
+    Promise
+      .all([usuario, ingresos, hora ])
+      .then(([usuario, ingresos, hora ]) => {
+        res.render('formularios/listadoParaInformes', {
+          usuario, ingresos, hora 
+        })
+      })
+  },
+  ingresoAModificar: (req, res) => {
+    let ingresoId = req.params.id
+    let diaHoy = date
+    
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    let ingresos = RegistroTorre.findAll({
+      include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
+      where: { id: ingresoId } })
+    let empresa = Empresa.findAll();
+    let servicio = Servicio.findAll();
+    let plataforma = Plataforma.findAll();
+    let estado = Estado.findAll();
+    Promise
+      .all([usuario, ingresos, diaHoy, empresa, servicio, plataforma, estado, ingresoId])
+      .then(([usuario, ingresos, diaHoy, empresa, servicio, plataforma, estado, ingresoId]) => {
+        res.render('formularios/modificarIngreso', {
+          usuario,
+          ingresos,
+          diaHoy,
+          empresa,
+          servicio,
+          plataforma,
+          estado,
+          ingresoId
+        })
+      })
+  },
+  modificarIngreso: (req, res) => {
+    const userLogged = req.session.userLogged
+    let ingresoId = req.params.id
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    RegistroTorre.update({
+      estado_id: req.body.estado,
+      destino: req.body.detino,
+      fecha_salida: req.body.fecha_salida,
+      hora_salida: req.body.hora_salida,
+      plataformas_id: req.body.plataforma
+    }, {
+      where: {
+      id: ingresoId
+      }
+    }).then(() => {
+      return res.redirect('/ingreso/informes/listadoDeIngresos')
+    })
+  },
+  modificarEgreso: (req, res) => {
+    const userLogged = req.session.userLogged
+    let ingresoId = req.params.id
+    let usuario = Usuario.findOne({
+      where: { id: userLogged.id }
+    })
+    RegistroTorre.update({
+      estado_id: 4,
+    }, {
+      where: {
+        id: ingresoId
+      }
+    }).then(() => {
+      return res.redirect('/ingreso/informes/listadoDeIngresos')
+    })
   }
+
+
 
 
 

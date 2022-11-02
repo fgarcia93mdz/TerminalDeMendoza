@@ -5,7 +5,7 @@ var today = new Date();
 var day = today.getDate();
 
 // `getMonth()` returns the month (from 0 to 11)
-var month = "0" + (today.getMonth() + 1);
+var month = + (today.getMonth() + 1);
 
 // `getFullYear()` returns the full year
 var year = today.getFullYear();

@@ -20,7 +20,7 @@ const platformController = {
                 {association: "registro_empresa"},
                 {association: "registro_estado"},
                 {association: "registro_servicio"} 
-            ]},
+            ], where: {estado_id: 1}},
         )
         
         register.then( (data) => {
