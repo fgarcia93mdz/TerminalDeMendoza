@@ -9,6 +9,8 @@ body{
     width: fit-content;
     margin: auto;
     text-align: center;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
 .azul{

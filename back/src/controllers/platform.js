@@ -15,7 +15,7 @@ const platformController = {
 
     arrivals: function(req,res){
 
-        let register = db.RegistroAdministrativo.findAll(
+        let registroArribos = db.RegistroAdministrativo.findAll(
             {include: [
                 {association: "registro_empresa"},
                 {association: "registro_estado"},
@@ -23,7 +23,7 @@ const platformController = {
             ], where: {estado_id: 1}},
         )
         
-        register.then( (data) => {
+        registroArribos.then( (data) => {
             res.json(data)
         })
         .catch( error => console.log(error))
