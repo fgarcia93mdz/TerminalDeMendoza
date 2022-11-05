@@ -3,6 +3,8 @@ import './NavBar.styles.css'
 // import { Link } from 'react-router-dom'
 import Marquee from "react-fast-marquee";
 
+// import jwt from 'jsonwebtoken'
+
 // inicio
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -46,6 +48,8 @@ const NavBarAdmin = () => {
         setAnchorElUser(null);
     };
 
+    // const decode = jwt.decode(window.sessionStorage.getItem("jwt"))
+    // console.log('decode', decode)
 
         return (
             <>
@@ -150,6 +154,10 @@ const NavBarAdmin = () => {
                                     LOGIN
                                 </Link>
                             </Button>
+
+                            <Typography variant='p'>
+                                Bienvenido 
+                            </Typography>
                       
                     </Box>
 

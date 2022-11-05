@@ -38,7 +38,7 @@ const ControllerInicioUsuario = {
 
     })
   },
-  // Se inicia el proceos de login (ingreso) donde se busca al usuario en la base de datos, se hace una comparacion de contrasena encriptada y segun el resultado se redirecciona o se devuelve valores con el error
+  // Se inicia el procesos de login (ingreso) donde se busca al usuario en la base de datos, se hace una comparacion de contrasena encriptada y segun el resultado se redirecciona o se devuelve valores con el error
   login: (req, res, next) => {
 
     Usuario.findOne({

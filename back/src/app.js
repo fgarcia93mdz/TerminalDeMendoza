@@ -9,12 +9,14 @@ const cookies = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const platformRouter = require('./routes/platform')
+require('dotenv').config()
 
 const authRouter = require('./routes/auth');
 
 // Session
 app.use(session({
-  secret: 'Es un secreto nuestro',
+  // token guardado en .env
+  secret: process.env.ACCESS_TOKEN_SECRET,
   resave: false,
   saveUninitialized: false,
 }))
@@ -76,6 +78,18 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')
+  if(token == null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if(err) return res.sendStatus(403)
+    req.user = user
+    next()
+  })
+}
 
 app.listen(8080, () => {
   console.log('API Routes Availables')
