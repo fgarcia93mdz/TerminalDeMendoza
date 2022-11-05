@@ -5,17 +5,15 @@ import { Stack } from '@mui/material';
 
 const Footer = () => {
     return (
-        <footer>
-        <Stack px={12} py={2}  direction={"row"} justifyContent={'space-between'} alignItems={'end'} sx={{fontColor:'#0b2748', width: '100vw'}}> 
+        <Stack role='footer' px={12} py={0}  direction={"row"} justifyContent={'space-between'} alignItems={'center'} sx={{color:'#0b2748', backgroundColor: 'white', maxWidth: '100%',  bottom: '0'}}> 
             
-            <div> <img style={{width: '85%'}} className="icon" src={require("../../assets/img/icono-colectivo.png")} alt="icono colectivo" /></div>
+            <div> <img style={{maxWidth: '85%', height:'auto'}} className="icon" src={require("../../assets/img/icono-colectivo.png")} alt="icono colectivo" /></div>
             <div>
                <p> Terminal de Mendoza</p> 
                <p> Copyrights 2022 </p>
 
             </div>
         </Stack>
-        </footer>
     );
 }
 

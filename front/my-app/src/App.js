@@ -12,7 +12,7 @@ import ArrivalsBoard from './pages/board-tv/ArrivalsBoard'
 import DeparturesBoard from './pages/board-tv/DeparturesBoard'
 import Login from './pages/login/Login'
 import Footer from './components/footer/Footer';
-import CustomizedTables from './components/table/Table';
+// import CustomizedTables from './components/table/Table';
 import FormTicket from './pages/ticket/FormTicket';
 
 
@@ -22,11 +22,11 @@ function App() {
   const [ isAdmin, setIsAdmin ] = useState(true)
 
   return (
-    <>
+    <div className="App">
       {isAdmin ? <NavBarAdmin /> : <NavBar />}
       
 
-      <div className="App">
+      <>
         <Routes >
           <Route exact path='/' element={<Home />} />
           <Route path='/tablero-arribos' element={<ArrivalsBoard />} />
@@ -34,12 +34,9 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/ticket/crear' element={<FormTicket />} />
         </Routes>
-      </div>
-      {/* <Login /> */}
-      {/* <CustomizedTables /> */}
-
+      </>
       <Footer />
-    </>
+    </div>
   );
 }
 

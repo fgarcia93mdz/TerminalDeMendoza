@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 
 const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
 const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
@@ -93,15 +94,63 @@ const NavBarAdmin = () => {
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
-                        {pages.map((page) => (
+                       
                             <Button
-                                key={page}
+                                key={'inicio'}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
-                                {page}
+                                <Link to='/ticket/crear'>
+                                    INICIO
+                                </Link>
                             </Button>
-                        ))}
+                            <Button
+                                key={'inicio'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                <Link to='/'>
+                                    PANTALLAS
+                                </Link>
+                            </Button>
+                            <Button
+                                key={'inicio'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                <Link to='/'>
+                                    INFORME
+                                </Link>
+                            </Button>
+                            <Button
+                                key={'inicio'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                <Link to='/'>
+                                    CAMBIAR CONTRASEÑA
+                                </Link>
+                            
+                            </Button>
+                            <Button
+                                key={'inicio'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                <Link to='/'>
+                                    CERRAR SESION
+                                </Link>
+                            </Button>
+                            <Button
+                                key={'inicio'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                <Link to='/login'>
+                                    LOGIN
+                                </Link>
+                            </Button>
+                      
                     </Box>
 
                     {/* <Box sx={{ flexGrow: 0 }}>

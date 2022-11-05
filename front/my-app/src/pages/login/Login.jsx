@@ -1,30 +1,34 @@
 import React from 'react';
-import './login.css';
+import './Login.css';
 
 const Login = () => {
     return (
            
-        <div className='login'>
-            <h1 className='azul bienvenido'>Bienvenido</h1>
+        <div className="container">
+            <div className="login">
 
-            <form>
-                <div className='item'>
-                    <label htmlFor="" className='azul'>Usuario:</label> <br />
-                    <input type="text" />
-                </div>
-                <div className='item'>
-                    <label htmlFor="" className='azul'>Contraseña:</label> <br />
-                    <input type="password" />
-                </div>
+            
+                <h1 className='azul bienvenido'>Bienvenido</h1>
 
-                <div>
-                    <button>Iniciar sesión</button>
-                </div>
+                <form>
+                    <div className='item'>
+                        <label htmlFor="" className='azul'>Usuario:</label> <br />
+                        <input type="text" />
+                    </div>
+                    <div className='item'>
+                        <label htmlFor="" className='azul'>Contraseña:</label> <br />
+                        <input type="password" />
+                    </div>
 
-                <div>
-                <a href='#' className='cambiar-cont'>Olvidé mi contraseña</a>
-                </div>
-            </form>
+                    <div>
+                        <button>Iniciar sesión</button>
+                    </div>
+
+                    <div>
+                        <a href='/#' className='cambiar-cont'>Olvidé mi contraseña</a>
+                    </div>
+                </form>
+            </div>
         </div>
         
     );
