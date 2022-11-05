@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 
 //esta clave secreta hay que ponerla en un .env
-const TOKEN_SECRET = "as1d65a4f6849w815416fd45w987fdw8dwf";
+const TOKEN_SECRET = require("../config/token");
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization']

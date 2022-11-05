@@ -55,10 +55,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', homeRouter);
-app.use('/users', usersRouter);
 app.use('/api/plataforma', platformRouter) 
 
 app.use('/auth', authRouter);
+app.use('/users', usersRouter);
 
 
 // Catch 404 and forward to error handler
