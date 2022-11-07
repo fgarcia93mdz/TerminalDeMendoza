@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {register, changePassword } = require("../controllers/users");
+const {register, changePassword, modifyUser, deleteUser } = require("../controllers/users");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
 const ROLES = require("../config/roles");
@@ -24,6 +24,19 @@ router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrad
 //   "password":"ptest",
 //   "nuevaClave":"ptest1"
 // }
+// HEADERS
+// authorization "Bearer token..."
+
+router.post("/modifyUser/:id", authenticateToken, modifyUser);
+
+router.get("/deleteUser", authenticateToken, deleteUser);
+//GET localhost:8080/users/deleteUser/2
+// BODY
+// {
+//   "motivo":"porque si"
+// }
+// QUERY
+// id : 2
 // HEADERS
 // authorization "Bearer token..."
 

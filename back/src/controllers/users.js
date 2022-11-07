@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const db = require("../database/models");
 const Usuario = db.Usuario;
+const EliminarUsuario = db.UsuarioEliminado;
 const bcryptjs = require("bcryptjs");
 
 const register = async (req, res) => {
@@ -69,4 +70,48 @@ const changePassword = async (req, res) => {
   }
 };
 
-module.exports = { register, changePassword };
+
+const deleteUser = async (req,res) => {
+  try {
+    console.log(req.usuario.id);
+    const usuarioAEliminar = parseInt(req.query.id);
+
+    let usuario = await Usuario.findOne({
+      where: {
+        id: usuarioAEliminar,
+      },
+    });
+    if (usuario !== null) {
+    
+
+      // por ahora falla porque la tabla usuario_eliminado tiene una fk a usuarios y cuando se 
+      // elimina un usuario se borran todos los logs de ese usuario en la tabla usuario_eliminado
+      
+      //   await EliminarUsuario.create({
+      //     usuario_id: req.usuario.id,
+      //     motivo: req.body.motivo,
+      //     usuario_id_eliminado: usuarioAEliminar,
+      //   });
+
+      // await Usuario.destroy({
+      //   where: {
+      //     id: usuarioAEliminar,
+      //   },
+      //   force: true,
+      // });
+
+      return res.status(200).json({ mensaje: "usuario eliminado correctamente" });
+    } else {
+      return res.status(400).json({ mensaje: "no existe el usuario" });
+    }
+
+  } catch (error) {
+    return res.status(400).json({ mensaje: error });
+  }
+}
+
+const modifyUser = (req,res) => {
+
+}
+
+module.exports = { register, changePassword, modifyUser, deleteUser };
