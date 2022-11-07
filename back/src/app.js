@@ -18,6 +18,7 @@ app.use(cookies());
 // Session
 app.use(session({
   // token guardado en .env
+  secret: "asdsadsadsad",
   resave: false,
   saveUninitialized: false,
 }))
