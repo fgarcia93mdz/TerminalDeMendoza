@@ -28,6 +28,8 @@ const Servicio = db.Servicio;
 const Plataforma = db.Plataforma;
 const Estado = db.Estado;
 const RegistroTorre = db.RegistroAdministrativo
+const EliminarUsuario = db.UsuarioEliminado
+const UsuarioLog = db.UsuarioLog
 
 
 // Login
@@ -84,9 +86,16 @@ const ControllerInicioUsuario = {
     })
   },
   logout: (req, res) => {
-    res.clearCookie('userEmail');
+const userLogged = req.session.userLogged
+    UsuarioLog.create({
+      usuarios_id: userLogged.id,
+      egreso: date
+    }).then(() => {
+      res.clearCookie('userEmail');
     req.session.destroy();
     return res.redirect("/")
+    })
+    
   },
 
   // Direccionamos al usuario a la pagina de ingreso, donde se valida su rol.
@@ -110,15 +119,16 @@ const ControllerInicioUsuario = {
       res.redirect("/ingreso/sector/seguridad")
     } else if (userLogged.roles_id === 5) {
       res.redirect("/ingreso/informes/listadoDeIngresos")
-    }
-    else {
+    } else {
       res.send("No tienes permiso para ingresar a esta vista")
     }
   },
   rrhh: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     let usuarios = Usuario.findAll({
       include: ['rol_usuario'],
@@ -129,23 +139,32 @@ const ControllerInicioUsuario = {
 
         res.render("usuarios/recursosHumanos", {
           userLogged,
-          usuarios, usuario
+          usuarios,
+          usuario
         });
       })
   },
   nuevoUsuario: (req, res) => {
     const userId = req.params.id
     let usuario = Usuario.findOne({
-      where: { id: userId }
+      where: {
+        id: userId
+      }
     })
     let roles = Rol.findAll({
+      where: {
+        id: {
+          [Op.gt]: 1
+        }
+      }
     })
     Promise
       .all([usuario, roles])
       .then(([usuario, roles]) => {
         res.render('usuarios/nuevoUsuario', {
           userId,
-          usuario, roles
+          usuario,
+          roles
         })
       })
   },
@@ -153,7 +172,9 @@ const ControllerInicioUsuario = {
     let roles = Rol.findAll()
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     Promise
       .all([roles, usuario])
@@ -169,12 +190,16 @@ const ControllerInicioUsuario = {
         }
       })
     let usuarioDB = Usuario.findOne({
-      where: { usuario: req.body.usuario }
+      where: {
+        usuario: req.body.usuario
+      }
     }).then((userInDB) => {
       let roles = Rol.findAll()
       const userLogged = req.session.userLogged
       let usuario = Usuario.findOne({
-        where: { id: userLogged.id }
+        where: {
+          id: userLogged.id
+        }
       })
       Promise
         .all([usuarioDB, roles, usuario])
@@ -218,7 +243,9 @@ const ControllerInicioUsuario = {
           password: bcryptjs.hashSync(req.body.nuevaClave, 10),
           estado_password: 1
         }, {
-          where: { id: userLogged.id }
+          where: {
+            id: userLogged.id
+          }
         }).then(() => {
           return res.redirect("/ingreso")
         })
@@ -229,7 +256,9 @@ const ControllerInicioUsuario = {
   viejaContraseña: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     Promise
       .all([usuario])
@@ -239,11 +268,114 @@ const ControllerInicioUsuario = {
         })
       })
   },
+  modificarUsuario: (req, res) => {
+    const userLogged = req.session.userLogged
+    let usuario = Usuario.findOne({
+      where: {
+        id: userLogged.id
+      }
+    })
+    let usuarios = Usuario.findOne({
+      include: ['rol_usuario'],
+      where: {
+        id: req.params.id
+      }
+    })
+    let roles = Rol.findAll({
+      where: {
+        id: {
+          [Op.gt]: 1
+        }
+      }
+    })
+    Promise
+      .all([usuarios, usuario, roles])
+      .then(([usuarios, usuario, roles]) => {
+        res.render("formularios/modificarUsuario", {
+          userLogged,
+          usuarios,
+          usuario,
+          roles
+        });
+      })
+  },
+  confirmarModificar: (req, res) => {
+    const userLogged = req.session.userLogged
+    const usuarioModificado = req.params.id
+    Usuario.update({
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      usuario: req.body.usuario,
+      roles_id: req.body.rol,
+    },{
+      where: {
+        id: usuarioModificado
+      }
+    }).then(() => {
+      return res.redirect('/ingreso/sector/recursosHumanos');
+    })
+  },
+  confirmarEliminar: (req, res) => {
+    const userLogged = req.session.userLogged
+    const usuarioId = req.params.id
+    let usuario = Usuario.findOne({
+      where: {
+        id: userLogged.id
+      }
+    })
+    let usuarios = Usuario.findOne({
+      where: {
+        id: usuarioId
+      }
+    })
+
+    Promise
+      .all([usuarios, usuario])
+      .then(([usuarios, usuario]) => {
+
+        res.render("formularios/confirmarEliminar", {
+          userLogged,
+          usuarios,
+          usuario
+        });
+      })
+  },
+  eliminarUsuario: (req, res) => {
+    const userLogged = req.session.userLogged
+    const usuarioId = req.params.id
+    let usuario = Usuario.findOne({
+      where: {
+        id: userLogged.id
+      }
+    })
+    Promise
+      .all([usuarioId, usuario])
+      .then(([usuarioId, usuario]) => {
+        EliminarUsuario.create({
+          usuario_id: usuario.id,
+          motivo: req.body.motivo,
+          usuario_id_eliminado: usuarioId
+        })
+      }).then(() => {
+        const usuarioId = req.params.id
+        Usuario.destroy({
+          where: {
+            id: usuarioId
+          },
+          force: true
+        })
+      })
+      .then(() => {
+        return res.redirect('/ingreso/sector/recursosHumanos');
+      })
+  },
   registroInforme: (req, res) => {
 
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
 
     let empresa = Empresa.findAll();
@@ -251,14 +383,18 @@ const ControllerInicioUsuario = {
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresa, servicio, plataforma, estado,])
-      .then(([usuario, empresa, servicio, plataforma, estado,]) => {
+      .all([usuario, empresa, servicio, plataforma, estado, ])
+      .then(([usuario, empresa, servicio, plataforma, estado, ]) => {
         const resultValidation = validationResult(req);
         if (resultValidation.errors.length > 0) {
           return res.render('formularios/seguridad', {
             errors: resultValidation.mapped(),
             oldData: req.body,
-            usuario, empresa, servicio, plataforma, estado,
+            usuario,
+            empresa,
+            servicio,
+            plataforma,
+            estado,
           });
         }
       }).then(() => {
@@ -280,7 +416,9 @@ const ControllerInicioUsuario = {
   informe: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
 
     let empresas = Empresa.findAll();
@@ -288,10 +426,14 @@ const ControllerInicioUsuario = {
     let plataforma = Plataforma.findAll();
     let estado = Estado.findAll();
     Promise
-      .all([usuario, empresas, servicio, plataforma, estado,])
-      .then(([usuario, empresas, servicio, plataforma, estado,]) => {
+      .all([usuario, empresas, servicio, plataforma, estado, ])
+      .then(([usuario, empresas, servicio, plataforma, estado, ]) => {
         res.render('formularios/seguridad', {
-          usuario, empresas, servicio, plataforma, estado,
+          usuario,
+          empresas,
+          servicio,
+          plataforma,
+          estado,
         })
       })
   },
@@ -299,20 +441,27 @@ const ControllerInicioUsuario = {
     let diaHoy = date
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     let ingresos = RegistroTorre.findAll({
       include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
-      where: { fecha_ingreso: { [Op.gt]: diaHoy } }, order: [
+      where: {
+        fecha_ingreso: {
+          [Op.gt]: diaHoy
+        }
+      },
+      order: [
         ['id', 'DESC'],
       ]
-    }
-    )
+    })
     Promise
       .all([usuario, ingresos])
       .then(([usuario, ingresos]) => {
         res.render('usuarios/listadoDeIngresos', {
-          usuario, ingresos
+          usuario,
+          ingresos
         })
       })
   },
@@ -321,7 +470,9 @@ const ControllerInicioUsuario = {
   contabilidad: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     let usuarios = Usuario.findAll({
       include: ['rol_usuario'],
@@ -338,7 +489,13 @@ const ControllerInicioUsuario = {
       .all([usuarios, usuario, empresas, servicio, plataforma, estado, hora])
       .then(([usuarios, usuario, empresas, servicio, plataforma, estado, hora]) => {
         res.render('usuarios/contabilidad', {
-          usuarios, usuario, empresas, servicio, plataforma, estado, hora
+          usuarios,
+          usuario,
+          empresas,
+          servicio,
+          plataforma,
+          estado,
+          hora
         })
       })
 
@@ -346,7 +503,9 @@ const ControllerInicioUsuario = {
   empresa: (req, res) => {
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     let hora = horaActual
     let empresa = Empresa.findAll();
@@ -357,7 +516,12 @@ const ControllerInicioUsuario = {
       .all([usuario, empresa, servicio, plataforma, estado, hora])
       .then(([usuario, empresa, servicio, plataforma, estado, hora]) => {
         res.render('formularios/empresa', {
-          usuario, empresa, servicio, plataforma, estado, hora
+          usuario,
+          empresa,
+          servicio,
+          plataforma,
+          estado,
+          hora
         })
       })
 
@@ -368,34 +532,47 @@ const ControllerInicioUsuario = {
     console.log("🚀 ~ file: inicio.js ~ line 367 ~ hora", hora)
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     let ingresos = RegistroTorre.findAll({
       include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
-      where: { fecha_ingreso: { [Op.gt]: diaHoy } }, order: [
+      where: {
+        fecha_ingreso: {
+          [Op.gt]: diaHoy
+        }
+      },
+      order: [
         ['hora_salida', 'DESC'],
       ]
-    }
-    )
+    })
     Promise
-      .all([usuario, ingresos, hora ])
-      .then(([usuario, ingresos, hora ]) => {
+      .all([usuario, ingresos, hora])
+      .then(([usuario, ingresos, hora]) => {
         res.render('formularios/listadoParaInformes', {
-          usuario, ingresos, hora 
+          usuario,
+          ingresos,
+          hora
         })
       })
   },
   ingresoAModificar: (req, res) => {
     let ingresoId = req.params.id
     let diaHoy = date
-    
+
     const userLogged = req.session.userLogged
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     let ingresos = RegistroTorre.findAll({
       include: ['registro_empresa', 'registro_servicio', 'registro_plataforma', 'registro_estado'],
-      where: { id: ingresoId } })
+      where: {
+        id: ingresoId
+      }
+    })
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
@@ -419,7 +596,9 @@ const ControllerInicioUsuario = {
     const userLogged = req.session.userLogged
     let ingresoId = req.params.id
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     RegistroTorre.update({
       estado_id: req.body.estado,
@@ -429,7 +608,7 @@ const ControllerInicioUsuario = {
       plataformas_id: req.body.plataforma
     }, {
       where: {
-      id: ingresoId
+        id: ingresoId
       }
     }).then(() => {
       return res.redirect('/ingreso/informes/listadoDeIngresos')
@@ -439,7 +618,9 @@ const ControllerInicioUsuario = {
     const userLogged = req.session.userLogged
     let ingresoId = req.params.id
     let usuario = Usuario.findOne({
-      where: { id: userLogged.id }
+      where: {
+        id: userLogged.id
+      }
     })
     RegistroTorre.update({
       estado_id: 4,

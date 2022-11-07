@@ -48,10 +48,16 @@ router.get('/logout', ControllerInicioUsuario.logout);
 router.get('/ingreso/sector', ControllerInicioUsuario.redirectRole);
 
 // Area de Recursos humanos
-router.get('/ingreso/sector/recursosHumanos', ControllerInicioUsuario.rrhh);
+router.get('/ingreso/sector/recursosHumanos/', ControllerInicioUsuario.rrhh);
 router.get('/ingreso/sector/recursosHumanos/:id/nuevoUsuario', validations, ControllerInicioUsuario.nuevoUsuario);
 // Nuevo Usuario
 router.post('/ingreso/sector/recursosHumanos/:id/nuevoUsuario/agregarUsuario', validations, ControllerInicioUsuario.agregarUsuario);
+// Eliminar Usuario
+router.get('/ingreso/sector/recursosHumanos/eliminarUsuario/:id', ControllerInicioUsuario.confirmarEliminar);
+router.post('/ingreso/sector/recursosHumanos/eliminarUsuario/:id', ControllerInicioUsuario.eliminarUsuario);
+// Modificar Usuario
+router.get('/ingreso/sector/recursosHumanos/modificarUsuario/:id', ControllerInicioUsuario.modificarUsuario);
+router.post('/ingreso/sector/recursosHumanos/modificarUsuario/:id', ControllerInicioUsuario.confirmarModificar);
 
 // Cambiar contraseña
 router.get('/ingreso/sector/:id/cambiarClave', validations, ControllerInicioUsuario.viejaContraseña);
