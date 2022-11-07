@@ -15,6 +15,12 @@ const authRouter = require('./routes/auth');
 
 app.use(cookies());
 
+// Session
+app.use(session({
+  // token guardado en .env
+  resave: false,
+  saveUninitialized: false,
+}))
 
 app.use(express.static('public'));
 app.use(express.static(publicPath));
