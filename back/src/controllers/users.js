@@ -6,7 +6,7 @@ const bcryptjs = require("bcryptjs");
 
 const register = async (req, res) => {
   try {
-      const { nombre, apellido, usuario, password, rol } = req.body;
+    const { nombre, apellido, usuario, password, rol } = req.body;
     if (!nombre || !apellido || !usuario || !password || !rol) {
       return res.status(400).json({ mensaje: "faltan datos" });
     }
@@ -70,23 +70,20 @@ const changePassword = async (req, res) => {
   }
 };
 
-
-const deleteUser = async (req,res) => {
+const deleteUser = async (req, res) => {
   try {
-    console.log(req.usuario.id);
-    const usuarioAEliminar = parseInt(req.query.id);
+    console.log(req.usuario.id, req.params.id);
+    const usuarioAEliminar = parseInt(req.params.id);
 
     let usuario = await Usuario.findOne({
       where: {
         id: usuarioAEliminar,
       },
     });
-    if (usuario !== null) {
-    
-
-      // por ahora falla porque la tabla usuario_eliminado tiene una fk a usuarios y cuando se 
+    if (usuario != null) {
+      // por ahora falla porque la tabla usuario_eliminado tiene una fk a usuarios y cuando se
       // elimina un usuario se borran todos los logs de ese usuario en la tabla usuario_eliminado
-      
+
       //   await EliminarUsuario.create({
       //     usuario_id: req.usuario.id,
       //     motivo: req.body.motivo,
@@ -100,18 +97,63 @@ const deleteUser = async (req,res) => {
       //   force: true,
       // });
 
-      return res.status(200).json({ mensaje: "usuario eliminado correctamente" });
+      return res
+        .status(200)
+        .json({ mensaje: "usuario eliminado correctamente" });
     } else {
       return res.status(400).json({ mensaje: "no existe el usuario" });
     }
-
   } catch (error) {
     return res.status(400).json({ mensaje: error });
   }
-}
+};
 
-const modifyUser = (req,res) => {
+const modifyUser = async (req, res) => {
+  const usuarioAModificar = parseInt(req.params.id);
 
-}
+  const { nombre, apellido, usuario, rol } = req.body;
+
+  const dataACambiar = {};
+
+  try {
+    let encontrado = await Usuario.findOne({
+      where: {
+        id: usuarioAModificar,
+      },
+    });
+
+    if (encontrado != null) {
+      //casos que no son contemplados
+      //toda la data es repetida con lo que ya esta en la base de datos
+
+      if (nombre != null) dataACambiar.nombre = nombre;
+      if (apellido != null) dataACambiar.apellido = apellido;
+      if (usuario != null) dataACambiar.usuario = usuario;
+      if (rol != null) dataACambiar.roles_id = rol;
+
+      if (Object.keys(dataACambiar).length === 0) {
+        return res
+          .status(400)
+          .json({ mensaje: "falta proporcionar datos a modificar" });
+      }
+      await Usuario.update(dataACambiar, {
+        where: {
+          id: usuarioAModificar,
+        },
+      });
+      return res
+        .status(200)
+        .json({ mensaje: "usuario modificado correctamente" });
+    } else {
+       return res
+         .status(400)
+         .json({ mensaje: "no existe el usuario a modificar" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ mensaje: "error a la hora de modificar usuario" });
+  }
+};
 
 module.exports = { register, changePassword, modifyUser, deleteUser };
