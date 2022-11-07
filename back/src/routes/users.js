@@ -27,10 +27,10 @@ router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrad
 // HEADERS
 // authorization "Bearer token..."
 
-router.post("/modifyUser/:id", authenticateToken, modifyUser);
+router.patch("/modifyUser/:id", authenticateToken, modifyUser);
 
-router.get("/deleteUser", authenticateToken, deleteUser);
-//GET localhost:8080/users/deleteUser/2
+router.delete("/deleteUser/:id", authenticateToken, deleteUser);
+//DELETE localhost:8080/users/deleteUser/2
 // BODY
 // {
 //   "motivo":"porque si"
