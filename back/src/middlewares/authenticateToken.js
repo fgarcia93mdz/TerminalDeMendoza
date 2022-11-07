@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-
-//esta clave secreta hay que ponerla en un .env
-const TOKEN_SECRET = require("../config/token");
+require("dotenv").config();
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
@@ -12,7 +10,7 @@ const authenticateToken = (req, res, next) => {
 
   if (token == null) return res.status(401).json({mensaje:"falta token"})
 
-  jwt.verify(token, TOKEN_SECRET , (err, usuario) => {
+  jwt.verify(token, process.env.TOKEN_SECRET , (err, usuario) => {
     if (err) return res.status(403).json({err});
 
     req.usuario = usuario

@@ -2,12 +2,10 @@ const jwt = require("jsonwebtoken");
 const db = require("../database/models");
 const Usuario = db.Usuario;
 const bcryptjs = require("bcryptjs");
-//esta clave secreta hay que ponerla en un .env
-const TOKEN_SECRET = require("../config/token");
+require("dotenv").config();
 
 generateAccessToken = (usuario) => {
-  //por ahora el token no expira, deberia...
-  return jwt.sign(usuario, TOKEN_SECRET);
+  return jwt.sign(usuario, process.env.TOKEN_SECRET);
 };
 
 const login = async (req, res) => {
