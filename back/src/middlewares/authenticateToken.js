@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
-  console.log(authHeader);
+  // console.log(authHeader);
   //el token viene asi "Bearer token..."
   const token = authHeader && authHeader.split(' ')[1]
 
