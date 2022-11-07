@@ -30,13 +30,12 @@ router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrad
 router.patch("/modifyUser/:id", authenticateToken, modifyUser);
 
 router.delete("/deleteUser/:id", authenticateToken, deleteUser);
+//2 seria el user id 2
 //DELETE localhost:8080/users/deleteUser/2
 // BODY
 // {
 //   "motivo":"porque si"
 // }
-// QUERY
-// id : 2
 // HEADERS
 // authorization "Bearer token..."
 
