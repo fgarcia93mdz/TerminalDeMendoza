@@ -67,7 +67,7 @@ const FormTicket = () => {
             alert('no hay errores')
         }
         // if(formik.isValid) return alert('valido')
-        console.log('ticket', formik.errors)
+        console.log('ticket', formik.values)
     }, [formik])
 
 
@@ -214,9 +214,9 @@ const FormTicket = () => {
                             helperText={formik.errors.servicios_id}
                         >
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
-                            <MenuItem value={10} selected={true}>Media distancia</MenuItem>
-                            <MenuItem value={20}>Larga distancia</MenuItem>
-                            <MenuItem value={30}>Corta distancia </MenuItem>
+                            <MenuItem value={1} selected={true}>Media distancia</MenuItem>
+                            <MenuItem value={2}>Larga distancia</MenuItem>
+                            <MenuItem value={3}>Corta distancia </MenuItem>
                         </TextField>
                     </Grid>
                     <Grid item display='flex' alignItems='center' gap={2} xs={12} my={2}>
@@ -251,8 +251,8 @@ const FormTicket = () => {
                             helperText={formik.errors.estado_id}
                         >
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
-                            <MenuItem value={10} selected={true}>Sin servicio de plataforma</MenuItem>
-                            <MenuItem value={20}>Ingresando</MenuItem>
+                            <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem>
+                            <MenuItem value={2}>Ingresando</MenuItem>
                         </TextField>
                     </Grid>
                     <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
