@@ -149,11 +149,6 @@ const FormTicket = () => {
                         <Typography variant='subtitle1' color='white'>Empresa:</Typography>
                         <TextField
                             select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={company}
-                            // label="Age"
-                            // onChange={handleChange}
                             label='Seleccione Empresa'
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -186,11 +181,6 @@ const FormTicket = () => {
                         <Typography variant='subtitle1' color='white'>Tipo de servicio:</Typography>
                         <TextField
                             select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={company}
-                            // label="Age"
-                            // onChange={handleChange}
                             label='Tipo de servicio'
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -223,11 +213,6 @@ const FormTicket = () => {
                         <Typography variant='subtitle1' color='white'>Estado:</Typography>
                         <TextField
                             select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={company}
-                            // label="Age"
-                            // onChange={handleChange}
                             label='Seleccione Estado'
                             InputLabelProps={{
                                 style: { color: '#fff' },
@@ -258,12 +243,6 @@ const FormTicket = () => {
                     <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
                         <Typography variant='subtitle1' color='white'>Destino / Servicio:</Typography>
                         <TextField
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={company}
-                            // label="Age"
-                            // onChange={handleChange}
-                            autoWidth
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
                                     borderColor: 'white'
@@ -283,7 +262,6 @@ const FormTicket = () => {
                     <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
                         <Typography variant='subtitle1' color='white'>Plataforma:</Typography>
                         <TextField
-                            autoWidth
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
                                     borderColor: 'white'
@@ -303,12 +281,6 @@ const FormTicket = () => {
                     <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
                         <Typography variant='subtitle1' color='white'>Usuario ID:</Typography>
                         <TextField
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={company}
-                            // label="Age"
-                            // onChange={handleChange}
-                            autoWidth
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
                                     borderColor: 'white'
