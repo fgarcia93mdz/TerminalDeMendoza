@@ -53,7 +53,8 @@ const login = async (req, res) => {
     }
   } catch (error) {
     return res.status(400).json({ mensaje: error });
-  }
+  };
+
 };
 
 module.exports = { login, logout };

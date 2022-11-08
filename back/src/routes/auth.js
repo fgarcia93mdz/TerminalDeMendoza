@@ -3,7 +3,7 @@ const router = express.Router()
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const { login, logout } = require("../controllers/auth.js");
 
-router.post('/login',login);
+router.post('/login', login);
 //data para el front
 // POST http://localhost:8080/auth/login
 // {
@@ -11,7 +11,7 @@ router.post('/login',login);
 //   "password":"ptest"
 // }
 
-router.get('/logout',authenticateToken,logout);
+router.get('/logout',authenticateToken, logout);
 // GET http://localhost:8080/auth/logout
 
 module.exports = router;

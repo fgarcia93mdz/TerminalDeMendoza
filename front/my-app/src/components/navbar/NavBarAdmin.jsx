@@ -2,6 +2,11 @@ import React from 'react';
 import './NavBar.styles.css'
 // import { Link } from 'react-router-dom'
 import Marquee from "react-fast-marquee";
+import jwt_decode from "jwt-decode";
+
+import MyClock from '../clock/Clock'
+
+
 
 // import jwt from 'jsonwebtoken'
 
@@ -26,12 +31,16 @@ const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseñ
 
 // final
 
+
+
 // import { Box, Stack } from '@mui/system';
 
 const NavBarAdmin = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [ userInfo, setUserInfo ] = React.useState({})
+    const [ userNombre, setUserNombre ] = React.useState('')
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -48,8 +57,30 @@ const NavBarAdmin = () => {
         setAnchorElUser(null);
     };
 
-    // const decode = jwt.decode(window.sessionStorage.getItem("jwt"))
-    // console.log('decode', decode)
+    const closeSession = () => {
+        handleCloseUserMenu()
+        setUserInfo({})
+        return window.sessionStorage.removeItem("jwt");
+    }
+
+    
+    React.useEffect(() => {
+        const token = window.sessionStorage.getItem("jwt")
+        
+        if(token){
+            const tokenDecoded = jwt_decode(token);
+            console.log('tokenDecoded', tokenDecoded)
+            // return setUserInfo(tokenDecoded)
+            // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
+            // console.log('decoded', decoded);
+            // setUserNombre(userInfo.nombre)
+        } else if (token === null){
+            return null
+        }
+    }, [userInfo])
+
+    
+
 
         return (
             <>
@@ -90,7 +121,7 @@ const NavBarAdmin = () => {
                         >
                         {pages.map((page) => (
                             <MenuItem key={page} onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{page}</Typography>
+                                <Typography textAlign="center">{page}</Typography>
                             </MenuItem>
                         ))}
                         </Menu>
@@ -109,7 +140,7 @@ const NavBarAdmin = () => {
                                 </Link>
                             </Button>
                             <Button
-                                key={'inicio'}
+                                key={'inicio2'}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
@@ -118,7 +149,7 @@ const NavBarAdmin = () => {
                                 </Link>
                             </Button>
                             <Button
-                                key={'inicio'}
+                                key={'inicio3'}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
@@ -127,7 +158,7 @@ const NavBarAdmin = () => {
                                 </Link>
                             </Button>
                             <Button
-                                key={'inicio'}
+                                key={'inicio4'}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
@@ -137,16 +168,18 @@ const NavBarAdmin = () => {
                             
                             </Button>
                             <Button
-                                key={'inicio'}
-                                onClick={handleCloseNavMenu}
+                                key={'inicio5'}
+                                onClick={() => closeSession()}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
-                                <Link to='/'>
+                                
                                     CERRAR SESION
-                                </Link>
+                                
                             </Button>
+
+                            {userInfo && !userInfo.nombre && 
                             <Button
-                                key={'inicio'}
+                                key={'inicio6'}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
@@ -154,10 +187,15 @@ const NavBarAdmin = () => {
                                     LOGIN
                                 </Link>
                             </Button>
+                           } 
 
-                            <Typography variant='p'>
-                                Bienvenido 
-                            </Typography>
+                            
+
+                            {/* {userInfo && userInfo.nombre &&  */}
+                                <Typography variant='body'>
+                                    Bienvenido {userInfo.length === 0 ? 'Invitado' : userInfo.nombre  }
+                                </Typography>
+                            {/* } */}
                       
                     </Box>
 
@@ -190,7 +228,10 @@ const NavBarAdmin = () => {
                         ))}
                         </Menu>
                     </Box> */}
+
+                    <MyClock />
                     </Toolbar>
+
                 </Container>
                 </AppBar>
             </>

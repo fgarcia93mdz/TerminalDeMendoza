@@ -29,13 +29,12 @@ const Login = () => {
         }
 
         if(email.length > 0 && password.length > 0){
-            alert('se submiteo!', email, password)
           
-                const url = 'http://localhost:8080/auth'
+                const url = 'http://localhost:8080/auth/login'
             
                 const data = {
-                    email:"cdardanelli",
-                    password:"1234"
+                    email: email,
+                    password: password
                 }
             
                 axios.post(url, data)
@@ -51,7 +50,7 @@ const Login = () => {
                     }
                 })
                 .catch(function (error) {
-                    console.log('error', error);
+                    console.log('Error:', error);
                 });
             
         }
