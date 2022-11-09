@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
+import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios'
+import BasicModal from '../../components/modals/Modal';
 
 const initialTicket = {
     fecha_ingreso: "", // '01-01-2022'
@@ -32,6 +34,10 @@ const validationSchema = yup.object({
   });
 
 const FormTicket = () => { 
+    const [ openModal, setOpenModal ] = useState(false)
+    // const navigate = useNavigate()
+
+   
     const formik = useFormik({
         initialValues: initialTicket,
         validationSchema: validationSchema,
@@ -49,7 +55,9 @@ const FormTicket = () => {
                         // escribe el jwt en session
                         // window.sessionStorage.setItem("jwt", jwt);
                         // redirecciona a la pagina principal
-                        return alert('ok')
+                        return setOpenModal(true)
+                        // navigate("/")
+                        // return alert('ok')
                     }
                 })
                 .catch(function (error) {
@@ -298,6 +306,9 @@ const FormTicket = () => {
                         />
                     </Grid>
                     <Button variant="contained" type="submit" my={2}>Crear ticket</Button>
+                    {openModal && 
+                        <BasicModal title='Exito' message='Ticket creado con exito' openModal={openModal} />
+                    }
                 </Grid>
             </form>
         </Stack>
