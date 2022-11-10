@@ -46,7 +46,7 @@ const Login = () => {
                         // escribe el jwt en session
                         window.sessionStorage.setItem("jwt", jwt);
                         // redirecciona a la pagina principal
-                        return navigate("/")
+                        return navigate("/ticket/crear")
                     }
                 })
                 .catch(function (error) {

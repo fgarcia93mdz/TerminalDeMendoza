@@ -80,12 +80,35 @@ const FormTicket = () => {
 
 
     return ( 
-        <Stack sx={{background: '#0b2748', borderRadius: '25px', shadow:4}} my={4} mx={6} p={4} mb={6}>
+        <Stack sx={{background: '#0b2748', borderRadius: '25px', shadow:4}} my={4} mx={{xs: 1, sm: 6}} p={4} sm={6}>
             <form onSubmit={formik.handleSubmit}>
                 <Typography variant="h4" color='white'>Crear nuevo Ticket:</Typography>
                 <Grid container my={4}>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={12} md={4} my={2}>
-                        <Typography variant='subtitle1' color='white'>Fecha de ingreso:</Typography>
+                <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={8}  my={2}>
+                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Interno:</Typography>
+                        <TextField 
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline':{
+                                    borderColor: 'white'
+                                },
+                                '.MuiInputBase-root':{
+                                    color: 'white'
+                                }
+                            }}
+                            InputProps={{
+                                type: "text"
+                            }} 
+                            value={formik.values.interno}
+                            name='interno'
+                            onChange={formik.handleChange}
+                            error={formik.errors.interno}
+                            helperText={formik.errors.interno}
+
+                        />
+                    </Grid>
+                    
+                    <Grid item  display={{ xs: 'block', sm: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm: 0}}>Fecha de ingreso:</Typography>
                         <TextField 
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -106,8 +129,8 @@ const FormTicket = () => {
                             helperText={formik.errors.fecha_ingreso}
                         />
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={12} md={4} my={2}>
-                        <Typography variant='subtitle1' color='white'>Hora de ingreso:</Typography>
+                    <Grid item  display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        <Typography variant='subtitle1' color='white'  mb={{xs: 1, sm: 0}}>Hora de ingreso:</Typography>
                         <TextField 
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -131,30 +154,9 @@ const FormTicket = () => {
 
                         />
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={12} md={4} my={2}>
-                        <Typography variant='subtitle1' color='white'>Interno:</Typography>
-                        <TextField 
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                }
-                            }}
-                            InputProps={{
-                                type: "text"
-                            }} 
-                            value={formik.values.interno}
-                            name='interno'
-                            onChange={formik.handleChange}
-                            error={formik.errors.interno}
-                            helperText={formik.errors.interno}
-
-                        />
-                    </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white'>Empresa:</Typography>
+                   
+                    <Grid item display={{ xs: 'block', md: 'flex'}} alignItems='center' gap={2} xs={12} md={6} my={2}>
+                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Empresa:</Typography>
                         <TextField
                             select
                             label='Seleccione Empresa'
@@ -185,8 +187,8 @@ const FormTicket = () => {
                             <MenuItem value={3}>FLB - Flecha Bus </MenuItem>
                         </TextField>
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white'>Tipo de servicio:</Typography>
+                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
+                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Tipo de servicio:</Typography>
                         <TextField
                             select
                             label='Tipo de servicio'
@@ -217,11 +219,11 @@ const FormTicket = () => {
                             <MenuItem value={3}>Corta distancia </MenuItem>
                         </TextField>
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={12} my={2}>
-                        <Typography variant='subtitle1' color='white'>Estado:</Typography>
+                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        <Typography variant='subtitle1' color='white' display={{xs:'none', sm:'block'}}>Tipo de servicio:</Typography>
                         <TextField
                             select
-                            label='Seleccione Estado'
+                            label='Seleccione tipo de servicio:'
                             InputLabelProps={{
                                 style: { color: '#fff' },
                             }}
@@ -248,8 +250,8 @@ const FormTicket = () => {
                             <MenuItem value={2}>Ingresando</MenuItem>
                         </TextField>
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
-                        <Typography variant='subtitle1' color='white'>Destino / Servicio:</Typography>
+                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
+                        <Typography variant='subtitle1' color='white' display={{xs:'none', sm:'block'}}>Destino / Servicio:</Typography>
                         <TextField
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -258,6 +260,9 @@ const FormTicket = () => {
                                 '.MuiInputBase-root':{
                                     color: 'white'
                                 }
+                            }}
+                            InputLabelProps={{
+                                style: { color: '#fff' },
                             }}
                             label='Inserte destino...'
                             name='destino'
@@ -267,8 +272,8 @@ const FormTicket = () => {
                             helperText={formik.errors.destino}
                         />
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
-                        <Typography variant='subtitle1' color='white'>Plataforma:</Typography>
+                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
+                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Plataforma:</Typography>
                         <TextField
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -277,6 +282,9 @@ const FormTicket = () => {
                                 '.MuiInputBase-root':{
                                     color: 'white'
                                 }
+                            }}
+                            InputLabelProps={{
+                                style: { color: '#fff' },
                             }}
                             label='Inserte plataforma'
                             name='plataformas_id'
@@ -286,8 +294,8 @@ const FormTicket = () => {
                             helperText={formik.errors.plataformas_id}
                         />
                     </Grid>
-                    <Grid item display='flex' alignItems='center' gap={2} xs={4} my={2}>
-                        <Typography variant='subtitle1' color='white'>Usuario ID:</Typography>
+                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Usuario ID:</Typography>
                         <TextField
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -297,6 +305,9 @@ const FormTicket = () => {
                                     color: 'white'
                                 }
                             }}
+                            InputLabelProps={{
+                                style: { color: '#fff' },
+                            }}
                             label='Inserte usuario ID'
                             name='usuarios_id'
                             value={formik.values.usuarios_id}
@@ -305,7 +316,9 @@ const FormTicket = () => {
                             helperText={formik.errors.usuarios_id}
                         />
                     </Grid>
-                    <Button variant="contained" type="submit" my={2}>Crear ticket</Button>
+                    <Grid item xs={12}>
+                        <Button  variant="contained" ml='auto' type="submit" my={2}>Crear ticket</Button>
+                    </Grid>
                     {openModal && 
                         <BasicModal title='Exito' message='Ticket creado con exito' openModal={openModal} />
                     }

@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 // import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['Arribos', 'Partidas', 'Locales'];
@@ -28,22 +29,23 @@ const settings = ['Arribos', 'Partidas', 'Locales', 'Logout'];
 const NavBar = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
     return (
         <>
             <Marquee gradient={false} style={{padding: '0', maxHeight:'100px', color: '#0E315A', margin:'0', background: 'white'}}>
@@ -76,29 +78,30 @@ const NavBar = () => {
                     <MenuIcon />
                     </IconButton>
                     <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElNav}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
-                    sx={{
-                        display: { xs: 'block', md: 'none' },
-                    }}
-                    >
-                    {pages.map((page) => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page}</Typography>
-                        </MenuItem>
-                    ))}
+                        id="menu-appbar"
+                        anchorEl={anchorElNav}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                        }}
+                        open={Boolean(anchorElNav)}
+                        onClose={handleCloseNavMenu}
+                        sx={{
+                            display: { xs: 'block', md: 'none' },
+                        }}
+                        >
+                        {pages.map((page) => (
+                            <MenuItem key={page} onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">{page}</Typography>
+                            </MenuItem>
+                        ))}
                     </Menu>
+
                 </Box>
                 {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                 
@@ -113,6 +116,7 @@ const NavBar = () => {
                     </Button>
                     ))}
                 </Box>
+                <Button> <Link to='/login'> Iniciar sesion </Link> </Button> 
 
                 {/* <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">

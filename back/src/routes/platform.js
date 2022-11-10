@@ -8,8 +8,8 @@ const platformController = require('../controllers/platform')
 
 // METODOS GET para llenar las tablas y pantallas
 // localhost:8080/api/platform/
-router.get('/arribos', platformController.arrivals) 
-router.get('/partidas', platformController.depratures)
+router.get('/arribos', platformController.arrivals) // '/api/plataforma/arribos' 
+router.get('/partidas', platformController.departures) // '/api/plataforma/partidas' 
 router.get('/locales', platformController.locals) // '/api/plataforma/locales' 
 
 // METODOS POST

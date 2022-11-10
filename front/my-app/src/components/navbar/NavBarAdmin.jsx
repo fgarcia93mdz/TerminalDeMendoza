@@ -1,11 +1,7 @@
 import React from 'react';
 import './NavBar.styles.css'
 // import { Link } from 'react-router-dom'
-import Marquee from "react-fast-marquee";
 import jwt_decode from "jwt-decode";
-
-import MyClock from '../clock/Clock'
-
 
 
 // import jwt from 'jsonwebtoken'
@@ -40,7 +36,6 @@ const NavBarAdmin = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [ userInfo, setUserInfo ] = React.useState({})
-    const [ userNombre, setUserNombre ] = React.useState('')
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -63,21 +58,21 @@ const NavBarAdmin = () => {
         return window.sessionStorage.removeItem("jwt");
     }
 
+    const token = window.sessionStorage.getItem("jwt")
     
     React.useEffect(() => {
-        const token = window.sessionStorage.getItem("jwt")
         
         if(token){
             const tokenDecoded = jwt_decode(token);
             console.log('tokenDecoded', tokenDecoded)
-            // return setUserInfo(tokenDecoded)
+            setUserInfo(tokenDecoded)
             // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
-            // console.log('decoded', decoded);
-            // setUserNombre(userInfo.nombre)
+            // console.log('decoded', userInfo);
+            // console.log('decoded', userNombre);
         } else if (token === null){
             return null
         }
-    }, [userInfo])
+    }, [token])
 
     
 
@@ -91,16 +86,7 @@ const NavBarAdmin = () => {
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
                         <Box className="" sx={{width: '70px'}} display={{xs:'block', md:'hidden'}} src={require("../../assets/img/icono-colectivo.png")} alt="icono colectivo" />
                     
-                        <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleOpenNavMenu}
-                        color="inherit"
-                        >
-                        <MenuIcon />
-                        </IconButton>
+                       
                         <Menu
                         id="menu-appbar"
                         anchorEl={anchorElNav}
@@ -116,7 +102,8 @@ const NavBarAdmin = () => {
                         open={Boolean(anchorElNav)}
                         onClose={handleCloseNavMenu}
                         sx={{
-                            display: { xs: 'block', md: 'none' },
+                            display: { xs: 'flex', md: 'none' },
+                            flexDirection: 'column'
                         }}
                         >
                         {pages.map((page) => (
@@ -125,59 +112,69 @@ const NavBarAdmin = () => {
                             </MenuItem>
                         ))}
                         </Menu>
+                        <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleOpenNavMenu}
+                        color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
                     </Box>
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
-                       
-                            <Button
-                                key={'inicio'}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                <Link to='/ticket/crear'>
-                                    INICIO
-                                </Link>
-                            </Button>
-                            <Button
-                                key={'inicio2'}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                <Link to='/'>
-                                    PANTALLAS
-                                </Link>
-                            </Button>
-                            <Button
-                                key={'inicio3'}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                <Link to='/'>
-                                    INFORME
-                                </Link>
-                            </Button>
-                            <Button
-                                key={'inicio4'}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                <Link to='/'>
-                                    CAMBIAR CONTRASEÑA
-                                </Link>
+                    
+                        <Button
+                            key={'inicio'}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                        >
+                            <Link to='/ticket/crear'>
+                                INICIO
+                            </Link>
+                        </Button>
+                        <Button
+                            key={'inicio2'}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                        >
+                            <Link to='/tabla/arribos'>
+                                VER PANTALLA ARRIBOS
+                            </Link>
+                        </Button>
+                        <Button
+                            key={'inicio3'}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                        >
+                            <Link to='/ticket/crear'>
+                                CREAR TICKET
+                            </Link>
+                        </Button>
+                        <Button
+                            key={'inicio4'}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                        >
+                            <Link to='/'>
+                                CAMBIAR CONTRASEÑA
+                            </Link>
+                        
+                        </Button>
+                        <Button
+                            key={'inicio5'}
+                            onClick={() => closeSession()}
+                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                        >
                             
-                            </Button>
-                            <Button
-                                key={'inicio5'}
-                                onClick={() => closeSession()}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                
-                                    CERRAR SESION
-                                
-                            </Button>
+                                CERRAR SESION
+                            
+                        </Button>
 
-                            {userInfo && !userInfo.nombre && 
+                        {userInfo && !userInfo.nombre && 
                             <Button
                                 key={'inicio6'}
                                 onClick={handleCloseNavMenu}
@@ -187,15 +184,15 @@ const NavBarAdmin = () => {
                                     LOGIN
                                 </Link>
                             </Button>
-                           } 
+                        } 
 
-                            
+                        
 
-                            {/* {userInfo && userInfo.nombre &&  */}
-                                <Typography variant='body'>
-                                    Bienvenido {userInfo.length === 0 ? 'Invitado' : userInfo.nombre  }
-                                </Typography>
-                            {/* } */}
+                        {userInfo && userInfo.nombre && 
+                            <Typography variant='body' my='auto' marginLeft={4}>
+                                Bienvenido {userInfo.nombre}  
+                            </Typography>
+                        }
                       
                     </Box>
 
@@ -229,7 +226,7 @@ const NavBarAdmin = () => {
                         </Menu>
                     </Box> */}
 
-                    <MyClock />
+                    
                     </Toolbar>
 
                 </Container>
