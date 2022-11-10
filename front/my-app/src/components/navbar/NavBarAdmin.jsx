@@ -17,13 +17,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 // import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+// import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 
 const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
-const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
+// const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
 
 // final
 
@@ -31,11 +31,12 @@ const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseñ
 
 // import { Box, Stack } from '@mui/system';
 
-const NavBarAdmin = () => {
+const NavBarAdmin = ({ name }) => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [ userInfo, setUserInfo ] = React.useState({})
+    // const [ userName, setUserName ] = React.useState('')
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -66,11 +67,15 @@ const NavBarAdmin = () => {
             const tokenDecoded = jwt_decode(token);
             console.log('tokenDecoded', tokenDecoded)
             setUserInfo(tokenDecoded)
-            // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
+            setUserInfo(state => ({ ...state, tokenDecoded }));
             // console.log('decoded', userInfo);
             // console.log('decoded', userNombre);
         } else if (token === null){
             return null
+        }
+
+        return () => {
+            setUserInfo({})
         }
     }, [token])
 

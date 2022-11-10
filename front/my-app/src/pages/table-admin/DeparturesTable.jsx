@@ -14,7 +14,7 @@ const ArrivalsTable = () => {
        
 
 
-        const fetchData = fetch('http://localhost:8080/api/plataforma/arribos')
+        fetch('http://localhost:8080/api/plataforma/arribos')
                 .then(response =>  response.json())
                 .then(data => {
                     console.log('data::', data)

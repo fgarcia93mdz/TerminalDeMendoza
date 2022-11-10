@@ -24,13 +24,13 @@ function App() {
   const [ isAdmin, setIsAdmin ] = useState(false)
   const [ userRole, setUserRole ] = useState('')
 
-  
+
+
   React.useEffect(() => {
     const token = window.sessionStorage.getItem("jwt")
-
-    if (token === null){
-      return null
-    } else if(token !== null){
+    if (token === undefined || token === null) {
+      setIsAdmin(false)
+    } else if(token !== undefined || token !== null) {
       const tokenDecoded = jwt_decode(token);
       console.log('tokenDecoded', tokenDecoded)
       setUserRole(tokenDecoded.rol)
@@ -38,19 +38,15 @@ function App() {
       // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
       // console.log('decoded', userInfo);
       console.log('decoded', userRole);
-    }
+    } },[userRole, isAdmin])
 
-    
-  }, [])
 
-   
 
+  
 
   return (
     <div className="App">
-      
-      {isAdmin ? <NavBarAdmin /> : <NavBar />}
-
+      {!isAdmin ? <NavBar /> : <NavBarAdmin />}
       <>
         <Routes >
           <Route exact path='/' element={<Home />} />
