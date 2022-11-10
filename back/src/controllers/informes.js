@@ -35,34 +35,39 @@ const informesListado = async (req, res) => {
 };
 
 const getInforme = async (req, res) => {
-  const ingresoId = req.params.id;
-  const diaHoy = date;
+  try {
+    const ingresoId = req.params.id;
+    const diaHoy = date;
 
-  const ingresos = await RegistroTorre.findAll({
-    include: [
-      "registro_empresa",
-      "registro_servicio",
-      "registro_plataforma",
-      "registro_estado",
-    ],
-    where: {
-      id: ingresoId,
-    },
-  });
-  const empresa = await Empresa.findAll();
-  const servicio = await Servicio.findAll();
-  const plataforma = await Plataforma.findAll();
-  const estado = await Estado.findAll();
+    const ingresos = await RegistroTorre.findAll({
+      include: [
+        "registro_empresa",
+        "registro_servicio",
+        "registro_plataforma",
+        "registro_estado",
+      ],
+      where: {
+        id: ingresoId,
+      },
+    });
+    const empresa = await Empresa.findAll();
+    const servicio = await Servicio.findAll();
+    const plataforma = await Plataforma.findAll();
+    const estado = await Estado.findAll();
 
-  return res.status(200).json({
-    ingresos,
-    diaHoy,
-    empresa,
-    servicio,
-    plataforma,
-    estado,
-    ingresoId,
-  });
+    return res.status(200).json({
+      ingresos,
+      diaHoy,
+      empresa,
+      servicio,
+      plataforma,
+      estado,
+      ingresoId,
+    });
+  } catch (error) {
+     return res.status(400).json({ mensaje: error });
+  }
+  
 };
 
 const modificarInforme = async (req, res) => {
