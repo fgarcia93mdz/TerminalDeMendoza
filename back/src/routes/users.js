@@ -6,6 +6,7 @@ const verifyRoles = require("../middlewares/verifyRoles");
 const ROLES = require("../config/roles");
 
 router.post('/register',register)
+//falta agregar middleware de roles
 //data para el front
 // POST localhost:8080/users/register
 // {
@@ -28,6 +29,7 @@ router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrad
 // authorization "Bearer token..."
 
 router.patch("/modifyUser/:id", authenticateToken, modifyUser);
+//falta agregar middleware de roles
 //6 seria el user id a editar
 // PATCH localhost:8080/users/modifyUser/6
 //NOTA: no es necesario que tenga los 4 campos, solo los que va a modificar , tipo si solo quiere modificar nombre en el json va solo nombre
@@ -42,6 +44,7 @@ router.patch("/modifyUser/:id", authenticateToken, modifyUser);
 // authorization "Bearer token..."
 
 router.delete("/deleteUser/:id", authenticateToken, deleteUser);
+//falta agregar middleware de roles
 //2 seria el user id a eliminar
 //DELETE localhost:8080/users/deleteUser/2
 // BODY

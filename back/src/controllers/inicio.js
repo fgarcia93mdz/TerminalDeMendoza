@@ -377,6 +377,8 @@ const ControllerInicioUsuario = {
       },
     });
 
+    console.log(req.body);
+
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
