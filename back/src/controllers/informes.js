@@ -10,10 +10,18 @@ const tieneCampoNull = require("../../public/js/tieneCampoNull");
 
 const getDataInformeSeguridad = async (req,res) => {
   try {
-    const empresa = await Empresa.findAll();
-    const servicio = await Servicio.findAll();
-    const estado = await Estado.findAll();
-    respuesta = { empresa ,servicio,estado};
+    const empresas = await Empresa.findAll();
+    const servicios = await Servicio.findAll();
+    const estados = await Estado.findAll();
+
+    //esto es para que solo muestre "ingresando y servicio sin plataforma"
+    let estadosDisponibles = [];
+      for (let estado of estados) {
+        if (estado.id === 2 || estado.id === 3) {
+          estadosDisponibles.push(estado);
+        }
+      }
+    respuesta = { empresas, servicios, estadosDisponibles };
     return res.status(200).json({ ...respuesta });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
