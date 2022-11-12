@@ -80,6 +80,7 @@ const deleteUser = async (req, res) => {
         id: usuarioAEliminar,
       },
     });
+    console.log("🚀 ~ file: users.js ~ line 83 ~ deleteUser ~ usuario", usuario)
     if (usuario != null) {
       // por ahora falla porque la tabla usuario_eliminado tiene una fk a usuarios y cuando se
       // elimina un usuario se borran todos los logs de ese usuario en la tabla usuario_eliminado

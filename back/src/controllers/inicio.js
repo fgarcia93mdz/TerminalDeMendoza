@@ -383,8 +383,7 @@ const ControllerInicioUsuario = {
       },
     });
 
-    console.log(req.body);
-
+    
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();
@@ -543,7 +542,7 @@ const ControllerInicioUsuario = {
   informesListado: (req, res) => {
     let diaHoy = date;
     let hora = horaActual;
-    console.log("🚀 ~ file: inicio.js ~ line 367 ~ hora", hora);
+
     const userLogged = req.session.userLogged;
     let usuario = Usuario.findOne({
       where: {
