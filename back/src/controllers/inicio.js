@@ -86,7 +86,7 @@ const ControllerInicioUsuario = {
   logout: (req, res) => {
     const userLogged = req.session.userLogged;
     UsuarioLog.create({
-      usuarios_id: userLogged.id,
+      usuario_log: userLogged.usuario,
       egreso: date,
     }).then(() => {
       res.clearCookie("userEmail");
@@ -348,12 +348,18 @@ const ControllerInicioUsuario = {
         id: userLogged.id,
       },
     });
-    Promise.all([usuarioId, usuario])
-      .then(([usuarioId, usuario]) => {
+    let usuario_eliminado = Usuario.findOne({
+      where: {
+        id: usuarioId,
+      },
+    });
+    Promise.all([usuarioId, usuario, usuario_eliminado])
+      .then(([usuarioId, usuario, usuario_eliminado]) => {
         EliminarUsuario.create({
-          usuario_id: usuario.id,
+          nombre: usuario.nombre,
+          apellido: usuario.apellido,
           motivo: req.body.motivo,
-          usuario_id_eliminado: usuarioId,
+          usuario_eliminado: usuario_eliminado.usuario,
         });
       })
       .then(() => {

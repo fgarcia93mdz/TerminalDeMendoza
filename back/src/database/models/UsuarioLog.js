@@ -14,8 +14,10 @@ module.exports = (sequelize, dataTypes) => {
     egreso: {
       type: dataTypes.DATE,
     },
-    usuarios_id: dataTypes.BIGINT(11),
-
+    usuario_log: {
+      type: dataTypes.STRING(45),
+      allowNull: false
+    },
   };
   let config = {
     tableName: 'usuarios_log',

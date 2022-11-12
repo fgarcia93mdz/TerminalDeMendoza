@@ -12,8 +12,18 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.STRING(100),
       allowNull: false
     },
-    usuario_id: dataTypes.BIGINT(11),
-    usuario_id_eliminado: dataTypes.BIGINT(11),
+    nombre: {
+      type: dataTypes.STRING(100),
+      allowNull: false
+    },
+    apellido: {
+      type: dataTypes.STRING(100),
+      allowNull: false
+    },
+    usuario_eliminado: {
+      type: dataTypes.STRING(100),
+      allowNull: false
+    },
 
   };
   let config = {
