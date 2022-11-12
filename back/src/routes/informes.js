@@ -3,23 +3,54 @@ var router = express.Router();
 const {
   informesListado,
   getInforme,
-modificarInforme} = require("../controllers/informes");
+  modificarInforme,
+  addInformeSeguridad,
+  getDataInformeSeguridad,
+} = require("../controllers/informes");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
 
 //NOTA: fijarse que roles puede hacer que cosa y usar el middleware veryfyRoles
 const ROLES = require("../config/roles");
 
+
+router.post("/seguridad/nuevo", authenticateToken,addInformeSeguridad);
+//falta agregar middleware de roles
+//POST localhost:8080/informes/seguridad/nuevo
+//authorization Bearer token...
+//JSON
+// {
+//   "fecha_ingreso": "2022-11-16",
+//   "hora_ingreso": "16:51",
+//   "interno": "4",
+//   "empresa_id": "2",
+//   "servicios_id": "2",
+//   "estado_id": "1",
+//   "destino": "AAAAAA"
+// }
+
+
+router.get("/seguridad/data", authenticateToken, getDataInformeSeguridad);
+//falta agregar middleware de roles
+//GET localhost:8080/informes/seguridad/data
+//authorization Bearer token...
+//devuelve toda la data necesaria para rellenar los dropdown
+
 router.get(
   "/listado",
   informesListado
 );
+//falta agregar middleware de roles
 //GET localhost:8080/informes/listado
 //authorization Bearer token...
+
 router.get("/:id", authenticateToken, getInforme);
+//falta agregar middleware de roles
 //GET localhost:8080/informes/2
 //authorization Bearer token...
+
 router.patch("/modificar/:id", authenticateToken, modificarInforme);
+//falta agregar middleware de roles
 //PATCH localhost:8080/informes/modificar/2
 //authorization Bearer token...
 //JSON (al menos uno de estos campos)

@@ -6,16 +6,73 @@ const Plataforma = db.Plataforma;
 const Estado = db.Estado;
 const { Op } = require("sequelize");
 const moment = require("moment");
+const tieneCampoNull = require("../../public/js/tieneCampoNull");
+
+const getDataInformeSeguridad = async (req,res) => {
+  try {
+    const empresas = await Empresa.findAll();
+    const servicios = await Servicio.findAll();
+    const estados = await Estado.findAll();
+
+    //esto es para que solo muestre "ingresando y servicio sin plataforma"
+    let estadosDisponibles = [];
+      for (let estado of estados) {
+        if (estado.id === 2 || estado.id === 3) {
+          estadosDisponibles.push(estado);
+        }
+      }
+    respuesta = { empresas, servicios, estadosDisponibles };
+    return res.status(200).json({ ...respuesta });
+  } catch (error) {
+    return res.status(400).json({ mensaje: error });
+  }
+}
+
+const addInformeSeguridad = async (req, res) => {
+  try {
+    const dataAIngresar = req.body;
+    const { id: usuarios_id } = req.usuario;
+    if (tieneCampoNull(dataAIngresar)) {
+      return res.status(400).json({ mensaje: "faltan datos" });
+    }
+
+    const {
+      fecha_ingreso,
+      hora_ingreso,
+      interno,
+      empresa_id,
+      servicios_id,
+      estado_id,
+      destino,
+    } = dataAIngresar;
+
+    await RegistroTorre.create({
+      fecha_ingreso,
+      hora_ingreso,
+      interno,
+      empresa_id,
+      servicios_id,
+      usuarios_id,
+      estado_id,
+      destino,
+    });
+
+    return res.status(200).json({
+      mensaje: "informe generado correctamente",
+    });
+  } catch (error) {
+    return res.status(400).json({ mensaje: "error al generar ingreso" });
+  }
+};
 
 const informesListado = async (req, res) => {
   try {
     let diaHoy = moment();
-    let diaAyer = diaHoy.add(-1, 'days');
-    let hora = diaHoy.format('HH:mm');
+    let diaAyer = diaHoy.add(-1, "days");
+    let hora = diaHoy.format("HH:mm");
     let ingresos = await RegistroTorre.findAll({
       include: [
         "registro_empresa",
-        //  "registro_servicio",
         "registro_plataforma",
         "registro_estado",
       ],
@@ -29,15 +86,14 @@ const informesListado = async (req, res) => {
 
     const respuesta = [];
 
-    ingresos.forEach(ingreso => {
+    ingresos.forEach((ingreso) => {
       respuesta.push({
         id: ingreso.id,
         destino: ingreso.destino,
         interno: ingreso.interno,
         empresa: ingreso.registro_empresa.dataValues.empresa,
         horario_salida: ingreso.hora_salida,
-        plataforma:
-          ingreso.registro_plataforma.dataValues.plataforma,
+        plataforma: ingreso.registro_plataforma.dataValues.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
       });
     });
@@ -151,4 +207,6 @@ module.exports = {
   informesListado,
   getInforme,
   modificarInforme,
+  addInformeSeguridad,
+  getDataInformeSeguridad,
 };
