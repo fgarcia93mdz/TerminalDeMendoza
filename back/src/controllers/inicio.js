@@ -40,6 +40,11 @@ const ControllerInicioUsuario = {
   // Se inicia el procesos de login (ingreso) donde se busca al usuario en la base de datos, se hace una comparacion de contrasena encriptada y segun el resultado se redirecciona o se devuelve valores con el error
   //VIEJO
   login: (req, res, next) => {
+    user = req.body.email
+    UsuarioLog.create({
+        usuario_log: user,
+        tipo_de_estado: 'Ingreso',
+    }).then(() => {
     Usuario.findOne({
       where: {
         usuario: req.body.email,
@@ -60,8 +65,10 @@ const ControllerInicioUsuario = {
               maxAge: 1000 * 60 * 60,
             });
           }
+        
+            return res.redirect("/ingreso");
+          
 
-          return res.redirect("/ingreso");
         }
 
         return res.render("index", {
@@ -81,13 +88,14 @@ const ControllerInicioUsuario = {
         },
       });
     });
+    })
   },
   //VIEJO
   logout: (req, res) => {
     const userLogged = req.session.userLogged;
     UsuarioLog.create({
       usuario_log: userLogged.usuario,
-      egreso: date,
+      tipo_de_estado: 'Egreso',
     }).then(() => {
       res.clearCookie("userEmail");
       req.session.destroy();
@@ -370,8 +378,7 @@ const ControllerInicioUsuario = {
           },
           force: true,
         });
-      })
-      .then(() => {
+      }).then(() => {
         return res.redirect("/ingreso/sector/recursosHumanos");
       });
   },
@@ -383,7 +390,7 @@ const ControllerInicioUsuario = {
       },
     });
 
-    
+
     let empresa = Empresa.findAll();
     let servicio = Servicio.findAll();
     let plataforma = Plataforma.findAll();

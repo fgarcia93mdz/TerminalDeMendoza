@@ -8,11 +8,8 @@ module.exports = (sequelize, dataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    ingreso: {
-      type: dataTypes.DATE,
-    },
-    egreso: {
-      type: dataTypes.DATE,
+    tipo_de_estado: {
+      type: dataTypes.STRING(45),
     },
     usuario_log: {
       type: dataTypes.STRING(45),
@@ -22,7 +19,7 @@ module.exports = (sequelize, dataTypes) => {
   let config = {
     tableName: 'usuarios_log',
     timestamps: false,
-    // createdAt: 'created_at',
+    createdAt: 'created_at',
     // updatedAt: 'updated_at',
     // deletedAt: false
   }

@@ -3,7 +3,7 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-   /* background-size: cover; */
+  /* background-size: cover; */
   font-family: "Bangers", cursive;
 }
 .html {
@@ -15,7 +15,7 @@ body {
   margin-top: -4%;
 }
 .text-danger {
-    margin-top: 4%;
+  margin-top: 4%;
 }
 .botonera-inicial {
   width: 20%;
@@ -97,7 +97,6 @@ input {
   outline: none;
   width: 100%;
   color: #000000;
-
 }
 
 /*Text*/
@@ -146,26 +145,51 @@ input {
 .btn-link:hover {
   color: #ffeba7;
 }
-
-@media (min-width: 768px) {
-  /* .contenedor-mayor {
-    width: 370px;
-    background: #edebeb;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 5px;
-    box-shadow: 10px 10px 64px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 10px 10px 64px 0px rgba(58, 58, 58, 0.75);
-    -moz-box-shadow: 10px 10px 64px 0px rgba(102, 100, 98, 0.75);
-    height: 510px;
-  } */
-  .html{
-    margin-left: 6%;
-    margin-top: -5%;
+@media (min-width: 375px) {
+  .card {
+    width: 250px;
+    padding: 0.9rem 1rem;
+    text-align: center;
+    background: #a8a6a6;
+    border-radius: 10%;
+    top: -86%;
+    left: 7%;
+  }
+  .html {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 12%;
+    margin-top: -69%;
   }
 }
-@media(min-width: 1024px) {
+@media (min-width: 768px) {
+  .card {
+  width: 241px;
+  padding: 1.1rem 1.0rem;
+  text-align: center;
+  background: #a8a6a6;
+  border-radius: 10%;
+  left: 7%;
+}
   .html {
-    margin-left: 11%;
-    margin-top: -4%;
+    margin-left: -2%;
+margin-top: -1%;
   }
+}
+
+@media (min-width: 1024px) {
+  .card {
+  width: 100%;
+  padding: 1.1rem 1.0rem;
+  text-align: center;
+  background: #a8a6a6;
+  border-radius: 10%;
+  left: 7%;
+}
+  .html {
+  margin-left: 0%;
+  margin-top: -2%;
+}
 }
