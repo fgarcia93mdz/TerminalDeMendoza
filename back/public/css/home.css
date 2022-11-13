@@ -1,18 +1,20 @@
 body {
-  background-image: url(../img/logo/logo.svg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  /* background-size: cover; */
-  font-family: "Bangers", cursive;
+    background-image: url(../img/logo/logo.svg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position-x: 43%;
+    background-position-y: 10%;
+    background-size: 70%;
+    font-family: "Bangers", cursive;
 }
 .html {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  margin-left: 11%;
-  margin-top: -4%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 18%;
+    margin-top: 0%;
 }
 .text-danger {
   margin-top: 4%;
@@ -62,8 +64,8 @@ body {
 }
 /* From uiverse.io by @alexruix */
 .card {
-  width: 350px;
-  padding: 1.9rem 1.2rem;
+width: 250px;
+    padding: 1.1rem 1rem;
   text-align: center;
   background: #a8a6a6;
   border-radius: 10%;
@@ -145,7 +147,7 @@ input {
 .btn-link:hover {
   color: #ffeba7;
 }
-@media (min-width: 375px) {
+@media (min-width: 500px) {
   .card {
     width: 250px;
     padding: 0.9rem 1rem;
@@ -165,6 +167,14 @@ input {
   }
 }
 @media (min-width: 768px) {
+body {
+  background-image: url(../img/logo/logo.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* background-size: cover; */
+  font-family: "Bangers", cursive;
+}
   .card {
   width: 241px;
   padding: 1.1rem 1.0rem;
