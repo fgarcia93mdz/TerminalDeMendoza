@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 12-11-2022 a las 15:54:17
+-- Tiempo de generación: 13-11-2022 a las 12:02:32
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -142,6 +142,13 @@ CREATE TABLE `registro_administrativo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Volcado de datos para la tabla `registro_administrativo`
+--
+
+INSERT INTO `registro_administrativo` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`) VALUES
+(1, '2022-11-13', '06:59:00', 155, 1, 1, 4, 2, 4, '2022-11-13', '07:15:00', 'Mendoza');
+
+--
 -- Disparadores `registro_administrativo`
 --
 DELIMITER $$
@@ -189,6 +196,13 @@ CREATE TABLE `registro_administrativo_log` (
   `operacion_id` int(11) NOT NULL,
   `id_registro` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `registro_administrativo_log`
+--
+
+INSERT INTO `registro_administrativo_log` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`, `updated_at`, `operacion_id`, `id_registro`) VALUES
+(4, '2022-11-13', '06:59:00', 155, 1, 1, 4, 2, 4, '2022-11-13', '07:15:00', NULL, '2022-11-13 10:52:17', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -256,7 +270,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `password`, `roles_id`, `estado_password`) VALUES
 (1, 'Clara', 'Dardanelli', 'cdardanelli', '$2a$10$masn/IRSjpofNznTU0cnU.11UATeHdVUCLCTdrE/MyJCbuLpIgO.u', 2, 1),
-(3, 'Facundo Roberto', 'Garcia', 'frgarcia', '$2a$10$8ivSHxnhJEZaRMph8Rp6P.9RddvtY554TQRGiCkjz1UeU/j6AIUrK', 3, 1);
+(2, 'Facundo Roberto', 'Garcia', 'frgarcia', '$2a$10$8ivSHxnhJEZaRMph8Rp6P.9RddvtY554TQRGiCkjz1UeU/j6AIUrK', 4, 1),
+(3, 'Ana ', 'Gaitan', 'agaitan', '$2a$10$izJxVa21OkaAJER0xbQUXuJ5vS5hrxipLesEzs48380RgVOTSb0Ey', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -266,14 +281,14 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `password`, `role
 
 CREATE TABLE `usuarios_log` (
   `id` int(11) NOT NULL,
-  `ingreso` timestamp NULL DEFAULT NULL,
-  `egreso` timestamp NULL DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `tipo_de_estado` varchar(45) DEFAULT NULL,
   `usuario_log` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `usuarios_log`
---
+
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `usuario_eliminado`
 --
@@ -286,10 +301,6 @@ CREATE TABLE `usuario_eliminado` (
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `usuario_eliminado`
---
 
 --
 -- Índices para tablas volcadas
@@ -333,7 +344,6 @@ ALTER TABLE `registro_administrativo`
   ADD PRIMARY KEY (`id`,`empresa_id`,`servicios_id`,`usuarios_id`,`estado_id`),
   ADD KEY `fk_registro_administrativo_empresa1_idx` (`empresa_id`),
   ADD KEY `fk_registro_administrativo_servicios1_idx` (`servicios_id`),
-  ADD KEY `fk_registro_administrativo_usuarios1_idx` (`usuarios_id`),
   ADD KEY `fk_registro_administrativo_estado1_idx` (`estado_id`);
 
 --
@@ -345,7 +355,6 @@ ALTER TABLE `registro_administrativo_log`
   ADD KEY `fk_registro_administrativo_estado1_idx` (`estado_id`),
   ADD KEY `fk_registro_administrativo_servicios1_idx` (`servicios_id`),
   ADD KEY `fk_registro_administrativo_plataformas1_idx` (`plataformas_id`),
-  ADD KEY `fk_registro_administrativo_usuarios1_idx` (`usuarios_id`),
   ADD KEY `fk_registro_administrativo_log_operacion1_idx` (`operacion_id`);
 
 --
@@ -364,8 +373,7 @@ ALTER TABLE `servicios`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`,`roles_id`),
-  ADD KEY `fk_usuarios_roles_idx` (`roles_id`);
+  ADD PRIMARY KEY (`id`,`roles_id`);
 
 --
 -- Indices de la tabla `usuarios_log`
@@ -411,13 +419,13 @@ ALTER TABLE `plataformas`
 -- AUTO_INCREMENT de la tabla `registro_administrativo`
 --
 ALTER TABLE `registro_administrativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_administrativo_log`
 --
 ALTER TABLE `registro_administrativo_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -465,8 +473,7 @@ ALTER TABLE `plataformas`
 ALTER TABLE `registro_administrativo`
   ADD CONSTRAINT `fk_registro_administrativo_empresa1` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_registro_administrativo_estado1` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registro_administrativo_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registro_administrativo_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_registro_administrativo_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `registro_administrativo_log`
@@ -476,14 +483,7 @@ ALTER TABLE `registro_administrativo_log`
   ADD CONSTRAINT `fk_registro_administrativo_log_estado1` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_registro_administrativo_log_operacion1` FOREIGN KEY (`operacion_id`) REFERENCES `operacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_registro_administrativo_log_plataformas1` FOREIGN KEY (`plataformas_id`) REFERENCES `plataformas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_registro_administrativo_log_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_registro_administrativo_log_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usuarios_roles` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_registro_administrativo_log_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
