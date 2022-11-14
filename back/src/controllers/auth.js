@@ -9,23 +9,6 @@ generateAccessToken = (usuario) => {
   return jwt.sign(usuario, process.env.TOKEN_SECRET);
 };
 
-const logout = async (req, res) => {
-  const timestamp = req.usuario.iat * 1000;
-  let ingreso = new Date(timestamp);
-  try {
-    const logLogout = await UsuarioLog.create({
-      usuario_log: req.usuario.usuario,
-      tipo_de_estado: "Egreso",
-    });
-    
-    return res.status(200).json({ mensaje: "deslogeado" });
-  } catch (error) {
-    return res.status(400).json({ mensaje: error });
-  }
-};
-
-
-
 const login = async (req, res) => {
   try {
     const userToLogin = await Usuario.findOne({
@@ -63,6 +46,21 @@ const login = async (req, res) => {
     return res.status(400).json({ mensaje: error });
   };
 
+};
+
+const logout = async (req, res) => {
+  const timestamp = req.usuario.iat * 1000;
+  let ingreso = new Date(timestamp);
+  try {
+    const logLogout = await UsuarioLog.create({
+      usuario_log: req.usuario.usuario,
+      tipo_de_estado: "Egreso",
+    });
+
+    return res.status(200).json({ mensaje: "deslogeado" });
+  } catch (error) {
+    return res.status(400).json({ mensaje: error });
+  }
 };
 
 module.exports = { login, logout };

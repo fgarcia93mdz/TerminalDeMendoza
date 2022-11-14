@@ -10,6 +10,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const platformRouter = require('./routes/platform');
 const informesRouter = require('./routes/informes');
+const empresasRouter = require("./routes/empresas");
 
 
 const authRouter = require('./routes/auth');
@@ -63,6 +64,7 @@ app.use('/api/plataforma', platformRouter)
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/informes', informesRouter);
+app.use('/empresas', empresasRouter);
 
 
 // Catch 404 and forward to error handler
