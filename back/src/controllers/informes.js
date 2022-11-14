@@ -9,7 +9,7 @@ const moment = require("moment");
 const tieneCampoNull = require("../../public/js/tieneCampoNull");
 
 const addInforme = async (req, res) => {
-  //admin es rol 1
+  //informes es rol 5
   //seguridad es rol 4
 
   try {
@@ -18,8 +18,6 @@ const addInforme = async (req, res) => {
     // if (tieneCampoNull(dataAIngresar)) {
     //   return res.status(400).json({ mensaje: "faltan datos" });
     // }
-
-    console.log(data);
 
     const {
       fecha_ingreso,
@@ -54,7 +52,7 @@ const addInforme = async (req, res) => {
       usuarios_id,
     };
 
-    if (rol === 1) {
+    if (rol === 5) {
       const { fecha_salida, hora_salida, plataformas_id } = data;
 
       if (
@@ -80,20 +78,28 @@ const addInforme = async (req, res) => {
   }
 };
 
-const getDataInformeSeguridad = async (req, res) => {
+const getDataDropdown = async (req, res) => {
   try {
+    const { rol } = req.usuario;
+
     const empresas = await Empresa.findAll();
     const servicios = await Servicio.findAll();
-    const estados = await Estado.findAll();
+    let estados = await Estado.findAll();
 
-    //esto es para que solo muestre "ingresando y servicio sin plataforma"
-    let estadosDisponibles = [];
-    for (let estado of estados) {
-      if (estado.id === 2 || estado.id === 3) {
-        estadosDisponibles.push(estado);
+    if (rol === 4) {
+      //esto es para que solo muestre "ingresando y servicio sin plataforma"
+      let estadosDisponibles = [];
+      for (let estado of estados) {
+        if (estado.id === 2 || estado.id === 3) {
+          estadosDisponibles.push(estado);
+        }
       }
+      estados = estadosDisponibles;
     }
-    respuesta = { empresas, servicios, estadosDisponibles };
+
+
+
+    respuesta = { empresas, servicios, estados };
     return res.status(200).json({ ...respuesta });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
@@ -292,6 +298,6 @@ module.exports = {
   getInforme,
   modificarInforme,
   addInforme,
-  getDataInformeSeguridad,
+  getDataDropdown,
   informesListadoSeparadosPorEstado,
 };

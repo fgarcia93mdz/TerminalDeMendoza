@@ -5,7 +5,7 @@ const {
   getInforme,
   modificarInforme,
   addInforme,
-  getDataInformeSeguridad,
+  getDataDropdown,
   informesListadoSeparadosPorEstado,
 } = require("../controllers/informes");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
@@ -16,12 +16,12 @@ const ROLES = require("../config/roles");
 
 
 router.post("/nuevo", authenticateToken,addInforme);
-//los usuarios que pueden crear informes son el de seguridad de torre (no puede agregar plataformas_id, fecha_salida y hora salida) y otro mas que no recuerdo
-//para que el sistema sepa si es seguridad o tiene un rol con mas permisos se verifican los roles del token, si es 1 es admin por ejemplo
-//ahora esta diseñado para que si el usuario es admin tenga que agregar plataformas_id, fecha_salida y hora_salida
-//si no es usuario admin puede ahorrarse esos 3 campos porque igual no los va a guardar en la base de datos
-//falta agregar middleware de roles
-//POST localhost:8080/informes/seguridad/nuevo
+//para los roles seguridad e informes
+//los usuarios que pueden crear informes son el de seguridad de torre (no puede agregar plataformas_id, fecha_salida y hora salida) y informes que agrega todos los campos
+//para que el sistema sepa si es seguridad o tiene un rol con mas permisos se verifican los roles del token, si es 5 es informes por ejemplo
+//si no es usuario rol informe puede ahorrarse esos 3 campos porque igual no los va a guardar en la base de datos
+//falta agregar middleware de roles para que solo seguridad e informes puedan acceder a la ruta
+//POST localhost:8080/informes/nuevo
 //authorization Bearer token...
 //JSON
 // {
@@ -38,7 +38,10 @@ router.post("/nuevo", authenticateToken,addInforme);
 // }
 
 
-router.get("/seguridad/data", authenticateToken, getDataInformeSeguridad);
+router.get("/dataDropdown", authenticateToken, getDataDropdown);
+//para los roles rol seguridad y informes
+//rol informes tiene los drowpdown completos
+
 //falta agregar middleware de roles
 //GET localhost:8080/informes/seguridad/data
 //authorization Bearer token...
@@ -48,6 +51,7 @@ router.get(
   "/listado",
   informesListado
 );
+//para el rol seguridad
 //falta agregar middleware de roles
 //GET localhost:8080/informes/listado
 //authorization Bearer token...
@@ -56,16 +60,18 @@ router.get(
   "/listadoSeparado",
   authenticateToken, informesListadoSeparadosPorEstado
 );
-//este es para el usuario de informes
+//para el rol informes
 //GET localhost:8080/informes/listadoSeparado
 //authorization Bearer token...
 
 router.get("/:id", authenticateToken, getInforme);
+//para el rol informes
 //falta agregar middleware de roles
 //GET localhost:8080/informes/2
 //authorization Bearer token...
 
 router.patch("/modificar/:id", authenticateToken, modificarInforme);
+//para el rol informes
 //falta agregar middleware de roles
 //PATCH localhost:8080/informes/modificar/2
 //authorization Bearer token...
