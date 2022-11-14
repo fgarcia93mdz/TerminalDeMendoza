@@ -4,7 +4,7 @@ const {
   informesListado,
   getInforme,
   modificarInforme,
-  addInformeSeguridad,
+  addInforme,
   getDataInformeSeguridad,
   informesListadoSeparadosPorEstado,
 } = require("../controllers/informes");
@@ -15,7 +15,11 @@ const verifyRoles = require("../middlewares/verifyRoles");
 const ROLES = require("../config/roles");
 
 
-router.post("/seguridad/nuevo", authenticateToken,addInformeSeguridad);
+router.post("/nuevo", authenticateToken,addInforme);
+//los usuarios que pueden crear informes son el de seguridad de torre (no puede agregar plataformas_id, fecha_salida y hora salida) y otro mas que no recuerdo
+//para que el sistema sepa si es seguridad o tiene un rol con mas permisos se verifican los roles del token, si es 1 es admin por ejemplo
+//ahora esta diseñado para que si el usuario es admin tenga que agregar plataformas_id, fecha_salida y hora_salida
+//si no es usuario admin puede ahorrarse esos 3 campos porque igual no los va a guardar en la base de datos
 //falta agregar middleware de roles
 //POST localhost:8080/informes/seguridad/nuevo
 //authorization Bearer token...
@@ -27,7 +31,10 @@ router.post("/seguridad/nuevo", authenticateToken,addInformeSeguridad);
 //   "empresa_id": "2",
 //   "servicios_id": "2",
 //   "estado_id": "1",
-//   "destino": "AAAAAA"
+//   "destino": "AAAAAA2",
+//   "plataformas_id": "2",
+//   "fecha_salida": "2022-12-12",
+//   "hora_salida": "12:22"
 // }
 
 
@@ -49,7 +56,7 @@ router.get(
   "/listadoSeparado",
   authenticateToken, informesListadoSeparadosPorEstado
 );
-
+//este es para el usuario de informes
 //GET localhost:8080/informes/listadoSeparado
 //authorization Bearer token...
 

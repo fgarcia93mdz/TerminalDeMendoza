@@ -8,6 +8,78 @@ const { Op } = require("sequelize");
 const moment = require("moment");
 const tieneCampoNull = require("../../public/js/tieneCampoNull");
 
+const addInforme = async (req, res) => {
+  //admin es rol 1
+  //seguridad es rol 4
+
+  try {
+    const data = req.body;
+    const { id: usuarios_id, rol } = req.usuario;
+    // if (tieneCampoNull(dataAIngresar)) {
+    //   return res.status(400).json({ mensaje: "faltan datos" });
+    // }
+
+    console.log(data);
+
+    const {
+      fecha_ingreso,
+      hora_ingreso,
+      interno,
+      empresa_id,
+      servicios_id,
+      estado_id,
+      destino,
+    } = data;
+
+    if (
+      !fecha_ingreso ||
+      !hora_ingreso ||
+      !interno ||
+      !empresa_id ||
+      !servicios_id ||
+      !estado_id ||
+      !destino
+    ) {
+      return res.status(400).json({ mensaje: "faltan datos" });
+    }
+
+    const dataAingresar = {
+      fecha_ingreso,
+      hora_ingreso,
+      interno,
+      empresa_id,
+      servicios_id,
+      estado_id,
+      destino,
+      usuarios_id,
+    };
+
+    if (rol === 1) {
+      const { fecha_salida, hora_salida, plataformas_id } = data;
+
+      if (
+        !fecha_salida ||
+        !hora_salida ||
+        !plataformas_id
+      ) {
+        return res.status(400).json({ mensaje: "faltan datos" });
+      }
+
+      dataAingresar.fecha_salida = fecha_salida;
+      dataAingresar.hora_salida = hora_salida;
+      dataAingresar.plataformas_id = plataformas_id;
+    }
+    console.log(dataAingresar);
+    await RegistroTorre.create(dataAingresar);
+
+    return res.status(200).json({
+      mensaje: "informe generado correctamente",
+    });
+  } catch (error) {
+    return res.status(400).json({ mensaje: "error al generar ingreso" });
+  }
+};
+
 const getDataInformeSeguridad = async (req, res) => {
   try {
     const empresas = await Empresa.findAll();
@@ -28,43 +100,6 @@ const getDataInformeSeguridad = async (req, res) => {
   }
 };
 
-const addInformeSeguridad = async (req, res) => {
-  try {
-    const dataAIngresar = req.body;
-    const { id: usuarios_id } = req.usuario;
-    if (tieneCampoNull(dataAIngresar)) {
-      return res.status(400).json({ mensaje: "faltan datos" });
-    }
-
-    const {
-      fecha_ingreso,
-      hora_ingreso,
-      interno,
-      empresa_id,
-      servicios_id,
-      estado_id,
-      destino,
-    } = dataAIngresar;
-
-    await RegistroTorre.create({
-      fecha_ingreso,
-      hora_ingreso,
-      interno,
-      empresa_id,
-      servicios_id,
-      usuarios_id,
-      estado_id,
-      destino,
-    });
-
-    return res.status(200).json({
-      mensaje: "informe generado correctamente",
-    });
-  } catch (error) {
-    return res.status(400).json({ mensaje: "error al generar ingreso" });
-  }
-};
-
 const informesListadoSeparadosPorEstado = async (req, res) => {
   try {
     let diaHoy = moment();
@@ -79,10 +114,12 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
       },
       order: [["hora_salida", "DESC"]],
     });
-    
 
-
-    const respuesta = { fueraDePlataforma: [], enPlataforma: [], ingresando : []};
+    const respuesta = {
+      fueraDePlataforma: [],
+      enPlataforma: [],
+      ingresando: [],
+    };
 
     ingresos.forEach((ingreso) => {
       const data = {
@@ -109,7 +146,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
     });
     console.log(respuesta);
     return res.status(200).json({
-      respuesta
+      respuesta,
     });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
@@ -254,7 +291,7 @@ module.exports = {
   informesListado,
   getInforme,
   modificarInforme,
-  addInformeSeguridad,
+  addInforme,
   getDataInformeSeguridad,
   informesListadoSeparadosPorEstado,
 };
