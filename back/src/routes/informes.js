@@ -38,6 +38,7 @@ router.post("/nuevo", authenticateToken,addInforme);
 // }
 
 
+
 router.get("/dataDropdown", authenticateToken, getDataDropdown);
 //para los roles rol seguridad y informes
 //rol informes tiene los drowpdown completos
@@ -76,15 +77,17 @@ router.patch("/modificar/:id", authenticateToken, modificarInforme);
 //PATCH localhost:8080/informes/modificar/2
 //authorization Bearer token...
 //JSON (al menos uno de estos campos)
-//{
-//   "estado": "3",
-//   "destino": "aaab",
+// {
+//   "fecha_ingreso": "2022-11-16",
+//   "hora_ingreso": "16:51",
+//   "interno": "4",
+//   "empresa_id": "2",
+//   "servicios_id": "2",
+//   "estado_id": "1",
+//   "destino": "BBBB",
+//   "plataformas_id": "2",
 //   "fecha_salida": "2022-12-12",
-//   "hora_salida": "10:10:10",
-//   "plataforma": "2",
-//   "fecha_ingreso": "2000-01-01",
-//   "hora_ingreso": "05:05:05",
-//   "empresa": 3
+//   "hora_salida": "12:22"
 // }
 
 

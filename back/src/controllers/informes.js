@@ -259,7 +259,7 @@ const modificarInforme = async (req, res) => {
     });
     if (encontrado != null) {
       //casos que no son contemplados
-      //toda la data es repetida con lo que ya esta en la base de datos
+      // si toda la data es repetida con lo que ya esta en la base de datos
       if (estado != null) dataACambiar.estado_id = estado;
       if (destino != null) dataACambiar.destino = destino;
       if (fecha_salida != null) dataACambiar.fecha_salida = fecha_salida;
