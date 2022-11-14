@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const db = require("../database/models");
+const Rol = db.Rol;
 const Usuario = db.Usuario;
 const EliminarUsuario = db.UsuarioEliminado;
 const bcryptjs = require("bcryptjs");
@@ -112,7 +113,56 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getUserInfoToModify = async (req, res) => {};
+const getDataInfoToCreateNewUser = async (req,res) => {
+  try {
+    const roles = await Rol.findAll();
+    let rolesDisponibles = [];
+    for (let rol of roles) {
+      if (rol.id !== 1) {
+        rolesDisponibles.push(rol);
+      }
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ mensaje: "error al obtener info de roles" });
+  }
+    
+}
+
+const getDataUserInfoToModify = async (req, res) => {
+  try {
+    const usuario = await Usuario.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (usuario !== null) {
+      const usuarioAEnviar = {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        usuario: usuario.usuario,
+      };
+      const roles = await Rol.findAll();
+      let rolesDisponibles = [];
+      for (let rol of roles) {
+        if (rol.id !== 1) {
+          rolesDisponibles.push(rol);
+        }
+      }
+      respuesta = { usuarioAEnviar, rolesDisponibles };
+      return res.status(200).json({ ...respuesta });
+    } else {
+      return res.status(400).json({ mensaje: "usuario no existe" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ mensaje: "error a la hora de obtener data para modificar usuario" });
+  }
+};
 
 const modifyUser = async (req, res) => {
   const usuarioAModificar = parseInt(req.params.id);
@@ -162,4 +212,11 @@ const modifyUser = async (req, res) => {
   }
 };
 
-module.exports = { register, changePassword, modifyUser, deleteUser };
+module.exports = {
+  register,
+  changePassword,
+  modifyUser,
+  deleteUser,
+  getDataUserInfoToModify,
+  getDataInfoToCreateNewUser,
+};

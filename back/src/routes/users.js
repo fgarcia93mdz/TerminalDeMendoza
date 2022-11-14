@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const {register, changePassword, modifyUser, deleteUser } = require("../controllers/users");
+const {
+  register,
+  changePassword,
+  modifyUser,
+  deleteUser,
+  getDataUserInfoToModify,
+  getDataInfoToCreateNewUser,
+} = require("../controllers/users");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
 const ROLES = require("../config/roles");
@@ -16,6 +23,19 @@ router.post('/register',register)
 //   "password": "ptest",
 //   "rol": "3"
 // }
+
+router.get("/getUser/:id", authenticateToken, getDataUserInfoToModify);
+//devuelve información del usuario a modificar + la lista de roles disponibles para el dropdown
+// GET localhost:8080/users/getUser/:id
+// HEADERS
+// authorization "Bearer token..."
+
+
+router.get("/new", authenticateToken, getDataInfoToCreateNewUser);
+// devuelve la lista de roles disponibles para crear un nuevo usuario
+// GET localhost:8080/users/new
+// HEADERS
+// authorization "Bearer token..."
 
 
 router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrador,ROLES.RRHH),changePassword);
