@@ -44,7 +44,7 @@ router.get("/dataDropdown", authenticateToken, getDataDropdown);
 //rol informes tiene los drowpdown completos
 
 //falta agregar middleware de roles
-//GET localhost:8080/informes/seguridad/data
+//GET localhost:8080/informes/dataDropdown
 //authorization Bearer token...
 //devuelve toda la data necesaria para rellenar los dropdown
 
