@@ -9,22 +9,22 @@ generateAccessToken = (usuario) => {
   return jwt.sign(usuario, process.env.TOKEN_SECRET);
 };
 
-//actualmente el logout no tiene en cuenta si un usuario se logeó, se le apagó la pc o cerró el navegador y despues
-//se volvió a logear, no hay registro del logeo. hay que ver como conectar x logeo a x deslogeo
 const logout = async (req, res) => {
   const timestamp = req.usuario.iat * 1000;
   let ingreso = new Date(timestamp);
   try {
     const logLogout = await UsuarioLog.create({
-      usuarios_id: req.usuario.id,
-      ingreso: ingreso,
-      egreso: new Date(),
+      usuario_log: req.usuario.usuario,
+      tipo_de_estado: "Egreso",
     });
+    
     return res.status(200).json({ mensaje: "deslogeado" });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
   }
 };
+
+
 
 const login = async (req, res) => {
   try {
@@ -33,19 +33,27 @@ const login = async (req, res) => {
         usuario: req.body.email,
       },
     });
+   
     if (userToLogin) {
       let isOkPassword = bcryptjs.compareSync(
         req.body.password,
         userToLogin.password
       );
+       console.log(userToLogin.dataValues);
       if (isOkPassword) {
         const usuario = {
           nombre: userToLogin.dataValues.nombre,
           apellido: userToLogin.dataValues.apellido,
+          usuario: userToLogin.dataValues.usuario,
           rol: userToLogin.dataValues.roles_id,
           id: userToLogin.dataValues.id,
         };
         const token = generateAccessToken(usuario);
+       
+       const logLogin = await UsuarioLog.create({
+         usuario_log: req.body.email,
+         tipo_de_estado: "Ingreso",
+       });
         return res.status(200).json(token);
       } else {
         return res.status(400).json({ mensaje: "credenciales invalidas" });

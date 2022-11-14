@@ -71,36 +71,39 @@ const changePassword = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+  //tenemos que poner el middleware para que solo puedan eliminar si tienen permiso.
   try {
-    console.log(req.usuario.id, req.params.id);
     const usuarioAEliminar = parseInt(req.params.id);
 
-    let usuario = await Usuario.findOne({
+    const usuario = await Usuario.findOne({
       where: {
         id: usuarioAEliminar,
       },
     });
-    console.log("🚀 ~ file: users.js ~ line 83 ~ deleteUser ~ usuario", usuario)
+
+    console.log(
+      "🚀 ~ file: users.js ~ line 83 ~ deleteUser ~ usuario",
+      usuario.dataValues
+    );
     if (usuario != null) {
-      // por ahora falla porque la tabla usuario_eliminado tiene una fk a usuarios y cuando se
-      // elimina un usuario se borran todos los logs de ese usuario en la tabla usuario_eliminado
+      const eliminado = await Usuario.destroy({
+        where: {
+          id: usuarioAEliminar,
+        },
+        force: true,
+      });
 
-      //   await EliminarUsuario.create({
-      //     usuario_id: req.usuario.id,
-      //     motivo: req.body.motivo,
-      //     usuario_id_eliminado: usuarioAEliminar,
-      //   });
-
-      // await Usuario.destroy({
-      //   where: {
-      //     id: usuarioAEliminar,
-      //   },
-      //   force: true,
-      // });
-
-      return res
-        .status(200)
-        .json({ mensaje: "usuario eliminado correctamente" });
+      if (eliminado != null) {
+        await EliminarUsuario.create({
+          nombre: usuario.nombre,
+          apellido: usuario.apellido,
+          motivo: req.body.motivo,
+          usuario_eliminado: usuario.usuario,
+        });
+        return res
+          .status(200)
+          .json({ mensaje: "usuario eliminado correctamente" });
+      }
     } else {
       return res.status(400).json({ mensaje: "no existe el usuario" });
     }
@@ -108,6 +111,8 @@ const deleteUser = async (req, res) => {
     return res.status(400).json({ mensaje: error });
   }
 };
+
+const getUserInfoToModify = async (req, res) => {};
 
 const modifyUser = async (req, res) => {
   const usuarioAModificar = parseInt(req.params.id);
@@ -146,9 +151,9 @@ const modifyUser = async (req, res) => {
         .status(200)
         .json({ mensaje: "usuario modificado correctamente" });
     } else {
-       return res
-         .status(400)
-         .json({ mensaje: "no existe el usuario a modificar" });
+      return res
+        .status(400)
+        .json({ mensaje: "no existe el usuario a modificar" });
     }
   } catch (error) {
     return res
