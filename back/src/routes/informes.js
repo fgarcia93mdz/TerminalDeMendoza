@@ -6,6 +6,7 @@ const {
   modificarInforme,
   addInformeSeguridad,
   getDataInformeSeguridad,
+  informesListadoSeparadosPorEstado,
 } = require("../controllers/informes");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
@@ -42,6 +43,14 @@ router.get(
 );
 //falta agregar middleware de roles
 //GET localhost:8080/informes/listado
+//authorization Bearer token...
+
+router.get(
+  "/listadoSeparado",
+  authenticateToken, informesListadoSeparadosPorEstado
+);
+
+//GET localhost:8080/informes/listadoSeparado
 //authorization Bearer token...
 
 router.get("/:id", authenticateToken, getInforme);
