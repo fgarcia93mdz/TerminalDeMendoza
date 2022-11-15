@@ -16,7 +16,6 @@ const login = async (req, res) => {
         usuario: req.body.email,
       },
     });
-   
     if (userToLogin) {
       let isOkPassword = bcryptjs.compareSync(
         req.body.password,
@@ -39,8 +38,12 @@ const login = async (req, res) => {
        });
         return res.status(200).json(token);
       } else {
-        return res.status(400).json({ mensaje: "credenciales invalidas" });
+        return res
+          .status(400)
+          .json({ mensaje: "usuario o contraseña incorrectos" });
       }
+    } else {
+      return res.status(400).json({ mensaje: "usuario o contraseña incorrectos" });
     }
   } catch (error) {
     return res.status(400).json({ mensaje: error });
