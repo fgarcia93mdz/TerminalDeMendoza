@@ -69,11 +69,11 @@ const Login = () => {
 
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className='item'>
-                        <label htmlFor='email' className='azul'>Usuario:</label> <br />
+                        <label htmlFor='email' className='azul'>Usuario:</label>
                         <input type="text" name='email' value={email}   onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className='item'>
-                        <label htmlFor="password" className='azul' >Contraseña:</label> <br />
+                        <label htmlFor="password" className='azul' >Contraseña:</label> 
                         <input type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
