@@ -40,10 +40,10 @@ const login = async (req, res) => {
       } else {
         return res
           .status(400)
-          .json({ mensaje: "usuario o contraseña incorrectos" });
+          .json({ mensaje: "contraseña incorrecta" });
       }
     } else {
-      return res.status(400).json({ mensaje: "usuario o contraseña incorrectos" });
+      return res.status(400).json({ mensaje: "usuarioincorrecto" });
     }
   } catch (error) {
     return res.status(400).json({ mensaje: error });
