@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios'
-import BasicModal from '../../components/modals/Modal';
+import BasicModal from '../modals/Modal';
 
 const initialTicket = {
     fecha_ingreso: "", // '01-01-2022'

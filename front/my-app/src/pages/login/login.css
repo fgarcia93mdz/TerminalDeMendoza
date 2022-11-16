@@ -33,9 +33,14 @@ input{
     width: 100%;
     padding: 5px;
 }
-
+input:hover{
+    background-color: rgb(160 208 213)
+}
 .item{
-    margin: 10px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 button{
@@ -49,8 +54,19 @@ button{
     margin: 10px;
 }
 
+button:hover{
+    background-color:rgb(28 177 192);
+    padding: 13px 35px;
+    margin: 5px;
+
+}
+
 .cambiar-cont{
     text-decoration: none;
 font-size: 10px;
 color: rgba(11, 39, 72, 1);
+}
+
+.cambiar-cont:hover{
+    color:rgb(28 177 192);
 }

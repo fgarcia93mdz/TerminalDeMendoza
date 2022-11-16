@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import './login.css';
+import './Login.css';
 
 import axios from 'axios'
 
@@ -19,6 +19,17 @@ const Login = () => {
         console.log('email:', email)
         console.log('password:', password)
     }, [email, password])
+
+    useEffect(() => {
+
+
+        axios.get('http://localhost:8080/informes/dataDropdown')
+        .then(data => data.json())
+        .then(res => console.log('RES:', res))
+    }, 
+    
+    
+    [])
     
 
     const handleSubmit = (e) => {
@@ -50,7 +61,7 @@ const Login = () => {
                     }
                 })
                 .catch(function (error) {
-                    console.log('Error:', error);
+                    console.log('Error:', error.response.data.mensaje);
                 });
             
         }
@@ -63,17 +74,14 @@ const Login = () => {
            
         <div className="container">
             <div className="login">
-
-            
                 <h1 className='azul bienvenido'>Bienvenido</h1>
-
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className='item'>
-                        <label htmlFor='email' className='azul'>Usuario:</label> <br />
+                        <label htmlFor='email' className='azul'>Usuario:</label>
                         <input type="text" name='email' value={email}   onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className='item'>
-                        <label htmlFor="password" className='azul' >Contraseña:</label> <br />
+                        <label htmlFor="password" className='azul' >Contraseña:</label> 
                         <input type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
