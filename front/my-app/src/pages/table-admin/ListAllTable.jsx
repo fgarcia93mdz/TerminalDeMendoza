@@ -2,28 +2,14 @@ import React, { useState, useEffect } from 'react';
 import TableAdmin from '../../components/table/TableAdmin';
 
 
-// LISTADO DE PARTIDAS DE TICKETS
-// VISTA DE TORRE DE SEGURIDAD
+// LISTADO TOTAL DE TICKETS CREADOS
+// VISTA DE INFORMES, PARA LUEGO EDITAR LOS TICKETS O TERMINARLOS
 
 
 const ArrivalsTable = () => {
     const [ data, setData ] = useState({})
 
-    
-
-    useEffect(() => {
-       
-
-
-        fetch('http://localhost:8080/api/plataforma/arribos')
-                .then(response =>  response.json())
-                .then(data => {
-                    console.log('data::', data)
-                    return setData(data)
-                })
-                .catch(error => console.log(error))
-       
-    }, [])
+   
 
     return (
         <div >

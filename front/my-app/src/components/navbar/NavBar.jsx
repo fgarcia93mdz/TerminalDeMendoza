@@ -19,8 +19,6 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 // import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Arribos', 'Partidas', 'Locales'];
-const settings = ['Arribos', 'Partidas', 'Locales', 'Logout'];
 
 // final
 
@@ -57,12 +55,16 @@ const NavBar = () => {
             <AppBar position="sticky" style={{background: 'white', color: '#0E315A'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                <Box
-                    component='img'
-                    className="" 
-                    src={require("../../assets/img/icono-colectivo.png")} 
-                    alt="icono colectivo" 
-                />
+                    <Link to="" >
+                        <Box
+                            component='img'
+                            className="" 
+                            src={require("../../assets/img/icono-colectivo.png")} 
+                            alt="icono colectivo" 
+                            p={2}
+                            sx={{ width: '40%'}}
+                        />
+                    </Link>
 
                 <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'end' }}>
                     <Box className="" sx={{width: '70px'}} display={{xs:'block', md:'hidden'}} src={require("../../assets/img/icono-colectivo.png")} alt="icono colectivo" />
@@ -95,26 +97,59 @@ const NavBar = () => {
                             display: { xs: 'block', md: 'none' },
                         }}
                         >
-                        {pages.map((page) => (
-                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{page}</Typography>
+                        
+                        <Link to=''> 
+                            <MenuItem key={'/arribos'} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Arribos</Typography>
                             </MenuItem>
-                        ))}
+                        </Link>
+                        <Link to=''> 
+                            <MenuItem key={'/partidas'} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Partidas</Typography>
+                            </MenuItem>
+                        </Link>
+                        <Link to=''> 
+                            <MenuItem key={'/locales'} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Locales</Typography>
+                            </MenuItem>
+                        </Link>
                     </Menu>
 
                 </Box>
                 {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                 
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-                    {pages.map((page) => (
-                    <Button
-                        key={page}
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                    >
-                        {page}
-                    </Button>
-                    ))}
+                    
+                        <Link to='/arribos'>
+                            <Button
+                                key={'arribos'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                Arribos
+                            </Button>
+                        </Link>
+                        <Link to='/partidas'>
+                            <Button
+                                key={'partidas'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                Partidas
+                            </Button>
+                        </Link>
+                    
+                        <Link to='/locales'>
+                            <Button
+                                key={'locales'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                Locales
+                            </Button>
+                        </Link>
+                    
+                    
                 </Box>
                 <Button> <Link to='/login'> Iniciar sesion </Link> </Button> 
 

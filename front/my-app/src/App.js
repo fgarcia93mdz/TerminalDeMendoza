@@ -3,8 +3,6 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom'
 
 // import NavBar2 from './components/navbar/NavBar2';
-import NavBar from './components/navbar/NavBar';
-import NavBarAdmin from './components/navbar/NavBarAdmin';
 import jwt_decode from "jwt-decode";
 
 
@@ -16,6 +14,9 @@ import Footer from './components/footer/Footer';
 // import CustomizedTables from './components/table/Table';
 import FormTicket from './pages/ticket/FormTicket';
 import ArrivalsTable from './pages/table-admin/ArrivalsTable';
+import NavBarContainer from './components/navbar/NavBarContainer';
+
+// import clients
 
 
 function App() {
@@ -25,9 +26,9 @@ function App() {
   const [ userRole, setUserRole ] = useState('')
 
 
+  const token = window.sessionStorage.getItem("jwt")
 
   React.useEffect(() => {
-    const token = window.sessionStorage.getItem("jwt")
     if (token === undefined || token === null) {
       setIsAdmin(false)
     } else if(token !== undefined || token !== null) {
@@ -38,7 +39,7 @@ function App() {
       // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
       // console.log('decoded', userInfo);
       console.log('decoded', userRole);
-    } },[userRole, isAdmin])
+    } },[userRole, isAdmin, token])
 
 
 
@@ -46,17 +47,29 @@ function App() {
 
   return (
     <div className="App">
-      {!isAdmin ? <NavBar /> : <NavBarAdmin />}
+      <NavBarContainer isAdmin={isAdmin} />
       <>
         <Routes >
-          <Route exact path='/' element={<Home />} />
-          <Route path='/tablero-arribos' element={<ArrivalsBoard />} />
-          <Route path='/tablero-partidas' element={<DeparturesBoard />} />
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/ticket/crear' element={<FormTicket />} />
+          <Route exact path='/' element={<ArrivalsBoard />} />
+          {/* TABLEROS DE LA TERMINAL */}
+            <Route path='/tablero-arribos' element={<ArrivalsBoard />} />
+            <Route path='/tablero-partidas' element={<DeparturesBoard />} />
+
+          {/* LOGIN */}
+            <Route exact path='/login' element={<Login />} />
+
+          {/* SEGURIDAD - CRUD TICKET */}
+            <Route exact path='/ticket/crear' element={<FormTicket />} />
+            {/* crea un ticket sin plataforma ni horarios */}
+
+          {/* INFORMES - CRUD TICKET */}
+            <Route exact path='/ticket/editar' element={<FormTicket />} /> 
+            {/* edita o termina un ticket, le agrega plataforma y horario */}
+
+          {/* CONTABILIDAD */}
 
           {/* Admin Routes */}
-          <Route path='/tabla/arribos' element={<ArrivalsTable />} />
+            <Route path='/arribos' element={<ArrivalsBoard />} />
 
         </Routes>
       </>

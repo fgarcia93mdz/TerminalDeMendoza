@@ -15,7 +15,7 @@ const verifyRoles = require("../middlewares/verifyRoles");
 const ROLES = require("../config/roles");
 
 
-router.post("/nuevo", authenticateToken,addInforme);
+router.post("/nuevo", authenticateToken, addInforme);
 //para los roles seguridad e informes
 //los usuarios que pueden crear informes son el de seguridad de torre (no puede agregar plataformas_id, fecha_salida y hora salida) y informes que agrega todos los campos
 //para que el sistema sepa si es seguridad o tiene un rol con mas permisos se verifican los roles del token, si es 5 es informes por ejemplo

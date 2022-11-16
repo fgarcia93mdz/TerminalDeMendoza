@@ -3,7 +3,8 @@ import TableAdmin from '../../components/table/TableAdmin';
 import axios from 'axios'
 
 
-
+// LISTADO DE ARRIBOS DE TICKETS
+// VISTA DE TORRE DE SEGURIDAD
 
 
 const ArrivalsTable = () => {

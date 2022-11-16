@@ -33,7 +33,7 @@ const ArrivalsBoard = () => {
 
     return (
       <>
-        <div className="container" >
+        <div className="containerBoard" >
           <div>
             {estado.length === 0 && 
               <Stack justifyContent={'center'} alignItems={'center'} height={'40vh'}>
