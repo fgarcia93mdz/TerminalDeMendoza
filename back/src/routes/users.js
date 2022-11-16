@@ -12,7 +12,7 @@ const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
 const ROLES = require("../config/roles");
 
-router.post('/register',register)
+router.post('/register', register)
 //falta agregar middleware de roles
 //data para el front
 // POST localhost:8080/users/register

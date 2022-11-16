@@ -8,23 +8,13 @@ import * as yup from 'yup';
 import axios from 'axios'
 import BasicModal from '../modals/Modal';
 
-const initialTicket = {
-    fecha_ingreso: "", // '01-01-2022'
-    hora_ingreso: "", // '12:00'
-    interno: 0, // 123
-    empresa_id: "", // 2
-    servicios_id: "", // 2
-    usuarios_id: "", // 2
-    plataformas_id: "", // ? 1
-    estado_id: "", // '0'
-    destino: "" // 'Mar de Ajo'
-}
+
 
 
 const validationSchema = yup.object({
     fecha_ingreso: yup.string().required('Campo requerido'),
     hora_ingreso: yup.string().required('Campo requerido'),
-    interno: yup.mixed().required('Campo requerido'),
+    interno: yup.number().required('Campo requerido'),
     empresa_id: yup.number().required('Campo requerido'),
     servicios_id: yup.number().required('Campo requerido'),
     estado_id: yup.string().required('Campo requerido'),
@@ -33,11 +23,23 @@ const validationSchema = yup.object({
     // plataformas_id: yup.string().required('Campo requerido')
   });
 
-const FormTicket = () => { 
+const FormTicketEdit = ({ ticket }) => { 
     const [ openModal, setOpenModal ] = useState(false)
     const [ dataDropdown, setDataDropdown ] = useState({})
     // const navigate = useNavigate()
     const token = sessionStorage.getItem('jwt')
+
+    const initialTicket = {
+        fecha_ingreso: ticket.fecha_ingreso, // '01-01-2022'
+        hora_ingreso: ticket.hora_ingreso, // '12:00'
+        interno: ticket.interno, // 123
+        empresa_id: ticket.empresa_id, // 2
+        servicios_id: ticket.servicios_id, // 2
+        usuarios_id: ticket.usuarios_id, // 2
+        plataformas_id: ticket.plataformas_id || null, // ? 1
+        estado_id: ticket.estado_id, // '0'
+        destino: ticket.destino // 'Mar de Ajo'
+    }
 
     
     React.useEffect(() => {
@@ -61,15 +63,34 @@ const FormTicket = () => {
 
             axios.post(url, data)
                 .then((res) => {
+                    // console.log('response', res)
+                    // 
                     if(res.status === 200){
+                        // const jwt = res.data
+                        // escribe el jwt en session
+                        // window.sessionStorage.setItem("jwt", jwt);
+                        // redirecciona a la pagina principal
                         setOpenModal(true)
+                        // navigate("/")
+                        // return alert('ok')
                     }
                 })
                 .catch(function (error) {
                     console.log('Error:', error);
                 });
+
+        //   alert(JSON.stringify(values, null, 2));
         },
       });
+
+
+    // React.useEffect(() => {
+    //     if(!formik.errors){
+    //         // alert('no hay errores')
+    //     }
+    //     // if(formik.isValid) return alert('valido')
+    //     // console.log('ticket', formik.values)
+    // }, [formik])
 
 
     return ( 
@@ -296,7 +317,7 @@ const FormTicket = () => {
                             helperText={formik.errors.destino}
                         />
                     </Grid>
-                    {/* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
+                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
                         <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Plataforma:</Typography>
                         <TextField
                             sx={{
@@ -317,7 +338,7 @@ const FormTicket = () => {
                             error={formik.errors.plataformas_id}
                             helperText={formik.errors.plataformas_id}
                         />
-                    </Grid> */}
+                    </Grid>
                    
                     <Grid item sx={{marginRight: 'auto'}} xs={12}>
                         <Button  variant="contained" ml='auto' type="submit" my={2}>Crear ticket</Button>
@@ -332,4 +353,4 @@ const FormTicket = () => {
 
 }
 
-export default FormTicket
+export default FormTicketEdit

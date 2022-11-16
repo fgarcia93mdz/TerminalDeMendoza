@@ -1,19 +1,64 @@
 import React, { useState, useEffect } from 'react'
+import jwt_decode from "jwt-decode";
 
-import NavBar from './NavBar'
-import NavBarAdmin from './NavBarAdmin'
+import NavBarPublic from './NavBarPublic'
+import NavBarSecurity from './NavBarSecurity'
+import NavBarRRHH from './NavBarRRHH'
+import NavBarInforms from './NavBarInforms';
+import NavBarAccountant from './NavBarAccountant';
 
-const NavBarContainer = ({ isAdmin }) => {
 
-    const [ isAdminState, setIsAdminState ] = useState(false)
 
+
+
+const NavBarContainer = () => {
+    const [ rol, setRol ] = useState(null)
+    const [ name, setName ] = useState(null)
+
+    const token = window.sessionStorage.getItem("jwt")
+    
     useEffect(() => {
+        
+        if(token){
+            const tokenDecoded = jwt_decode(token);
+            console.log('tokenDecoded', tokenDecoded)
+            setRol(tokenDecoded.rol)
+            setName(tokenDecoded.nombre)
+            // console.log('decoded', userInfo);
+            // console.log('decoded', userNombre);
+        } else if (token === null){
+            return null
+        }
 
-        setIsAdminState(isAdmin)
+        return () => {
+            setRol(null)
+        }
+    }, [token])
 
-    }, [isAdmin])
+    // return isAdminState ? <NavBarAdmin /> : <NavBar />
+    return (
+        <>
+        {(() => {
+            switch (rol) {
 
-    return isAdminState ? <NavBarAdmin /> : <NavBar />
+              // RRHH
+              case 2 : 
+                return <NavBarRRHH name={name} />
+              // Contabilidad
+              case 3 :
+                return <NavBarAccountant name={name}/>
+              // Seguridad  
+              case 4 :
+                return <NavBarSecurity name={name} />
+              // Informes
+              case 5 :
+                return <NavBarInforms name={name} />
+              default:
+                return <NavBarPublic />
+            }
+          })()}
+        </>
+    )
     
 }
 

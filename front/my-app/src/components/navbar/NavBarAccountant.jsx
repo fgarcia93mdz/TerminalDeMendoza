@@ -21,6 +21,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import { Avatar, Tooltip } from '@mui/material';
 
 const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
 // const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
@@ -31,7 +32,7 @@ const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña',
 
 // import { Box, Stack } from '@mui/system';
 
-const NavBarAdmin = ({ name }) => {
+const NavBarAccountant = ({ name }) => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -88,42 +89,42 @@ const NavBarAdmin = ({ name }) => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
+                    <Box sx={{ flexGrow: 1, display:{ xs: 'flex', md: 'none' }}}>
                         <Box className="" sx={{width: '70px'}} display={{xs:'block', md:'hidden'}} src={require("../../assets/img/icono-colectivo.png")} alt="icono colectivo" />
                     
                        
                         <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorElNav}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                        open={Boolean(anchorElNav)}
-                        onClose={handleCloseNavMenu}
-                        sx={{
-                            display: { xs: 'flex', md: 'none' },
-                            flexDirection: 'column'
-                        }}
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'flex', md: 'none' },
+                                flexDirection: 'column'
+                            }}
                         >
-                        {pages.map((page) => (
-                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">{page}</Typography>
-                            </MenuItem>
-                        ))}
+                                {pages.map((page) => (
+                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </MenuItem>
+                                ))}
                         </Menu>
                         <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleOpenNavMenu}
-                        color="inherit"
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
@@ -137,11 +138,11 @@ const NavBarAdmin = ({ name }) => {
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
                         >
-                            <Link to='/ticket/crear'>
-                                INICIO
+                            <Link to='/seguridad'>
+                              'seguridad' INICIO
                             </Link>
                         </Button>
-                        <Button
+                        {/* <Button
                             key={'inicio2'}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
@@ -149,7 +150,7 @@ const NavBarAdmin = ({ name }) => {
                             <Link to='/tabla/arribos'>
                                 VER PANTALLA ARRIBOS
                             </Link>
-                        </Button>
+                        </Button> */}
                         <Button
                             key={'inicio3'}
                             onClick={handleCloseNavMenu}
@@ -201,7 +202,7 @@ const NavBarAdmin = ({ name }) => {
                       
                     </Box>
 
-                    {/* <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -223,13 +224,13 @@ const NavBarAdmin = ({ name }) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                         >
-                        {settings.map((setting) => (
-                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">{setting}</Typography>
+                        
+                            <MenuItem key={'SETTINGS'} onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center">SETTINGS</Typography>
                             </MenuItem>
-                        ))}
+                        
                         </Menu>
-                    </Box> */}
+                    </Box>
 
                     
                     </Toolbar>
@@ -241,4 +242,4 @@ const NavBarAdmin = ({ name }) => {
         );
 }
 
-export default NavBarAdmin;
+export default NavBarAccountant;

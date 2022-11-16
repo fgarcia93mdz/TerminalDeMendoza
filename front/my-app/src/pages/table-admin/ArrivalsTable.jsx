@@ -7,7 +7,7 @@ import axios from 'axios'
 // VISTA DE TORRE DE SEGURIDAD
 
 
-const ArrivalsTable = () => {
+const ArrivalsTable = ({ info }) => {
     const [ data, setData ] = useState({})
 
     
@@ -31,6 +31,7 @@ const ArrivalsTable = () => {
             <h2>Tablero de Arribos </h2>
             {data.length > 0 && 
                 <>
+                    
                     <TableAdmin data={data} />
                 </>
             }

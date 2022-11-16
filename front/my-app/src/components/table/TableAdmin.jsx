@@ -11,37 +11,7 @@ import { Box } from '@mui/material';
 
 
 
-//  RECIBE UN OBJETO DE ESTE TIPO === HABRIA QUE MEJORAR ESA API IGUAL
-// { 
-//     "id": 1,
-//     "fecha_ingreso": "2022-01-01",
-//     "hora_ingreso": "19:53:00",
-//     "interno": 123,
-//     "fecha_salida": null,
-//     "hora_salida": null,
-//     "destino": "mar de ajo",
-//     "empresa_id": 2,
-//     "servicios_id": 1,
-//     "usuarios_id": 1,
-//     "plataformas_id": 1,
-//     "estado_id": 1,
-//     "registro_empresa": {
-//       "id": 2,
-//       "empresa": "Iselin",
-//       "siglas": "ISL",
-//       "img": "iselin.png",
-//       "cuit": "20-4457-88"
-//     },
-//     "registro_estado": {
-//       "id": 1,
-//       "tipo": "En plataforma"
-//     },
-//     "registro_servicio": {
-//       "id": 1,
-//       "siglas": "SMD",
-//       "tipo_servicio": "Servicio de media distancia"
-//     }
-//   },
+
 
 export default function TableAdmin({ data }) {
   return (
@@ -60,7 +30,7 @@ export default function TableAdmin({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log('DATA..:', data)}
+            {/* {console.log('DATA..:', data)} */}
             {data.reverse().map((row) => (
               <TableRow
                 key={row.id}
