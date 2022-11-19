@@ -140,16 +140,11 @@ const NavBarPublic = () => {
                             </Button>
                         </Link>
                     
-                        <Link to='/locales'>
-                            <Button
-                                key={'locales'}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                Locales
-                            </Button>
-                        </Link>
-                    
+                    <a href="https://shop.terminalmendoza.com.ar/search">
+                        <Button sx={{ my: 2, color: '#0E315A', display: 'block' }}>
+                                Venta de pasajes
+                        </Button>
+                    </a>
                     
                 </Box>
                 <Button> <Link to='/login'> Iniciar sesion </Link> </Button> 
