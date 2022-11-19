@@ -27,6 +27,7 @@ const addInforme = async (req, res) => {
       servicios_id,
       estado_id,
       destino,
+      tipo_tv_id,
     } = data;
 
     if (
@@ -36,7 +37,8 @@ const addInforme = async (req, res) => {
       !empresa_id ||
       !servicios_id ||
       !estado_id ||
-      !destino
+      !destino ||
+      !tipo_tv_id
     ) {
       return res.status(400).json({ mensaje: "faltan datos" });
     }
@@ -50,6 +52,7 @@ const addInforme = async (req, res) => {
       estado_id,
       destino,
       usuarios_id,
+      tipo_tv_id,
     };
 
     if (rol === 5) {
@@ -58,6 +61,7 @@ const addInforme = async (req, res) => {
       if (
         !fecha_salida ||
         !hora_salida ||
+        !tipo_tv_id ||
         !plataformas_id
       ) {
         return res.status(400).json({ mensaje: "faltan datos" });
@@ -66,6 +70,7 @@ const addInforme = async (req, res) => {
       dataAingresar.fecha_salida = fecha_salida;
       dataAingresar.hora_salida = hora_salida;
       dataAingresar.plataformas_id = plataformas_id;
+      dataAingresar.tipo_tv_id = tipo_tv_id;
     }
     console.log(dataAingresar);
     await RegistroTorre.create(dataAingresar);

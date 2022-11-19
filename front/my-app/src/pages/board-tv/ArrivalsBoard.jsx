@@ -30,6 +30,7 @@ const ArrivalsBoard = () => {
     }, [])
 
     console.log(estado)
+    
 
     return (
       <>

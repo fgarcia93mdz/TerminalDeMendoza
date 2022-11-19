@@ -5,8 +5,6 @@ import './login.css';
 import axios from 'axios'
 
 
-
-
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -51,7 +49,7 @@ const Login = () => {
                 axios.post(url, data)
                 .then((res) => {
                     console.log('response', res)
-                    // 
+         
                     if(res.status === 200){
                         const jwt = res.data
                         // escribe el jwt en session

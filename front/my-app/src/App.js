@@ -80,6 +80,8 @@ function App() {
 
           {/* Admin Routes */}
           <Route path='/arribos' element={<ArrivalsBoard />} />
+          {/*Partida Routes */}
+          <Route path='/partidas' element={<DeparturesBoard />} />
 
         </Routes>
       </>

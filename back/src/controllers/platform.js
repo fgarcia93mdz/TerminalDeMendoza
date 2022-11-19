@@ -20,8 +20,10 @@ const platformController = {
             {include: [
                 {association: "registro_empresa"},
                 {association: "registro_estado"},
-                {association: "registro_servicio"} 
-            ], where: {estado_id: 1}},
+                { association: "registro_servicio" },
+                { association: "registro_tipo_tv" }
+            ], where: { tipo_tv_id: 1 }
+            },
         )
         
         registroArribos.then( (data) => {
@@ -32,15 +34,16 @@ const platformController = {
     },
 
     departures: function(req,res){
-        let registroArribos = db.RegistroAdministrativo.findAll(
+        let registroPartidas = db.RegistroAdministrativo.findAll(
             {include: [
                 {association: "registro_empresa"},
                 {association: "registro_estado"},
-                {association: "registro_servicio"} 
-            ], where: {estado_id: 1}},
+                { association: "registro_servicio" },
+                { association: "registro_tipo_tv" } 
+            ], where: { tipo_tv_id: 2}},
         )
         
-        registroArribos.then( (data) => {
+        registroPartidas.then( (data) => {
             res.json(data)
         })
         .catch( error => console.log(error))

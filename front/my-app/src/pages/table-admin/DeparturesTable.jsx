@@ -6,7 +6,7 @@ import TableAdmin from '../../components/table/TableAdmin';
 // VISTA DE TORRE DE SEGURIDAD
 
 
-const ArrivalsTable = () => {
+const DeparturesTable = () => {
     const [ data, setData ] = useState({})
 
     
@@ -15,7 +15,7 @@ const ArrivalsTable = () => {
        
 
 
-        fetch('http://localhost:8080/api/plataforma/arribos')
+        fetch('http://localhost:8080/api/plataforma/partidas')
                 .then(response =>  response.json())
                 .then(data => {
                     console.log('data::', data)
@@ -37,4 +37,4 @@ const ArrivalsTable = () => {
     );
 }
 
-export default ArrivalsTable;
+export default DeparturesTable;

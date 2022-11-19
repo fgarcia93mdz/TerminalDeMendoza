@@ -38,6 +38,7 @@ module.exports = (sequelize, dataTypes) => {
       allowNull: true
     },
     estado_id: dataTypes.BIGINT(11),
+    tipo_tv_id: dataTypes.BIGINT(11),
 
   };
   let config = {
@@ -72,6 +73,10 @@ module.exports = (sequelize, dataTypes) => {
     RegistroAdministrativo.belongsTo(models.Plataforma, {
       as: "registro_plataforma",
       foreignKey: "plataformas_id"
+    })
+    RegistroAdministrativo.belongsTo(models.Tipo_tv, {
+      as: "registro_tipo_tv",
+      foreignKey: "tipo_tv_id"
     })
   }
 

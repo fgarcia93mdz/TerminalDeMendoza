@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 13-11-2022 a las 12:02:32
+-- Tiempo de generación: 19-11-2022 a las 16:31:15
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -138,15 +138,17 @@ CREATE TABLE `registro_administrativo` (
   `estado_id` int(11) NOT NULL,
   `fecha_salida` date DEFAULT NULL,
   `hora_salida` time DEFAULT NULL,
-  `destino` varchar(45) DEFAULT NULL
+  `destino` varchar(45) DEFAULT NULL,
+  `tipo_tv_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `registro_administrativo`
 --
 
-INSERT INTO `registro_administrativo` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`) VALUES
-(1, '2022-11-13', '06:59:00', 155, 1, 1, 4, 2, 4, '2022-11-13', '07:15:00', 'Mendoza');
+INSERT INTO `registro_administrativo` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`, `tipo_tv_id`) VALUES
+(1, '2022-11-19', '08:00:00', 12, 1, 1, 2, 1, 1, '2022-11-19', '08:00:00', 'Bolivia', 1),
+(2, '2022-11-19', '09:00:00', 15, 2, 1, 2, 1, 1, '2022-11-19', '09:00:00', 'San Luis', 2);
 
 --
 -- Disparadores `registro_administrativo`
@@ -198,15 +200,6 @@ CREATE TABLE `registro_administrativo_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `registro_administrativo_log`
---
-
-INSERT INTO `registro_administrativo_log` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`, `updated_at`, `operacion_id`, `id_registro`) VALUES
-(4, '2022-11-13', '06:59:00', 155, 1, 1, 4, 2, 4, '2022-11-13', '07:15:00', NULL, '2022-11-13 10:52:17', 2, 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -247,6 +240,25 @@ INSERT INTO `servicios` (`id`, `siglas`, `tipo_servicio`) VALUES
 (2, 'SLD', 'Servicio de larga distancia'),
 (3, 'SLC', 'Servicio de corta distancia'),
 (4, 'SE', 'Servicio externo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_tv`
+--
+
+CREATE TABLE `tipo_tv` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipo_tv`
+--
+
+INSERT INTO `tipo_tv` (`id`, `tipo`) VALUES
+(1, 'Arribos'),
+(2, 'Partidas');
 
 -- --------------------------------------------------------
 
@@ -344,7 +356,8 @@ ALTER TABLE `registro_administrativo`
   ADD PRIMARY KEY (`id`,`empresa_id`,`servicios_id`,`usuarios_id`,`estado_id`),
   ADD KEY `fk_registro_administrativo_empresa1_idx` (`empresa_id`),
   ADD KEY `fk_registro_administrativo_servicios1_idx` (`servicios_id`),
-  ADD KEY `fk_registro_administrativo_estado1_idx` (`estado_id`);
+  ADD KEY `fk_registro_administrativo_estado1_idx` (`estado_id`),
+  ADD KEY `fk_registro_administrativo_tipo_tv1_idx` (`tipo_tv_id`);
 
 --
 -- Indices de la tabla `registro_administrativo_log`
@@ -367,6 +380,12 @@ ALTER TABLE `roles`
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_tv`
+--
+ALTER TABLE `tipo_tv`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -425,7 +444,7 @@ ALTER TABLE `registro_administrativo`
 -- AUTO_INCREMENT de la tabla `registro_administrativo_log`
 --
 ALTER TABLE `registro_administrativo_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -438,6 +457,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `servicios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_tv`
+--
+ALTER TABLE `tipo_tv`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -473,7 +498,8 @@ ALTER TABLE `plataformas`
 ALTER TABLE `registro_administrativo`
   ADD CONSTRAINT `fk_registro_administrativo_empresa1` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_registro_administrativo_estado1` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registro_administrativo_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_registro_administrativo_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_registro_administrativo_tipo_tv1` FOREIGN KEY (`tipo_tv_id`) REFERENCES `tipo_tv` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `registro_administrativo_log`
