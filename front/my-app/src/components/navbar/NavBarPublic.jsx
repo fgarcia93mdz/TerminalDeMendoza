@@ -17,6 +17,10 @@ import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
+//import LoginIcon from '@mui/icons-material/Login';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import NorthIcon from '@mui/icons-material/North';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 // import AdbIcon from '@mui/icons-material/Adb';
 
 
@@ -76,7 +80,8 @@ const NavBarPublic = () => {
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     onClick={handleOpenNavMenu}
-                    color="inherit"
+                                color="inherit"
+                                
                     >
                     <MenuIcon />
                     </IconButton>
@@ -100,7 +105,8 @@ const NavBarPublic = () => {
                         >
                         
                                 <Link to='/arribos'> 
-                            <MenuItem key={'/arribos'} onClick={handleCloseNavMenu}>
+                                    <MenuItem key={'/arribos'} onClick={handleCloseNavMenu}>
+                                        <ArrowDownwardIcon />
                                         <Typography textAlign="center">ARRIBOS</Typography>
                             </MenuItem>
                         </Link>
@@ -116,7 +122,6 @@ const NavBarPublic = () => {
                                             </Button>
                                         </a>
                           
-                        
                                 
                     </Menu>
 
@@ -129,29 +134,36 @@ const NavBarPublic = () => {
                             <Button
                                 key={'arribos'}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                Arribos
+                                    sx={{
+                                        my: 2, color: '#0E315A', display: 'block', fontSize: '20px', marginRight: '100px' }}
+                                    >
+                                    Arribos
+                                    {/* <ArrowDownwardIcon  sx={{ marginLeft: '10px'}}/> */}
                             </Button>
                         </Link>
                         <Link to='/partidas'>
                             <Button
                                 key={'partidas'}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                                sx={{ my: 2, color: '#0E315A', display: 'block', fontSize: '20px', marginRight: '100px'  }}
                             >
-                                Partidas
+                                    Partidas 
+                                    
+                                    {/* <NorthIcon sx={{ marginLeft: '10px'}}/>  */}
                             </Button>
                         </Link>
                     
                     <a href="https://shop.terminalmendoza.com.ar/search">
-                        <Button sx={{ my: 2, color: '#0E315A', display: 'block' }}>
-                                Venta de pasajes
+                        <Button sx={{ my: 2, color: '#0E315A', display: 'block', fontSize: '20px', marginRight: '100px'  }}>
+                                    Venta de pasajes 
+                                    {/* <ConfirmationNumberIcon sx={{ marginLeft: '10px'}} /> */}
                         </Button>
                     </a>
-                    
                 </Box>
-                <Button> <Link to='/login'> Iniciar sesion </Link> </Button> 
+                        <Button variant="contained">
+                            <Link to='/login'> Iniciar sesión </Link>
+                        </Button> 
+                    
 
                 {/* <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
