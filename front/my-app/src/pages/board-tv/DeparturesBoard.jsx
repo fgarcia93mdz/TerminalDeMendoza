@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { useEffect } from 'react';
-import GenericTable from '../../components/table/Table';
+import GenericTable from '../../components/table/TableDepartures';
 
 import './ArrivalsBoard.styles.css';
 

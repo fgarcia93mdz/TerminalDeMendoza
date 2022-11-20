@@ -31,7 +31,6 @@ const ArrivalsTable = ({ info }) => {
             <h2>Tablero de Arribos </h2>
             {data.length > 0 && 
                 <>
-                    
                     <TableAdmin data={data} />
                 </>
             }

@@ -78,17 +78,17 @@ export default function GenericTable( {props} ) {
       <Table sx={{ fontSize: '20px' }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">DESTINO</StyledTableCell>
-            <StyledTableCell align="center">INTERNO</StyledTableCell>
+            <StyledTableCell align="center">ORIGEN</StyledTableCell>
             <StyledTableCell align="center">EMPRESA</StyledTableCell>
-            <StyledTableCell align="center">
-              HORARIO<br></br>SALIDA
-            </StyledTableCell>
-            <StyledTableCell align="center">
-              
-            </StyledTableCell>
-            <StyledTableCell align="center">PLAT</StyledTableCell>
             <StyledTableCell align="center">ESTADO</StyledTableCell>
+            <StyledTableCell align="center">PLAT</StyledTableCell>
+            {/* <StyledTableCell align="center">
+              HORARIO<br></br>SALIDA
+            </StyledTableCell> */}
+            <StyledTableCell align="center">
+            </StyledTableCell>
+            <StyledTableCell align="center">INTERNO</StyledTableCell>
+            
           </TableRow>
         </TableHead>
         <TableBody>
@@ -97,11 +97,14 @@ export default function GenericTable( {props} ) {
             props.map((row) => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell align="center">{row.destino}</StyledTableCell>
-                <StyledTableCell align="center">{row.interno}</StyledTableCell>
                 <StyledTableCell align="center">{row.registro_empresa.empresa}</StyledTableCell>
+                <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.hora_salida}
+                  Plat. {row.plataformas_id}
                 </StyledTableCell>
+                {/* <StyledTableCell align="center">
+                  {row.hora_salida}
+                </StyledTableCell> */}
                 <StyledTableCell align="center">
                   <div className="box" style={styles.cajaFoto}>
                     <img
@@ -110,10 +113,8 @@ export default function GenericTable( {props} ) {
                     />
                   </div>
                 </StyledTableCell>
-                <StyledTableCell align="center">
-                 Plat. {row.plataformas_id}
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
+                <StyledTableCell align="center">{row.interno}</StyledTableCell>
+                
               </StyledTableRow>
             ))}
         </TableBody>

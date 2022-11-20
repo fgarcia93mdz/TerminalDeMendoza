@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TableAdmin from '../../components/table/TableAdmin';
+import TableDepartures from '../../components/table/TableDepartures';
 
 
 // LISTADO DE PARTIDAS DE TICKETS
@@ -27,10 +27,10 @@ const DeparturesTable = () => {
 
     return (
         <div >
-            <h2>Tablero de Arribos </h2>
+            <h2>Tablero de Partidas </h2>
             {data.length > 0 && 
                 <>
-                    <TableAdmin data={data} />
+                    <TableDepartures data={data} />
                 </>
             }
         </div>

@@ -21,7 +21,7 @@ export default function TableAdmin({ data }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Destino</TableCell>
+              <TableCell>Origen</TableCell>
               <TableCell align="right">Interno</TableCell>
               <TableCell align="right">Empresa</TableCell>
               <TableCell align="right">Horario <br></br>Salida</TableCell>
@@ -30,7 +30,7 @@ export default function TableAdmin({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {console.log('DATA..:', data)} */}
+            {console.log('DATA..:', data)},
             {data.reverse().map((row) => (
               <TableRow
                 key={row.id}

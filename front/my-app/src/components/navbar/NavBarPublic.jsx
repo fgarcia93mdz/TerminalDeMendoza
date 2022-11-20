@@ -99,21 +99,25 @@ const NavBarPublic = () => {
                         }}
                         >
                         
-                        <Link to=''> 
+                                <Link to='/arribos'> 
                             <MenuItem key={'/arribos'} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Arribos</Typography>
+                                        <Typography textAlign="center">ARRIBOS</Typography>
                             </MenuItem>
                         </Link>
-                        <Link to=''> 
+                                <Link to='/partidas'> 
                             <MenuItem key={'/partidas'} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Partidas</Typography>
+                                        <Typography textAlign="center">PARTIDAS</Typography>
                             </MenuItem>
-                        </Link>
-                        <Link to=''> 
-                            <MenuItem key={'/locales'} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Locales</Typography>
-                            </MenuItem>
-                        </Link>
+                                </Link>
+                               
+                                <a href="https://shop.terminalmendoza.com.ar/search">
+                                            <Button sx={{ color: '#0E315A'}}>
+                                                Venta de pasajes
+                                            </Button>
+                                        </a>
+                          
+                        
+                                
                     </Menu>
 
                 </Box>
