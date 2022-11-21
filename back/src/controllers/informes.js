@@ -119,9 +119,9 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
     let ingresos = await RegistroTorre.findAll({
       include: ["registro_empresa", "registro_plataforma", "registro_estado"],
       where: {
-        fecha_ingreso: {
-          [Op.gt]: diaAyer,
-        },
+        // fecha_ingreso: {
+        //   [Op.gt]: diaAyer,
+        // },
       },
       order: [["hora_salida", "DESC"]],
     });

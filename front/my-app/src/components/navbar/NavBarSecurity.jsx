@@ -24,12 +24,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { Link } from "react-router-dom";
 import { Avatar, Tooltip } from "@mui/material";
 
-const pages = ["Inicio", "Pantallas", "Carga de ingreso"];
-
-// const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
-
-// final
-
 // import { Box, Stack } from '@mui/system';
 
 const NavBarSecurity = ({ name }) => {

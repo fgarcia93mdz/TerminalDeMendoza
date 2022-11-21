@@ -10,16 +10,15 @@ const SecurityHome = () => {
 
     const token = window.sessionStorage.getItem("jwt")
 
+    // FETCH DATA
+    const url = 'http://localhost:8080/informes/listadoSeparado'
+    const headers = { headers: { "authorization": `Bearer ${token}` } }
     useEffect(()=> {
-        // FETCH INGRESANTES
-        const url = 'http://localhost:8080/informes/listadoSeparado'
-        const headers = { headers: { "authorization": `Bearer ${token}` } }
-      
-        // FETCH ARRIBOS
         axios.get(url, headers)
         .then(data => {
-            console.log('data respuesta informes/listadoSeparado :', data.data.respuesta)
-            setArrivals(data)
+            console.log('data respuesta informes/listadoSeparado:', data.data.respuesta)
+            setArrivals(data.data.respuesta)
+            console.log('arrivals state', arrivals)
         })
         .catch(error => { throw new Error('Error fetch arribos', error) })
 
@@ -32,13 +31,21 @@ const SecurityHome = () => {
         // })
         // .catch(error => { throw new Error('Error fetch arribos', error) })
         
-    })
+    }, [])
 
     return (
         <Stack >
             <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>Listado</Typography>
-                <TableAdmin data={arrivals} />
+                <Typography align='center' variant='h4'>Ingresando</Typography>
+                <TableAdmin data={arrivals?.ingresando} />
+            </Box>
+            <Box sx={{margin:'auto', width: '100%'}}>
+                <Typography align='center' variant='h4'>En Plataforma</Typography>
+                <TableAdmin data={arrivals?.enPlataforma} />
+            </Box>
+            <Box sx={{margin:'auto', width: '100%'}}>
+                <Typography align='center' variant='h4'>Fuera de Plataforma</Typography>
+                <TableAdmin data={arrivals?.fueraDePlataforma} />
             </Box>
            
         </Stack>

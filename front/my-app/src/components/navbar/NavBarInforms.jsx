@@ -157,7 +157,7 @@ const NavBarInforms = ({ name }) => {
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
                         >
-                            <Link to='/ticket/crear'>
+                            <Link to='/seguridad/ticket/crear'>
                                 CREAR TICKET
                             </Link>
                         </Button>

@@ -21,7 +21,7 @@ export default function TableAdmin({ data }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Origen</TableCell>
+              <TableCell>Destino/Origen</TableCell>
               <TableCell align="right">Interno</TableCell>
               <TableCell align="right">Empresa</TableCell>
               <TableCell align="right">Horario <br></br>Salida</TableCell>
@@ -30,18 +30,18 @@ export default function TableAdmin({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log('DATA en tabla admin..:', data)},
-            {data.lenght > 0 && data.reverse().map((row) => (
+            {console.log('DATA en tabla admin..:', data)}
+            {data?.reverse().map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">{row.destino} </TableCell>
                 <TableCell align="right">{row.interno}</TableCell>
-                <TableCell align="right">{row.registro_empresa.empresa}</TableCell>
-                <TableCell align="right">{row.hora_ingreso}</TableCell>
-                <TableCell align="right">{row.plataformas_id}</TableCell>
-                <TableCell align="right">{row.registro_estado.tipo}</TableCell>
+                <TableCell align="right">{row.empresa}</TableCell>
+                <TableCell align="right">{row.hora_salida}</TableCell>
+                <TableCell align="right">{row.pltaforma}</TableCell>
+                <TableCell align="right">{row.estado}</TableCell>
               </TableRow>
             ))}
           </TableBody>
