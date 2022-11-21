@@ -8,36 +8,40 @@ import * as yup from 'yup';
 import axios from 'axios'
 import BasicModal from '../../components/modals/Modal';
 
-const initialTicket = {
-    fecha_ingreso: "", // '01-01-2022'
-    hora_ingreso: "", // '12:00'
-    interno: "", // 123
-    empresa_id: "", // 2
-    servicios_id: "", // 2
-    usuarios_id: "", // 2
-    plataformas_id: "", // ? 1
-    estado_id: "", // '0'
-    destino: "" // 'Mar de Ajo'
-}
 
 
-const validationSchema = yup.object({
-    fecha_ingreso: yup.string().required('Campo requerido'),
-    hora_ingreso: yup.string().required('Campo requerido'),
-    interno: yup.number().required('Campo requerido'),
-    empresa_id: yup.number().required('Campo requerido'),
-    servicios_id: yup.number().required('Campo requerido'),
-    estado_id: yup.string().required('Campo requerido'),
-    destino: yup.string().required('Campo requerido'),
-    usuarios_id: yup.string().required('Campo requerido')
-    // plataformas_id: yup.string().required('Campo requerido')
-  });
-
-const FormTicket = () => { 
+const FormTicket = ({ id }) => { 
     const [ openModal, setOpenModal ] = useState(false)
     const [ dataDropdown, setDataDropdown ] = useState({})
     // const navigate = useNavigate()
     const token = sessionStorage.getItem('jwt')
+
+    const initialTicket = {
+        fecha_ingreso: "", // '01-01-2022'
+        hora_ingreso: "", // '12:00'
+        interno: "", // 123
+        empresa_id: "", // 2
+        servicios_id: "", // 2
+        usuarios_id: id, // 2
+        plataformas_id: "", // ? 1
+        estado_id: "", // '0'
+        destino: "" // 'Mar de Ajo'
+    }
+    
+    
+    const validationSchema = yup.object({
+        fecha_ingreso: yup.string().required('Campo requerido'),
+        hora_ingreso: yup.string().required('Campo requerido'),
+        interno: yup.number().required('Campo requerido'),
+        empresa_id: yup.number().required('Campo requerido'),
+        servicios_id: yup.number().required('Campo requerido'),
+        estado_id: yup.string().required('Campo requerido'),
+        destino: yup.string().required('Campo requerido'),
+        usuarios_id: yup.string().required('Campo requerido')
+        // plataformas_id: yup.string().required('Campo requerido')
+      });
+
+    
 
     
     React.useEffect(() => {
@@ -81,7 +85,7 @@ const FormTicket = () => {
             <form onSubmit={formik.handleSubmit}>
                 <Typography variant="h4" color='white'>Crear nuevo Ticket:</Typography>
                 <Grid container my={4}>
-                    <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6}  my={2}>
+                    <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={12}  my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Interno:</Typography>
                         <TextField 
                             sx={{
@@ -102,9 +106,9 @@ const FormTicket = () => {
                             helperText={formik.errors.interno}
                         />
                     </Grid>
-                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Usuario ID:</Typography>
-                        <TextField
+                    {/* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        {/* <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Usuario ID:</Typography> */}
+                        {/* <TextField
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
                                     borderColor: 'white'
@@ -112,19 +116,21 @@ const FormTicket = () => {
 
                                 '.MuiInputBase-root':{
                                     color: 'white'
-                                }
+                                },
+
+                                // display: 'none'
                             }}
                             InputLabelProps={{
                                 style: { color: '#fff' },
                             }}
                             label='Inserte usuario ID'
                             name='usuarios_id'
-                            value={formik.values.usuarios_id}
+                            value={id}
                             onChange={formik.handleChange}
                             error={formik.errors.usuarios_id}
                             helperText={formik.errors.usuarios_id}
-                        />
-                    </Grid>
+                        /> */}
+                    {/* </Grid> */}
                     
                     <Grid item  display={{ xs: 'block', sm: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm: 0}}>Fecha de ingreso:</Typography>

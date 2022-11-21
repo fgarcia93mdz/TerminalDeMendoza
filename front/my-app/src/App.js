@@ -28,7 +28,8 @@ function App() {
   // aca voy a crear que segun el tipo de usuario que se renderice diferentes navbars
   // navbars adminitrativo/seguridad y navbar de cliente/publico normal
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-  const [ userRole, setUserRole ] = useState('')
+  const [ userRole, setUserRole ] = useState(null)
+  const [ userId, setUserId ] = useState(null)
 
 
   const token = window.sessionStorage.getItem("jwt")
@@ -41,6 +42,7 @@ function App() {
       console.log('tokenDecoded', tokenDecoded)
       setUserRole(tokenDecoded.rol)
       setIsLoggedIn(true)
+      setUserId(tokenDecoded.id)
       // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
       // console.log('decoded', userInfo);
       console.log('decoded', userRole);
@@ -68,7 +70,7 @@ function App() {
             {/* crea un ticket sin plataforma ni horarios */}
             <Route exact path='/seguridad/ticket/crear' element={
               <Protected isLoggedIn={isLoggedIn}>
-                <FormTicket />
+                <FormTicket id={userId} />
               </Protected>
               } /> 
           <Route exact path='/seguridad' element={
