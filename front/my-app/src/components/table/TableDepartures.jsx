@@ -19,6 +19,21 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {},
   [`&.${tableCellClasses.root}`]: {
     borderBottom: "none",
+    fontSize: 15,
+    color: "white",
+    fontWeight: "bold",
+    padding: "10px",
+    marginLeft: '2rem'
+  },
+}));
+const StyledTableCell2 = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#0E315A",
+    height: "80px",
+  },
+  [`&.${tableCellClasses.body}`]: {},
+  [`&.${tableCellClasses.root}`]: {
+    borderBottom: "none",
     fontSize: 20,
     color: "white",
     fontWeight: "bold",
@@ -78,17 +93,17 @@ export default function GenericTable( {props} ) {
       <Table sx={{ fontSize: '20px' }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">DESTINO</StyledTableCell>
-            <StyledTableCell align="center">EMPRESA</StyledTableCell>
-            <StyledTableCell align="center">
+            <StyledTableCell2 align="center">DESTINO</StyledTableCell2>
+            <StyledTableCell2 align="center">EMPRESA</StyledTableCell2>
+            <StyledTableCell2 align="center">
               HORARIO<br></br>SALIDA
-            </StyledTableCell>
-            <StyledTableCell align="center">ESTADO</StyledTableCell>
-            <StyledTableCell align="center">PLAT</StyledTableCell>
-            <StyledTableCell align="center">
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">ESTADO</StyledTableCell2>
+            <StyledTableCell2 align="center">PLAT</StyledTableCell2>
+            <StyledTableCell2 align="center">
               
-            </StyledTableCell>
-            <StyledTableCell align="center">INTERNO</StyledTableCell>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">INTERNO</StyledTableCell2>
           </TableRow>
         </TableHead>
         <TableBody>
