@@ -30,8 +30,8 @@ export default function TableAdmin({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log('DATA..:', data)},
-            {data.reverse().map((row) => (
+            {console.log('DATA en tabla admin..:', data)},
+            {data.lenght > 0 && data.reverse().map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

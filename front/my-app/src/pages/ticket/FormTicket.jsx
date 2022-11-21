@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -36,7 +36,7 @@ const validationSchema = yup.object({
 const FormTicket = () => { 
     const [ openModal, setOpenModal ] = useState(false)
     const [ dataDropdown, setDataDropdown ] = useState({})
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const token = sessionStorage.getItem('jwt')
 
     
@@ -61,34 +61,19 @@ const FormTicket = () => {
 
             axios.post(url, data)
                 .then((res) => {
-                    // console.log('response', res)
-                    // 
                     if(res.status === 200){
                         // const jwt = res.data
                         // escribe el jwt en session
                         // window.sessionStorage.setItem("jwt", jwt);
                         // redirecciona a la pagina principal
                         setOpenModal(true)
-                        // navigate("/")
-                        // return alert('ok')
                     }
                 })
                 .catch(function (error) {
                     console.log('Error:', error);
                 });
-
-        //   alert(JSON.stringify(values, null, 2));
         },
       });
-
-
-    // React.useEffect(() => {
-    //     if(!formik.errors){
-    //         // alert('no hay errores')
-    //     }
-    //     // if(formik.isValid) return alert('valido')
-    //     // console.log('ticket', formik.values)
-    // }, [formik])
 
 
     return ( 
@@ -338,8 +323,8 @@ const FormTicket = () => {
                         />
                     </Grid> */}
                    
-                    <Grid item sx={{marginRight: 'auto'}} xs={12}>
-                        <Button  variant="contained" ml='auto' type="submit" my={2}>Crear ticket</Button>
+                    <Grid item sx={{display: 'flex', justifyContent: 'flex-end', marginRight: {xs:0 , sm:8} }} xs={12}>
+                        <Button  variant="contained" type="submit" py={2} my={4} mx={4}>Crear ticket</Button>
                     </Grid>
                     {openModal && 
                         <BasicModal title='Exito' message='Ticket creado con exito' openModal={openModal}  />

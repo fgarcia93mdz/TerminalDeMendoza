@@ -18,7 +18,7 @@ const SecurityHome = () => {
         // FETCH ARRIBOS
         axios.get(url, headers)
         .then(data => {
-            console.log('data::', data.data.respuesta)
+            console.log('data respuesta informes/listadoSeparado :', data.data.respuesta)
             setArrivals(data)
         })
         .catch(error => { throw new Error('Error fetch arribos', error) })
