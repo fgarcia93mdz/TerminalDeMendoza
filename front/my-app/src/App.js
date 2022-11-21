@@ -19,6 +19,7 @@ import FormEditUser from './components/profile/FormEditUser';
 import FormCreateUser from './components/profile/FormCreateUser';
 import SecurityHome from './pages/securityUser/SecurityHome';
 import InformsHome from './pages/informsUser/InformsHome';
+import Protected from './components/protected/Protected';
 
 // import clients
 
@@ -26,7 +27,7 @@ import InformsHome from './pages/informsUser/InformsHome';
 function App() {
   // aca voy a crear que segun el tipo de usuario que se renderice diferentes navbars
   // navbars adminitrativo/seguridad y navbar de cliente/publico normal
-  const [ isAdmin, setIsAdmin ] = useState(false)
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
   const [ userRole, setUserRole ] = useState('')
 
 
@@ -34,16 +35,16 @@ function App() {
 
   React.useEffect(() => {
     if (token === undefined || token === null) {
-      setIsAdmin(false)
+      setIsLoggedIn(false)
     } else if(token !== undefined || token !== null) {
       const tokenDecoded = jwt_decode(token);
       console.log('tokenDecoded', tokenDecoded)
       setUserRole(tokenDecoded.rol)
-      setIsAdmin(true)
+      setIsLoggedIn(true)
       // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
       // console.log('decoded', userInfo);
       console.log('decoded', userRole);
-    } },[userRole, isAdmin, token])
+    } },[userRole, isLoggedIn, token])
 
 
 
@@ -51,7 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBarContainer isAdmin={isAdmin} />
+      <NavBarContainer isAdmin={isLoggedIn} />
       <>
         <Routes >
           <Route exact path='/' element={<ArrivalsBoard />} />
@@ -64,11 +65,23 @@ function App() {
           <Route exact path='/login' element={<Login />} />
 
           {/* == SEGURIDAD - CRUD TICKET == */}
-          <Route exact path='/seguridad/ticket/crear' element={<FormTicket />} /> 
-          {/* crea un ticket sin plataforma ni horarios */}
-          <Route exact path='/seguridad' element={<SecurityHome />} />
+            {/* crea un ticket sin plataforma ni horarios */}
+            <Route exact path='/seguridad/ticket/crear' element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <FormTicket />
+              </Protected>
+              } /> 
+          <Route exact path='/seguridad' element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <SecurityHome />
+              </Protected>
+          } />
           {/* Arribos desde seguridad */}
-          <Route exact path='/seguridad/arribos' element={<ArrivalsBoard />} />
+          <Route exact path='/seguridad/arribos' element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <ArrivalsBoard />
+              </Protected>
+        } />
           {/* Partidas desde seguridad */}
           <Route exact path='/seguridad/partidas' element={<DeparturesBoard />} />
           {/* == INFORMES - CRUD TICKET == */}

@@ -33,18 +33,29 @@ const SecurityHome = () => {
         
     }, [])
 
+    const styles = {
+        margin:'auto', 
+        width: '100%',
+        background: '#0e315a',
+        color: 'white',
+    }
+
+    const typographyStyles = {
+        paddingBlock: '2vh'
+    }
+
     return (
         <Stack >
-            <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>Ingresando</Typography>
+            <Box style={styles}>
+                <Typography align='center' variant='h4' style={typographyStyles}>INGRESANDO</Typography>
                 <TableAdmin data={arrivals?.ingresando} />
             </Box>
-            <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>En Plataforma</Typography>
+            <Box style={styles}>
+                <Typography align='center' variant='h4' style={typographyStyles}>EN PLATAFORMA</Typography>
                 <TableAdmin data={arrivals?.enPlataforma} />
             </Box>
-            <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>Fuera de Plataforma</Typography>
+            <Box style={styles}>
+                <Typography align='center' variant='h4' style={typographyStyles}>FUERA DE PLATAFORMA</Typography>
                 <TableAdmin data={arrivals?.fueraDePlataforma} />
             </Box>
            
