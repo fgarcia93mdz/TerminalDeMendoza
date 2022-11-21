@@ -63,7 +63,8 @@ const NavBarAccountant = ({ name }) => {
         axios.get('http://localhost:8080/auth/logout', { headers: {"authorization": `Bearer ${token}` }})
         .then( res => res.json())
         .catch( err => console.log('Error en logout:', err))
-
+        window.sessionStorage.removeItem("jwt")
+        
         return navigate('/')
     }
     
