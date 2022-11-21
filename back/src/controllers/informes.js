@@ -56,7 +56,7 @@ const addInforme = async (req, res) => {
     };
 
     if (rol === 5) {
-      const { fecha_salida, hora_salida, plataformas_id } = data;
+      const { fecha_salida, hora_salida, plataformas_id.tipo_tv_id } = data;
 
       if (
         !fecha_salida ||
