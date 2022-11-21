@@ -3,7 +3,7 @@ const verifyRoles = (...allowedRoles) => {
         if (!req?.usuario?.rol) return res.status(401).json({ mensaje: "sin autorización" });
         const rolesArray = [...allowedRoles];
         const result = rolesArray.find(val => val === req.usuario.rol);
-        console.log(result);
+        //console.log(result);
         if (!result) return res.status(401).json({ mensaje: "sin autorización" });
         next();
     }

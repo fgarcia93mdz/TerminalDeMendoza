@@ -21,7 +21,7 @@ const login = async (req, res) => {
         req.body.password,
         userToLogin.password
       );
-       console.log(userToLogin.dataValues);
+       //console.log(userToLogin.dataValues);
       if (isOkPassword) {
         const usuario = {
           nombre: userToLogin.dataValues.nombre,

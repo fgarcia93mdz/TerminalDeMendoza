@@ -82,10 +82,7 @@ const deleteUser = async (req, res) => {
       },
     });
 
-    console.log(
-      "🚀 ~ file: users.js ~ line 83 ~ deleteUser ~ usuario",
-      usuario.dataValues
-    );
+    
     if (usuario != null) {
       const eliminado = await Usuario.destroy({
         where: {

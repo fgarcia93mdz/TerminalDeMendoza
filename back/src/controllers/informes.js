@@ -72,7 +72,7 @@ const addInforme = async (req, res) => {
       dataAingresar.plataformas_id = plataformas_id;
       dataAingresar.tipo_tv_id = tipo_tv_id;
     }
-    console.log(dataAingresar);
+    //console.log(dataAingresar);
     await RegistroTorre.create(dataAingresar);
 
     return res.status(200).json({
@@ -155,7 +155,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         respuesta.fueraDePlataforma.push(data);
       }
     });
-    console.log(respuesta);
+   // console.log(respuesta);
     return res.status(200).json({
       respuesta,
     });
@@ -290,7 +290,7 @@ const modificarInforme = async (req, res) => {
         },
       });
 
-      console.log(modificacion);
+      //console.log(modificacion);
       return res.status(200).json({ mensaje: "modificacion exitosa" });
     }
   } catch (error) {

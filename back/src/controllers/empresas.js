@@ -14,7 +14,7 @@ const getAllEmpresas = async (req, res) => {
 };
 
 const addNewEmpresa = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
 
   const { empresa, siglas, img, cuit } = req.body;
   if (!empresa || !siglas || !img || !cuit) {
