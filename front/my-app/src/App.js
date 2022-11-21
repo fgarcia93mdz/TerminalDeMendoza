@@ -64,10 +64,13 @@ function App() {
           <Route exact path='/login' element={<Login />} />
 
           {/* == SEGURIDAD - CRUD TICKET == */}
-          <Route exact path='/ticket/crear' element={<FormTicket />} /> 
+          <Route exact path='/seguridad/ticket/crear' element={<FormTicket />} /> 
           {/* crea un ticket sin plataforma ni horarios */}
           <Route exact path='/seguridad' element={<SecurityHome />} />
-
+          {/* Arribos desde seguridad */}
+          <Route exact path='/seguridad/arribos' element={<ArrivalsBoard />} />
+          {/* Partidas desde seguridad */}
+          <Route exact path='/seguridad/partidas' element={<DeparturesBoard />} />
           {/* == INFORMES - CRUD TICKET == */}
           <Route exact path='/ticket/editar' element={<FormTicket />} /> 
           {/* edita o termina un ticket, le agrega plataforma y horario */}

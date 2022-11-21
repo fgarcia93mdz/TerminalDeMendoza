@@ -106,7 +106,7 @@ const NavBarPublic = () => {
                         
                                 <Link to='/arribos'> 
                                     <MenuItem key={'/arribos'} onClick={handleCloseNavMenu}>
-                                        <ArrowDownwardIcon />
+                                        {/* <ArrowDownwardIcon /> */}
                                         <Typography textAlign="center">ARRIBOS</Typography>
                             </MenuItem>
                         </Link>
