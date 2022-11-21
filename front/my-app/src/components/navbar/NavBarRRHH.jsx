@@ -1,5 +1,8 @@
 import React from 'react';
 import './NavBar.styles.css'
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+
 // import { Link } from 'react-router-dom'
 // import jwt_decode from "jwt-decode";
 
@@ -15,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
+import SettingsIcon from '@mui/icons-material/Settings';
 // import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
@@ -27,7 +31,7 @@ import { Avatar, Tooltip } from '@mui/material';
 // import { Box, Stack } from '@mui/system';
 
 const NavBarRRHH = ({ name }) => {
-
+    const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [ userInfo, setUserInfo ] = React.useState({})
@@ -51,8 +55,28 @@ const NavBarRRHH = ({ name }) => {
     const closeSession = () => {
         handleCloseUserMenu()
         setUserInfo({})
-        return window.sessionStorage.removeItem("jwt");
+        window.sessionStorage.removeItem("jwt");
+        navigate("/arribos")
+        window.location.reload();
     }
+    const token = window.sessionStorage.getItem("jwt");
+
+    React.useEffect(() => {
+        if (token) {
+            const tokenDecoded = jwt_decode(token);
+            console.log("tokenDecoded", tokenDecoded);
+            setUserInfo(tokenDecoded);
+            setUserInfo((state) => ({ ...state, tokenDecoded }));
+            // console.log('decoded', userInfo);
+            // console.log('decoded', userNombre);
+        } else if (token === null) {
+            return null;
+        }
+
+        return () => {
+            setUserInfo({});
+        };
+    }, [token]);
 
 
         return (
@@ -113,22 +137,25 @@ const NavBarRRHH = ({ name }) => {
                         <Button
                             key={'inicio'}
                             onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
+                                    marginLeft: "30px",
+                                    fontSize: "18px", }}
                         >
                             <Link to='/usuarios' exact>
-                                'RRHH' USUARIOS
+                               USUARIOS
                             </Link>
                         </Button>
                         <Button
                             key={'inicio2'}
                             onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
+                                    fontSize: "18px", }}
                         >
                             <Link to='/usuarios/crear'>
                                 CREAR USUARIO
                             </Link>
                         </Button>
-                        <Button
+                        {/* <Button
                             key={'inicio3'}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
@@ -136,8 +163,8 @@ const NavBarRRHH = ({ name }) => {
                             <Link to='/usuarios/editar/1'>
                                 EDITAR USUARIO 1
                             </Link>
-                        </Button>
-                        <Button
+                        </Button> */}
+                        {/* <Button
                             key={'inicio4'}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
@@ -146,14 +173,7 @@ const NavBarRRHH = ({ name }) => {
                                 PERFIL
                             </Link>
                         
-                        </Button>
-                        <Button
-                            key={'inicio5'}
-                            onClick={() => closeSession()}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                                CERRAR SESION
-                        </Button>
+                        </Button> */}
 
                         {userInfo && !userInfo.nombre && 
                             <Button
@@ -166,21 +186,23 @@ const NavBarRRHH = ({ name }) => {
                                 </Link>
                             </Button>
                         } 
-
-                        
-
-                        {userInfo && userInfo.nombre && 
-                            <Typography variant='body' my='auto' marginLeft={4}>
-                                Bienvenido {userInfo.nombre}  
-                            </Typography>
-                        }
                       
                     </Box>
-
+                            {userInfo && userInfo.nombre && (
+                                <Typography variant="body" my="auto" marginRight="50px">
+                                    Hola {userInfo.nombre}!
+                                </Typography>
+                            )}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                     
+                                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                                <Avatar>
+                                                    <SettingsIcon />
+                                                </Avatar>
+                                            </IconButton>
+                                    
                         </IconButton>
                         </Tooltip>
                         <Menu
@@ -200,9 +222,37 @@ const NavBarRRHH = ({ name }) => {
                         onClose={handleCloseUserMenu}
                         >
                         
-                            <MenuItem key={'setting'} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">setting</Typography>
-                            </MenuItem>
+                                    <Menu
+                                        sx={{ mt: "45px" }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
+                                    >
+                                        <MenuItem
+                                            key={"inicio4"}
+                                            onClick={handleCloseNavMenu}
+                                            sx={{ my: 2, color: "#0E315A", display: "block" }}
+                                        >
+                                            CAMBIAR CONTRASEÑA
+                                        </MenuItem>
+                                        <MenuItem
+                                            key={"inicio5"}
+                                            onClick={() => closeSession()}
+                                            sx={{ my: 2, color: "#0E315A", display: "block" }}
+                                        >
+                                            CERRAR SESION
+                                        </MenuItem>
+                                    </Menu>
                         
                         </Menu>
                     </Box>

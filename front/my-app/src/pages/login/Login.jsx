@@ -55,7 +55,9 @@ const Login = () => {
                         // escribe el jwt en session
                         window.sessionStorage.setItem("jwt", jwt);
                         // redirecciona a la pagina principal
-                        return navigate("/ticket/crear")
+                        //return navigate("/seguridad/ticket/crear")
+                        window.location.reload();
+
                     }
                 })
                 .catch(function (error) {
@@ -69,7 +71,8 @@ const Login = () => {
 
 
     return (
-           
+        
+
         <div className="container">
             <div className="login">
                 <h1 className='azul bienvenido'>Bienvenido</h1>
@@ -86,7 +89,9 @@ const Login = () => {
                     
                     <button type='submit'>Iniciar sesión</button>
                     
+                    <h1>
 
+</h1>
                     <div>
                         <a href='/#' className='cambiar-cont'>Olvidé mi contraseña</a>
                     </div>

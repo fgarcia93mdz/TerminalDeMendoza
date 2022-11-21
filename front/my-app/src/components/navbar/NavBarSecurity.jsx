@@ -2,6 +2,7 @@ import React from "react";
 import "./NavBar.styles.css";
 // import { Link } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 // import jwt from 'jsonwebtoken'
 
@@ -32,6 +33,7 @@ const pages = ["Inicio", "Pantallas", "Carga de ingreso"];
 // import { Box, Stack } from '@mui/system';
 
 const NavBarSecurity = ({ name }) => {
+    const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [userInfo, setUserInfo] = React.useState({});
@@ -55,7 +57,10 @@ const NavBarSecurity = ({ name }) => {
     const closeSession = () => {
         handleCloseUserMenu();
         setUserInfo({});
-        return window.sessionStorage.removeItem("jwt");
+        window.sessionStorage.removeItem("jwt");
+        navigate("/arribos")
+        window.location.reload();
+        
     };
 
     const token = window.sessionStorage.getItem("jwt");
@@ -164,7 +169,7 @@ const NavBarSecurity = ({ name }) => {
                                     display: "block",
                                     marginRight: "20px",
                                     marginLeft: "30px",
-                                    fontSize: "20px",
+                                    fontSize: "18px",
                                 }}
                             >
                                 <Link to="/seguridad">Listado de ingresos</Link>
@@ -186,7 +191,7 @@ const NavBarSecurity = ({ name }) => {
                                     color: "#0E315A",
                                     display: "block",
                                     marginRight: "20px",
-                                    fontSize: "20px",
+                                    fontSize: "18px",
                                 }}
                             >
                                 <Link to="/seguridad/ticket/crear">Registar Ingreso</Link>
@@ -199,7 +204,7 @@ const NavBarSecurity = ({ name }) => {
                                     color: "#0E315A",
                                     display: "block",
                                     marginRight: "20px",
-                                    fontSize: "20px",
+                                    fontSize: "18px",
                                 }}
                             >
                                 <Link to="/seguridad/arribos">Arribos</Link>
@@ -212,7 +217,7 @@ const NavBarSecurity = ({ name }) => {
                                     color: "#0E315A",
                                     display: "block",
                                     marginRight: "20px",
-                                    fontSize: "20px",
+                                    fontSize: "18px",
                                 }}
                             >
                                 <Link to="/seguridad/partidas">Partidas</Link>

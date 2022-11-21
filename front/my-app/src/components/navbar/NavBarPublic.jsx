@@ -48,6 +48,7 @@ const NavBarPublic = () => {
     // const handleCloseUserMenu = () => {
     //     setAnchorElUser(null);
     // };
+    
 
     return (
         <>
