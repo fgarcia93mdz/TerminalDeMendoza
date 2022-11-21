@@ -20,8 +20,9 @@ import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Tooltip } from '@mui/material';
+import axios from 'axios';
 
 const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
 // const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
@@ -33,9 +34,9 @@ const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña',
 // import { Box, Stack } from '@mui/system';
 
 const NavBarAccountant = ({ name }) => {
-
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const navigate = useNavigate()
+    const [ anchorElNav, setAnchorElNav ] = React.useState(null);
+    const [ anchorElUser, setAnchorElUser ] = React.useState(null);
     const [ userInfo, setUserInfo ] = React.useState({})
     // const [ userName, setUserName ] = React.useState('')
 
@@ -53,20 +54,24 @@ const NavBarAccountant = ({ name }) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-    const closeSession = () => {
-        handleCloseUserMenu()
-        setUserInfo({})
-        return window.sessionStorage.removeItem("jwt");
-    }
-
+    
     const token = window.sessionStorage.getItem("jwt")
+    
+    const closeSession = () => {
+    handleCloseUserMenu()
+        setUserInfo({})
+        axios.get('http://localhost:8080/auth/logout', { headers: {"authorization": `Bearer ${token}` }})
+        .then( res => res.json())
+        .catch( err => console.log('Error en logout:', err))
+
+        return navigate('/')
+    }
     
     React.useEffect(() => {
         
         if(token){
             const tokenDecoded = jwt_decode(token);
-            console.log('tokenDecoded', tokenDecoded)
+            // console.log('tokenDecoded', tokenDecoded)
             setUserInfo(tokenDecoded)
             setUserInfo(state => ({ ...state, tokenDecoded }));
             // console.log('decoded', userInfo);
@@ -132,16 +137,17 @@ const NavBarAccountant = ({ name }) => {
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
-                    
-                        <Button
-                            key={'inicio'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                            <Link to='/seguridad'>
-                              'seguridad' INICIO
-                            </Link>
-                        </Button>
+                        <Link to='/seguridad'>
+                            <Button
+                                key={'inicioSeguridad'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                
+                                'seguridad' INICIO
+                                
+                            </Button>
+                        </Link>
                         {/* <Button
                             key={'inicio2'}
                             onClick={handleCloseNavMenu}
@@ -151,33 +157,32 @@ const NavBarAccountant = ({ name }) => {
                                 VER PANTALLA ARRIBOS
                             </Link>
                         </Button> */}
+                        <Link to='/seguridad/ticket/crear'>
+                            <Button
+                                key={'crearTicket'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                            
+                                    CREAR TICKET
+                                
+                            </Button>
+                        </Link>
+                        <Link to='/'>
+                            <Button
+                                key={'cambiarContraseña'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                                    CAMBIAR CONTRASEÑA
+                            </Button>
+                        </Link>
                         <Button
-                            key={'inicio3'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                            <Link to='/seguridad/ticket/crear'>
-                                CREAR TICKET
-                            </Link>
-                        </Button>
-                        <Button
-                            key={'inicio4'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                            <Link to='/'>
-                                CAMBIAR CONTRASEÑA
-                            </Link>
-                        
-                        </Button>
-                        <Button
-                            key={'inicio5'}
+                            key={'cerrarSesion'}
                             onClick={() => closeSession()}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
                         >
-                            
-                                CERRAR SESION
-                            
+                            CERRAR SESION
                         </Button>
 
                         {userInfo && !userInfo.nombre && 

@@ -82,9 +82,9 @@ export default function GenericTable( {props} ) {
   // const colectivosRedux  = useSelector(state => state.estado);
 
   // console.log('data:', colectivosRedux)
-  if(props){
-    console.log('PROPSS table:', props)
-  }
+  // if(props){
+  //   // console.log('PROPSS table:', props)
+  // }
   
 
   return (

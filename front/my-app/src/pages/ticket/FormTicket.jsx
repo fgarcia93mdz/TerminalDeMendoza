@@ -207,7 +207,7 @@ const FormTicket = ({ id }) => {
                             helperText={formik.errors.empresa_id}
                         >
                             {dataDropdown.empresas?.map((empresa) => 
-                                <MenuItem value={empresa.id}  selected={true}> {empresa.empresa} </MenuItem>
+                                <MenuItem value={empresa.id} key={empresa.empresa}  selected={true}> {empresa.empresa} </MenuItem>
                             )}
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
                             {/* <MenuItem value={2}>ISL - Iselin</MenuItem> */}
@@ -218,7 +218,6 @@ const FormTicket = ({ id }) => {
                         <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Tipo de servicio:</Typography>
                         <TextField
                             select
-                            
                             label='Seleccione tipo de servicio'
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -243,7 +242,7 @@ const FormTicket = ({ id }) => {
                         >
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
                             {dataDropdown.servicios?.map((servicio) => 
-                                <MenuItem value={servicio.id}  selected={true}>{servicio.tipo_servicio} - {servicio.siglas}</MenuItem>
+                                <MenuItem value={servicio.id} key={servicio.tipo_servicio}  selected={true}>{servicio.tipo_servicio} - {servicio.siglas}</MenuItem>
                             )}
                             {/* <MenuItem value={1} selected={true}>Media distancia</MenuItem>
                             <MenuItem value={2}>Larga distancia</MenuItem>
@@ -278,7 +277,7 @@ const FormTicket = ({ id }) => {
                         >
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
                             {dataDropdown.estados?.map((estado) => 
-                                <MenuItem value={estado.id}  selected={true}>{estado.tipo}</MenuItem>
+                                <MenuItem value={estado.id} key={estado.tipo}  selected={true}>{estado.tipo}</MenuItem>
                             )}
                             {/* <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem> */}
                             {/* <MenuItem value={2}>Ingresando</MenuItem> */}

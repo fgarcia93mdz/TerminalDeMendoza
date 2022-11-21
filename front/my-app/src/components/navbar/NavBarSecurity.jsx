@@ -154,7 +154,8 @@ const NavBarSecurity = ({ name }) => {
                                 justifyContent: "start",
                             }}
                         >
-                            <Button
+                            <Link to="/seguridad">
+                                <Button
                                 key={"inicio"}
                                 onClick={handleCloseNavMenu}
                                 sx={{
@@ -165,9 +166,10 @@ const NavBarSecurity = ({ name }) => {
                                     marginLeft: "30px",
                                     fontSize: "18px",
                                 }}
-                            >
-                                <Link to="/seguridad">Listado de ingresos</Link>
-                            </Button>
+                                >
+                                    Listado de ingresos
+                                </Button>
+                            </Link>
                             {/* <Button
                             key={'inicio2'}
                             onClick={handleCloseNavMenu}
@@ -177,6 +179,7 @@ const NavBarSecurity = ({ name }) => {
                                 VER PANTALLA ARRIBOS
                             </Link>
                         </Button> */}
+                        <Link to="/seguridad/ticket/crear">
                             <Button
                                 key={"inicio3"}
                                 onClick={handleCloseNavMenu}
@@ -188,8 +191,10 @@ const NavBarSecurity = ({ name }) => {
                                     fontSize: "18px",
                                 }}
                             >
-                                <Link to="/seguridad/ticket/crear">Registar Ingreso</Link>
+                               Registar Ingreso
                             </Button>
+                        </Link>
+                        <Link to="/seguridad/arribos">
                             <Button
                                 key={"inicio3"}
                                 onClick={handleCloseNavMenu}
@@ -201,8 +206,10 @@ const NavBarSecurity = ({ name }) => {
                                     fontSize: "18px",
                                 }}
                             >
-                                <Link to="/seguridad/arribos">Arribos</Link>
+                                Arribos
                             </Button>
+                        </Link>
+                        <Link to="/seguridad/partidas">
                             <Button
                                 key={"inicio3"}
                                 onClick={handleCloseNavMenu}
@@ -214,17 +221,20 @@ const NavBarSecurity = ({ name }) => {
                                     fontSize: "18px",
                                 }}
                             >
-                                <Link to="/seguridad/partidas">Partidas</Link>
+                                Partidas
                             </Button>
+                        </Link>
 
                             {userInfo && !userInfo.nombre && (
-                                <Button
-                                    key={"inicio6"}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: "#0E315A", display: "block" }}
-                                >
-                                    <Link to="/login">LOGIN</Link>
-                                </Button>
+                                <Link to="/login">
+                                    <Button
+                                        key={"inicio6"}
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 2, color: "#0E315A", display: "block" }}
+                                    >
+                                    LOGIN
+                                    </Button>
+                                </Link>
                             )}
                         </Box>
                         {userInfo && userInfo.nombre && (

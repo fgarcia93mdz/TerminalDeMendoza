@@ -152,17 +152,18 @@ const NavBarInforms = ({ name }) => {
                                 VER PANTALLA ARRIBOS
                             </Link>
                         </Button> */}
-                        <Button
-                            key={'inicio3'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                            <Link to='/seguridad/ticket/crear'>
+                        <Link to='/seguridad/ticket/crear'>
+                            <Button
+                                key={'crearTicket'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                            >
+                            
                                 CREAR TICKET
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                         <Button
-                            key={'inicio4'}
+                            key={'cambiarContraseña'}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
                         >
@@ -172,7 +173,7 @@ const NavBarInforms = ({ name }) => {
                         
                         </Button>
                         <Button
-                            key={'inicio5'}
+                            key={'cerrarSesion'}
                             onClick={() => closeSession()}
                             sx={{ my: 2, color: '#0E315A', display: 'block' }}
                         >
@@ -183,7 +184,7 @@ const NavBarInforms = ({ name }) => {
 
                         {userInfo && !userInfo.nombre && 
                             <Button
-                                key={'inicio6'}
+                                key={'login'}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >

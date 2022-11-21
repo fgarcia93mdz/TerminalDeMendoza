@@ -30,7 +30,7 @@ export default function TableAdmin({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log('DATA en tabla admin..:', data)}
+            {/* {console.log('DATA en tabla admin..:', data)} */}
             {data?.reverse().map((row) => (
               <TableRow
                 key={row.id}

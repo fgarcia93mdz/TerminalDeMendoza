@@ -39,13 +39,13 @@ function App() {
       setIsLoggedIn(false)
     } else if(token !== undefined || token !== null) {
       const tokenDecoded = jwt_decode(token);
-      console.log('tokenDecoded', tokenDecoded)
+      // console.log('tokenDecoded', tokenDecoded)
       setUserRole(tokenDecoded.rol)
       setIsLoggedIn(true)
       setUserId(tokenDecoded.id)
       // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
       // console.log('decoded', userInfo);
-      console.log('decoded', userRole);
+      // console.log('decoded', userRole);
     } },[userRole, isLoggedIn, token])
 
 
