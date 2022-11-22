@@ -64,7 +64,6 @@ const platformController = {
             empresa_id: req.body.empresa_id,
             servicios_id: req.body.servicios_id,
             usuarios_id: req.body.usuarios_id,
-            plataformas_id: 1,
             estado_id: req.body.estado_id,
             destino: req.body.destino,
         }).then(() => {
