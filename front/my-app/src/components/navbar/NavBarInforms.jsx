@@ -23,7 +23,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { Avatar, Tooltip } from '@mui/material';
 
-const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
+// const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
 // const settings = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña', 'Cerrar sesión'];
 
 // final
@@ -112,11 +112,26 @@ const NavBarInforms = ({ name }) => {
                                 flexDirection: 'column'
                             }}
                         >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
+                                    <Link to='/informes'>
+                                        <MenuItem key={'/informes'} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">Plataformas e Ingresos</Typography>
+                                        </MenuItem>
+                                    </Link>
+                                    <Link to='/informes/ticket/crear'>
+                                        <MenuItem key={'/informes/ticket/crear'} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">Crear Ingreso</Typography>
+                                        </MenuItem>
+                                    </Link>
+                                    <Link to="/arribos">
+                                        <MenuItem key={"/seguridad/arribos"} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">Arribos</Typography>
+                                        </MenuItem>
+                                    </Link>
+                                    <Link to="/partidas">
+                                        <MenuItem key={"/seguridad/partidas"} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">Partidas</Typography>
+                                        </MenuItem>
+                                    </Link>
                         </Menu>
                         <IconButton
                             size="large"

@@ -92,6 +92,12 @@ function App() {
           <Route exact path='/ticket/editar' element={<FormTicket />} /> 
           {/* edita o termina un ticket, le agrega plataforma y horario */}
           <Route exact path='/informes' element={<InformsHome />} />
+          {/* cera un registro de ser necesario */}
+          <Route exact path='/informes/ticket/crear' element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormTicket id={userId} />
+            </Protected>
+          } />
 
           {/* == RECURSOS HUMANOS - CRUD USER == */}
           <Route exact path='/usuarios/editar/:id' element={<FormEditUser />} /> 
