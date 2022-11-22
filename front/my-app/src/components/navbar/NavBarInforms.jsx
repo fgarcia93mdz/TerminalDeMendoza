@@ -56,7 +56,9 @@ const NavBarInforms = ({ name }) => {
   const closeSession = () => {
     handleCloseUserMenu();
     setUserInfo({});
-    return window.sessionStorage.removeItem("jwt");
+    window.sessionStorage.removeItem("jwt");
+    navigate("/arribos");
+    window.location.reload();
   };
 
   const token = window.sessionStorage.getItem("jwt");
