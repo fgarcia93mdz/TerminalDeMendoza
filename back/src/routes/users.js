@@ -7,6 +7,7 @@ const {
   deleteUser,
   getDataUserInfoToModify,
   getDataInfoToCreateNewUser,
+  getAllUsers,
 } = require("../controllers/users");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
@@ -23,6 +24,8 @@ router.post('/register', register)
 //   "password": "ptest",
 //   "rol": "3"
 // }
+
+router.get("/", authenticateToken, getAllUsers);
 
 router.get("/getUser/:id", authenticateToken, getDataUserInfoToModify);
 //devuelve información del usuario a modificar + la lista de roles disponibles para el dropdown

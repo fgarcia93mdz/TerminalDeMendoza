@@ -1,9 +1,33 @@
 const jwt = require("jsonwebtoken");
 const db = require("../database/models");
 const Rol = db.Rol;
+const { Op } = require("sequelize");
 const Usuario = db.Usuario;
 const EliminarUsuario = db.UsuarioEliminado;
 const bcryptjs = require("bcryptjs");
+
+const getAllUsers = async (req, res) => {
+  const { rol } = req.usuario;
+  try {
+    let usuarios = await Usuario.findAll({
+      //where: { roles_id: {[Op.ne]: 1} },
+    });
+
+    if (rol !== 1) {
+      //esto es para que solo el admin pueda ver otros usuarios admin
+      let UsuariosDisponibles = [];
+      for (let usuario of usuarios) {
+        if (usuario.roles_id !== 1) {
+          UsuariosDisponibles.push(usuario);
+        }
+      }
+      usuarios = UsuariosDisponibles;
+    }
+    return res.status(200).json({ usuarios });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+};
 
 const register = async (req, res) => {
   try {
@@ -82,7 +106,6 @@ const deleteUser = async (req, res) => {
       },
     });
 
-    
     if (usuario != null) {
       const eliminado = await Usuario.destroy({
         where: {
@@ -110,7 +133,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getDataInfoToCreateNewUser = async (req,res) => {
+const getDataInfoToCreateNewUser = async (req, res) => {
   try {
     const roles = await Rol.findAll();
     let rolesDisponibles = [];
@@ -120,12 +143,9 @@ const getDataInfoToCreateNewUser = async (req,res) => {
       }
     }
   } catch (error) {
-    return res
-      .status(400)
-      .json({ mensaje: "error al obtener info de roles" });
+    return res.status(400).json({ mensaje: "error al obtener info de roles" });
   }
-    
-}
+};
 
 const getDataUserInfoToModify = async (req, res) => {
   try {
@@ -157,7 +177,9 @@ const getDataUserInfoToModify = async (req, res) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ mensaje: "error a la hora de obtener data para modificar usuario" });
+      .json({
+        mensaje: "error a la hora de obtener data para modificar usuario",
+      });
   }
 };
 
@@ -216,4 +238,5 @@ module.exports = {
   deleteUser,
   getDataUserInfoToModify,
   getDataInfoToCreateNewUser,
+  getAllUsers,
 };

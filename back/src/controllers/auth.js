@@ -11,17 +11,19 @@ generateAccessToken = (usuario) => {
 
 const login = async (req, res) => {
   try {
+    
     const userToLogin = await Usuario.findOne({
       where: {
         usuario: req.body.email,
       },
     });
+    // console.log(userToLogin);
     if (userToLogin) {
       let isOkPassword = bcryptjs.compareSync(
         req.body.password,
         userToLogin.password
       );
-       //console.log(userToLogin.dataValues);
+      //  console.log(userToLogin.dataValues, "!");
       if (isOkPassword) {
         const usuario = {
           nombre: userToLogin.dataValues.nombre,
