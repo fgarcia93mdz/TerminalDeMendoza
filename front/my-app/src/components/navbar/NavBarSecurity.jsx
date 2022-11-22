@@ -238,7 +238,7 @@ const NavBarSecurity = ({ name }) => {
                             )}
                         </Box>
                         {userInfo && userInfo.nombre && (
-                            <Typography variant="body" my="auto" marginRight="50px">
+                            <Typography variant="body" my="auto" marginRight="50px" xs={{ fontSize: "15px" }} >
                                 Hola {userInfo.nombre}!
                             </Typography>
                         )}

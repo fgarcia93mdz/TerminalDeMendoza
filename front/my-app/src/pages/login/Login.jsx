@@ -56,6 +56,7 @@ const Login = () => {
                         window.sessionStorage.setItem("jwt", jwt);
                         // redirecciona a la pagina principal
                         //return navigate("/seguridad/ticket/crear")
+                        navigate("/ingreso")
                         window.location.reload();
 
                     }

@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import ArrivalsBoard from './pages/board-tv/ArrivalsBoard'
 import DeparturesBoard from './pages/board-tv/DeparturesBoard'
 import Login from './pages/login/Login'
+import Ingreso from './pages/login/Ingreso'
 import Footer from './components/footer/Footer';
 // import CustomizedTables from './components/table/Table';
 import FormTicket from './pages/ticket/FormTicket';
@@ -65,6 +66,7 @@ function App() {
 
           {/* == LOGIN == */}
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/ingreso' element={<Ingreso />} />
 
           {/* == SEGURIDAD - CRUD TICKET == */}
             {/* crea un ticket sin plataforma ni horarios */}
