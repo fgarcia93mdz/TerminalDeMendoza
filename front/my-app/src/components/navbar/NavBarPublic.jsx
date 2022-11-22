@@ -59,9 +59,9 @@ const NavBarPublic = () => {
         }}
       >
         <span className="texto">
-          NUESTRO NUMERO DE ATENCION AL CLIENTE ES: 0800 - 555 - 555 / EMPRESA
+           NUESTRO NUMERO DE ATENCION AL CLIENTE ES: 0800 - 555 - 555 / EMPRESA
           FLECHA BUS FUERA DE SERVICIO EN LAS FECHAS 31 DE DICIEMBRE DESDE LAS
-          00:00HS HASTA LAS 6:00HS DEL MISMO
+          00:00HS HASTA LAS 6:00HS DEL MISMO 
         </span>
       </Marquee>
       <AppBar

@@ -225,7 +225,7 @@ const NavBarSecurity = ({ name }) => {
                             </Button>
                         </Link>
 
-                            {userInfo && !userInfo.nombre && (
+                            {/* {userInfo && !userInfo.nombre && (
                                 <Link to="/login">
                                     <Button
                                         key={"inicio6"}
@@ -235,7 +235,7 @@ const NavBarSecurity = ({ name }) => {
                                     LOGIN
                                     </Button>
                                 </Link>
-                            )}
+                            )} */}
                         </Box>
                         {userInfo && userInfo.nombre && (
                             <Typography variant="body" my="auto" marginRight="50px" xs={{ fontSize: "15px" }} >
