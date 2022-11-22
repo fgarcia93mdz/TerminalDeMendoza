@@ -184,6 +184,7 @@ const getDataUserInfoToModify = async (req, res) => {
 };
 
 const modifyUser = async (req, res) => {
+  const { id , rol: rol_auth } = req.usuario;
   const usuarioAModificar = parseInt(req.params.id);
 
   const { nombre, apellido, usuario, rol } = req.body;
@@ -197,9 +198,20 @@ const modifyUser = async (req, res) => {
       },
     });
 
+
+
     if (encontrado != null) {
-      //casos que no son contemplados
-      //toda la data es repetida con lo que ya esta en la base de datos
+      //casos que no son contemplados :toda la data es repetida con lo que ya esta en la base de datos
+
+
+      // solo se controla que el usuario sea rrhh porque el auth de roles solo permite que lleguen admins y rrhh
+      if (rol_auth === 2 && id !== encontrado.id) {
+        if (encontrado.roles_id === 1 || encontrado.roles_id === 2) {
+          return res
+            .status(400)
+            .json({ mensaje: "no tienes permiso para modificar este usuario" });
+        }
+      }
 
       if (nombre != null) dataACambiar.nombre = nombre;
       if (apellido != null) dataACambiar.apellido = apellido;
