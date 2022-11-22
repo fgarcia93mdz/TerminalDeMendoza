@@ -20,6 +20,7 @@ import FormCreateUser from "./components/profile/FormCreateUser";
 import SecurityHome from "./pages/securityUser/SecurityHome";
 import InformsHome from "./pages/informsUser/InformsHome";
 import Protected from "./components/protected/Protected";
+import ListUsers from "./pages/RRHHUser.jsx/ListUsers";
 
 // import clients
 
@@ -132,6 +133,8 @@ function App() {
           {/* == RECURSOS HUMANOS - CRUD USER == */}
           <Route exact path="/usuarios/editar/:id" element={<FormEditUser />} />
           <Route exact path="/usuarios/crear" element={<FormCreateUser />} />
+          <Route exact path="/usuarios" element={<ListUsers />} />
+
 
           {/* Admin Routes */}
           <Route path="/arribos" element={<ArrivalsBoard />} />
