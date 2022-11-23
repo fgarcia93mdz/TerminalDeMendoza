@@ -133,28 +133,27 @@ const NavBarRRHH = ({ name }) => {
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
-                    
-                        <Button
-                            key={'inicio'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
-                                    marginLeft: "30px",
-                                    fontSize: "18px", }}
-                        >
-                            <Link to='/usuarios' exact>
-                               USUARIOS
-                            </Link>
-                        </Button>
-                        <Button
-                            key={'inicio2'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
-                                    fontSize: "18px", }}
-                        >
-                            <Link to='/usuarios/crear'>
+                        <Link to='/usuarios' exact>
+                            <Button
+                                key={'inicio'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
+                                        marginLeft: "30px",
+                                        fontSize: "18px", }}
+                            >
+                                USUARIOS
+                            </Button>
+                        </Link>
+                        <Link to='/usuarios/crear'>
+                            <Button
+                                key={'inicio2'}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
+                                        fontSize: "18px", }}
+                            >
                                 CREAR USUARIO
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                         {/* <Button
                             key={'inicio3'}
                             onClick={handleCloseNavMenu}
