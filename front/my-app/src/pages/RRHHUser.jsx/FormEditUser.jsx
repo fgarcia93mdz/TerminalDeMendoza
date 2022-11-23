@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { useNavigate , useParams } from 'react-router-dom';
-
+import {  useParams } from 'react-router-dom';
+// useNavigate
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios'
-import BasicModal from '../modals/Modal';
+import BasicModal from '../../components/modals/Modal';
 
 
 
@@ -23,7 +23,7 @@ const FormEditUser = () => {
     const [ openModal, setOpenModal ] = useState(false)
     const [ roles, setRoles ] = useState([])
     const [ user, setUser ] = useState({})
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const params = useParams()
     const [ id, setId ] = useState(params.id)
     const token = sessionStorage.getItem('jwt')
@@ -38,6 +38,8 @@ const FormEditUser = () => {
         password: "", // 2
         estado_password: "", // 2
     }
+
+    console.log('form values:', formValues)
 
     const userSaved = {
         nombre: "USERNAME", // '01-01-2022'
@@ -59,11 +61,12 @@ const FormEditUser = () => {
             return response
         })
         .then( data => {
+            console.log('data', data)
             setRoles(data.data.rolesDisponibles)
             setUser(data.data.usuarioAEnviar)
             setFormValues(data.data.usuarioAEnviar)
             // console.log('DATA', data)
-            // console.log('USER', user)
+            console.log('USER', user)
             // console.log('ROLES', roles)
             // console.log('formvalues:', formValues)
         

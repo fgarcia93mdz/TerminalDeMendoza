@@ -15,7 +15,7 @@ import Footer from "./components/footer/Footer";
 import FormTicket from "./pages/ticket/FormTicket";
 // import ArrivalsTable from './pages/table-admin/ArrivalsTable';
 import NavBarContainer from "./components/navbar/NavBarContainer";
-import FormEditUser from "./components/profile/FormEditUser";
+import FormEditUser from "./pages/RRHHUser.jsx/FormEditUser";
 import FormCreateUser from "./components/profile/FormCreateUser";
 import SecurityHome from "./pages/securityUser/SecurityHome";
 import InformsHome from "./pages/informsUser/InformsHome";
