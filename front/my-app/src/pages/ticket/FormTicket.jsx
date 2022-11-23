@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 // import { useNavigate } from 'react-router-dom';
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios'
 import BasicModal from '../../components/modals/Modal';
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 
 
@@ -70,8 +70,9 @@ const FormTicket = ({ id }) => {
                         // escribe el jwt en session
                         // window.sessionStorage.setItem("jwt", jwt);
                         // redirecciona a la pagina principal
-                        setOpenModal(true)
+                        setOpenModal(true)   
                     }
+                    
                 })
                 .catch(function (error) {
                     console.log('Error:', error);
@@ -80,35 +81,57 @@ const FormTicket = ({ id }) => {
       });
 
 
-    return ( 
-        <Stack sx={{background: '#0b2748', borderRadius: '25px', shadow:4}} my={4} mx={{xs: 1, sm: 6}} p={4} sm={6}>
-            <form onSubmit={formik.handleSubmit}>
-                <Typography variant="h4" color='white'>Crear nuevo Ticket:</Typography>
-                <Grid container my={4}>
-                    <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={12}  my={2}>
-                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Interno:</Typography>
-                        <TextField 
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                }
-                            }}
-                            InputProps={{
-                                type: "text"
-                            }} 
-                            value={formik.values.interno}
-                            name='interno'
-                            onChange={formik.handleChange}
-                            error={formik.errors.interno}
-                            helperText={formik.errors.interno}
-                        />
-                    </Grid>
-                    {/* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+    return (
+      <Stack
+        sx={{ background: "#1C68C0", borderRadius: "25px", shadow: 4 }}
+        my={4}
+        mx={{ xs: 1, sm: 6 }}
+        p={4}
+        sm={6}
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <Typography variant="h4" color="white">
+            Crear nuevo Registro:
+          </Typography>
+          <Grid container my={4}>
+            <Grid
+              item
+              display={{ xs: "block", sm: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              sm={12}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                mb={{ xs: 1, sm: 0 }}
+              >
+                Interno:
+              </Typography>
+              <TextField
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                }}
+                InputProps={{
+                  type: "text",
+                }}
+                value={formik.values.interno}
+                name="interno"
+                onChange={formik.handleChange}
+                error={formik.errors.interno}
+                helperText={formik.errors.interno}
+              />
+            </Grid>
+            {/* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
                         {/* <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Usuario ID:</Typography> */}
-                        {/* <TextField
+            {/* <TextField
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
                                     borderColor: 'white'
@@ -130,182 +153,280 @@ const FormTicket = ({ id }) => {
                             error={formik.errors.usuarios_id}
                             helperText={formik.errors.usuarios_id}
                         /> */}
-                    {/* </Grid> */}
-                    
-                    <Grid item  display={{ xs: 'block', sm: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
-                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm: 0}}>Fecha de ingreso:</Typography>
-                        <TextField 
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                }
-                            }}
-                            
-                            InputProps={{
-                                type: "date",
-                            }} 
-                            name='fecha_ingreso'
-                            value={formik.values.fecha_ingreso}
-                            onChange={formik.handleChange}
-                            error={formik.errors.fecha_ingreso}
-                            helperText={formik.errors.fecha_ingreso}
-                        />
-                    </Grid>
-                    <Grid item  display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6} my={2}>
-                        <Typography variant='subtitle1' color='white'  mb={{xs: 1, sm: 0}}>Hora de ingreso:</Typography>
-                        <TextField 
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                },
-                                '& .MuiSvgIcon-root': {
-                                    color: 'white',
-                                },
-                            }}
-                            InputProps={{
-                                type: "time"
-                            }} 
-                            value={formik.values.hora_ingreso}
-                            name='hora_ingreso'
-                            onChange={formik.handleChange}
-                            error={formik.errors.hora_ingreso}
-                            helperText={formik.errors.hora_ingreso}
+            {/* </Grid> */}
 
-                        />
-                    </Grid>
-                   
-                    <Grid item display={{ xs: 'block', md: 'flex'}} alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}} display={{xs: 'none', sm: 'block'}}>Empresa:</Typography>
-                        <TextField
-                            select
-                            label='Seleccione Empresa'
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                },
-                                '& .MuiSvgIcon-root': {
-                                    color: 'white',
-                                },
-                                minWidth:'200px'
-                            }}
-                            InputLabelProps={{
-                                style: { color: '#fff' },
-                            }}
-                            name='empresa_id'
-                            value={formik.values.empresa_id}
-                            onChange={formik.handleChange}
-                            error={formik.errors.empresa_id}
-                            helperText={formik.errors.empresa_id}
-                        >
-                            {dataDropdown.empresas?.map((empresa) => 
-                                <MenuItem value={empresa.id} key={empresa.empresa}  selected={true}> {empresa.empresa} </MenuItem>
-                            )}
-                            {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
-                            {/* <MenuItem value={2}>ISL - Iselin</MenuItem> */}
-                            {/* <MenuItem value={3}>FLB - Flecha Bus </MenuItem> */}
-                        </TextField>
-                    </Grid>
-                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Tipo de servicio:</Typography>
-                        <TextField
-                            select
-                            label='Seleccione tipo de servicio'
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                },
-                                '& .MuiSvgIcon-root': {
-                                    color: 'white',
-                                },
-                                minWidth:'260px'
-                            }}
-                            InputLabelProps={{
-                                style: { color: '#fff' },
-                            }}
-                            name='servicios_id'
-                            value={formik.values.servicios_id}
-                            onChange={formik.handleChange}
-                            error={formik.errors.servicios_id}
-                            helperText={formik.errors.servicios_id}
-                        >
-                            {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
-                            {dataDropdown.servicios?.map((servicio) => 
-                                <MenuItem value={servicio.id} key={servicio.tipo_servicio}  selected={true}>{servicio.tipo_servicio} - {servicio.siglas}</MenuItem>
-                            )}
-                            {/* <MenuItem value={1} selected={true}>Media distancia</MenuItem>
+            <Grid
+              item
+              display={{ xs: "block", sm: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              sm={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                mb={{ xs: 1, sm: 0 }}
+              >
+                Fecha de ingreso:
+              </Typography>
+              <TextField
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                }}
+                InputProps={{
+                  type: "date",
+                }}
+                name="fecha_ingreso"
+                value={formik.values.fecha_ingreso}
+                onChange={formik.handleChange}
+                error={formik.errors.fecha_ingreso}
+                helperText={formik.errors.fecha_ingreso}
+              />
+            </Grid>
+            <Grid
+              item
+              display={{ xs: "block", sm: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              sm={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                mb={{ xs: 1, sm: 0 }}
+              >
+                Hora de ingreso:
+              </Typography>
+              <TextField
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                }}
+                InputProps={{
+                  type: "time",
+                }}
+                value={formik.values.hora_ingreso}
+                name="hora_ingreso"
+                onChange={formik.handleChange}
+                error={formik.errors.hora_ingreso}
+                helperText={formik.errors.hora_ingreso}
+              />
+            </Grid>
+
+            <Grid
+              item
+              display={{ xs: "block", md: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              md={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                mb={{ xs: 1, sm: 0 }}
+                display={{ xs: "none", sm: "block" }}
+              >
+                Empresa:
+              </Typography>
+              <TextField
+                select
+                label="Seleccione Empresa"
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                  minWidth: "200px",
+                }}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                }}
+                name="empresa_id"
+                value={formik.values.empresa_id}
+                onChange={formik.handleChange}
+                error={formik.errors.empresa_id}
+                helperText={formik.errors.empresa_id}
+              >
+                {dataDropdown.empresas?.map((empresa) => (
+                  <MenuItem
+                    value={empresa.id}
+                    key={empresa.empresa}
+                    selected={true}
+                  >
+                    {" "}
+                    {empresa.empresa}{" "}
+                  </MenuItem>
+                ))}
+                {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
+                {/* <MenuItem value={2}>ISL - Iselin</MenuItem> */}
+                {/* <MenuItem value={3}>FLB - Flecha Bus </MenuItem> */}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              display={{ xs: "block", md: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              md={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                display={{ xs: "none", sm: "block" }}
+              >
+                Tipo de servicio:
+              </Typography>
+              <TextField
+                select
+                label="Seleccione tipo de servicio"
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                  minWidth: "260px",
+                }}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                }}
+                name="servicios_id"
+                value={formik.values.servicios_id}
+                onChange={formik.handleChange}
+                error={formik.errors.servicios_id}
+                helperText={formik.errors.servicios_id}
+              >
+                {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
+                {dataDropdown.servicios?.map((servicio) => (
+                  <MenuItem
+                    value={servicio.id}
+                    key={servicio.tipo_servicio}
+                    selected={true}
+                  >
+                    {servicio.tipo_servicio} - {servicio.siglas}
+                  </MenuItem>
+                ))}
+                {/* <MenuItem value={1} selected={true}>Media distancia</MenuItem>
                             <MenuItem value={2}>Larga distancia</MenuItem>
                             <MenuItem value={3}>Corta distancia </MenuItem> */}
-                        </TextField>
-                    </Grid>
-                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs:'none', sm:'block'}}>Estado:</Typography>
-                        <TextField
-                            select
-                            label='Seleccione estado'
-                            InputLabelProps={{
-                                style: { color: '#fff' },
-                            }}
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                },
-                                '& .MuiSvgIcon-root': {
-                                    color: 'white',
-                                },
-                                minWidth: '250px'
-                            }}
-                            name='estado_id'
-                            value={formik.values.estado_id}
-                            onChange={formik.handleChange}
-                            error={formik.errors.estado_id}
-                            helperText={formik.errors.estado_id}
-                        >
-                            {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
-                            {dataDropdown.estados?.map((estado) => 
-                                <MenuItem value={estado.id} key={estado.tipo}  selected={true}>{estado.tipo}</MenuItem>
-                            )}
-                            {/* <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem> */}
-                            {/* <MenuItem value={2}>Ingresando</MenuItem> */}
-                        </TextField>
-                    </Grid>
-                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs:'none', sm:'block'}}>Destino / Servicio:</Typography>
-                        <TextField
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                }
-                            }}
-                            InputLabelProps={{
-                                style: { color: '#fff' },
-                            }}
-                            label='Inserte destino...'
-                            name='destino'
-                            value={formik.values.destino}
-                            onChange={formik.handleChange}
-                            error={formik.errors.destino}
-                            helperText={formik.errors.destino}
-                        />
-                    </Grid>
-                    {/* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              display={{ xs: "block", md: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              sm={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                display={{ xs: "none", sm: "block" }}
+              >
+                Estado:
+              </Typography>
+              <TextField
+                select
+                label="Seleccione estado"
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                }}
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                  minWidth: "250px",
+                }}
+                name="estado_id"
+                value={formik.values.estado_id}
+                onChange={formik.handleChange}
+                error={formik.errors.estado_id}
+                helperText={formik.errors.estado_id}
+              >
+                {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
+                {dataDropdown.estados?.map((estado) => (
+                  <MenuItem value={estado.id} key={estado.tipo} selected={true}>
+                    {estado.tipo}
+                  </MenuItem>
+                ))}
+                {/* <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem> */}
+                {/* <MenuItem value={2}>Ingresando</MenuItem> */}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              display={{ xs: "block", md: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              md={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                display={{ xs: "none", sm: "block" }}
+              >
+                Destino / Origen / Servicio:
+              </Typography>
+              <TextField
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                }}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                }}
+                label="Inserte destino..."
+                name="destino"
+                value={formik.values.destino}
+                onChange={formik.handleChange}
+                error={formik.errors.destino}
+                helperText={formik.errors.destino}
+              />
+            </Grid>
+            {/* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
                         <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Plataforma:</Typography>
                         <TextField
                             sx={{
@@ -327,17 +448,40 @@ const FormTicket = ({ id }) => {
                             helperText={formik.errors.plataformas_id}
                         />
                     </Grid> */}
-                   
-                    <Grid item sx={{display: 'flex', justifyContent: 'flex-end', marginRight: {xs:0 , sm:8} }} xs={12}>
-                        <Button  variant="contained" type="submit" py={2} my={4} mx={4}>Crear ticket</Button>
-                    </Grid>
-                    {openModal && 
-                        <BasicModal title='Exito' message='Ticket creado con exito' openModal={openModal}  />
-                    }
-                </Grid>
-            </form>
-        </Stack>
-    )
+
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginRight: { xs: 0, sm: 8 },
+              }}
+              xs={12}
+            >
+              <Button
+                variant="contained"
+                type="submit"
+                py={2}
+                my={4}
+                mx={4}
+                sx={{ backgroundColor: "black" }}
+              >
+                Crear registro
+              </Button>
+            </Grid>
+            {openModal && (
+              <BasicModal
+                title=<CheckCircleOutlineIcon
+                  sx={{ fontSize: "50px", marginLeft: "-25px" }}
+                />
+                message="Registro creado con éxito"
+                openModal={openModal}
+              />
+            )}
+          </Grid>
+        </form>
+      </Stack>
+    );
 
 }
 

@@ -10,7 +10,9 @@ const getAllUsers = async (req, res) => {
   const { rol } = req.usuario;
   try {
     let usuarios = await Usuario.findAll({
-      //where: { roles_id: {[Op.ne]: 1} },
+      include: [
+        { association: "rol_usuario" },
+      ],
     });
 
     if (rol !== 1) {
