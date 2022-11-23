@@ -85,13 +85,7 @@ const NavBarSecurity = ({ name }) => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                            <Box
-                                className=""
-                                sx={{ width: "70px" }}
-                                display={{ xs: "block", md: "hidden" }}
-                                src={require("../../assets/img/icono-colectivo.png")}
-                                alt="icono colectivo"
-                            />
+                           
 
                             <Menu
                                 id="menu-appbar"
@@ -238,7 +232,7 @@ const NavBarSecurity = ({ name }) => {
                             )} */}
                         </Box>
                         {userInfo && userInfo.nombre && (
-                            <Typography variant="body" my="auto" marginRight="50px" xs={{ fontSize: "15px" }} >
+                            <Typography variant="body" my="auto" marginRight="50px" fontSize="20px">
                                 Hola {userInfo.nombre}!
                             </Typography>
                         )}

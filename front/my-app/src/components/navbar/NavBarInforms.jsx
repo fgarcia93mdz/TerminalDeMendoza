@@ -89,14 +89,7 @@ const NavBarInforms = ({ name }) => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <Box
-                className=""
-                sx={{ width: "70px" }}
-                display={{ xs: "block", md: "hidden" }}
-                src={require("../../assets/img/icono-colectivo.png")}
-                alt="icono colectivo"
-              />
-
+              
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
