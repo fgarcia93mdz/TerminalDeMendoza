@@ -17,9 +17,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function TableUsers({ data }) {
   return (
-   
-      <TableContainer component={Paper} >
-         <Box px={4}>
+    <TableContainer component={Paper}>
+      <Box px={4}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -29,7 +28,6 @@ export default function TableUsers({ data }) {
               <TableCell align="center">Usuario</TableCell>
               <TableCell align="center">Rol</TableCell>
               <TableCell align="center">Edit</TableCell>
-
             </TableRow>
           </TableHead>
           <TableBody>
@@ -37,23 +35,25 @@ export default function TableUsers({ data }) {
             {data?.map((row) => (
               <TableRow
                 key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">{row.id} </TableCell>
+                <TableCell component="th" scope="row">
+                  {row.id}{" "}
+                </TableCell>
                 <TableCell align="center">{row.nombre}</TableCell>
                 <TableCell align="center">{row.apellido}</TableCell>
                 <TableCell align="center">{row.usuario}</TableCell>
-                <TableCell align="center">{row.roles_id}</TableCell>
+                <TableCell align="center">{row.rol_usuario.rol}</TableCell>
                 <TableCell align="center">
-                    <Link to={`/usuarios/editar/${row.id}`}>
-                        <SettingsIcon />     
-                    </Link>
+                  <Link to={`/usuarios/editar/${row.id}`}>
+                    <SettingsIcon />
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </Box>
-      </TableContainer>
+    </TableContainer>
   );
 }
