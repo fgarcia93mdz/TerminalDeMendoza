@@ -145,7 +145,7 @@ const NavBarAccountant = ({ name }) => {
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
                                 
-                                'seguridad' INICIO
+                                'contabilidad' INICIO
                                 
                             </Button>
                         </Link>
