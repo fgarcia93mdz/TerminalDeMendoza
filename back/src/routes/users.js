@@ -8,6 +8,7 @@ const {
   getDataUserInfoToModify,
   getDataInfoToCreateNewUser,
   getAllUsers,
+  resetPassword,
 } = require("../controllers/users");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
@@ -40,6 +41,7 @@ router.get("/new", authenticateToken, getDataInfoToCreateNewUser);
 // HEADERS
 // authorization "Bearer token..."
 
+router.post("/resetPassword", authenticateToken, resetPassword)
 
 router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrador,ROLES.RRHH),changePassword);
 //data para el front

@@ -9,8 +9,8 @@ const styles = {
         margin: 'auto',
     },
     foto: { 
-        width: '99%',
-        padding: '8px'
+        width: '90%',
+        padding: '5%'
     }
 }
 

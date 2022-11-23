@@ -17,7 +17,7 @@ const Footer = () => {
 
     return (
 
-        <Stack role='footer' px={6} py={2} direction={{ xs: 'column', sm: 'row' }} justifyContent={'space-between'} alignItems={{ xs: 'center', sm: 'end' }} sx={{ color: '#0b2748', backgroundColor: 'white', width: '93%', bottom: '0', position:'relative' }}>
+        <Stack role='footer' px={6} py={2} direction={{ xs: 'column', sm: 'row' }} justifyContent={'space-between'} alignItems={{ xs: 'center', sm: 'end' }} sx={{ color: '#0b2748', backgroundColor: 'white', bottom: '0', position:'relative' }}>
             <ThemeProvider theme={colors}>
                 <Box
                     component='img'
