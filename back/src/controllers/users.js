@@ -200,6 +200,7 @@ const getDataUserInfoToModify = async (req, res) => {
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         usuario: usuario.usuario,
+        rol: usuario.roles_id
       };
       const roles = await Rol.findAll();
       let rolesDisponibles = [];
