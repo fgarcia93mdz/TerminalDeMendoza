@@ -75,7 +75,7 @@ const FormTicket = () => {
     return ( 
         <Stack sx={{background: '#0b2748', borderRadius: '25px', shadow:4}} my={4} mx={{xs: 1, sm: 6}} p={4} sm={6}>
             <form onSubmit={formik.handleSubmit}>
-                <Typography variant="h4" color='white'>Crear nuevo Ticket:</Typography>
+                <Typography variant="h4" color='white'>Registro de nuevo ingreso:</Typography>
                 <Grid container my={4}>
                     <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6}  my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Interno:</Typography>
@@ -275,7 +275,7 @@ const FormTicket = () => {
                         </TextField>
                     </Grid>
                     <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs:'none', sm:'block'}}>Destino / Servicio:</Typography>
+                        <Typography variant='subtitle1' color='white' display={{xs:'none', sm:'block'}}>Destino / Origen / Servicio:</Typography>
                         <TextField
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline':{
@@ -323,7 +323,7 @@ const FormTicket = () => {
                         <Button  variant="contained" ml='auto' type="submit" my={2}>Crear ticket</Button>
                     </Grid>
                     {openModal && 
-                        <BasicModal title='Exito' message='Ticket creado con exito' openModal={openModal}  />
+                        <BasicModal title='Exito' message='El registro de ingreso fue creado con éxito' openModal={openModal}  />
                     }
                 </Grid>
             </form>
