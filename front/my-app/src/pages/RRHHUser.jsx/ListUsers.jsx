@@ -10,7 +10,9 @@ const ListUsers = () => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/users', { headers: {"authorization": `Bearer ${token}` }} )
-        .then(data => setUsers(data.data.usuarios))
+        .then(data => {
+            console.log(data.data.usuarios)
+            setUsers(data.data.usuarios)})
         .catch(error => console.log('error users', error))
     }, [])
     
