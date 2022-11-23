@@ -10,9 +10,7 @@ const getAllUsers = async (req, res) => {
   const { rol } = req.usuario;
   try {
     let usuarios = await Usuario.findAll({
-      include: [
-        { association: "rol_usuario" },
-      ],
+      include: [{ association: "rol_usuario" }],
     });
 
     if (rol !== 1) {
@@ -54,6 +52,45 @@ const register = async (req, res) => {
       estado_password: 0,
     });
     return res.status(200).json({ mensaje: "usuario creado exitosamente" });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { id, motivo } = req.body;
+
+    if (!id || !motivo) {
+      return res.status(400).json({ mensaje: "faltan datos" });
+    }
+
+    const usuarioEncontrado = await Usuario.findOne({ where: { id } });
+
+    if (usuarioEncontrado === null) {
+      return res
+        .status(400)
+        .json({ mensaje: "no se encontro usuario con esa id" });
+    }
+
+    if (req.usuario.rol === 2 && usuarioEncontrado.roles_id === 1) {
+      return res
+        .status(400)
+        .json({ mensaje: "no tienes permisos para resetear la contraseña de ese usuario" });
+    }
+
+    //TODO: guardar el motivo del reseteo en algún lado.
+
+    await Usuario.update(
+      {
+        password: bcryptjs.hashSync("1234", 10),
+        estado_password: 0,
+      },
+      {
+        where: { id },
+      }
+    );
+    return res.status(200).json({ mensaje: "clave reseteada exitosamente" });
   } catch (error) {
     return res.status(400).json({ error });
   }
@@ -177,16 +214,14 @@ const getDataUserInfoToModify = async (req, res) => {
       return res.status(400).json({ mensaje: "usuario no existe" });
     }
   } catch (error) {
-    return res
-      .status(400)
-      .json({
-        mensaje: "error a la hora de obtener data para modificar usuario",
-      });
+    return res.status(400).json({
+      mensaje: "error a la hora de obtener data para modificar usuario",
+    });
   }
 };
 
 const modifyUser = async (req, res) => {
-  const { id , rol: rol_auth } = req.usuario;
+  const { id, rol: rol_auth } = req.usuario;
   const usuarioAModificar = parseInt(req.params.id);
 
   const { nombre, apellido, usuario, rol } = req.body;
@@ -200,11 +235,8 @@ const modifyUser = async (req, res) => {
       },
     });
 
-
-
     if (encontrado != null) {
       //casos que no son contemplados :toda la data es repetida con lo que ya esta en la base de datos
-
 
       // solo se controla que el usuario sea rrhh porque el auth de roles solo permite que lleguen admins y rrhh
       if (rol_auth === 2 && id !== encontrado.id) {
@@ -253,4 +285,5 @@ module.exports = {
   getDataUserInfoToModify,
   getDataInfoToCreateNewUser,
   getAllUsers,
+  resetPassword,
 };
