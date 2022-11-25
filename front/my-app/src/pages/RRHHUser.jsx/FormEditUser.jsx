@@ -25,7 +25,7 @@ const FormEditUser = () => {
     const [ user, setUser ] = useState({})
     // const navigate = useNavigate()
     const params = useParams()
-    const [ id, setId ] = useState(params.id)
+    const id = params.id
     const token = sessionStorage.getItem('jwt')
 
     const [ formValues, setFormValues ] = useState(null)
@@ -38,20 +38,6 @@ const FormEditUser = () => {
         password: "", // 2
         estado_password: "", // 2
     }
-
-    console.log('form values:', formValues)
-
-    const userSaved = {
-        nombre: "USERNAME", // '01-01-2022'
-        apellido: "APELLIDO1", // '12:00'
-        rol: 1, // 123
-        usuario: "USER", // 2
-        password: "ASDF1234", // 2
-        estado_password: 1, // 2
-    }
-
-    
-
     
     useEffect(() => {
         const url = `http://localhost:8080/users/getUser/${id}`

@@ -16,7 +16,7 @@ import { Box } from '@mui/material';
 export default function TableAdmin({ data }) {
   return (
    
-      <TableContainer component={Paper} >
+      <TableContainer component={Paper} sx={{width: '98%', margin:'auto'}}>
          <Box px={4}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -31,7 +31,7 @@ export default function TableAdmin({ data }) {
           </TableHead>
           <TableBody>
             {/* {console.log('DATA en tabla admin..:', data)} */}
-            {data?.reverse().map((row) => (
+            {data.length > 0 && data.reverse().map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

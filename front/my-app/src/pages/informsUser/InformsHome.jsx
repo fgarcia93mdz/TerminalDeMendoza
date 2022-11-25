@@ -35,18 +35,29 @@ const InformsHome = () => {
         
     })
 
+    const style = {
+        background: '#0b2748',
+        color: 'white',
+    }
+
+    const boxStyle = {
+        margin:'auto', 
+        width: '100%',
+        background: '#0b2748'
+    }
+
     return (
-        <Stack >
-            <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>Ingresantes</Typography>
+        <Stack>
+            <Box style={boxStyle}>
+                <Typography align='center' variant='h4' style={style} > Ingresantes </Typography>
                 <TableAdmin data={arrivals} />
             </Box>
-            <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>Fuera de plataforma </Typography>
+            <Box style={boxStyle}>
+                <Typography align='center' variant='h4' style={style} >Fuera de plataforma </Typography>
                 <TableAdmin data={arrivals} />
             </Box>
-            <Box sx={{margin:'auto', width: '100%'}}>
-                <Typography align='center' variant='h4'>En Plataforma</Typography>
+            <Box style={boxStyle}>
+                <Typography align='center' variant='h4' style={style} >En Plataforma</Typography>
                 <TableAdmin data={arrivals} />
             </Box>
         </Stack>

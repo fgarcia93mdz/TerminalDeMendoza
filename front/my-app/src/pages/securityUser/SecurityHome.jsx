@@ -9,17 +9,30 @@ import TableAdmin from '../../components/table/TableAdmin';
 const SecurityHome = () => {
     const [ arrivals, setArrivals ] = useState([])
 
-    const token = window.sessionStorage.getItem("jwt")
+    const token = sessionStorage.getItem('jwt')
 
     // FETCH DATA
-    const url = 'http://localhost:8080/informes/listadoSeparado'
-    const headers = { headers: { "authorization": `Bearer ${token}` } }
     useEffect(()=> {
-        axios.get(url, headers)
+        // // FETCH INGRESANTES
+        // console.log('token:', token)
+        // const url = 'http://localhost:8080/informes/listadoSeparado'
+        // const header = { headers: { "authorization": `Bearer ${token}` } }
+      
+        // // FETCH ARRIBOS
+        // axios.get(url, header)
+        // .then(data => {
+        //     console.log('data::', data.data.respuesta)
+        //     setArrivals(data)
+        // })
+        // .catch(error => { throw new Error('Error fetch arribos', error) })
+
+        
+        axios.get('http://localhost:8080/informes/listadoSeparado', { headers: {"authorization": `Bearer ${token}` }} )
         .then(data => {
-            setArrivals(data.data.respuesta)
-        })
-        .catch(error => { throw new Error('Error fetch arribos', error) })
+            console.log(data)})
+            // setUsers(data.data.usuarios)})
+        .catch(error => console.log('error security home', error))
+    
 
     }, [])
 
@@ -38,17 +51,8 @@ const SecurityHome = () => {
         <Stack >
             <Box style={styles}>
                 <Typography align='center' variant='h4' style={typographyStyles}>INGRESANDO</Typography>
-                <TableAdmin data={arrivals?.ingresando} />
+                <TableAdmin data={arrivals} />
             </Box>
-            <Box style={styles}>
-                <Typography align='center' variant='h4' style={typographyStyles}>EN PLATAFORMA</Typography>
-                <TableAdmin data={arrivals?.enPlataforma} />
-            </Box>
-            <Box style={styles}>
-                <Typography align='center' variant='h4' style={typographyStyles}>FUERA DE PLATAFORMA</Typography>
-                <TableAdmin data={arrivals?.fueraDePlataforma} />
-            </Box>
-           
         </Stack>
     )
 }

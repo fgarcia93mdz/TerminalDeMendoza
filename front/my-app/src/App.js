@@ -22,6 +22,8 @@ import InformsHome from "./pages/informsUser/InformsHome";
 import Protected from "./components/protected/Protected";
 import ListUsers from "./pages/RRHHUser.jsx/ListUsers";
 
+import AppWebRouter from "./AppWebRouter";
+
 // import clients
 
 function App() {
@@ -50,22 +52,29 @@ function App() {
 
   return (
     <div className="App">
-      <NavBarContainer isAdmin={isLoggedIn} />
+      {/* <NavBarContainer isAdmin={isLoggedIn} /> */}
       <>
         <Routes>
-          <Route exact path="/" element={<ArrivalsBoard />} />
+          {/* Admin Routes */}
+          <Route exact path="/arribos" element={<ArrivalsBoard />} />
+          {/*Partida Routes */}
+          <Route exact path="/partidas" element={<DeparturesBoard />} />
+          <Route component={AppWebRouter}/>
+
+          
+          {/* <Route exact path="/" element={<ArrivalsBoard />} /> */}
 
           {/* == TABLEROS DE LA TERMINAL - para el publico == */}
-          <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
-          <Route path="/tablero-partidas" element={<DeparturesBoard />} />
+          {/* <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
+          <Route path="/tablero-partidas" element={<DeparturesBoard />} /> */}
 
           {/* == LOGIN == */}
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/ingreso" element={<Ingreso />} />
+          {/* <Route exact path="/login" element={<Login />} />
+          <Route exact path="/ingreso" element={<Ingreso />} /> */}
 
           {/* == SEGURIDAD - CRUD TICKET == */}
           {/* crea un ticket sin plataforma ni horarios */}
-          <Route
+          {/* <Route
             exact
             path="/seguridad/ticket/crear"
             element={
@@ -82,9 +91,9 @@ function App() {
                 <SecurityHome />
               </Protected>
             }
-          />
+          /> */}
           {/* Arribos desde seguridad */}
-          <Route
+          {/* <Route
             exact
             path="/seguridad/arribos"
             element={
@@ -92,19 +101,19 @@ function App() {
                 <ArrivalsBoard />
               </Protected>
             }
-          />
+          /> */}
           {/* Partidas desde seguridad */}
-          <Route
+          {/* <Route
             exact
             path="/seguridad/partidas"
             element={<DeparturesBoard />}
-          />
+          /> */}
           {/* == INFORMES - CRUD TICKET == */}
-          <Route exact path="/ticket/editar" element={<FormTicket />} />
+          {/* <Route exact path="/ticket/editar" element={<FormTicket />} /> */}
           {/* edita o termina un ticket, le agrega plataforma y horario */}
-          <Route exact path="/informes" element={<InformsHome />} />
+          {/* <Route exact path="/informes" element={<InformsHome />} /> */}
           {/* cera un registro de ser necesario */}
-          <Route
+          {/* <Route
             exact
             path="/informes/ticket/crear"
             element={
@@ -112,9 +121,9 @@ function App() {
                 <FormTicket id={userId} />
               </Protected>
             }
-          />
+          /> */}
           {/* Arribos desde informes */}
-          <Route
+          {/* <Route
             exact
             path="/informes/arribos"
             element={
@@ -122,27 +131,23 @@ function App() {
                 <ArrivalsBoard />
               </Protected>
             }
-          />
+          /> */}
           {/* Partidas desde informes */}
-          <Route
+          {/* <Route
             exact
             path="/informes/partidas"
             element={<DeparturesBoard />}
-          />
+          /> */}
 
           {/* == RECURSOS HUMANOS - CRUD USER == */}
-          <Route exact path="/usuarios/editar/:id" element={<FormEditUser />} />
+          {/* <Route exact path="/usuarios/editar/:id" element={<FormEditUser />} />
           <Route exact path="/usuarios/crear" element={<FormCreateUser />} />
-          <Route exact path="/usuarios" element={<ListUsers />} />
+          <Route exact path="/usuarios" element={<ListUsers />} /> */}
 
 
-          {/* Admin Routes */}
-          <Route path="/arribos" element={<ArrivalsBoard />} />
-          {/*Partida Routes */}
-          <Route path="/partidas" element={<DeparturesBoard />} />
+      
         </Routes>
       </>
-      <Footer />
     </div>
   );
 }

@@ -83,7 +83,7 @@ const FormTicket = ({ id }) => {
 
     return (
       <Stack
-        sx={{ background: "#1C68C0", borderRadius: "25px", shadow: 4 }}
+        sx={{ background: "#0b2748", borderRadius: "25px", shadow: 4 }}
         my={4}
         mx={{ xs: 1, sm: 6 }}
         p={4}
@@ -464,7 +464,7 @@ const FormTicket = ({ id }) => {
                 py={2}
                 my={4}
                 mx={4}
-                sx={{ backgroundColor: "black" }}
+                sx={{ backgroundColor: "blue" }}
               >
                 Crear registro
               </Button>

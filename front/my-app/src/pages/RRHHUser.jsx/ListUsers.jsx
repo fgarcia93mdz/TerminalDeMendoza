@@ -14,7 +14,7 @@ const ListUsers = () => {
             console.log(data.data.usuarios)
             setUsers(data.data.usuarios)})
         .catch(error => console.log('error users', error))
-    }, [])
+    }, [token])
     
     const style ={
         background: '#0b2748',
