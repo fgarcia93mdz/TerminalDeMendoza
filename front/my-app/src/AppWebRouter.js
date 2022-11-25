@@ -2,14 +2,11 @@ import React, { useState } from "react";
 
 import { Routes, Route } from 'react-router-dom'
 
-// import Home from './pages/home/Home';
 import ArrivalsBoard from "./pages/board-tv/ArrivalsBoard";
 import DeparturesBoard from "./pages/board-tv/DeparturesBoard";
 import Login from "./pages/login/Login";
 import Ingreso from "./pages/login/Ingreso";
-// import CustomizedTables from './components/table/Table';
 import FormTicket from "./pages/ticket/FormTicket";
-// import ArrivalsTable from './pages/table-admin/ArrivalsTable';
 import FormEditUser from "./pages/RRHHUser.jsx/FormEditUser";
 import FormCreateUser from "./components/profile/FormCreateUser";
 import SecurityHome from "./pages/securityUser/SecurityHome";
