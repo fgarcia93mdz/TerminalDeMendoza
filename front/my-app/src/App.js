@@ -14,7 +14,8 @@ function App() {
         <Routes>
           <Route exact path="/arribos" element={<ArrivalsBoard />} />
           <Route exact path="/partidas" element={<DeparturesBoard />} />
-          <Route component={AppWebRouter}/>
+          <Route path="*" element={<AppWebRouter />} />
+          {/* <Route component={AppWebRouter}/> */}
         </Routes>
     </div>
   );

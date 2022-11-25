@@ -130,6 +130,8 @@ const AppWebRouter = () => {
                 <Route exact path="/usuarios/crear" element={<FormCreateUser />} />
                 <Route exact path="/usuarios" element={<ListUsers />} />
 
+                <Route path='*' component={<h1>404 Not Found</h1>} />
+
             </Routes>
             <Footer />
 
