@@ -9,12 +9,13 @@ import TableAdmin from '../../components/table/TableAdmin';
 const SecurityHome = () => {
     const [ arrivals, setArrivals ] = useState([])
 
-    const token = sessionStorage.getItem('jwt')
+    const token = window.sessionStorage.getItem('jwt')
+    console.log('token', token)
 
     // FETCH DATA
     useEffect(()=> {
         
-        axios.get('http://localhost:8080/informes/listadoSeparado', { headers: {"authorization": `Bearer ${token}` }} )
+        axios.get('http://localhost:8080/informes/listadoSeparado', { headers: {authorization: `Bearer ${token}` }} )
         .then(data => {
             console.log('listado:',data)})
             // setUsers(data.data.usuarios)})

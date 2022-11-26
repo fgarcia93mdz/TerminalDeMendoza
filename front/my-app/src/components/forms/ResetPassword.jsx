@@ -17,7 +17,6 @@ const ResetPassword = () => {
     const [ openModal, setOpenModal ] = useState(false)
     const [ users, setUsers ] = useState([])
     const token = window.sessionStorage.getItem('jwt')
-    console.log('token', token)
     // const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,8 +27,8 @@ const ResetPassword = () => {
     }, [token])
 
     const initialReason = {
-        motivo: '', // '01-01-2022'
-        id: '' // '12:00'
+        motivo: '', // string
+        id: '' // number
     }
     const url = 'http://localhost:8080/users/resetPassword'
     const config =  { headers: { 'authorization': `Bearer ${token}` } }
@@ -40,27 +39,16 @@ const ResetPassword = () => {
         onSubmit: (values) => {
             
             const data = formik.values
-            // console.log('data form', data)
-            debugger
+
             axios.post(url, data, config)
                 .then((res) => {
-                    // console.log('response', res)
-                    // 
                     if(res.status === 200){
-                        // const jwt = res.data
-                        // escribe el jwt en session
-                        // window.sessionStorage.setItem("jwt", jwt);
-                        // redirecciona a la pagina principal
                         setOpenModal(true)
-                        // navigate("/")
-                        // return alert('ok')
                     }
                 })
                 .catch(function (error) {
                     console.log('Error send reset pasword:', error);
                 });
-
-        //   alert(JSON.stringify(values, null, 2));
         },
       });
 
