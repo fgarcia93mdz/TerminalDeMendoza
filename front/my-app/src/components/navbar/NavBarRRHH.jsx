@@ -133,10 +133,9 @@ const NavBarRRHH = ({ name }) => {
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
-                        <Link to='/usuarios' exact>
+                        <Link to='/usuarios' onClick={handleCloseNavMenu}>
                             <Button
                                 key={'inicio'}
-                                onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
                                         marginLeft: "30px",
                                         fontSize: "18px", }}
@@ -144,46 +143,35 @@ const NavBarRRHH = ({ name }) => {
                                 USUARIOS
                             </Button>
                         </Link>
-                        <Link to='/usuarios/crear'>
+                        <Link to='/usuarios/crear' onClick={handleCloseNavMenu}>
                             <Button
                                 key={'inicio2'}
-                                onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
                                         fontSize: "18px", }}
                             >
                                 CREAR USUARIO
                             </Button>
                         </Link>
-                        {/* <Button
-                            key={'inicio3'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                            <Link to='/usuarios/editar/1'>
-                                EDITAR USUARIO 1
-                            </Link>
-                        </Button> */}
-                        {/* <Button
-                            key={'inicio4'}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                        >
-                            <Link to='/'>
-                                PERFIL
-                            </Link>
-                        
-                        </Button> */}
+                        <Link to='/usuarios/resetPass'  onClick={handleCloseNavMenu}>
+                            <Button
+                                key={'inicio2'}
+                                sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
+                                        fontSize: "18px", }}
+                            >
+                                RESETEAR CONTRASEÑAS
+                            </Button>
+                        </Link>
 
                         {userInfo && !userInfo.nombre && 
-                            <Button
-                                key={'inicio6'}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                            >
-                                <Link to='/login'>
+                            <Link to='/login' onClick={handleCloseNavMenu}>
+                                <Button
+                                    key={'inicio6'}
+                                    sx={{ my: 2, color: '#0E315A', display: 'block' }}
+                                >
+                                
                                     LOGIN
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         } 
                       
                     </Box>
@@ -195,13 +183,9 @@ const NavBarRRHH = ({ name }) => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                     
-                                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                <Avatar>
-                                                    <SettingsIcon />
-                                                </Avatar>
-                                            </IconButton>
-                                    
+                            <Avatar>
+                                <SettingsIcon />
+                            </Avatar>
                         </IconButton>
                         </Tooltip>
                         <Menu

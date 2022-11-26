@@ -13,23 +13,10 @@ const SecurityHome = () => {
 
     // FETCH DATA
     useEffect(()=> {
-        // // FETCH INGRESANTES
-        // console.log('token:', token)
-        // const url = 'http://localhost:8080/informes/listadoSeparado'
-        // const header = { headers: { "authorization": `Bearer ${token}` } }
-      
-        // // FETCH ARRIBOS
-        // axios.get(url, header)
-        // .then(data => {
-        //     console.log('data::', data.data.respuesta)
-        //     setArrivals(data)
-        // })
-        // .catch(error => { throw new Error('Error fetch arribos', error) })
-
         
         axios.get('http://localhost:8080/informes/listadoSeparado', { headers: {"authorization": `Bearer ${token}` }} )
         .then(data => {
-            console.log(data)})
+            console.log('listado:',data)})
             // setUsers(data.data.usuarios)})
         .catch(error => console.log('error security home', error))
     

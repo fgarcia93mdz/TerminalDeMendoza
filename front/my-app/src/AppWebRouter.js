@@ -16,6 +16,8 @@ import ListUsers from "./pages/RRHHUser.jsx/ListUsers";
 import jwt_decode from "jwt-decode";
 import NavBarContainer from "./components/navbar/NavBarContainer";
 import Footer from "./components/footer/Footer";
+import NotFoundPage from './pages/not-found/NotFound';
+import PageResetPassword from "./pages/RRHHUser.jsx/PageResetPassword";
 
 
 const AppWebRouter = () => {
@@ -24,10 +26,13 @@ const AppWebRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [userId, setUserId] = useState(null);
+//   const [ tokenState, setTokenState ] = useState(null);
 
-  const token = window.sessionStorage.getItem("jwt");
 
-  React.useEffect(() => {
+    const token = window.sessionStorage.getItem("jwt");
+
+React.useEffect(() => {
+    // if (token.length > 0) { setTokenState(token) }
     if (token === undefined || token === null) {
       setIsLoggedIn(false);
     } else if (token !== undefined || token !== null) {
@@ -45,21 +50,16 @@ const AppWebRouter = () => {
 
     return (
         <>
-            <NavBarContainer isAdmin={isLoggedIn} />
+            <NavBarContainer />
 
             <Routes>
                 <Route exact path="/" element={<ArrivalsBoard />} />
-
-                {/* == TABLEROS DE LA TERMINAL - para el publico == */}
                 <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
                 <Route path="/tablero-partidas" element={<DeparturesBoard />} />
-
-                {/* == LOGIN == */}
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/ingreso" element={<Ingreso />} />
+                <Route path="/perfil/editar" element={<FormEditUser />} />
 
-                {/* == SEGURIDAD - CRUD TICKET == */}
-                {/* crea un ticket sin plataforma ni horarios */}
                 <Route
                 exact
                 path="/seguridad/ticket/crear"
@@ -78,7 +78,6 @@ const AppWebRouter = () => {
                     </Protected>
                 }
                 />
-                {/* Arribos desde seguridad */}
                 <Route
                 exact
                 path="/seguridad/arribos"
@@ -88,17 +87,13 @@ const AppWebRouter = () => {
                     </Protected>
                 }
                 />
-                {/* Partidas desde seguridad */}
                 <Route
                 exact
                 path="/seguridad/partidas"
                 element={<DeparturesBoard />}
                 />
-                {/* == INFORMES - CRUD TICKET == */}
                 <Route exact path="/ticket/editar" element={<FormTicket />} />
-                {/* edita o termina un ticket, le agrega plataforma y horario */}
                 <Route exact path="/informes" element={<InformsHome />} />
-                {/* cera un registro de ser necesario */}
                 <Route
                 exact
                 path="/informes/ticket/crear"
@@ -108,7 +103,6 @@ const AppWebRouter = () => {
                     </Protected>
                 }
                 />
-                {/* Arribos desde informes */}
                 <Route
                 exact
                 path="/informes/arribos"
@@ -118,19 +112,18 @@ const AppWebRouter = () => {
                     </Protected>
                 }
                 />
-                {/* Partidas desde informes */}
                 <Route
                 exact
                 path="/informes/partidas"
                 element={<DeparturesBoard />}
                 />
 
-                {/* == RECURSOS HUMANOS - CRUD USER == */}
+                <Route exact path="/usuarios/resetPass" element={<PageResetPassword token={token} />} />
                 <Route exact path="/usuarios/editar/:id" element={<FormEditUser />} />
                 <Route exact path="/usuarios/crear" element={<FormCreateUser />} />
                 <Route exact path="/usuarios" element={<ListUsers />} />
 
-                <Route path='*' component={<h1>404 Not Found</h1>} />
+                <Route path='*' element={<NotFoundPage />} />
 
             </Routes>
             <Footer />
