@@ -18,6 +18,7 @@ import NavBarContainer from "./components/navbar/NavBarContainer";
 import Footer from "./components/footer/Footer";
 import NotFoundPage from './pages/not-found/NotFound';
 import PageResetPassword from "./pages/RRHHUser.jsx/PageResetPassword";
+import WritePassword from "./components/forms/WritePassword";
 
 
 const AppWebRouter = () => {
@@ -59,6 +60,7 @@ React.useEffect(() => {
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/ingreso" element={<Ingreso />} />
                 <Route path="/perfil/editar" element={<FormEditUser />} />
+                <Route path="/perfil/password" element={<WritePassword />} />
 
                 <Route
                 exact
@@ -74,7 +76,7 @@ React.useEffect(() => {
                 path="/seguridad"
                 element={
                     <Protected isLoggedIn={isLoggedIn}>
-                    <SecurityHome />
+                        <SecurityHome />
                     </Protected>
                 }
                 />

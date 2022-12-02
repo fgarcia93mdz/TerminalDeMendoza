@@ -160,6 +160,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
       respuesta,
     });
   } catch (error) {
+    console.log('error informes controller:', error)
     return res.status(400).json({ mensaje: error });
   }
 };
