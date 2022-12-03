@@ -7,6 +7,7 @@ import TableAdmin from '../../components/table/TableAdmin';
 
 
 const SecurityHome = () => {
+    
     const [ arrivals, setArrivals ] = useState([])
 
     const token = window.sessionStorage.getItem('jwt')
@@ -17,8 +18,9 @@ const SecurityHome = () => {
         
         axios.get('http://localhost:8080/informes/listadoSeparado', { headers: {authorization: `Bearer ${token}` }} )
         .then(data => {
-            console.log('listado:',data)})
-            // setUsers(data.data.usuarios)})
+                // console.log('listado:',data.data.respuesta )
+                setArrivals(data.data.respuesta.ingresando)
+            })
         .catch(error => console.log('error security home', error))
     
 

@@ -15,9 +15,10 @@ const initialTicket = {
     empresa_id: "", // 2
     servicios_id: "", // 2
     usuarios_id: "", // 2
-    plataformas_id: "", // ? 1
+    // plataformas_id: "", // ? 1
     estado_id: "", // '0'
-    destino: "" // 'Mar de Ajo'
+     // 'Mar de Ajo'
+    destino: ""
 }
 
 
@@ -29,7 +30,7 @@ const validationSchema = yup.object({
     servicios_id: yup.number().required('Campo requerido'),
     estado_id: yup.string().required('Campo requerido'),
     destino: yup.string().required('Campo requerido'),
-    usuarios_id: yup.string().required('Campo requerido')
+    usuarios_id: yup.string().required('Campo requerido'),
     // plataformas_id: yup.string().required('Campo requerido')
   });
 
@@ -56,7 +57,7 @@ const FormTicket = () => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
       
-            const url = 'http://localhost:8080/api/plataforma/ticket/crear'
+            const url = 'http://localhost:8080/ingresos/nuevo'
             const data = formik.values
 
             axios.post(url, data)
@@ -77,6 +78,24 @@ const FormTicket = () => {
             <form onSubmit={formik.handleSubmit}>
                 <Typography variant="h4" color='white'>Registro de nuevo ingreso:</Typography>
                 <Grid container my={4}>
+                <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6}  my={2}>
+                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>tipo_tv_id:</Typography>
+                        <TextField 
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline':{
+                                    borderColor: 'white'
+                                },
+                                '.MuiInputBase-root':{
+                                    color: 'white'
+                                }
+                            }}
+                            InputProps={{
+                                type: "number"
+                            }} 
+                            defaultValue={1}
+                            name='tipo_tv_id'
+                        />
+                    </Grid>
                     <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6}  my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Interno:</Typography>
                         <TextField 

@@ -6,7 +6,7 @@ import ArrivalsBoard from "./pages/board-tv/ArrivalsBoard";
 import DeparturesBoard from "./pages/board-tv/DeparturesBoard";
 import Login from "./pages/login/Login";
 import Ingreso from "./pages/login/Ingreso";
-import FormTicket from "./pages/ticket/FormTicket";
+import FormTicket from "./pages/securityUser/FormTicket";
 import FormEditUser from "./pages/RRHHUser.jsx/FormEditUser";
 import FormCreateUser from "./components/profile/FormCreateUser";
 import SecurityHome from "./pages/securityUser/SecurityHome";
@@ -67,7 +67,7 @@ React.useEffect(() => {
                 path="/seguridad/ticket/crear"
                 element={
                     <Protected isLoggedIn={isLoggedIn}>
-                    <FormTicket id={userId} />
+                        <FormTicket />
                     </Protected>
                 }
                 />
@@ -101,7 +101,7 @@ React.useEffect(() => {
                 path="/informes/ticket/crear"
                 element={
                     <Protected isLoggedIn={isLoggedIn}>
-                    <FormTicket id={userId} />
+                        <FormTicket id={userId} />
                     </Protected>
                 }
                 />

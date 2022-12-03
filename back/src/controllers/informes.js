@@ -15,6 +15,7 @@ const addInforme = async (req, res) => {
   try {
     const data = req.body;
     const { id: usuarios_id, rol } = req.usuario;
+
     // if (tieneCampoNull(dataAIngresar)) {
     //   return res.status(400).json({ mensaje: "faltan datos" });
     // }
@@ -118,14 +119,14 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
     let hora = diaHoy.format("HH:mm");
     let ingresos = await RegistroTorre.findAll({
       include: ["registro_empresa", "registro_plataforma", "registro_estado"],
-      where: {
-        fecha_ingreso: {
-          [Op.gt]: diaAyer,
-        },
-      },
       order: [["hora_salida", "DESC"]],
     });
-
+    
+    // where: {
+    //   fecha_ingreso: {
+    //     [Op.gt]: diaAyer,
+    //   },
+    // },
     const respuesta = {
       fueraDePlataforma: [],
       enPlataforma: [],
@@ -139,7 +140,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         interno: ingreso.interno,
         empresa: ingreso.registro_empresa.dataValues.empresa,
         horario_salida: ingreso.hora_salida,
-        plataforma: ingreso.registro_plataforma.dataValues.plataforma,
+        plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
       };
 
@@ -170,17 +171,20 @@ const informesListado = async (req, res) => {
     let diaHoy = moment();
     let diaAyer = diaHoy.add(-1, "days");
     let hora = diaHoy.format("HH:mm");
+    
     let ingresos = await RegistroTorre.findAll({
       include: ["registro_empresa", "registro_plataforma", "registro_estado"],
-      where: {
-        fecha_ingreso: {
-          [Op.gt]: diaAyer,
-        },
-      },
       order: [["hora_salida", "DESC"]],
     });
-
+    
+    // where: {
+    //   fecha_ingreso: {
+    //     [Op.gt]: diaAyer,
+    //   },
+    // },
     const respuesta = [];
+
+    console.log('ingresos controller:', ingresos)
 
     ingresos.forEach((ingreso) => {
       respuesta.push({
@@ -189,7 +193,7 @@ const informesListado = async (req, res) => {
         interno: ingreso.interno,
         empresa: ingreso.registro_empresa.dataValues.empresa,
         horario_salida: ingreso.hora_salida,
-        plataforma: ingreso.registro_plataforma.dataValues.plataforma,
+        plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
       });
     });
