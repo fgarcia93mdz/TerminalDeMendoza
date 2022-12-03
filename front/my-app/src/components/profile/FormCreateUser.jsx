@@ -62,7 +62,6 @@ const FormCreateUser = () => {
                         // redirecciona a la pagina principal
                         setOpenModal(true)
                         // navigate("/")
-                        return alert('ok')
                     }
                 })
                 .catch(function (error) {
@@ -76,13 +75,13 @@ const FormCreateUser = () => {
       });
 
 
-    React.useEffect(() => {
-        if(!formik.errors){
-            alert('no hay errores')
-        }
-        // if(formik.isValid) return alert('valido')
-        console.log('ticket', formik.values)
-    }, [formik])
+    // React.useEffect(() => {
+    //     if(!formik.errors){
+    //         alert('no hay errores')
+    //     }
+    //     // if(formik.isValid) return alert('valido')
+    //     console.log('ticket', formik.values)
+    // }, [formik])
 
 
     return (

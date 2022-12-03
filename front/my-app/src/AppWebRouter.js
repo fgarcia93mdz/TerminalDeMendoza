@@ -85,7 +85,7 @@ React.useEffect(() => {
                 path="/seguridad/arribos"
                 element={
                     <Protected isLoggedIn={isLoggedIn}>
-                    <ArrivalsBoard />
+                        <ArrivalsBoard />
                     </Protected>
                 }
                 />

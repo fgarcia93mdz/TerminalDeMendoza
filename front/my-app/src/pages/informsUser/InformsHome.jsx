@@ -6,7 +6,9 @@ import TableAdmin from '../../components/table/TableAdmin';
 
 
 const InformsHome = () => {
-    const [ arrivals, setArrivals ] = useState([])
+    const [ ingresando, setIngresando ] = useState([])
+    const [ enPlataforma, setEnPlataforma ] = useState([])
+    const [ fueraDePlataforma, setFueraDePlataforma ] = useState([])
 
 
     const token = window.sessionStorage.getItem("jwt")
@@ -14,26 +16,18 @@ const InformsHome = () => {
     useEffect(()=> {
         // FETCH INGRESANTES
         const url = 'http://localhost:8080/informes/listadoSeparado'
-        const headers = { headers: { "authorization": `Bearer ${token}` } }
+        const config = { headers: { authorization: `Bearer ${token}` } }
       
         // FETCH ARRIBOS
-        axios.get(url, headers)
+        axios.get(url, config)
         .then(data => {
-            console.log('data::', data.data.respuesta)
-            setArrivals(data)
+            setIngresando(data.data.respuesta.ingresando)
+            setEnPlataforma(data.data.respuesta.enPlataforma)
+            setFueraDePlataforma(data.data.respuesta.fueraDePlataforma)
         })
         .catch(error => { throw new Error('Error fetch arribos', error) })
 
-        // // FETCH SALIDAS
-        // axios.get('http://localhost:8080/api/plataforma/arribos')
-        // .then(response =>  response.json())
-        // .then(data => {
-        //     console.log('data::', data)
-        //     return setArrivals(data)
-        // })
-        // .catch(error => { throw new Error('Error fetch arribos', error) })
-        
-    })
+    }, [token])
 
     const style = {
         background: '#0b2748',
@@ -50,15 +44,15 @@ const InformsHome = () => {
         <Stack>
             <Box style={boxStyle}>
                 <Typography align='center' variant='h4' style={style} > Ingresantes </Typography>
-                <TableAdmin data={arrivals} />
+                <TableAdmin data={ingresando} />
             </Box>
             <Box style={boxStyle}>
                 <Typography align='center' variant='h4' style={style} >Fuera de plataforma </Typography>
-                <TableAdmin data={arrivals} />
+                <TableAdmin data={enPlataforma} />
             </Box>
             <Box style={boxStyle}>
                 <Typography align='center' variant='h4' style={style} >En Plataforma</Typography>
-                <TableAdmin data={arrivals} />
+                <TableAdmin data={fueraDePlataforma} />
             </Box>
         </Stack>
     )
