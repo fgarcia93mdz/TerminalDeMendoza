@@ -5,12 +5,13 @@ module.exports = (sequelize, dataTypes) => {
       id: {
         type: dataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       rol: {
         type: dataTypes.STRING(45),
-        allowNull: false
+        allowNull: false,
       },
+      borrado: dataTypes.BIGINT(2),
     };
     let config = {
       tableName: 'roles',

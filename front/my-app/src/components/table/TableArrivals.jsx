@@ -120,12 +120,14 @@ export default function GenericTable( {props} ) {
                   {row.hora_salida}
                 </StyledTableCell> */}
                 <StyledTableCell align="center">
-                  <div className="box" style={styles.cajaFoto}>
-                    <img
-                      src={require("../../assets/img/empresas/" + row.registro_empresa.img)}
-                      alt=""
-                    />
-                  </div>
+                    {row.registro_empresa.img != null &&
+                      <div className="box" style={styles.cajaFoto}>
+                        <img
+                          src={require("../../assets/img/empresas/" + row.registro_empresa.img)}
+                          alt=""
+                        />
+                      </div>
+                    }
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.interno}</StyledTableCell>
                 
