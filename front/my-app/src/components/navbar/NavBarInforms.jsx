@@ -161,34 +161,42 @@ const NavBarInforms = ({ name }) => {
                 justifyContent: "start",
               }}
             >
-              <Button
-                key={"inicio"}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#0E315A", display: "block" }}
-              >
-                <Link to="/informes">Plataformas e Ingresos</Link>
-              </Button>
-              <Button
-                key={"crearRegistro"}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#0E315A", display: "block" }}
-              >
-                <Link to="/informes/ticket/crear">Crear Ingreso</Link>
-              </Button>
-              <Button
-                key={"arribos"}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#0E315A", display: "block" }}
-              >
-                <Link to="/informes/arribos">Arribos</Link>
-              </Button>
-              <Button
-                key={"partidas"}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#0E315A", display: "block" }}
-              >
-                <Link to="/informes/partidas">Partidas</Link>
-              </Button>
+              <Link to="/informes">
+                <Button
+                  key={"inicio"}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "#0E315A", display: "block" }}
+                >
+                  Plataformas e Ingresos
+                </Button>
+              </Link>
+              <Link to="/informes/ticket/crear">
+                <Button
+                  key={"crearRegistro"}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "#0E315A", display: "block" }}
+                >
+                  Crear Ingreso
+                </Button>
+              </Link>
+              <Link to="/informes/arribos">
+                <Button
+                  key={"arribos"}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "#0E315A", display: "block" }}
+                >
+                  Arribos 
+                </Button>
+              </Link>
+              <Link to="/informes/partidas">
+                <Button
+                  key={"partidas"}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "#0E315A", display: "block" }}
+                >
+                  Partidas
+                </Button>
+              </Link>
 
               {/* {userInfo && !userInfo.nombre && (
                 <Button
