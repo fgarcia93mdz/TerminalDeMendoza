@@ -116,7 +116,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
   try {
     let diaHoy = moment();
     let diaAyer = diaHoy.add(-1, "days");
-    let hora = diaHoy.format("HH:mm");
+    let hora = diaHoy.format("HH:mm:ss");
     let ingresos = await RegistroTorre.findAll({
       include: ["registro_empresa", "registro_plataforma", "registro_estado"],
       order: [["hora_salida", "DESC"]],
@@ -136,12 +136,14 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
     ingresos.forEach((ingreso) => {
       const data = {
         id: ingreso.id,
+        fecha_ingreso: ingreso.fecha_ingreso,
+        horario_ingreso: ingreso.hora_ingreso,
         destino: ingreso.destino,
         interno: ingreso.interno,
         empresa: ingreso.registro_empresa.dataValues.empresa,
-        horario_salida: ingreso.hora_salida,
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
+        horario_salida: ingreso.hora_salida,
       };
 
       if (ingreso.estado_id === 1) {

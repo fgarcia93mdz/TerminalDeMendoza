@@ -9,17 +9,20 @@ import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
+import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
 
-
-
-
+const day = `Informe de ingresos_${new Date().toJSON().slice(0, 10)}`;
 
 
 export default function TableUsers({ data }) {
   return (
     <TableContainer component={Paper}>
       <Box px={4}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{ minWidth: 650 }}
+          aria-label="simple table"
+          id="rrhh"
+        >
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
@@ -54,6 +57,19 @@ export default function TableUsers({ data }) {
           </TableBody>
         </Table>
       </Box>
+        <br />
+        <br />
+        <div>
+          <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="download-table-xls-button"
+            table="rrhh"
+            filename={day}
+            sheet="Usuarios"
+            buttonText="Descargar Excel"
+          />
+      </div>
+      <br />
     </TableContainer>
   );
 }
