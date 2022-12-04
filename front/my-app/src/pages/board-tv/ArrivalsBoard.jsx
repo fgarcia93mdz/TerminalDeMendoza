@@ -21,7 +21,7 @@ const ArrivalsBoard = () => {
           return data.json()
         })
         .then( result => {
-           console.log('result:', result)
+          //  console.log('result:', result)
            return setEstado(result)
         })
 
@@ -29,7 +29,7 @@ const ArrivalsBoard = () => {
         
     }, [])
 
-    console.log(estado)
+    // console.log(estado)
     
 
     return (

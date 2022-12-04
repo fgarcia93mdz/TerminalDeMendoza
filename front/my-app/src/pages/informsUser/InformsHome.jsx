@@ -44,15 +44,15 @@ const InformsHome = () => {
         <Stack>
             <Box style={boxStyle}>
                 <Typography align='center' variant='h4' style={style} > Ingresantes </Typography>
-                <TableAdmin data={ingresando} />
+                <TableAdmin edit={true} data={ingresando} />
             </Box>
             <Box style={boxStyle}>
                 <Typography align='center' variant='h4' style={style} >Fuera de plataforma </Typography>
-                <TableAdmin data={enPlataforma} />
+                <TableAdmin  edit={true} data={enPlataforma} />
             </Box>
             <Box style={boxStyle}>
                 <Typography align='center' variant='h4' style={style} >En Plataforma</Typography>
-                <TableAdmin data={fueraDePlataforma} />
+                <TableAdmin  edit={true} data={fueraDePlataforma} />
             </Box>
         </Stack>
     )

@@ -68,7 +68,7 @@ const FormEditUser = () => {
 
             const url = `http://localhost:8080/users/modifyUser/${id}`
             const data = formik.values
-            const headers = {headers: {"authorization": `Bearer ${token}` }}
+            const headers = { headers: {"authorization": `Bearer ${token}` }}
 
             axios.patch(url, data, headers)
                 .then((res) => {

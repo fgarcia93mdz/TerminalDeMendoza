@@ -23,22 +23,43 @@ const validationSchema = yup.object({
     // plataformas_id: yup.string().required('Campo requerido')
   });
 
-const FormTicketEdit = ({ ticket }) => { 
+const FormEditTicket = ({ ticket }) => { 
     const [ openModal, setOpenModal ] = useState(false)
     const [ dataDropdown, setDataDropdown ] = useState({})
     // const navigate = useNavigate()
     const token = sessionStorage.getItem('jwt')
 
+    const PLATAFORMAS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+    console.log('ticket prop:', ticket)
+
     const initialTicket = {
+        fecha_ingreso: "", // '01-01-2022'
+        hora_ingreso: "", // '12:00'
+        interno: "", // 123
+        empresa_id: "", // 2
+        servicios_id: "", // 2
+        usuarios_id: "", // 2
+        plataformas_id: "" || null, // ? 1
+        estado_id: "" , // '0'
+        destino: "", // 'Mar de Ajo'
+        hora_salida: "",
+        fecha_salida: ""
+    }
+
+    const editTicket = {
         fecha_ingreso: ticket.fecha_ingreso, // '01-01-2022'
         hora_ingreso: ticket.hora_ingreso, // '12:00'
         interno: ticket.interno, // 123
-        empresa_id: ticket.empresa_id, // 2
-        servicios_id: ticket.servicios_id, // 2
+        empresa_id: ticket.registro_empresa?.id, // 2
+        servicios_id: ticket.registro_servicio.id, // 2
         usuarios_id: ticket.usuarios_id, // 2
-        plataformas_id: ticket.plataformas_id || null, // ? 1
-        estado_id: ticket.estado_id, // '0'
-        destino: ticket.destino // 'Mar de Ajo'
+        plataformas_id: ticket.registro_plataforma.id || null, // ? 1
+        estado_id: ticket.registro_estado.id, // '0'
+        destino: ticket.destino, // 'Mar de Ajo'
+        tipo_tv_id: ticket.tipo_tv_id, // 1 o 2
+        fecha_salida: ticket.fecha_salida,
+        hora_salida: ticket.hora_salida
     }
 
     
@@ -54,14 +75,17 @@ const FormTicketEdit = ({ ticket }) => {
     }, [token])
     
     const formik = useFormik({
-        initialValues: initialTicket,
+        initialValues: editTicket || initialTicket,
         validationSchema: validationSchema,
+        enableReinitialize: true,
         onSubmit: (values) => {
-      
-            const url = 'http://localhost:8080/api/plataforma/ticket/crear'
+            const config = { headers: { authorization: `Bearer ${token}`}}
+            const url = `http://localhost:8080/informes/modificar/${ticket.id}`
             const data = formik.values
 
-            axios.post(url, data)
+            console.log('data to send:', data)
+
+            axios.patch(url, data, config)
                 .then((res) => {
                     // console.log('response', res)
                     // 
@@ -98,6 +122,80 @@ const FormTicketEdit = ({ ticket }) => {
             <form onSubmit={formik.handleSubmit}>
                 <Typography variant="h4" color='white'>Crear nuevo Ticket:</Typography>
                 <Grid container my={4}>
+                <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={12} my={2}>
+                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Plataforma:</Typography>
+                        <TextField
+                            select
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline':{
+                                    borderColor: 'white'
+                                },
+                                '.MuiInputBase-root':{
+                                    color: 'white'
+                                }
+                            }}
+                            InputLabelProps={{
+                                style: { color: '#fff' },
+                            }}
+                            label='Inserte plataforma'
+                            name='plataformas_id'
+                            value={formik.values.plataformas_id}
+                            onChange={formik.handleChange}
+                            error={formik.errors.plataformas_id}
+                            helperText={formik.errors.plataformas_id}
+                        >
+                        {PLATAFORMAS?.map((plat) => 
+                            <MenuItem value={plat} key={plat} selected={true}>{plat}</MenuItem>
+                        )}
+                        </TextField>
+                    </Grid>
+                    <Grid item  display={{ xs: 'block', sm: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm: 0}}>Fecha de salida:</Typography>
+                        <TextField 
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline':{
+                                    borderColor: 'white'
+                                },
+                                '.MuiInputBase-root':{
+                                    color: 'white'
+                                }
+                            }}
+                            
+                            InputProps={{
+                                type: "date",
+                            }} 
+                            name='fecha_salida'
+                            value={formik.values.fecha_salida}
+                            onChange={formik.handleChange}
+                            error={formik.errors.fecha_salida}
+                            helperText={formik.errors.fecha_salida}
+                        />
+                    </Grid>
+                    <Grid item  display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                        <Typography variant='subtitle1' color='white'  mb={{xs: 1, sm: 0}}>Hora de salida:</Typography>
+                        <TextField 
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline':{
+                                    borderColor: 'white'
+                                },
+                                '.MuiInputBase-root':{
+                                    color: 'white'
+                                },
+                                '& .MuiSvgIcon-root': {
+                                    color: 'white',
+                                },
+                            }}
+                            InputProps={{
+                                type: "time"
+                            }} 
+                            value={formik.values.hora_salida}
+                            name='hora_salida'
+                            onChange={formik.handleChange}
+                            error={formik.errors.hora_salida}
+                            helperText={formik.errors.hora_salida}
+
+                        />
+                    </Grid>
                     <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12} sm={6}  my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Interno:</Typography>
                         <TextField 
@@ -317,28 +415,7 @@ const FormTicketEdit = ({ ticket }) => {
                             helperText={formik.errors.destino}
                         />
                     </Grid>
-                    <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Plataforma:</Typography>
-                        <TextField
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                }
-                            }}
-                            InputLabelProps={{
-                                style: { color: '#fff' },
-                            }}
-                            label='Inserte plataforma'
-                            name='plataformas_id'
-                            value={formik.values.plataformas_id}
-                            onChange={formik.handleChange}
-                            error={formik.errors.plataformas_id}
-                            helperText={formik.errors.plataformas_id}
-                        />
-                    </Grid>
+                    
                    
                     <Grid item sx={{marginRight: 'auto'}} xs={12}>
                         <Button  variant="contained" ml='auto' type="submit" my={2}>Crear ticket</Button>
@@ -353,4 +430,4 @@ const FormTicketEdit = ({ ticket }) => {
 
 }
 
-export default FormTicketEdit
+export default FormEditTicket

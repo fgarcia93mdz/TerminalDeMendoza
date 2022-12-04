@@ -253,7 +253,7 @@ const modificarInforme = async (req, res) => {
       destino,
       fecha_salida,
       hora_salida,
-      plataforma,
+      plataforma_id,
       fecha_ingreso,
       hora_ingreso,
       interno,
@@ -261,6 +261,8 @@ const modificarInforme = async (req, res) => {
       servicio,
       usuario,
     } = req.body;
+
+    console.log('req.body:', req.body)
 
     const encontrado = await RegistroTorre.findOne({
       where: {
@@ -274,7 +276,7 @@ const modificarInforme = async (req, res) => {
       if (destino != null) dataACambiar.destino = destino;
       if (fecha_salida != null) dataACambiar.fecha_salida = fecha_salida;
       if (hora_salida != null) dataACambiar.hora_salida = hora_salida;
-      if (plataforma != null) dataACambiar.plataformas_id = plataforma;
+      if (plataforma_id != null) dataACambiar.plataforma_id =  plataforma_id;
       if (fecha_ingreso != null) dataACambiar.fecha_ingreso = fecha_ingreso;
       if (hora_ingreso != null) dataACambiar.hora_ingreso = hora_ingreso;
       if (interno != null) dataACambiar.interno = interno;

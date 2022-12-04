@@ -7,13 +7,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 
 
+export default function TableAdmin({ data, edit }) {
+  // edit. if edit is true so the table will have a column with edit button
 
+  console.log('data table admin:', data)
 
-
-export default function TableAdmin({ data }) {
   return (
    
       <TableContainer component={Paper} sx={{width: '98%', margin:'auto'}}>
@@ -25,8 +28,9 @@ export default function TableAdmin({ data }) {
               <TableCell align="right">Interno</TableCell>
               <TableCell align="right">Empresa</TableCell>
               <TableCell align="right">Horario <br></br>Salida</TableCell>
-              <TableCell align="right">Plat</TableCell>
-              <TableCell align="right">Estado</TableCell>
+              <TableCell align="center">Plat</TableCell>
+              <TableCell align="center">Estado</TableCell>
+              {edit && <TableCell align="right">Editar</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -40,8 +44,12 @@ export default function TableAdmin({ data }) {
                 <TableCell align="right">{row.interno}</TableCell>
                 <TableCell align="right">{row.empresa}</TableCell>
                 <TableCell align="right">{row.hora_salida}</TableCell>
-                <TableCell align="right">{row.pltaforma}</TableCell>
-                <TableCell align="right">{row.estado}</TableCell>
+                <TableCell align="center">{row.plataforma}</TableCell>
+                <TableCell align="center">{row.estado}</TableCell>
+                {edit && 
+                  <TableCell align="right">
+                    <Link to={`/informes/editar/${row.id}`}> <SettingsIcon /> </Link>
+                  </TableCell>}
               </TableRow>
             ))}
           </TableBody>
