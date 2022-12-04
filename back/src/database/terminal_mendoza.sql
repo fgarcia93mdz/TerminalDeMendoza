@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 04-12-2022 a las 13:25:33
+-- Tiempo de generación: 04-12-2022 a las 17:25:45
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -244,12 +244,12 @@ CREATE TABLE `registro_administrativo` (
   `empresa_id` int(11) NOT NULL,
   `servicios_id` int(11) NOT NULL,
   `usuarios_id` int(11) NOT NULL,
-  `plataformas_id` int(11) DEFAULT NULL,
+  `plataformas_id` int(11) DEFAULT '1',
   `estado_id` int(11) NOT NULL,
   `fecha_salida` date DEFAULT NULL,
   `hora_salida` time DEFAULT NULL,
   `destino` varchar(45) DEFAULT NULL,
-  `tipo_tv_id` int(11) DEFAULT NULL
+  `tipo_tv_id` int(11) DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -304,7 +304,6 @@ CREATE TABLE `registro_administrativo_log` (
   `operacion_id` int(11) NOT NULL,
   `id_registro` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 --
 -- Estructura de tabla para la tabla `roles`
@@ -371,7 +370,8 @@ CREATE TABLE `tipo_tv` (
 
 INSERT INTO `tipo_tv` (`id`, `tipo`) VALUES
 (1, 'Arribos'),
-(2, 'Partidas');
+(2, 'Partidas'),
+(3, 'Sin asignar');
 
 -- --------------------------------------------------------
 
@@ -578,7 +578,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `tipo_tv`
 --
 ALTER TABLE `tipo_tv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
