@@ -23,7 +23,7 @@ const FormTicket = () => {
     servicios_id: "", // 2
     estado_id: "", // '0'
     destino: "", // 'Mar de Ajo'
-    tipo_tv_id: 1,
+    tipo_tv_id: 3,
   };
 
   const validationSchema = yup.object({
@@ -112,16 +112,21 @@ const FormTicket = () => {
               helperText={formik.errors?.interno}
             />
           </Grid>
-          {/* <Grid
+          <Grid
             item
-            display={{ xs: "block", sm: "flex" }}
+            display={{ xs: "none", sm: "none" }}
             alignItems="center"
             gap={2}
             xs={6}
             sm={6}
             my={2}
           >
-            <Typography variant="subtitle1" color="white" mb={{ xs: 1, sm: 0 }}>
+            <Typography
+              variant="subtitle1"
+              color="white"
+              mb={{ xs: 1, sm: 0 }}
+              display={{ xs: "none", sm: "block" }}
+            >
               tipo tv id:
             </Typography>
             <TextField
@@ -136,11 +141,10 @@ const FormTicket = () => {
               InputProps={{
                 type: "number",
               }}
-              defaultValue={1}
+              defaultValue={3}
               name="tipo_tv_id"
             />
-          </Grid> */}
-
+          </Grid>
 
           <Grid
             item
@@ -302,7 +306,6 @@ const FormTicket = () => {
               value={formik.values.servicios_id}
               onChange={formik.handleChange}
               error={formik.errors.length > 0}
-
               // error={formik.errors?.servicios_id}
               helperText={formik.errors?.servicios_id}
             >
@@ -354,7 +357,6 @@ const FormTicket = () => {
               name="estado_id"
               value={formik.values.estado_id}
               error={formik.errors.length > 0}
-
               onChange={formik.handleChange}
               // error={formik.errors?.estado_id}
               helperText={formik.errors?.estado_id}
@@ -399,7 +401,6 @@ const FormTicket = () => {
               value={formik.values.destino}
               onChange={formik.handleChange}
               error={formik.errors.length > 0}
-
               // error={formik.errors?.destino}
               helperText={formik.errors?.destino}
             />
