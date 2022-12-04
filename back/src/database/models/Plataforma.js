@@ -5,14 +5,14 @@ module.exports = (sequelize, dataTypes) => {
       id: {
         type: dataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       plataforma: {
         type: dataTypes.STRING(45),
-        allowNull: false
+        allowNull: false,
       },
       servicios_id: dataTypes.BIGINT(11),
-  
+      borrado: dataTypes.BIGINT(2),
     };
     let config = {
       tableName: 'plataformas',

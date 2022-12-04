@@ -21,7 +21,8 @@ module.exports = (sequelize, dataTypes) => {
     cuit: {
       type: dataTypes.STRING(100),
       allowNull: false
-    }
+    },
+    borrado: dataTypes.BIGINT(2),
   };
 
   let config = {
