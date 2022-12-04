@@ -56,7 +56,7 @@ const NavBarRRHH = ({ name }) => {
         handleCloseUserMenu()
         setUserInfo({})
         window.sessionStorage.removeItem("jwt");
-        navigate("/arribos")
+        navigate("/login")
         window.location.reload();
     }
     const token = window.sessionStorage.getItem("jwt");
@@ -221,13 +221,13 @@ const NavBarRRHH = ({ name }) => {
                                         open={Boolean(anchorElUser)}
                                         onClose={handleCloseUserMenu}
                                     >
-                                        <MenuItem
+                                        {/* <MenuItem
                                             key={"inicio4"}
                                             onClick={handleCloseNavMenu}
                                             sx={{ my: 2, color: "#0E315A", display: "block" }}
                                         >
                                             CAMBIAR CONTRASEÑA
-                                        </MenuItem>
+                                        </MenuItem> */}
                                         <MenuItem
                                             key={"inicio5"}
                                             onClick={() => closeSession()}
