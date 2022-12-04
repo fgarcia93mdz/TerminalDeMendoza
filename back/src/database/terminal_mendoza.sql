@@ -62,8 +62,8 @@ INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`, `cuit`, `borrado`) VALU
 (16, 'Vallecito', 'VLL', NULL, '0', 0),
 (17, 'Viento Sur', 'VTS', NULL, '0', 0),
 (18, 'SOL Y VALLE', 'SYV', NULL, '0', 0),
-(19, '20 DE JUNIO', '20J', NULL, '0', 0),
-(20, 'Ahumada', 'AHU', NULL, '0', 0),
+(19, '20 DE JUNIO', '20J', '20dejunio_88c96fe543.jpg', '0', 0),
+(20, 'Ahumada', 'AHU', 'ahumada_1bfb06b4e4.jpg', '0', 0),
 (21, 'Chiar', 'CHI', NULL, '0', 0),
 (22, 'Coitram', 'COI', NULL, '0', 0),
 (23, 'El Quirquincho', 'QQC', NULL, '0', 0),
@@ -253,46 +253,6 @@ CREATE TABLE `registro_administrativo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `registro_administrativo`
---
-
-INSERT INTO `registro_administrativo` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`, `tipo_tv_id`) VALUES
-(1, '2022-11-19', '08:00:00', 12, 1, 1, 2, 1, 1, '2022-11-19', '08:00:00', 'Bolivia', 1),
-(2, '2022-11-19', '09:00:00', 15, 2, 1, 2, 1, 1, '2022-11-19', '09:00:00', 'San Luis', 2),
-(3, '2022-11-20', '18:56:00', 56, 3, 1, 2, 3, 1, '2022-11-20', '20:00:00', 'San Juan', 1),
-(4, '2022-11-22', '15:10:00', 225, 1, 2, 2, 1, 2, NULL, NULL, 'Yarara', 1),
-(5, '2022-11-23', '19:55:00', 1154, 1, 2, 2, 1, 2, NULL, NULL, 'Buenos Aires', 1),
-(6, '2022-11-23', '19:57:00', 1154, 1, 3, 2, NULL, 2, NULL, NULL, 'San Lucas', 1),
-(7, '2022-11-22', '20:36:00', 1154, 2, 4, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(8, '2022-11-22', '21:37:00', 8887, 1, 1, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(9, '2022-11-22', '21:12:00', 1158, 1, 1, 2, NULL, 2, NULL, NULL, 'Yalaca', NULL),
-(10, '2022-11-22', '21:13:00', 878, 2, 2, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(11, '2022-11-22', '21:18:00', 9999, 3, 2, 2, NULL, 2, NULL, NULL, 'San Rafael', NULL),
-(12, '2022-11-22', '21:20:00', 1154, 3, 2, 2, NULL, 2, NULL, NULL, 'asdasfasf', NULL),
-(13, '2022-11-22', '21:21:00', 99966, 2, 2, 2, NULL, 2, NULL, NULL, 'sdfsdgfsdg', NULL),
-(14, '2022-11-22', '21:25:00', 7777, 2, 3, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(15, '2022-11-22', '21:27:00', 554, 2, 2, 2, NULL, 2, NULL, NULL, '7845', NULL),
-(16, '2022-11-22', '21:28:00', 888798, 1, 4, 2, NULL, 3, NULL, NULL, 'Carga combustible', NULL),
-(17, '2022-11-22', '21:28:00', 8887983, 1, 4, 2, NULL, 3, NULL, NULL, 'Carga combustible', NULL),
-(18, '2022-11-22', '22:29:00', 67567, 1, 4, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(19, '2022-11-22', '21:30:00', 1154, 1, 1, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(20, '2022-11-22', '21:32:00', 4875, 1, 1, 2, NULL, 2, NULL, NULL, '4512', NULL),
-(21, '2022-11-22', '21:43:00', 1154, 2, 1, 2, NULL, 2, NULL, NULL, 'San Luis', NULL),
-(22, '2022-11-22', '21:46:00', 213421, 1, 2, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(23, '2022-11-22', '21:46:00', 4234, 1, 2, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(24, '2022-11-22', '21:52:00', 53466, 1, 2, 2, NULL, 2, NULL, NULL, 'hfghfgh', NULL),
-(25, '2022-11-22', '22:05:00', 86789, 1, 2, 2, NULL, 2, NULL, NULL, 'San Luis', NULL),
-(26, '2022-11-22', '22:07:00', 465565, 2, 1, 2, NULL, 2, NULL, NULL, 'San Luis', NULL),
-(27, '2022-11-22', '22:11:00', 8908, 1, 2, 2, NULL, 3, NULL, NULL, 'Buenos Aires', NULL),
-(28, '2022-11-22', '00:14:00', 908908, 1, 2, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(29, '2022-11-22', '22:27:00', 65456, 1, 1, 2, NULL, 2, NULL, NULL, 'San Lucas', NULL),
-(30, '2022-11-25', '23:43:00', 200, 2, 1, 2, NULL, 2, NULL, NULL, 'erwer', NULL),
-(31, '2022-11-25', '23:47:00', 12312, 1, 2, 2, NULL, 2, NULL, NULL, 'Buenos Aires', NULL),
-(32, '2022-11-25', '22:49:00', 1154, 1, 4, 2, NULL, 2, NULL, NULL, 'Turismo', NULL),
-(33, '2022-11-25', '23:53:00', 6456, 1, 4, 2, NULL, 2, NULL, NULL, 'Policia', NULL),
-(34, '2022-11-25', '22:56:00', 55345, 1, 2, 2, NULL, 2, NULL, NULL, 'San juan', NULL);
-
---
 -- Disparadores `registro_administrativo`
 --
 DROP TRIGGER IF EXISTS `registro_administrativo_INSERT`;
@@ -345,64 +305,6 @@ CREATE TABLE `registro_administrativo_log` (
   `id_registro` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `registro_administrativo_log`
---
-
-INSERT INTO `registro_administrativo_log` (`id`, `fecha_ingreso`, `hora_ingreso`, `interno`, `empresa_id`, `servicios_id`, `usuarios_id`, `plataformas_id`, `estado_id`, `fecha_salida`, `hora_salida`, `destino`, `updated_at`, `operacion_id`, `id_registro`) VALUES
-(1, '2022-11-20', '18:56:00', 56, 3, 1, 2, 1, 2, NULL, NULL, NULL, '2022-11-20 21:58:07', 1, 3),
-(2, '2022-11-20', '18:56:00', 56, 3, 1, 2, 3, 1, '2022-11-20', '20:00:00', NULL, '2022-11-20 22:06:37', 2, 3),
-(3, '2022-11-20', '18:56:00', 56, 3, 1, 2, 3, 1, '2022-11-20', '20:00:00', NULL, '2022-11-20 19:07:51', 2, 3),
-(4, '2022-11-22', '15:10:00', 225, 1, 2, 2, 1, 2, NULL, NULL, NULL, '2022-11-21 18:09:47', 1, 4),
-(5, '2022-11-22', '19:55:00', 1154, 1, 2, 2, 1, 2, NULL, NULL, NULL, '2022-11-22 22:56:03', 1, 5),
-(6, '2022-11-22', '19:57:00', 1154, 1, 3, 2, NULL, 2, NULL, NULL, NULL, '2022-11-22 22:57:31', 1, 6),
-(7, '2022-11-23', '19:57:00', 1154, 1, 3, 2, NULL, 2, NULL, NULL, NULL, '2022-11-22 19:59:10', 2, 6),
-(8, '2022-11-23', '19:55:00', 1154, 1, 2, 2, 1, 2, NULL, NULL, NULL, '2022-11-22 19:59:10', 2, 5),
-(9, '2022-11-23', '19:57:00', 1154, 1, 3, 2, NULL, 2, NULL, NULL, NULL, '2022-11-22 20:03:27', 2, 6),
-(10, '2022-11-23', '19:55:00', 1154, 1, 2, 2, 1, 2, NULL, NULL, NULL, '2022-11-22 20:03:27', 2, 5),
-(11, '2022-11-22', '15:10:00', 225, 1, 2, 2, 1, 2, NULL, NULL, NULL, '2022-11-22 20:03:27', 2, 4),
-(12, '2022-11-22', '20:36:00', 1154, 2, 4, 2, NULL, 2, NULL, NULL, NULL, '2022-11-22 23:36:39', 1, 7),
-(13, '2022-11-22', '21:37:00', 8887, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-22 23:37:24', 1, 8),
-(14, '2022-11-22', '21:12:00', 1158, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:13:02', 1, 9),
-(15, '2022-11-22', '21:13:00', 878, 2, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:14:01', 1, 10),
-(16, '2022-11-22', '21:18:00', 9999, 3, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:18:19', 1, 11),
-(17, '2022-11-22', '21:20:00', 1154, 3, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:20:15', 1, 12),
-(18, '2022-11-22', '21:21:00', 99966, 2, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:21:12', 1, 13),
-(19, '2022-11-22', '21:25:00', 7777, 2, 3, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:25:20', 1, 14),
-(20, '2022-11-22', '21:27:00', 554, 2, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:27:28', 1, 15),
-(21, '2022-11-22', '21:28:00', 888798, 1, 4, 2, NULL, 3, NULL, NULL, NULL, '2022-11-23 00:28:23', 1, 16),
-(22, '2022-11-22', '21:28:00', 8887983, 1, 4, 2, NULL, 3, NULL, NULL, NULL, '2022-11-23 00:29:05', 1, 17),
-(23, '2022-11-22', '22:29:00', 67567, 1, 4, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:29:39', 1, 18),
-(24, '2022-11-22', '21:30:00', 1154, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:31:01', 1, 19),
-(25, '2022-11-22', '21:32:00', 4875, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:32:28', 1, 20),
-(26, '2022-11-22', '21:43:00', 1154, 2, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:43:20', 1, 21),
-(27, '2022-11-22', '21:46:00', 213421, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:46:22', 1, 22),
-(28, '2022-11-22', '21:46:00', 4234, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:46:52', 1, 23),
-(29, '2022-11-22', '21:52:00', 53466, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 00:52:43', 1, 24),
-(30, '2022-11-22', '22:05:00', 86789, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:05:49', 1, 25),
-(31, '2022-11-22', '22:07:00', 465565, 2, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:07:46', 1, 26),
-(32, '2022-11-22', '22:11:00', 8908, 1, 2, 2, NULL, 3, NULL, NULL, NULL, '2022-11-23 01:10:21', 1, 27),
-(33, '2022-11-22', '00:14:00', 908908, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:14:38', 1, 28),
-(34, '2022-11-22', '22:27:00', 65456, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:27:42', 1, 29),
-(35, '2022-11-22', '23:43:00', 200, 2, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:44:03', 1, 30),
-(36, '2022-11-22', '23:47:00', 12312, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:47:49', 1, 31),
-(37, '2022-11-22', '22:49:00', 1154, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:49:39', 1, 32),
-(38, '2022-11-22', '23:53:00', 6456, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:53:06', 1, 33),
-(39, '2022-11-22', '22:56:00', 55345, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-23 01:56:08', 1, 34),
-(40, '2022-11-25', '22:56:00', 55345, 1, 2, 2, NULL, 1, NULL, NULL, NULL, '2022-11-25 08:51:12', 2, 34),
-(41, '2022-11-25', '23:53:00', 6456, 1, 2, 2, NULL, 1, NULL, NULL, NULL, '2022-11-25 08:51:12', 2, 33),
-(42, '2022-11-25', '22:49:00', 1154, 1, 1, 2, NULL, 1, NULL, NULL, NULL, '2022-11-25 08:51:12', 2, 32),
-(43, '2022-11-25', '23:47:00', 12312, 1, 2, 2, NULL, 1, NULL, NULL, NULL, '2022-11-25 08:51:12', 2, 31),
-(44, '2022-11-25', '23:43:00', 200, 2, 1, 2, NULL, 1, NULL, NULL, NULL, '2022-11-25 08:51:12', 2, 30),
-(45, '2022-11-25', '23:43:00', 200, 2, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:51:55', 2, 30),
-(46, '2022-11-25', '23:47:00', 12312, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:51:55', 2, 31),
-(47, '2022-11-25', '22:49:00', 1154, 1, 1, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:51:55', 2, 32),
-(48, '2022-11-25', '23:53:00', 6456, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:51:55', 2, 33),
-(49, '2022-11-25', '22:56:00', 55345, 1, 2, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:53:02', 2, 34),
-(50, '2022-11-25', '22:49:00', 1154, 1, 4, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:53:02', 2, 32),
-(51, '2022-11-25', '23:53:00', 6456, 1, 4, 2, NULL, 2, NULL, NULL, NULL, '2022-11-25 08:53:02', 2, 33);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `roles`
@@ -652,13 +554,13 @@ ALTER TABLE `plataformas`
 -- AUTO_INCREMENT de la tabla `registro_administrativo`
 --
 ALTER TABLE `registro_administrativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_administrativo_log`
 --
 ALTER TABLE `registro_administrativo_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -688,7 +590,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios_log`
 --
 ALTER TABLE `usuarios_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_eliminado`
