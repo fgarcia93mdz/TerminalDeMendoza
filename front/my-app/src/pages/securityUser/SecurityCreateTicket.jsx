@@ -29,7 +29,7 @@ const FormTicket = () => {
   const validationSchema = yup.object({
     fecha_ingreso: yup.string().required("Campo requerido"),
     hora_ingreso: yup.string().required("Campo requerido"),
-    interno: yup.number().required("Campo requerido"),
+    interno: yup.number().notRequired(),
     empresa_id: yup.number().required("Campo requerido"),
     servicios_id: yup.number().required("Campo requerido"),
     estado_id: yup.string().required("Campo requerido"),
@@ -169,9 +169,8 @@ const FormTicket = () => {
               name="fecha_ingreso"
               value={formik.values.fecha_ingreso}
               onChange={formik.handleChange}
-              error={formik.errors.length > 0}
-
-              // error={formik.errors.fecha_ingreso}
+              // error={formik.errors.length > 0}
+              error={formik.errors.fecha_ingreso}
               helperText={formik.errors?.fecha_ingreso}
             />
           </Grid>
@@ -205,9 +204,8 @@ const FormTicket = () => {
               value={formik.values.hora_ingreso}
               name="hora_ingreso"
               onChange={formik.handleChange}
-              error={formik.errors.length > 0}
-
-              // error={formik.errors?.hora_ingreso}
+              // error={formik.errors.length > 0}
+              error={formik.errors?.hora_ingreso}
               helperText={formik.errors?.hora_ingreso}
             />
           </Grid>
@@ -250,9 +248,8 @@ const FormTicket = () => {
               name="empresa_id"
               value={formik.values.empresa_id}
               onChange={formik.handleChange}
-              error={formik.errors.length > 0}
-
-              // error={formik.errors?.empresa_id}
+              // error={formik.errors.length > 0}
+              error={formik.errors?.empresa_id}
               helperText={formik.errors?.empresa_id}
             >
               {dataDropdown.empresas?.map((empresa) => (

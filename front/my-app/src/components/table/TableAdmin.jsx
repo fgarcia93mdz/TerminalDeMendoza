@@ -27,10 +27,11 @@ export default function TableAdmin({ data, edit }) {
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha de ingreso</TableCell>
-              <TableCell align="center">Horario de ingreso</TableCell>
+              <TableCell align="center">Horario <br></br> de ingreso</TableCell>
               <TableCell align="center">Destino/Origen/Servicio</TableCell>
               <TableCell align="center">Interno</TableCell>
               <TableCell align="center">Empresa</TableCell>
+              <TableCell align="center">Fecha Salida</TableCell>
               <TableCell align="center">Horario <br></br>Salida</TableCell>
               <TableCell align="center">Plat</TableCell>
               <TableCell align="center">Estado</TableCell>
@@ -49,7 +50,8 @@ export default function TableAdmin({ data, edit }) {
                 <TableCell component="th" scope="row" align="center">{row.destino} </TableCell>
                 <TableCell align="center">{row.interno}</TableCell>
                 <TableCell align="center">{row.empresa}</TableCell>
-                <TableCell align="center"> horario_salida </TableCell>
+                <TableCell align="center"> {row.fecha_salida} </TableCell>
+                <TableCell align="center"> {row.horario_salida} </TableCell>
                 <TableCell align="center">{row.plataforma}</TableCell>
                 <TableCell align="center">{row.estado}</TableCell>
                 {edit && 
