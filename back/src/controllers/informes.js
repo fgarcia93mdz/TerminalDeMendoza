@@ -60,12 +60,7 @@ const addInforme = async (req, res) => {
     if (rol === 5) {
       const { fecha_salida, hora_salida, plataformas_id, tipo_tv_id } = data;
 
-      if (
-        !fecha_salida ||
-        !hora_salida ||
-        !tipo_tv_id ||
-        !plataformas_id
-      ) {
+      if (!fecha_salida || !hora_salida || !tipo_tv_id || !plataformas_id) {
         return res.status(400).json({ mensaje: "faltan datos" });
       }
 
@@ -105,8 +100,6 @@ const getDataDropdown = async (req, res) => {
       estados = estadosDisponibles;
     }
 
-
-
     respuesta = { empresas, servicios, estados, tipo_tv };
     return res.status(200).json({ ...respuesta });
   } catch (error) {
@@ -118,7 +111,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
   try {
     let diaHoy = moment();
     let diaAyer = diaHoy.add(-1, "days");
-    let hora = diaHoy.format("HH:mm:ss");
+    let hora = diaHoy.format("HH:mm");
     let ingresos = await RegistroTorre.findAll({
       include: [
         "registro_empresa",
@@ -127,17 +120,19 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         "registro_tipo_tv",
       ],
       order: [["hora_salida", "DESC"]],
+      where: {
+        fecha_ingreso: {
+          [Op.gt]: diaAyer,
+        },
+      },
     });
-    
-    // where: {
-    //   fecha_ingreso: {
-    //     [Op.gt]: diaAyer,
-    //   },
-    // },
+
+  
     const respuesta = {
       fueraDePlataforma: [],
       enPlataforma: [],
       ingresando: [],
+      ingresandoSeguridad: [],
     };
 
     ingresos.forEach((ingreso) => {
@@ -155,28 +150,30 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         tipo_tv: ingreso.registro_tipo_tv.dataValues.tipo,
       };
 
+      if (ingreso.estado_id === 2) {
+        respuesta.ingresando.push(data);
+      }
+      if (ingreso.estado_id === 1) {
+        respuesta.enPlataforma.push(data);
+      }
+
+      if (ingreso.estado_id === 4) {
+        respuesta.fueraDePlataforma.push(data);
+      }
       if (
         ingreso.estado_id === 1 ||
         ingreso.estado_id === 2 ||
         ingreso.estado_id === 4
       ) {
-        respuesta.ingresando.push(data);
+        respuesta.ingresandoSeguridad.push(data);
       }
-
-      // if (ingreso.estado_id === 2) {
-      //   respuesta.ingresando.push(data);
-      // }
-
-      // if (ingreso.estado_id === 4) {
-      //   respuesta.fueraDePlataforma.push(data);
-      // }
     });
-   console.log(respuesta);
+    console.log(respuesta);
     return res.status(200).json({
       respuesta,
     });
   } catch (error) {
-    console.log('error informes controller:', error)
+    console.log("error informes controller:", error);
     return res.status(400).json({ mensaje: error });
   }
 };
@@ -186,7 +183,7 @@ const informesListado = async (req, res) => {
     let diaHoy = moment();
     let diaAyer = diaHoy.add(-1, "days");
     let hora = diaHoy.format("HH:mm");
-    
+
     let ingresos = await RegistroTorre.findAll({
       include: [
         "registro_empresa",
@@ -196,7 +193,7 @@ const informesListado = async (req, res) => {
       ],
       order: [["hora_salida", "DESC"]],
     });
-    
+
     // where: {
     //   fecha_ingreso: {
     //     [Op.gt]: diaAyer,
@@ -204,7 +201,7 @@ const informesListado = async (req, res) => {
     // },
     const respuesta = [];
 
-    console.log('ingresos controller:', ingresos)
+    console.log("ingresos controller:", ingresos);
 
     ingresos.forEach((ingreso) => {
       respuesta.push({
@@ -284,7 +281,7 @@ const modificarInforme = async (req, res) => {
       tipo_tv,
     } = req.body;
 
-    console.log('req.body:', req.body)
+    console.log("req.body:", req.body);
 
     const encontrado = await RegistroTorre.findOne({
       where: {
@@ -298,11 +295,11 @@ const modificarInforme = async (req, res) => {
       if (destino != null) dataACambiar.destino = destino;
       if (fecha_salida != null) dataACambiar.fecha_salida = fecha_salida;
       if (hora_salida != null) dataACambiar.hora_salida = hora_salida;
-      if (plataforma != null) dataACambiar.plataforma_id =  plataforma;
+      if (plataforma != null) dataACambiar.plataforma_id = plataforma;
       if (fecha_ingreso != null) dataACambiar.fecha_ingreso = fecha_ingreso;
       if (hora_ingreso != null) dataACambiar.hora_ingreso = hora_ingreso;
       if (interno != null) dataACambiar.interno = interno;
-if (tipo_tv != null) dataACambiar.tipo_tv = tipo_tv;
+      if (tipo_tv != null) dataACambiar.tipo_tv = tipo_tv;
       if (empresa != null) dataACambiar.empresa_id = empresa;
       if (servicio != null) dataACambiar.servicios_id = servicio;
       if (usuario != null) dataACambiar.usuarios_id = usuario;
@@ -319,7 +316,7 @@ if (tipo_tv != null) dataACambiar.tipo_tv = tipo_tv;
         },
       });
 
-      //console.log(modificacion);
+      console.log(modificacion);
       return res.status(200).json({ mensaje: "modificacion exitosa" });
     }
   } catch (error) {

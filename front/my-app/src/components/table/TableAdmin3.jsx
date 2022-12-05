@@ -1,5 +1,5 @@
 
-/* TABLERO DE INFORMES, EN PLATAFORMA */
+/* TABLERO DE SEGURIDAD */
 
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -16,12 +16,10 @@ import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
 
 
 
-export default function TableAdmin2({ data, edit }) {
+export default function TableAdmin3({ data, edit }) {
   // edit. if edit is true so the table will have a column with edit button
 
-  const day = `Registro de en plataforma en informes_${new Date()
-    .toJSON()
-    .slice(0, 10)}`;
+  const day = `Registro de ingresantes en informes_${new Date().toJSON().slice(0, 10)}`;
 
   console.log('data table admin:', data)
 
@@ -70,7 +68,7 @@ export default function TableAdmin2({ data, edit }) {
                   <TableCell align="center">{row.tipo_tv}</TableCell>
                   {edit && (
                     <TableCell align="right">
-                      <Link to={`/informes/editar/en_plataforma/${row.id}`}>
+                      <Link to={`/informes/editar/ingreso/${row.id}`}>
                         {" "}
                         <SettingsIcon />{" "}
                       </Link>
@@ -90,7 +88,7 @@ export default function TableAdmin2({ data, edit }) {
           table="informes"
           filename={day}
           sheet="ingresos"
-          buttonText="Descargar Excel"
+          buttonText="Descargar Reporte"
         />
       </div>
       <br />
