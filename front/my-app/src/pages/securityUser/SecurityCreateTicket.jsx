@@ -108,7 +108,8 @@ const FormTicket = () => {
               value={formik.values.interno}
               name="interno"
               onChange={formik.handleChange}
-              error={formik.errors.interno?.length > 0}
+              // error={formik.errors.interno?.length > 0}
+              error={formik.errors.interno}
               helperText={formik.errors?.interno}
             />
           </Grid>
@@ -305,8 +306,8 @@ const FormTicket = () => {
               name="servicios_id"
               value={formik.values.servicios_id}
               onChange={formik.handleChange}
-              error={formik.errors.length > 0}
-              // error={formik.errors?.servicios_id}
+              // error={formik.errors.length > 0}
+              error={formik.errors?.servicios_id}
               helperText={formik.errors?.servicios_id}
             >
               {dataDropdown.servicios?.map((servicio) => (
@@ -356,9 +357,9 @@ const FormTicket = () => {
               }}
               name="estado_id"
               value={formik.values.estado_id}
-              error={formik.errors.length > 0}
+              // error={formik.errors.length > 0}
               onChange={formik.handleChange}
-              // error={formik.errors?.estado_id}
+              error={formik.errors?.estado_id}
               helperText={formik.errors?.estado_id}
             >
               {dataDropdown.estados?.map((estado) => (
@@ -400,8 +401,8 @@ const FormTicket = () => {
               name="destino"
               value={formik.values.destino}
               onChange={formik.handleChange}
-              error={formik.errors.length > 0}
-              // error={formik.errors?.destino}
+              // error={formik.errors.length > 0}
+              error={formik.errors?.destino}
               helperText={formik.errors?.destino}
             />
           </Grid>

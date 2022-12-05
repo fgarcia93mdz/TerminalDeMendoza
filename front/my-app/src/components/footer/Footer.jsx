@@ -10,6 +10,14 @@ import colors from '../../colors'
 import { Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
+const style = {
+    color: '#0b2748', 
+    backgroundColor: 'white', 
+    position:'absolute', 
+    // bottom: '0', 
+    right: '0', 
+    left: '0' 
+}
 
 
 const Footer = () => {
@@ -17,7 +25,7 @@ const Footer = () => {
 
     return (
 
-        <Stack role='footer' px={6} py={2} direction={{ xs: 'column', sm: 'row' }} justifyContent={'space-between'} alignItems={{ xs: 'center', sm: 'end' }} sx={{ color: '#0b2748', backgroundColor: 'white', bottom: '0', position:'relative' }}>
+        <Stack role='footer' px={6} py={2} direction={{ xs: 'column', sm: 'row' }} justifyContent={'space-between'} alignItems={{ xs: 'center', sm: 'end' }} style={style} >
             <ThemeProvider theme={colors}>
                 <Box
                     component='img'

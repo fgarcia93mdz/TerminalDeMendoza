@@ -18,12 +18,14 @@ const ArrivalsBoard = () => {
 
       fetch('http://localhost:8080/api/plataforma/arribos')
         .then( data => {
+          console.log('data')
           return data.json()
         })
         .then( result => {
           //  console.log('result:', result)
            return setEstado(result)
         })
+        .catch( error => console.log('error', error))
 
         
         
