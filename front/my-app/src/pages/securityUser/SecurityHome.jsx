@@ -40,7 +40,7 @@ const SecurityHome = () => {
     return (
         <Stack >
             <Box style={styles}>
-                <Typography align='center' variant='h4' style={typographyStyles}>INGRESANDO</Typography>
+                <Typography align='center' variant='h4' style={typographyStyles}>REGISTRO DE INGRESOS DE TORRE DE SEGURIDAD</Typography>
                 <TableAdmin data={arrivals} />
             </Box>
         </Stack>

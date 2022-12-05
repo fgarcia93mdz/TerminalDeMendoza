@@ -155,17 +155,21 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         tipo_tv: ingreso.registro_tipo_tv.dataValues.tipo,
       };
 
-      if (ingreso.estado_id === 1) {
-        respuesta.enPlataforma.push(data);
-      }
-
-      if (ingreso.estado_id === 2) {
+      if (
+        ingreso.estado_id === 1 ||
+        ingreso.estado_id === 2 ||
+        ingreso.estado_id === 4
+      ) {
         respuesta.ingresando.push(data);
       }
 
-      if (ingreso.estado_id === 4) {
-        respuesta.fueraDePlataforma.push(data);
-      }
+      // if (ingreso.estado_id === 2) {
+      //   respuesta.ingresando.push(data);
+      // }
+
+      // if (ingreso.estado_id === 4) {
+      //   respuesta.fueraDePlataforma.push(data);
+      // }
     });
    console.log(respuesta);
     return res.status(200).json({

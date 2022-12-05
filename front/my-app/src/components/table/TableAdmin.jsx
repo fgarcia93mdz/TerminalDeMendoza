@@ -85,7 +85,7 @@ export default function TableAdmin({ data, edit }) {
           table="informes"
           filename={day}
           sheet="ingresos"
-          buttonText="Descargar Excel"
+          buttonText="Descargar Reporte"
         />
       </div>
       <br />
