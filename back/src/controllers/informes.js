@@ -4,6 +4,7 @@ const Empresa = db.Empresa;
 const Servicio = db.Servicio;
 const Plataforma = db.Plataforma;
 const Estado = db.Estado;
+const Tipo_tv = db.Tipo_tv;
 const { Op } = require("sequelize");
 const moment = require("moment");
 const tieneCampoNull = require("../../public/js/tieneCampoNull");
@@ -89,6 +90,7 @@ const getDataDropdown = async (req, res) => {
     const { rol } = req.usuario;
 
     const empresas = await Empresa.findAll();
+    const tipo_tv = await Tipo_tv.findAll();
     const servicios = await Servicio.findAll();
     let estados = await Estado.findAll();
 
@@ -105,7 +107,7 @@ const getDataDropdown = async (req, res) => {
 
 
 
-    respuesta = { empresas, servicios, estados };
+    respuesta = { empresas, servicios, estados, tipo_tv };
     return res.status(200).json({ ...respuesta });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
@@ -118,7 +120,12 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
     let diaAyer = diaHoy.add(-1, "days");
     let hora = diaHoy.format("HH:mm:ss");
     let ingresos = await RegistroTorre.findAll({
-      include: ["registro_empresa", "registro_plataforma", "registro_estado"],
+      include: [
+        "registro_empresa",
+        "registro_plataforma",
+        "registro_estado",
+        "registro_tipo_tv",
+      ],
       order: [["hora_salida", "DESC"]],
     });
     
@@ -143,7 +150,9 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         empresa: ingreso.registro_empresa.dataValues.empresa,
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
+        fecha_salida: ingreso.fecha_salida,
         horario_salida: ingreso.hora_salida,
+        tipo_tv: ingreso.registro_tipo_tv.dataValues.tipo,
       };
 
       if (ingreso.estado_id === 1) {
@@ -175,7 +184,12 @@ const informesListado = async (req, res) => {
     let hora = diaHoy.format("HH:mm");
     
     let ingresos = await RegistroTorre.findAll({
-      include: ["registro_empresa", "registro_plataforma", "registro_estado"],
+      include: [
+        "registro_empresa",
+        "registro_plataforma",
+        "registro_estado",
+        "registro_tipo_tv",
+      ],
       order: [["hora_salida", "DESC"]],
     });
     
@@ -220,6 +234,7 @@ const getInforme = async (req, res) => {
         "registro_servicio",
         "registro_plataforma",
         "registro_estado",
+        "registro_tipo_tv",
       ],
       where: {
         id: ingresoId,
@@ -255,13 +270,14 @@ const modificarInforme = async (req, res) => {
       destino,
       fecha_salida,
       hora_salida,
-      plataforma_id,
+      plataforma,
       fecha_ingreso,
       hora_ingreso,
       interno,
       empresa,
       servicio,
       usuario,
+      tipo_tv,
     } = req.body;
 
     console.log('req.body:', req.body)
@@ -278,11 +294,11 @@ const modificarInforme = async (req, res) => {
       if (destino != null) dataACambiar.destino = destino;
       if (fecha_salida != null) dataACambiar.fecha_salida = fecha_salida;
       if (hora_salida != null) dataACambiar.hora_salida = hora_salida;
-      if (plataforma_id != null) dataACambiar.plataforma_id =  plataforma_id;
+      if (plataforma != null) dataACambiar.plataforma_id =  plataforma;
       if (fecha_ingreso != null) dataACambiar.fecha_ingreso = fecha_ingreso;
       if (hora_ingreso != null) dataACambiar.hora_ingreso = hora_ingreso;
       if (interno != null) dataACambiar.interno = interno;
-
+if (tipo_tv != null) dataACambiar.tipo_tv = tipo_tv;
       if (empresa != null) dataACambiar.empresa_id = empresa;
       if (servicio != null) dataACambiar.servicios_id = servicio;
       if (usuario != null) dataACambiar.usuarios_id = usuario;

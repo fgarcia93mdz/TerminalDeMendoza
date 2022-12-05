@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import FormEditTicket from '../../components/forms/FormEditTicket';
+import FormEditTicket from '../../components/forms/FormEditTicketEntry';
 import { CircularProgress } from '@mui/material';
 
 const InformsEditTicket = () => {

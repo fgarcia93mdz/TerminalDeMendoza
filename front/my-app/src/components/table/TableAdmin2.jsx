@@ -13,7 +13,7 @@ import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
 
 
 
-export default function TableAdmin({ data, edit }) {
+export default function TableAdmin2({ data, edit }) {
   // edit. if edit is true so the table will have a column with edit button
 
   const day = `Informe de ingresos_${new Date().toJSON().slice(0, 10)}`;
@@ -65,7 +65,7 @@ export default function TableAdmin({ data, edit }) {
                   <TableCell align="center">{row.tipo_tv}</TableCell>
                   {edit && (
                     <TableCell align="right">
-                      <Link to={`/informes/editar/ingreso/${row.id}`}>
+                      <Link to={`/informes/editar/en_plataforma/${row.id}`}>
                         {" "}
                         <SettingsIcon />{" "}
                       </Link>

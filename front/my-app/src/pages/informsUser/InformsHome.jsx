@@ -3,6 +3,7 @@ import { Box, Stack, Typography } from '@mui/material';
 import axios from 'axios'
 
 import TableAdmin from '../../components/table/TableAdmin';
+import TableAdmin2 from "../../components/table/TableAdmin2";
 
 
 const InformsHome = () => {
@@ -41,21 +42,26 @@ const InformsHome = () => {
     }
 
     return (
-        <Stack>
-            <Box style={boxStyle}>
-                <Typography align='center' variant='h4' style={style} > Ingresantes </Typography>
-                <TableAdmin edit={true} data={ingresando} />
-            </Box>
-            <Box style={boxStyle}>
-                <Typography align='center' variant='h4' style={style} >Fuera de plataforma </Typography>
-                <TableAdmin  edit={true} data={enPlataforma} />
-            </Box>
-            <Box style={boxStyle}>
-                <Typography align='center' variant='h4' style={style} >En Plataforma</Typography>
-                <TableAdmin  edit={true} data={fueraDePlataforma} />
-            </Box>
-        </Stack>
-    )
+      <Stack>
+        <Box style={boxStyle}>
+          <Typography align="center" variant="h4" style={style}>
+            {" "}
+            Ingresantes{" "}
+          </Typography>
+          <TableAdmin edit={true} data={ingresando} />
+        </Box>
+        <Box style={boxStyle}>
+          <Typography align="center" variant="h4" style={style}>En plataforma</Typography>
+          <TableAdmin2 edit={true} data={enPlataforma} />
+        </Box>
+        <Box style={boxStyle}>
+          <Typography align="center" variant="h4" style={style}>
+            Fuera de plataforma{" "}
+          </Typography>
+          <TableAdmin edit={true} data={fueraDePlataforma} />
+        </Box>
+      </Stack>
+    );
 }
 
 export default InformsHome
