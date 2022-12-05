@@ -1,6 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const { getAllEmpresas, addNewEmpresa } = require("../controllers/empresas");
+const {
+  getAllEmpresas,
+  addNewEmpresa,
+  deleteEmpresa,
+} = require("../controllers/empresas");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
 
@@ -23,5 +27,7 @@ router.post("/nueva", authenticateToken, addNewEmpresa);
 //         "cuit" : "53-32523325"
 // }
 //authorization Bearer token...
+
+router.delete("/:id", authenticateToken, deleteEmpresa)
 
 module.exports = router;
