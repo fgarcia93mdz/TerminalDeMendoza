@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
+import { Button, Divider, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 // import { useNavigate } from 'react-router-dom';
 
@@ -128,7 +128,7 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
       >
         <form onSubmit={formik.handleSubmit}>
           <Typography variant="h4" color="white">
-            Editar ticke en plataforma:
+            Editar ticket en plataforma:
           </Typography>
           <Grid container my={4}>
             <Grid
@@ -349,6 +349,11 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
                 {/* <MenuItem value={2}>Ingresando</MenuItem> */}
               </TextField>
             </Grid>
+            <Grid item xs={12} py={4}>
+
+              <Divider color='white' />
+            </Grid>
+            
             <Grid
               item
               display={{ xs: "block", sm: "flex" }}
@@ -653,7 +658,7 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
               />
             </Grid>
 
-            <Grid item sx={{ marginRight: "auto" }} xs={12}>
+            <Grid item sx={{ marginRight: "auto" }} align='center' xs={12} pt={4}>
               <Button variant="contained" ml="auto" type="submit" my={2}>
                 Editar ingreso
               </Button>

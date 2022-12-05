@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
+import { Button, Divider, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 // import { useNavigate } from 'react-router-dom';
 
@@ -70,6 +70,7 @@ const FormEditTicket = ({ ticket }) => {
         .then(response =>  setDataDropdown(response.data))
         .catch(error => console.log('error jwt:', error.response.data.mensaje))
 
+          console.log('datadropdown:', dataDropdown)
         // console.log('dataDropdown:', dataDropdown)
 
     }, [token])
@@ -108,15 +109,6 @@ const FormEditTicket = ({ ticket }) => {
       });
 
 
-    // React.useEffect(() => {
-    //     if(!formik.errors){
-    //         // alert('no hay errores')
-    //     }
-    //     // if(formik.isValid) return alert('valido')
-    //     // console.log('ticket', formik.values)
-    // }, [formik])
-
-
     return (
       <Stack
         sx={{ background: "#0b2748", borderRadius: "25px", shadow: 4 }}
@@ -127,7 +119,7 @@ const FormEditTicket = ({ ticket }) => {
       >
         <form onSubmit={formik.handleSubmit}>
           <Typography variant="h4" color="white">
-            Editar ticke de ingreso:
+            Editar ticket de ingresos:
           </Typography>
           <Grid container my={2}>
             <Grid
@@ -136,7 +128,7 @@ const FormEditTicket = ({ ticket }) => {
               alignItems="center"
               gap={2}
               xs={12}
-              md={12}
+              md={6}
               my={2}
             >
               <Typography
@@ -147,6 +139,7 @@ const FormEditTicket = ({ ticket }) => {
                 Plataforma:
               </Typography>
               <TextField
+                // select
                 sx={{
                   ".MuiOutlinedInput-notchedOutline": {
                     borderColor: "white",
@@ -170,10 +163,60 @@ const FormEditTicket = ({ ticket }) => {
                 helperText={formik.errors.plataformas}
               >
                 {dataDropdown.plataformas?.map((plataformas) => (
-                  <MenuItem value={plataformas.id} selected={true}>
+                  <MenuItem value={plataformas.id} >
                     {plataformas.plataforma}
                   </MenuItem>
                 ))}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              display={{ xs: "block", md: "flex" }}
+              alignItems="center"
+              gap={2}
+              xs={12}
+              sm={6}
+              my={2}
+            >
+              <Typography
+                variant="subtitle1"
+                color="white"
+                display={{ xs: "none", sm: "block" }}
+              >
+                Estado:
+              </Typography>
+              <TextField
+                select
+                label="Seleccione estado"
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                }}
+                sx={{
+                  ".MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  ".MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                  minWidth: "250px",
+                }}
+                name="estado_id"
+                value={formik.values.estado_id}
+                onChange={formik.handleChange}
+                error={formik.errors.estado_id}
+                helperText={formik.errors.estado_id}
+              >
+                {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
+                {dataDropdown.estados?.map((estado) => (
+                  <MenuItem value={estado.id} selected={true}>
+                    {estado.tipo}
+                  </MenuItem>
+                ))}
+                {/* <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem> */}
+                {/* <MenuItem value={2}>Ingresando</MenuItem> */}
               </TextField>
             </Grid>
             <Grid
@@ -249,6 +292,10 @@ const FormEditTicket = ({ ticket }) => {
                 helperText={formik.errors.hora_salida}
               />
             </Grid>
+            <Grid item xs={12} py={4}>
+              <Divider color='whitesmoke' />
+            </Grid>
+            
             <Grid
               item
               display={{ xs: "block", sm: "flex" }}
@@ -499,7 +546,7 @@ const FormEditTicket = ({ ticket }) => {
                             <MenuItem value={3}>Corta distancia </MenuItem> */}
               </TextField>
             </Grid>
-            <Grid
+            {/* <Grid
               item
               display={{ xs: "block", md: "flex" }}
               alignItems="center"
@@ -540,15 +587,16 @@ const FormEditTicket = ({ ticket }) => {
                 helperText={formik.errors.estado_id}
               >
                 {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
-                {dataDropdown.estados?.map((estado) => (
+                {/* {dataDropdown.estados?.map((estado) => (
                   <MenuItem value={estado.id} selected={true}>
                     {estado.tipo}
                   </MenuItem>
-                ))}
+                ))} */}
                 {/* <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem> */}
                 {/* <MenuItem value={2}>Ingresando</MenuItem> */}
-              </TextField>
-            </Grid>
+              {/* </TextField>
+            </Grid> */} 
+            
             <Grid
               item
               display={{ xs: "block", md: "flex" }}
@@ -586,7 +634,7 @@ const FormEditTicket = ({ ticket }) => {
               />
             </Grid>
 
-            <Grid item sx={{ marginRight: "auto" }} xs={12}>
+            <Grid item sx={{ marginLeft: "auto" }} align='center' xs={12} pt={4}>
               <Button variant="contained" ml="auto" type="submit" my={2}>
                 Modificar ingreso
               </Button>
