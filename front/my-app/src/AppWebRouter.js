@@ -66,15 +66,6 @@ React.useEffect(() => {
 
           <Route
             exact
-            path="/seguridad/ticket/crear"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <FormTicket />
-              </Protected>
-            }
-          />
-          <Route
-            exact
             path="/seguridad"
             element={
               <Protected isLoggedIn={isLoggedIn}>
@@ -82,6 +73,17 @@ React.useEffect(() => {
               </Protected>
             }
           />
+
+          <Route
+            exact
+            path="/seguridad/ticket/crear"
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <FormTicket />
+              </Protected>
+            }
+          />
+
           <Route
             exact
             path="/seguridad/arribos"
@@ -96,8 +98,13 @@ React.useEffect(() => {
             path="/seguridad/partidas"
             element={<DeparturesBoard />}
           />
-          <Route exact path="/ticket/editar" element={<FormTicket />} />
-          <Route exact path="/informes" element={<InformsHome />} />
+
+          <Route 
+            exact 
+            path="/informes" 
+            element={<InformsHome />} 
+          />
+
           <Route
             exact
             path="/informes/ticket/crear"
@@ -117,6 +124,7 @@ React.useEffect(() => {
               </Protected>
             }
           />
+
           <Route
             exact
             path="/informes/partidas"
@@ -132,9 +140,10 @@ React.useEffect(() => {
               </Protected>
             }
           />
+
           <Route
             exact
-            path="/informes/editar/en_plataforma/:id"
+            path="/informes/editar/en-plataforma/:id"
             element={
               <Protected isLoggedIn={isLoggedIn}>
                 <InformsEditTicketOnPlatform />
@@ -142,14 +151,29 @@ React.useEffect(() => {
             }
           />
 
-          <Route exact path="/usuarios" element={<ListUsers />} />
-          <Route exact path="/usuarios/crear" element={<FormCreateUser />} />
+          <Route 
+            exact 
+            path="/usuarios" 
+            element={<ListUsers />} 
+          />
+
+          <Route 
+            exact 
+            path="/usuarios/crear" 
+            element={<FormCreateUser />} 
+          />
+
           <Route
             exact
             path="/usuarios/resetPass"
             element={<PageResetPassword token={token} />}
           />
-          <Route exact path="/usuarios/editar/:id" element={<FormEditUser />} />
+
+          <Route 
+            exact 
+            path="/usuarios/editar/:id" 
+            element={<FormEditUser />} 
+          />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

@@ -70,9 +70,8 @@ export default function TableAdmin2({ data, edit }) {
                   <TableCell align="center">{row.tipo_tv}</TableCell>
                   {edit && (
                     <TableCell align="right">
-                      <Link to={`/informes/editar/en_plataforma/${row.id}`}>
-                        {" "}
-                        <SettingsIcon />{" "}
+                      <Link to={`/informes/editar/en-plataforma/${row.id}`}>
+                        {" "}<SettingsIcon />{" "}
                       </Link>
                     </TableCell>
                   )}
