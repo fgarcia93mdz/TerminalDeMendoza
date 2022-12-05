@@ -267,27 +267,28 @@ const modificarInforme = async (req, res) => {
     const dataACambiar = {};
 
     const {
-      estado,
+      estado_id: estado,
       destino,
       fecha_salida,
       hora_salida,
-      plataforma,
+      plataformas_id: plataforma,
       fecha_ingreso,
       hora_ingreso,
       interno,
-      empresa,
-      servicio,
+      empresa_id: empresa,
+      servicios_id: servicio,
       usuario,
       tipo_tv,
     } = req.body;
 
-    console.log("req.body:", req.body);
+    // console.log("req.body:", req.body);
 
     const encontrado = await RegistroTorre.findOne({
       where: {
         id: ingresoId,
       },
     });
+
     if (encontrado != null) {
       //casos que no son contemplados
       // si toda la data es repetida con lo que ya esta en la base de datos
@@ -295,11 +296,11 @@ const modificarInforme = async (req, res) => {
       if (destino != null) dataACambiar.destino = destino;
       if (fecha_salida != null) dataACambiar.fecha_salida = fecha_salida;
       if (hora_salida != null) dataACambiar.hora_salida = hora_salida;
-      if (plataforma != null) dataACambiar.plataforma_id = plataforma;
+      if (plataforma != null) dataACambiar.plataformas_id = plataforma;
       if (fecha_ingreso != null) dataACambiar.fecha_ingreso = fecha_ingreso;
       if (hora_ingreso != null) dataACambiar.hora_ingreso = hora_ingreso;
       if (interno != null) dataACambiar.interno = interno;
-      if (tipo_tv != null) dataACambiar.tipo_tv = tipo_tv;
+      if (tipo_tv != null) dataACambiar.tipo_tv_id = tipo_tv;
       if (empresa != null) dataACambiar.empresa_id = empresa;
       if (servicio != null) dataACambiar.servicios_id = servicio;
       if (usuario != null) dataACambiar.usuarios_id = usuario;
@@ -316,11 +317,11 @@ const modificarInforme = async (req, res) => {
         },
       });
 
-      console.log(modificacion);
+      // console.log(modificacion);
       return res.status(200).json({ mensaje: "modificacion exitosa" });
     }
   } catch (error) {
-    return res.status(400).json({ mensaje: error });
+    return res.status(400).json({ mensaje: "consulte administrador" });
   }
 };
 
