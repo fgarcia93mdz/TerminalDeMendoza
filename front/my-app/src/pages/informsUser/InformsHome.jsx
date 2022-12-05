@@ -4,12 +4,11 @@ import axios from 'axios'
 
 import TableAdmin from '../../components/table/TableAdmin';
 import TableAdmin2 from "../../components/table/TableAdmin2";
-import TableAdmin3 from "../../components/table/TableAdmin3";
+
 
 
 const InformsHome = () => {
   const [ingresando, setIngresando] = useState([])
-  const [ingresandoSeguridad, setIngresandoSeguridad] = useState([]);
     const [ enPlataforma, setEnPlataforma ] = useState([])
     const [ fueraDePlataforma, setFueraDePlataforma ] = useState([])
 
@@ -25,7 +24,6 @@ const InformsHome = () => {
         axios.get(url, config)
         .then(data => {
           setIngresando(data.data.respuesta.ingresando)
-          setIngresandoSeguridad(data.data.respuesta.ingresandoSeguridad);
             setEnPlataforma(data.data.respuesta.enPlataforma)
             setFueraDePlataforma(data.data.respuesta.fueraDePlataforma)
         })
