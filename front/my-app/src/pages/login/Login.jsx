@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import './login.css';
 
 import axios from 'axios'
+import { Button, Typography } from '@mui/material';
 
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,17 +19,6 @@ const Login = () => {
         console.log('email:', email)
         console.log('password:', password)
     }, [email, password])
-
-    useEffect(() => {
-
-
-        axios.get('http://localhost:8080/informes/dataDropdown')
-        .then(data => data.json())
-        .then(res => console.log('RES:', res))
-    }, 
-    
-    
-    [])
     
 
     const handleSubmit = (e) => {
@@ -63,11 +54,9 @@ const Login = () => {
                 })
                 .catch(function (error) {
                     console.log('Error:', error.response.data.mensaje);
+                    setError(error.response.data.mensaje)
                 });
-            
         }
-
-
     }
 
 
@@ -76,7 +65,7 @@ const Login = () => {
 
         <div className="container">
             <div className="login">
-                <h1 className='azul bienvenido'>Bienvenido</h1>
+                <Typography className='azul bienvenido' variant='h5' fontWeight='bold' sx={{marginBottom:'16px'}}>Bienvenido</Typography>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className='item'>
                         <label htmlFor='email' className='azul'>Usuario:</label>
@@ -88,14 +77,16 @@ const Login = () => {
                     </div>
 
                     
-                    <button type='submit'>Iniciar sesión</button>
-                    
-                    <h1>
+                    {error && 
 
-</h1>
-                    <div>
-                        <a href='/#' className='cambiar-cont'>Olvidé mi contraseña</a>
-                    </div>
+                        <Typography variant="caption" color="error"  align='left' style={{color:'red', maxWidth: '90%', margin:'auto', display:'block'}}> * Hay un error en tu usuario o contraseña </Typography>
+                        
+                    }
+
+                    <Button type='submit'  variant="contained" size="small" sx={{marginBlock: '16px'}}>Iniciar sesión</Button>
+                    {/* <div>
+                        <a href='/#' className='cambiar-cont'>Si olvidaste tu contraseña </a>
+                    </div> */}
                 </form>
             </div>
         </div>
