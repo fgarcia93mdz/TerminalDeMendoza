@@ -4,6 +4,7 @@ const Empresa = db.Empresa;
 const Servicio = db.Servicio;
 const Plataforma = db.Plataforma;
 const Estado = db.Estado;
+const Tipo_tv = db.Tipo_tv;
 const { Op } = require("sequelize");
 const moment = require("moment");
 const tieneCampoNull = require("../../public/js/tieneCampoNull");
@@ -59,12 +60,7 @@ const addInforme = async (req, res) => {
     if (rol === 5) {
       const { fecha_salida, hora_salida, plataformas_id, tipo_tv_id } = data;
 
-      if (
-        !fecha_salida ||
-        !hora_salida ||
-        !tipo_tv_id ||
-        !plataformas_id
-      ) {
+      if (!fecha_salida || !hora_salida || !tipo_tv_id || !plataformas_id) {
         return res.status(400).json({ mensaje: "faltan datos" });
       }
 
@@ -89,6 +85,7 @@ const getDataDropdown = async (req, res) => {
     const { rol } = req.usuario;
 
     const empresas = await Empresa.findAll();
+    const tipo_tv = await Tipo_tv.findAll();
     const servicios = await Servicio.findAll();
     let estados = await Estado.findAll();
 
@@ -103,9 +100,7 @@ const getDataDropdown = async (req, res) => {
       estados = estadosDisponibles;
     }
 
-
-
-    respuesta = { empresas, servicios, estados };
+    respuesta = { empresas, servicios, estados, tipo_tv };
     return res.status(200).json({ ...respuesta });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
@@ -116,21 +111,28 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
   try {
     let diaHoy = moment();
     let diaAyer = diaHoy.add(-1, "days");
-    let hora = diaHoy.format("HH:mm:ss");
+    let hora = diaHoy.format("HH:mm");
     let ingresos = await RegistroTorre.findAll({
-      include: ["registro_empresa", "registro_plataforma", "registro_estado"],
+      include: [
+        "registro_empresa",
+        "registro_plataforma",
+        "registro_estado",
+        "registro_tipo_tv",
+      ],
       order: [["hora_salida", "DESC"]],
+      where: {
+        fecha_ingreso: {
+          [Op.gt]: diaAyer,
+        },
+      },
     });
-    
-    // where: {
-    //   fecha_ingreso: {
-    //     [Op.gt]: diaAyer,
-    //   },
-    // },
+
+  
     const respuesta = {
       fueraDePlataforma: [],
       enPlataforma: [],
       ingresando: [],
+      ingresandoSeguridad: [],
     };
 
     ingresos.forEach((ingreso) => {
@@ -143,27 +145,35 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         empresa: ingreso.registro_empresa.dataValues.empresa,
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
+        fecha_salida: ingreso.fecha_salida,
         horario_salida: ingreso.hora_salida,
+        tipo_tv: ingreso.registro_tipo_tv.dataValues.tipo,
       };
-
-      if (ingreso.estado_id === 1) {
-        respuesta.enPlataforma.push(data);
-      }
 
       if (ingreso.estado_id === 2) {
         respuesta.ingresando.push(data);
+      }
+      if (ingreso.estado_id === 1) {
+        respuesta.enPlataforma.push(data);
       }
 
       if (ingreso.estado_id === 4) {
         respuesta.fueraDePlataforma.push(data);
       }
+      if (
+        ingreso.estado_id === 1 ||
+        ingreso.estado_id === 2 ||
+        ingreso.estado_id === 4
+      ) {
+        respuesta.ingresandoSeguridad.push(data);
+      }
     });
-   console.log(respuesta);
+    console.log(respuesta);
     return res.status(200).json({
       respuesta,
     });
   } catch (error) {
-    console.log('error informes controller:', error)
+    console.log("error informes controller:", error);
     return res.status(400).json({ mensaje: error });
   }
 };
@@ -173,12 +183,17 @@ const informesListado = async (req, res) => {
     let diaHoy = moment();
     let diaAyer = diaHoy.add(-1, "days");
     let hora = diaHoy.format("HH:mm");
-    
+
     let ingresos = await RegistroTorre.findAll({
-      include: ["registro_empresa", "registro_plataforma", "registro_estado"],
+      include: [
+        "registro_empresa",
+        "registro_plataforma",
+        "registro_estado",
+        "registro_tipo_tv",
+      ],
       order: [["hora_salida", "DESC"]],
     });
-    
+
     // where: {
     //   fecha_ingreso: {
     //     [Op.gt]: diaAyer,
@@ -186,7 +201,7 @@ const informesListado = async (req, res) => {
     // },
     const respuesta = [];
 
-    console.log('ingresos controller:', ingresos)
+    console.log("ingresos controller:", ingresos);
 
     ingresos.forEach((ingreso) => {
       respuesta.push({
@@ -220,6 +235,7 @@ const getInforme = async (req, res) => {
         "registro_servicio",
         "registro_plataforma",
         "registro_estado",
+        "registro_tipo_tv",
       ],
       where: {
         id: ingresoId,
@@ -251,26 +267,28 @@ const modificarInforme = async (req, res) => {
     const dataACambiar = {};
 
     const {
-      estado,
+      estado_id: estado,
       destino,
       fecha_salida,
       hora_salida,
-      plataforma_id,
+      plataformas_id: plataforma,
       fecha_ingreso,
       hora_ingreso,
       interno,
-      empresa,
-      servicio,
+      empresa_id: empresa,
+      servicios_id: servicio,
       usuario,
+      tipo_tv,
     } = req.body;
 
-    console.log('req.body:', req.body)
+    // console.log("req.body:", req.body);
 
     const encontrado = await RegistroTorre.findOne({
       where: {
         id: ingresoId,
       },
     });
+
     if (encontrado != null) {
       //casos que no son contemplados
       // si toda la data es repetida con lo que ya esta en la base de datos
@@ -278,11 +296,11 @@ const modificarInforme = async (req, res) => {
       if (destino != null) dataACambiar.destino = destino;
       if (fecha_salida != null) dataACambiar.fecha_salida = fecha_salida;
       if (hora_salida != null) dataACambiar.hora_salida = hora_salida;
-      if (plataforma_id != null) dataACambiar.plataforma_id =  plataforma_id;
+      if (plataforma != null) dataACambiar.plataformas_id = plataforma;
       if (fecha_ingreso != null) dataACambiar.fecha_ingreso = fecha_ingreso;
       if (hora_ingreso != null) dataACambiar.hora_ingreso = hora_ingreso;
       if (interno != null) dataACambiar.interno = interno;
-
+      if (tipo_tv != null) dataACambiar.tipo_tv_id = tipo_tv;
       if (empresa != null) dataACambiar.empresa_id = empresa;
       if (servicio != null) dataACambiar.servicios_id = servicio;
       if (usuario != null) dataACambiar.usuarios_id = usuario;
@@ -299,11 +317,13 @@ const modificarInforme = async (req, res) => {
         },
       });
 
-      //console.log(modificacion);
+      // console.log(modificacion);
       return res.status(200).json({ mensaje: "modificacion exitosa" });
+    } else {
+      return res.status(400).json({mensaje: "informe no encontrado"});
     }
   } catch (error) {
-    return res.status(400).json({ mensaje: error });
+    return res.status(400).json({ mensaje: "consulte administrador" });
   }
 };
 

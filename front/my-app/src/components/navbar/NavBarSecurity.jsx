@@ -52,7 +52,7 @@ const NavBarSecurity = ({ name }) => {
         handleCloseUserMenu();
         setUserInfo({});
         window.sessionStorage.removeItem("jwt");
-        navigate("/arribos")
+        navigate("/login")
         window.location.reload();
         
     };
@@ -261,7 +261,7 @@ const NavBarSecurity = ({ name }) => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >   
-                                <Link to='/perfil/editar'>
+                                {/* <Link to='/perfil/editar'>
                                     <MenuItem
                                         key={"inicio4"}
                                         onClick={handleCloseNavMenu}
@@ -269,7 +269,7 @@ const NavBarSecurity = ({ name }) => {
                                     >
                                         CAMBIAR CONTRASEÑA
                                     </MenuItem>
-                                </Link>
+                                </Link> */}
                                 <MenuItem
                                     key={"inicio5"}
                                     onClick={() => closeSession()}

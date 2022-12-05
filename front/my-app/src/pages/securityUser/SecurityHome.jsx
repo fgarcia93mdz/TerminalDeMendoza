@@ -1,9 +1,12 @@
+
+/* TABLERO DE SEGURIDAD */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { Box, Stack, Typography } from '@mui/material';
 import axios from 'axios'
 
-import TableAdmin from '../../components/table/TableAdmin';
+import TableAdmin3 from '../../components/table/TableAdmin3';
 
 
 const SecurityHome = () => {
@@ -19,7 +22,7 @@ const SecurityHome = () => {
         axios.get('http://localhost:8080/informes/listadoSeparado', { headers: {authorization: `Bearer ${token}` }} )
         .then(data => {
                 // console.log('listado:',data.data.respuesta )
-                setArrivals(data.data.respuesta.ingresando)
+                setArrivals(data.data.respuesta.ingresandoSeguridad)
             })
         .catch(error => console.log('error security home', error))
     
@@ -40,8 +43,8 @@ const SecurityHome = () => {
     return (
         <Stack >
             <Box style={styles}>
-                <Typography align='center' variant='h4' style={typographyStyles}>INGRESANDO</Typography>
-                <TableAdmin data={arrivals} />
+                <Typography align='center' variant='h4' style={typographyStyles}>REGISTRO DE INGRESOS DE TORRE DE SEGURIDAD</Typography>
+                <TableAdmin3 data={arrivals} />
             </Box>
         </Stack>
     )

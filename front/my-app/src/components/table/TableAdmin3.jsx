@@ -1,3 +1,6 @@
+
+/* TABLERO DE SEGURIDAD */
+
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,7 +16,7 @@ import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
 
 
 
-export default function TableAdmin({ data, edit = false }) {   
+export default function TableAdmin3({ data, edit }) {
   // edit. if edit is true so the table will have a column with edit button
 
   const day = `Registro de ingresantes en informes_${new Date().toJSON().slice(0, 10)}`;
