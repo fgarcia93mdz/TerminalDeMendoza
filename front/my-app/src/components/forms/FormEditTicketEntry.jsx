@@ -129,7 +129,7 @@ const FormEditTicket = ({ ticket }) => {
           <Typography variant="h4" color="white">
             Editar ticke de ingreso:
           </Typography>
-          <Grid container my={4}>
+          <Grid container my={2}>
             <Grid
               item
               display={{ xs: "block", md: "flex" }}
@@ -588,13 +588,13 @@ const FormEditTicket = ({ ticket }) => {
 
             <Grid item sx={{ marginRight: "auto" }} xs={12}>
               <Button variant="contained" ml="auto" type="submit" my={2}>
-                Editar ingreso
+                Modificar ingreso
               </Button>
             </Grid>
             {openModal && (
               <BasicModal
-                title="Exito"
-                message="Ticket creado con exito"
+                title="Éxito"
+                message="El registro fue modificado"
                 openModal={openModal}
               />
             )}

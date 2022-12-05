@@ -660,8 +660,8 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
             </Grid>
             {openModal && (
               <BasicModal
-                title="Exito"
-                message="Ticket creado con exito"
+                title="Éxito"
+                message="Ticket de ingreso creado"
                 openModal={openModal}
               />
             )}
