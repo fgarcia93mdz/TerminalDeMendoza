@@ -16,7 +16,9 @@ import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
 export default function TableAdmin2({ data, edit }) {
   // edit. if edit is true so the table will have a column with edit button
 
-  const day = `Informe de ingresos_${new Date().toJSON().slice(0, 10)}`;
+  const day = `Registro de en plataforma en informes_${new Date()
+    .toJSON()
+    .slice(0, 10)}`;
 
   console.log('data table admin:', data)
 
