@@ -319,6 +319,8 @@ const modificarInforme = async (req, res) => {
 
       // console.log(modificacion);
       return res.status(200).json({ mensaje: "modificacion exitosa" });
+    } else {
+      return res.status(400).json({mensaje: "informe no encontrado"});
     }
   } catch (error) {
     return res.status(400).json({ mensaje: "consulte administrador" });
