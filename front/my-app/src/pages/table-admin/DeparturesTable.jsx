@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TableDepartures from '../../components/table/TableDepartures';
-
+import axios from "axios";
 
 // LISTADO DE PARTIDAS DE TICKETS
 // VISTA DE TORRE DE SEGURIDAD
