@@ -65,8 +65,6 @@ const NavBarSecurity = ({ name }) => {
             console.log("tokenDecoded", tokenDecoded);
             setUserInfo(tokenDecoded);
             setUserInfo((state) => ({ ...state, tokenDecoded }));
-            // console.log('decoded', userInfo);
-            // console.log('decoded', userNombre);
         } else if (token === null) {
             return null;
         }
@@ -116,14 +114,14 @@ const NavBarSecurity = ({ name }) => {
                                         <Typography textAlign="center">Registrar Ingreso</Typography>
                                     </MenuItem>
                                 </Link>
-                                <Link to="/arribos">
+                                <Link to="/seguridad/arribos">
                                     <MenuItem key={"/seguridad/arribos"} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">Pantalla de Arribos</Typography>
+                                        <Typography textAlign="center">Arribos</Typography>
                                     </MenuItem>
                                 </Link>
-                                <Link to="/partidas">
+                                <Link to="/seguridad/partidas">
                                     <MenuItem key={"/seguridad/partidas"} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">Pantalla de Partidas</Typography>
+                                        <Typography textAlign="center">Partidas</Typography>
                                     </MenuItem>
                                 </Link>
 
@@ -232,7 +230,7 @@ const NavBarSecurity = ({ name }) => {
                             )} */}
                         </Box>
                         {userInfo && userInfo.nombre && (
-                            <Typography variant="body" my="auto" marginRight="50px" fontSize="20px">
+                            <Typography variant="body" my="auto" align='center' width={{xs:'90%', sm:'auto'}} pr={{xs:0,sm:8}} fontSize="18px">
                                 Hola {userInfo.nombre}!
                             </Typography>
                         )}
@@ -273,7 +271,7 @@ const NavBarSecurity = ({ name }) => {
                                 <MenuItem
                                     key={"inicio5"}
                                     onClick={() => closeSession()}
-                                    sx={{ my: 2, color: "#0E315A", display: "block" }}
+                                    sx={{ mt: 1, color: "#0E315A", display: "block" }}
                                 >
                                     CERRAR SESION
                                 </MenuItem>

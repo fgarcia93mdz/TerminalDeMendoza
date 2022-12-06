@@ -409,12 +409,14 @@ const FormTicket = () => {
 
           <Grid
             item
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginRight: { xs: 0, sm: 8 },
-            }}
+            // sx={{
+            //   display: "flex",
+            //   justifyContent: "flex-end",
+            //   marginRight: { xs: 0, sm: 8 },
+            // }}
             xs={12}
+            align='center'
+            pt={{xs: 4, sm: 6}}
           >
             <Button
               variant="contained"
@@ -422,7 +424,7 @@ const FormTicket = () => {
               py={2}
               my={4}
               mx={4}
-              sx={{ backgroundColor: "blue" }}
+              // sx={{ backgroundColor: "blue" }}
             >
               Crear registro
             </Button>
@@ -443,26 +445,3 @@ const FormTicket = () => {
 };
 
 export default FormTicket;
-
-          /* <Grid item display={{ xs: 'block', md: 'flex'}}  alignItems='center' gap={2} xs={12} md={6} my={2}>
-                        <Typography variant='subtitle1' color='white' display={{xs: 'none', sm: 'block'}}>Plataforma:</Typography>
-                        <TextField
-                            sx={{
-                                '.MuiOutlinedInput-notchedOutline':{
-                                    borderColor: 'white'
-                                },
-                                '.MuiInputBase-root':{
-                                    color: 'white'
-                                }
-                            }}
-                            InputLabelProps={{
-                                style: { color: '#fff' },
-                            }}
-                            label='Inserte plataforma'
-                            name='plataformas_id'
-                            value={formik.values.plataformas_id}
-                            onChange={formik.handleChange}
-                            error={formik.errors.plataformas_id}
-                            helperText={formik.errors.plataformas_id}
-                        />
-                    </Grid> */
