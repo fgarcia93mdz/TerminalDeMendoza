@@ -62,7 +62,7 @@ const styles = {
   cajaFoto: {
     width: '152px',
     height: '56px',
-    border: '1px solid white',
+    border: 'none',
     color: 'black',
     margin: 'auto',
     overflow: 'hidden'
@@ -121,14 +121,14 @@ export default function GenericTable( {props} ) {
                  Plat. {row.plataformas_id}
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                    {row.registro_empresa.img != null &&
-                      <div className="box" style={styles.cajaFoto}>
+                    <div className="box" style={styles.cajaFoto}>
+                      {row.registro_empresa.img != null &&
                         <img
                           src={require("../../assets/img/empresas/" + row.registro_empresa.img)}
                           alt=""
                         />
-                      </div>
-                    }
+                      }
+                    </div>
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.interno}</StyledTableCell>
               </StyledTableRow>

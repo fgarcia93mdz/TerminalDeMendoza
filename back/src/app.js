@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', homeRouter);
-app.use('/api/plataforma', platformRouter) 
+app.use('/plataforma', platformRouter) 
 
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);

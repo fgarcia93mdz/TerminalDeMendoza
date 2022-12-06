@@ -1,5 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import { Stack } from '@mui/system';
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import GenericTable from '../../components/table/TableArrivals';
 
@@ -9,44 +10,26 @@ import './ArrivalsBoard.styles.css';
 
 
 const ArrivalsBoard = () => {
-
-    const [ estado, setEstado ] = React.useState([]);
-
-    // const colectivosRedux  = useSelector( state => state.estado);
+    const [ arribos, setArribos ] = React.useState([]);
 
     useEffect(() => {
-
-      fetch('http://localhost:8080/api/plataforma/arribos')
+      axios.get('http://localhost:8080/plataforma/arribos')
         .then( data => {
-          console.log('data')
-          return data.json()
-        })
-        .then( result => {
-          //  console.log('result:', result)
-           return setEstado(result)
+          setArribos(data.data)
         })
         .catch( error => console.log('error', error))
-
-        
-        
     }, [])
-
-    // console.log(estado)
-    
 
     return (
       <>
         <div className="containerBoard" >
           <div>
-            {estado.length === 0 && 
+            {arribos.length === 0 && 
               <Stack justifyContent={'center'} alignItems={'center'} height={'40vh'}>
-
                 <CircularProgress />
               </Stack>
             }
-
-            {estado.length > 0 && <GenericTable props={estado} />}
-            {/* <GenericTable props={estado} /> */}
+            {arribos.length > 0 && <GenericTable props={arribos} />}
           </div>
         </div>
       </>
