@@ -40,7 +40,7 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
       empresa_id: "", // 2
       servicios_id: "", // 2
       usuarios_id: "", // 2
-      plataformas: "" || null, // ? 1
+      plataformas_id: "" || null, // ? 1
       estado_id: "", // '0'
       tipo_tv: "", // '0'
       destino: "", // 'Mar de Ajo'
@@ -52,10 +52,10 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
         fecha_ingreso: ticket.fecha_ingreso, // '01-01-2022'
         hora_ingreso: ticket.hora_ingreso, // '12:00'
         interno: ticket.interno, // 123
-        empresa_id: ticket.registro_empresa?.empresa, // 2
-        servicios_id: ticket.registro_servicio.tipo_servicio, // 2
+        empresa_id: ticket.registro_empresa?.id, // 2
+        servicios_id: ticket.registro_servicio.id, // 2
         usuarios_id: ticket.usuarios_id, // 2
-        plataformas: ticket.registro_plataforma.plataforma || null, // ? 1
+        plataformas_id: ticket.registro_plataforma.plataforma || null, // ? 1
         estado_id: ticket.registro_estado.id, // '0'
         destino: ticket.destino, // 'Mar de Ajo'
         tipo_tv_id: ticket.tipo_tv_id, // 1 o 2
@@ -162,10 +162,10 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
                 }}
                 label="Plataforma asiganada"
                 name="plataformas_id"
-                value={formik.values.plataformas}
+                value={formik.values.plataformas_id}
                 onChange={formik.handleChange}
-                error={formik.errors.plataformas}
-                helperText={formik.errors.plataformas}
+                error={formik.errors.plataformas_id}
+                helperText={formik.errors.plataformas_id}
               >
                 {PLATAFORMAS.map((plataforma) => (
                   <MenuItem value={plataforma} key={plataforma} selected={true}>
