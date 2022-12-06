@@ -124,20 +124,22 @@ const NavBarPublic = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <Link to="/arribos">
-                  <MenuItem key={"/arribos"} onClick={handleCloseNavMenu}>
+                <Link to="/tablero-arribos">
+                  <MenuItem key={"/tablero-arribos"} onClick={handleCloseNavMenu}>
                     {/* <ArrowDownwardIcon /> */}
                     <Typography textAlign="center">ARRIBOS</Typography>
                   </MenuItem>
                 </Link>
-                <Link to="/partidas">
-                  <MenuItem key={"/partidas"} onClick={handleCloseNavMenu}>
+                <Link to="/tablero-arribos">
+                  <MenuItem key={"/tablero-arribos"} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">PARTIDAS</Typography>
                   </MenuItem>
                 </Link>
 
                 <a href="https://shop.terminalmendoza.com.ar/search">
-                  <Button sx={{ color: "#0E315A" }}>Venta de pasajes</Button>
+                  <MenuItem key={"/tablero-arribos"} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">VENTA DE PASAJES</Typography>
+                  </MenuItem>
                 </a>
               </Menu>
             </Box>

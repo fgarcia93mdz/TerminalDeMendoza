@@ -42,7 +42,7 @@ const Footer = () => {
                     <a href="https://www.terminalmendoza.com.ar/contacto.html"><Typography textAlign="center">Contacto</Typography></a>
 
                 </Box>
-                <Box textAlign={{ xs: 'center', sm: 'center', fontSize: 15, }}>
+                <Box textAlign={{ xs: 'center', sm: 'center', fontSize: 15 }}>
 
                     <a href="https://www.terminalmendoza.com.ar/agencias.html" ><Typography>Agencias</Typography></a>
                     <a href="https://www.terminalmendoza.com.ar/locales.html"><Typography textAlign="center">Locales comerciales</Typography></a>
@@ -50,7 +50,7 @@ const Footer = () => {
                     {/* <a href="https://shop.terminalmendoza.com.ar/search"><Typography textAlign="center">Venta de pasajes online</Typography></a> */}
 
                 </Box>
-                <Box textAlign={{ xs: 'center', sm: 'center' }}>
+                <Box textAlign={{ xs: 'center', sm: 'center' }} py={4}>
                     <a href="https://www.facebook.com/terminalmendoza"><FacebookIcon color='facebook' sx={{ fontSize: 40, marginLeft: 2, }} /> </a>
                     <a href="https://www.instagram.com/terminalmendoza/"><InstagramIcon color='instagram' sx={{ fontSize: 40, marginLeft: 2, }} /></a>
                     <a href="https://twitter.com/terminaltm"><TwitterIcon color='twitter' sx={{ fontSize: 40, marginLeft: 2, }} /></a>
@@ -75,7 +75,7 @@ const Footer = () => {
                         sx={{ maxWidth: '40px', marginLeft: "20px" }}
 
                     />
-                    <Box textAlign={{ xs: 'center', sm: 'rigth' }}>
+                    <Box textAlign={{ xs: 'center', sm: 'rigth' }} py={4}>
                         <Typography variant='body2'>Terminal de Mendoza</Typography>
                         <Typography variant='body2'>Copyrights 2022</Typography>
                     </Box>

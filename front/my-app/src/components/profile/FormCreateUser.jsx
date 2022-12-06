@@ -218,7 +218,7 @@ const FormCreateUser = () => {
                         />
                     </Grid> */}
 
-                    <Grid item sx={{marginRight: 'auto'}} align='left' pl={3} pt={6} xs={12}>
+                    <Grid item sx={{marginRight: 'auto'}} align={{xs:'center', sm:'left'}} pl={{xs:'0',sm:'3'}} pt={6} xs={12}>
                         <Button  variant="contained" ml='auto' type="submit" my={2}>Crear usuario</Button>
                     </Grid>
                     {openModal &&
