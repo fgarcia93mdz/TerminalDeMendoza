@@ -33,14 +33,9 @@ const FormCreateUser = () => {
     
     React.useEffect(() => {
         const url = `http://localhost:8080/users/new`
-
-        // axios.get(url)
         axios.get(url, { headers: {"authorization": `Bearer ${token}` }} )
         .then(response =>  console.log('RESPONSE USER DATA:', response.json()))
         .catch(error => console.log('error USER DATA:', error.response.data.mensaje))
-
-        // console.log('dataDropdown:', dataDropdown)
-
     }, [token])
 
     const formik = useFormik({
@@ -53,15 +48,8 @@ const FormCreateUser = () => {
 
             axios.post(url, data)
                 .then((res) => {
-                    // console.log('response', res)
-                    //
                     if(res.status === 200){
-                        // const jwt = res.data
-                        // escribe el jwt en session
-                        // window.sessionStorage.setItem("jwt", jwt);
-                        // redirecciona a la pagina principal
                         setOpenModal(true)
-                        // navigate("/")
                     }
                 })
                 .catch(function (error) {
@@ -69,20 +57,8 @@ const FormCreateUser = () => {
                     return alert('problem')
 
                 });
-
-        //   alert(JSON.stringify(values, null, 2));
         },
       });
-
-
-    // React.useEffect(() => {
-    //     if(!formik.errors){
-    //         alert('no hay errores')
-    //     }
-    //     // if(formik.isValid) return alert('valido')
-    //     console.log('ticket', formik.values)
-    // }, [formik])
-
 
     return (
         <Stack sx={{background: '#0b2748', borderRadius: '25px', shadow:4}} my={4} mx={{xs: 1, sm: 6}} p={4} sm={6}>
@@ -242,7 +218,7 @@ const FormCreateUser = () => {
                         />
                     </Grid> */}
 
-                    <Grid item sx={{marginRight: 'auto'}} xs={12}>
+                    <Grid item sx={{marginRight: 'auto'}} align='left' pl={3} pt={6} xs={12}>
                         <Button  variant="contained" ml='auto' type="submit" my={2}>Crear usuario</Button>
                     </Grid>
                     {openModal &&
