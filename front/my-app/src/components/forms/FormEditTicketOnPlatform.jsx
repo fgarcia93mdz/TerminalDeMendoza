@@ -71,7 +71,7 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
         .then(response =>  setDataDropdown(response.data))
         .catch(error => console.log('error jwt:', error.response.data.mensaje))
 
-        // console.log('dataDropdown:', dataDropdown)
+        console.log('dataDropdown:', dataDropdown)
 
     }, [token])
     
@@ -148,6 +148,7 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
                 Plataforma:
               </Typography> */}
               <TextField
+                select
                 sx={{
                   ".MuiOutlinedInput-notchedOutline": {
                     borderColor: "white",
@@ -166,12 +167,9 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
                 error={formik.errors.plataformas}
                 helperText={formik.errors.plataformas}
               >
-                {dataDropdown.plataformas?.map((plataformas) => (
-                  <MenuItem
-                    value={plataformas.id}
-                    selected={true}
-                  >
-                    {plataformas.plataforma}
+                {PLATAFORMAS.map((plataforma) => (
+                  <MenuItem value={plataforma} key={plataforma} selected={true}>
+                    {plataforma}
                   </MenuItem>
                 ))}
               </TextField>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import FormEditTicket from '../../components/forms/FormEditTicketEntry';
+import FormEditTicketOnPlatform from '../../components/forms/FormEditTicketOnPlatform';
 import { CircularProgress } from '@mui/material';
 
 const InformsEditTicket = () => {
@@ -27,7 +27,7 @@ const InformsEditTicket = () => {
 
     return (
         <>
-            { ticket === '' ? <CircularProgress /> : <FormEditTicket ticket={ticket} /> }
+            { ticket === '' ? <CircularProgress /> : <FormEditTicketOnPlatform ticket={ticket} /> }
         </>
     )
 }

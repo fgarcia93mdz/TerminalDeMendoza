@@ -308,7 +308,7 @@ const modificarInforme = async (req, res) => {
       if (Object.keys(dataACambiar).length === 0) {
         return res
           .status(400)
-          .json({ mensaje: "se require al menos un dato a modificar" });
+          .json({ mensaje: "Se require al menos un dato a modificar" });
       }
 
       const modificacion = await RegistroTorre.update(dataACambiar, {
@@ -318,12 +318,12 @@ const modificarInforme = async (req, res) => {
       });
 
       // console.log(modificacion);
-      return res.status(200).json({ mensaje: "modificacion exitosa" });
+      return res.status(200).json({ mensaje: "Modificacion exitosa" });
     } else {
-      return res.status(400).json({mensaje: "informe no encontrado"});
+      return res.status(400).json({mensaje: "Informe no encontrado"});
     }
   } catch (error) {
-    return res.status(400).json({ mensaje: "consulte administrador" });
+    return res.status(400).json({ mensaje: "Consulte administrador" });
   }
 };
 
