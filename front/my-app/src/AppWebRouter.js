@@ -60,9 +60,28 @@ React.useEffect(() => {
           <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
           <Route path="/tablero-partidas" element={<DeparturesBoard />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/ingreso" element={<Ingreso />} />
-          <Route path="/perfil/editar" element={<FormEditUser />} />
-          <Route path="/perfil/password" element={<WritePassword />} />
+          <Route 
+            exact 
+            path="/ingreso" 
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <Ingreso />
+              </Protected>
+          } />
+          <Route 
+            path="/perfil/editar" 
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                  <FormEditUser />
+              </Protected>
+            } />
+          <Route 
+            path="/perfil/password" 
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <WritePassword />
+              </Protected>
+          } />
 
           <Route
             exact

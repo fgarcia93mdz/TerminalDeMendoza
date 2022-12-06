@@ -178,7 +178,7 @@ const NavBarRRHH = ({ name }) => {
                       
                     </Box>
                             {userInfo && userInfo.nombre && (
-                                <Typography variant="body" my="auto" marginRight="50px">
+                                <Typography variant="body" my="auto" align='center' width={{xs:'90%', sm:'auto'}} pr={{xs:0,sm:8}} fontSize="18px">
                                     Hola {userInfo.nombre}!
                                 </Typography>
                             )}

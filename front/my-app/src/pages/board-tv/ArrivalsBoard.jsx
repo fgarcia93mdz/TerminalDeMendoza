@@ -12,12 +12,22 @@ import './ArrivalsBoard.styles.css';
 const ArrivalsBoard = () => {
     const [ arribos, setArribos ] = React.useState([]);
 
-    useEffect(() => {
+    
+
+    const getArrivals = ( ) => {
       axios.get('http://localhost:8080/plataforma/arribos')
         .then( data => {
           setArribos(data.data)
         })
         .catch( error => console.log('error', error))
+    }
+
+    useEffect(() => {
+      getArrivals()
+
+        setInterval(() => {
+          getArrivals()
+        }, 10000);
     }, [])
 
     return (

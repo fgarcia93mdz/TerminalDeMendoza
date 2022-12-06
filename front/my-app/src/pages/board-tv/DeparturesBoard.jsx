@@ -8,17 +8,24 @@ import './ArrivalsBoard.styles.css';
 
 const DeparturesBoard = () => {
     const [  partidas, setPArtidas ] = React.useState([]);
+    
+    const getPartidas = () => {
+        axios.get('http://localhost:8080/plataforma/partidas')
+        .then(data => {
+            return setPArtidas(data.data)
+        })
+        .catch( err => console.log('Error GET departures:', err))
+    }
 
     useEffect(() => {
-        axios.get('http://localhost:8080/plataforma/partidas')
-            .then(data => {
-                console.log('data:', data)
-                return setPArtidas(data.data)
-            })
-            .catch( err => console.log('Error GET departures:', err))
+        getPartidas()
+
+        setInterval(() => {
+            getPartidas()
+        }, 10000);
+
     }, [])
 
-    console.log(partidas)
 
     return (
         <>

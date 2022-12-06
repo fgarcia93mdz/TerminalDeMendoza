@@ -58,7 +58,7 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
         plataformas_id: ticket.registro_plataforma.plataforma || null, // ? 1
         estado_id: ticket.registro_estado.id, // '0'
         destino: ticket.destino, // 'Mar de Ajo'
-        tipo_tv_id: ticket.tipo_tv_id, // 1 o 2
+        tipo_tv: ticket.tipo_tv_id, // 1 o 2
         fecha_salida: ticket.fecha_salida,
         hora_salida: ticket.hora_salida
     }
@@ -311,24 +311,20 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
                   },
                   minWidth: "250px",
                 }}
-                name="tipo_tv_id"
-                value={formik.values.tipo_tv_id}
+                name="tipo_tv"
+                value={formik.values.tipo_tv}
                 onChange={formik.handleChange}
-                error={formik.errors.tipo_tv_id}
-                helperText={formik.errors.tipo_tv_id}
+                error={formik.errors.tipo_tv}
+                helperText={formik.errors.tipo_tv}
               >
-                {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
                 {dataDropdown.tipo_tv?.map((tipo_tv) => (
                   <MenuItem value={tipo_tv.id} selected={true}>
                     {tipo_tv.tipo}
                   </MenuItem>
                 ))}
-                {/* <MenuItem value={1} selected={true}>Sin servicio de plataforma</MenuItem> */}
-                {/* <MenuItem value={2}>Ingresando</MenuItem> */}
               </TextField>
             </Grid>
             <Grid item xs={12} py={4}>
-
               <Divider color='white' />
             </Grid>
             
