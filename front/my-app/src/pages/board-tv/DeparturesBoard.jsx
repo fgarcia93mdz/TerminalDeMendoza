@@ -19,7 +19,6 @@ const DeparturesBoard = () => {
 
     useEffect(() => {
         getPartidas()
-
         setInterval(() => {
             getPartidas()
         }, 10000);
