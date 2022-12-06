@@ -43,20 +43,20 @@ const InformsHome = () => {
     }
 
     return (
-      <Stack>
+      <Stack >
         <Box style={boxStyle}>
-          <Typography align="center" variant="h4" style={style}>
+          <Typography align="center" variant="h4" py={3} style={style}>
             {" "}
             Ingresantes{" "}
           </Typography>
           <TableAdmin edit={true} data={ingresando} />
         </Box>
         <Box style={boxStyle}>
-          <Typography align="center" variant="h4" style={style}>En plataforma</Typography>
+          <Typography align="center" variant="h4" py={3}  style={style}>En plataforma</Typography>
           <TableAdmin2 edit={true} data={enPlataforma} />
         </Box>
-        <Box style={boxStyle}>
-          <Typography align="center" variant="h4" style={style}>
+        <Box style={boxStyle} pb={4}>
+          <Typography align="center" variant="h4" py={3}  style={style}>
             Fuera de plataforma{" "}
           </Typography>
           <TableAdmin edit={true} data={fueraDePlataforma} />

@@ -58,8 +58,8 @@ const ResetPassword = () => {
                 <Typography variant="h4" color='white'>Resetear contraseña:</Typography>
                 <Grid container my={4}>
                    
-                    <Grid item display={{ xs: 'block', md: 'flex'}} alignItems='center' gap={2} xs={12} md={8} my={2}>
-                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}} display={{xs: 'none', sm: 'block'}}>Usuario a editar:</Typography>
+                    <Grid item display={{ xs: 'block', md: 'flex'}} alignItems='center' gap={2} xs={12} md={10} my={2}>
+                        <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}} display={{xs: 'none', sm: 'block'}}>Usuario:</Typography>
                         <TextField
                             select
                             label='Seleccione usuario a editar'
@@ -73,7 +73,7 @@ const ResetPassword = () => {
                                 '& .MuiSvgIcon-root': {
                                     color: 'white',
                                 },
-                                minWidth:'200px'
+                                minWidth:'300px'
                             }}
                             InputLabelProps={{
                                 style: { color: '#fff' },
@@ -89,7 +89,7 @@ const ResetPassword = () => {
                             )}
                         </TextField>
                     </Grid>
-                    <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='center' gap={2} xs={12}  my={2}>
+                    <Grid item display={{ xs: 'block', sm: 'flex'}} alignItems='top' gap={2} xs={12}  my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm:0}}>Motivo:</Typography>
                         <TextField 
                             sx={{
@@ -98,19 +98,26 @@ const ResetPassword = () => {
                                 },
                                 '.MuiInputBase-root':{
                                     color: 'white'
-                                }
+                                },
+                                '.css-1d3z3hw-MuiOutlinedInput-notchedOutline' :{
+                                    borderColor: 'white'
+                                },
+                                minWidth:'300px'
                             }}
                             InputProps={{
                                 type: "text"
                             }} 
+                            multiline
+                            rows={4}
                             value={formik.values.motivo}
                             name='motivo'
                             onChange={formik.handleChange}
                             error={formik.errors.motivo}
                             helperText={formik.errors.motivo}
+
                         />
                     </Grid>
-                    <Grid item sx={{marginRight: 'auto'}} xs={12}>
+                    <Grid item sx={{marginRight: 'auto'}} align='center' pt={8} xs={12}>
                         <Button  variant="contained" ml='auto' type="submit" my={2}>Resetear contraseña</Button>
                     </Grid>
                     {openModal && 

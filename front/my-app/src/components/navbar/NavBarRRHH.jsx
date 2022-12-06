@@ -86,9 +86,6 @@ const NavBarRRHH = ({ name }) => {
                     <Toolbar disableGutters>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
-                       
-                    
-                       
                         <Menu
                         id="menu-appbar"
                         anchorEl={anchorElNav}
@@ -108,14 +105,19 @@ const NavBarRRHH = ({ name }) => {
                             flexDirection: 'column'
                         }}
                         >
-                            <Link to='/'>
+                            <Link to='/usuarios'>
+                                <MenuItem key={'usuarios'} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">Usuarios</Typography>
+                                </MenuItem>
+                            </Link>
+                            <Link to='/usuarios/crear'>
                                 <MenuItem key={'crearUsuario'} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">Crear Usuario</Typography>
                                 </MenuItem>
                             </Link>
-                            <Link to='/'>
-                                <MenuItem key={'usuarios'} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">Usuarios</Typography>
+                            <Link to='/usuarios/resetPass'>
+                                <MenuItem key={'resetearContraseña'} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">Resetear Contraseñas</Typography>
                                 </MenuItem>
                             </Link>
                         </Menu>

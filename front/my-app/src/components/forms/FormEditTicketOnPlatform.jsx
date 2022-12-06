@@ -88,35 +88,15 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
 
             axios.patch(url, data, config)
                 .then((res) => {
-                    // console.log('response', res)
-                    // 
                     if(res.status === 200){
-                        // const jwt = res.data
-                        // escribe el jwt en session
-                        // window.sessionStorage.setItem("jwt", jwt);
-                        // redirecciona a la pagina principal
                         setOpenModal(true)
-                        // navigate("/")
-                        // return alert('ok')
                     }
                 })
                 .catch(function (error) {
                     console.log('Error:', error);
                 });
-
-        //   alert(JSON.stringify(values, null, 2));
         },
       });
-
-
-    // React.useEffect(() => {
-    //     if(!formik.errors){
-    //         // alert('no hay errores')
-    //     }
-    //     // if(formik.isValid) return alert('valido')
-    //     // console.log('ticket', formik.values)
-    // }, [formik])
-
 
     return (
       <Stack

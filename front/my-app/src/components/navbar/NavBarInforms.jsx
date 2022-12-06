@@ -124,7 +124,7 @@ const NavBarInforms = ({ name }) => {
                     <Typography textAlign="center">Crear Ingreso</Typography>
                   </MenuItem>
                 </Link>
-                <Link to="/arribos">
+                <Link to="/seguridad/arribos">
                   <MenuItem
                     key={"/seguridad/arribos"}
                     onClick={handleCloseNavMenu}
@@ -132,7 +132,7 @@ const NavBarInforms = ({ name }) => {
                     <Typography textAlign="center">Arribos</Typography>
                   </MenuItem>
                 </Link>
-                <Link to="/partidas">
+                <Link to="/seguridad/partidas">
                   <MenuItem
                     key={"/seguridad/partidas"}
                     onClick={handleCloseNavMenu}

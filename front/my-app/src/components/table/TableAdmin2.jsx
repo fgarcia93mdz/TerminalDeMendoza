@@ -27,13 +27,13 @@ export default function TableAdmin2({ data, edit }) {
 
   return (
     <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
-      <Box px={4}>
+      <Box px={2}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table" id="informes">
           <TableHead>
             <TableRow>
               <TableCell align="left">Fecha de ingreso</TableCell>
               <TableCell align="center">
-                Horario <br></br> de ingreso
+                Horario <br></br>de ingreso
               </TableCell>
               <TableCell align="center">Destino/Origen/Servicio</TableCell>
               <TableCell align="center">Interno</TableCell>
