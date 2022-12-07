@@ -64,7 +64,7 @@ const NavBarRRHH = ({ name }) => {
     React.useEffect(() => {
         if (token) {
             const tokenDecoded = jwt_decode(token);
-            console.log("tokenDecoded", tokenDecoded);
+            // console.log("tokenDecoded", tokenDecoded);
             setUserInfo(tokenDecoded);
             setUserInfo((state) => ({ ...state, tokenDecoded }));
             // console.log('decoded', userInfo);
@@ -262,13 +262,15 @@ const NavBarRRHH = ({ name }) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
-                        {/* <MenuItem
-                                            key={"inicio4"}
-                                            onClick={handleCloseNavMenu}
-                                            sx={{ my: 2, color: "#0E315A", display: "block" }}
-                                        >
-                                            CAMBIAR CONTRASEÑA
-                                        </MenuItem> */}
+                        <Link to='/perfil/password'>
+                          <MenuItem
+                              key={"inicio4"}
+                              onClick={handleCloseNavMenu}
+                              sx={{ my: 2, color: "#0E315A", display: "block" }}
+                          >
+                              CAMBIAR CONTRASEÑA
+                          </MenuItem>
+                        </Link>
                         <MenuItem
                           key={"inicio5"}
                           onClick={() => closeSession()}

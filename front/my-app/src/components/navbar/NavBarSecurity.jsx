@@ -274,15 +274,15 @@ const NavBarSecurity = ({ name }) => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {/* <Link to='/perfil/editar'>
-                                    <MenuItem
-                                        key={"inicio4"}
-                                        onClick={handleCloseNavMenu}
-                                        sx={{ my: 2, color: "#0E315A", display: "block" }}
-                                    >
-                                        CAMBIAR CONTRASEÑA
-                                    </MenuItem>
-                                </Link> */}
+                  <Link to='/perfil/password'>
+                      <MenuItem
+                          key={"inicio4"}
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "#0E315A", display: "block" }}
+                      >
+                          CAMBIAR CONTRASEÑA
+                      </MenuItem>
+                  </Link>
                   <MenuItem
                     key={"inicio5"}
                     onClick={() => closeSession()}

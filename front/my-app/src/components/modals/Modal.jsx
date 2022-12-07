@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useNavigate } from "react-router-dom";
 import { fontSize } from '@mui/system';
+import { Stack } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -13,13 +14,16 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 300,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  // border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  borderRadius: "15px"
 };
 const titulo = {
-  color: 'green',
-  marginLeft: '50%'
+  color: '#1C40C0',
+  // marginLeft: '50%',
+  textAlign: 'center',
+  fontWeight: 'bold'
 }
 
 // title: 'Exito' string
@@ -44,18 +48,19 @@ export default function BasicModal({ title , message, openModal }) {
   
 
   return (
-    <div>
+    <Stack >
       {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+
       >
         <Box sx={style}>
           <Typography
             id="modal-modal-title"
-            variant="h6"
+            variant="h5"
             component="h2"
             sx={titulo}
           >
@@ -64,23 +69,26 @@ export default function BasicModal({ title , message, openModal }) {
           <Typography
             textAlign="center"
             id="modal-modal-description"
-            sx={{ mt: 2, fontSize: "20px", color: "green" }}
+            sx={{ mt:1, fontSize: "20px", fontWeight: "semi-bold", color: "#1C40C0" }}
           >
             {message}
           </Typography>
           <Button
             variant="contained"
             sx={{
-              mt: 2,
-              fontSize: "20px",
-              left: "32%",
+              mt: 4,
+              fontSize: "15px",
+              left: "27%",
+              borderRadius: '25px',
+              px: 5
             }}
+            size='small'
             onClick={() => closeSession()}
           >
             Cerrar
           </Button>
         </Box>
       </Modal>
-    </div>
+    </Stack>
   );
 }
