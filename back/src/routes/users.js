@@ -43,7 +43,7 @@ router.get("/new", authenticateToken, getDataInfoToCreateNewUser);
 
 router.post("/resetPassword", authenticateToken, resetPassword)
 
-router.post("/changePassword", authenticateToken , verifyRoles(ROLES.Administrador,ROLES.RRHH),changePassword);
+router.post("/changePassword", authenticateToken, changePassword);
 //data para el front
 // POST localhost:8080/users/changePassword
 // {

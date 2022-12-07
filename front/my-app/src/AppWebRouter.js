@@ -18,7 +18,7 @@ import NavBarContainer from "./components/navbar/NavBarContainer";
 import Footer from "./components/footer/Footer";
 import NotFoundPage from './pages/not-found/NotFound';
 import PageResetPassword from "./pages/RRHHUser.jsx/PageResetPassword";
-import WritePassword from "./components/forms/FormWritePassword";
+import WritePassword from "./components/forms/FormChangePassword";
 import InformsEditTicket from "./pages/informsUser/InformsEditTicketEntry";
 import InformsEditTicketOnPlatform from "./pages/informsUser/InformsEditTicketOnPlatform";
 
@@ -78,9 +78,9 @@ React.useEffect(() => {
           <Route 
             path="/perfil/password" 
             element={
-              <Protected isLoggedIn={isLoggedIn}>
+              // <Protected isLoggedIn={isLoggedIn}>
                 <WritePassword />
-              </Protected>
+              // </Protected>
           } />
 
           <Route

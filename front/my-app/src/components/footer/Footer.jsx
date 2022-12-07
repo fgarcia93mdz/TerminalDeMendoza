@@ -25,7 +25,7 @@ const Footer = () => {
 
     return (
 
-        <Stack role='footer' px={6} py={2} direction={{ xs: 'column', sm: 'row' }} justifyContent={'space-between'} alignItems={{ xs: 'center', sm: 'end' }} style={style} >
+        <Stack role='footer' px={6} py={2} direction={{ xs: 'column', sm: 'row' }} justifyContent={'space-between'} alignItems={{ xs: 'center' }} style={style} >
             <ThemeProvider theme={colors}>
                 <Box
                     component='img'
@@ -56,7 +56,7 @@ const Footer = () => {
                     <a href="https://twitter.com/terminaltm"><TwitterIcon color='twitter' sx={{ fontSize: 40, marginLeft: 2, }} /></a>
 
                 </Box>
-                <div>
+                <Box py={{xs:0, sm:4}}>
                     <Box
                         component='img'
                         className=""
@@ -75,11 +75,11 @@ const Footer = () => {
                         sx={{ maxWidth: '40px', marginLeft: "20px" }}
 
                     />
-                    <Box textAlign={{ xs: 'center', sm: 'rigth' }} py={4}>
+                    <Box textAlign={{ xs: 'center', sm: 'rigth' }} py={{xs:4, sm:2}}>
                         <Typography variant='body2'>Terminal de Mendoza</Typography>
                         <Typography variant='body2'>Copyrights 2022</Typography>
                     </Box>
-                </div>
+                </Box>
 
             </ThemeProvider>
 

@@ -64,7 +64,7 @@ const NavBarRRHH = ({ name }) => {
     React.useEffect(() => {
         if (token) {
             const tokenDecoded = jwt_decode(token);
-            console.log("tokenDecoded", tokenDecoded);
+            // console.log("tokenDecoded", tokenDecoded);
             setUserInfo(tokenDecoded);
             setUserInfo((state) => ({ ...state, tokenDecoded }));
             // console.log('decoded', userInfo);
