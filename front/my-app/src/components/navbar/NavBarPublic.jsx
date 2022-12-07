@@ -130,8 +130,8 @@ const NavBarPublic = () => {
                     <Typography textAlign="center">ARRIBOS</Typography>
                   </MenuItem>
                 </Link>
-                <Link to="/tablero-arribos">
-                  <MenuItem key={"/tablero-arribos"} onClick={handleCloseNavMenu}>
+                <Link to="/tablero-partidas">
+                  <MenuItem key={"/tablero-partidas"} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">PARTIDAS</Typography>
                   </MenuItem>
                 </Link>

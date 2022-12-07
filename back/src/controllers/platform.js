@@ -13,7 +13,6 @@ const platformController = {
 
   arrivals: function (req, res) {
     const diaHoy = moment().add(-1, "days");
-    console.log("🚀 ~ file: platform.js:16 ~ diaHoy", diaHoy)
     const diaAyer = diaHoy.add(-1, "days");
     let registroArribos = db.RegistroAdministrativo.findAll({
       include: [
@@ -28,7 +27,7 @@ const platformController = {
           { tipo_tv_id: 1 },
           {
             fecha_ingreso: {
-              [Op.gte]: diaHoy,
+              [Op.gt]: diaHoy,
             },
           },
         ],
@@ -44,7 +43,6 @@ const platformController = {
 
   departures: function (req, res) {
     const diaHoy = moment().add(-1, "days");
-    console.log("🚀 ~ file: platform.js:46 ~ diaHoy", diaHoy)
     const diaAyer = diaHoy.add(-1, "days");
     let registroPartidas = db.RegistroAdministrativo.findAll({
       include: [
