@@ -109,7 +109,7 @@ const getDataDropdown = async (req, res) => {
 
 const informesListadoSeparadosPorEstado = async (req, res) => {
   try {
-    let diaHoy = moment();
+    let diaHoy = moment().add(-1, "days");
     let diaAyer = diaHoy.add(-1, "days");
     let hora = diaHoy.format("HH:mm");
     let ingresos = await RegistroTorre.findAll({
@@ -122,7 +122,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
       order: [["hora_salida", "DESC"]],
       where: {
         fecha_ingreso: {
-          [Op.gt]: diaAyer,
+          [Op.gte]: diaHoy
         },
       },
     });

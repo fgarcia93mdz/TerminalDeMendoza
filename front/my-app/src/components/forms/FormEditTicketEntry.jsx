@@ -29,7 +29,7 @@ const FormEditTicket = ({ ticket }) => {
     // const navigate = useNavigate()
     const token = sessionStorage.getItem('jwt')
 
-    const PLATAFORMAS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    const PLATAFORMAS = ["Sin asignar",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65]
 
     console.log('ticket prop:', ticket)
 
@@ -54,7 +54,7 @@ const FormEditTicket = ({ ticket }) => {
         empresa_id: ticket.registro_empresa?.id, // 2
         servicios_id: ticket.registro_servicio.id, // 2
         usuarios_id: ticket.usuarios_id, // 2
-        plataformas: ticket.registro_plataforma.plataforma || null, // ? 1
+        plataformas: ticket.registro_plataforma.id|| null, // ? 1
         estado_id: ticket.registro_estado.id, // '0'
         destino: ticket.destino, // 'Mar de Ajo'
         tipo_tv_id: ticket.tipo_tv_id, // 1 o 2
@@ -139,7 +139,7 @@ const FormEditTicket = ({ ticket }) => {
                 Plataforma:
               </Typography>
               <TextField
-                // select
+                select
                 sx={{
                   ".MuiOutlinedInput-notchedOutline": {
                     borderColor: "white",

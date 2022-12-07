@@ -80,175 +80,209 @@ const NavBarRRHH = ({ name }) => {
 
 
         return (
-            <>
-                <AppBar position="sticky" style={{background: 'white', color: '#0E315A'}}>
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
+          <>
+            <AppBar
+              position="sticky"
+              style={{ background: "white", color: "#0E315A" }}
+            >
+              <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                  <Box
+                    sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+                  >
+                    <Menu
+                      id="menu-appbar"
+                      anchorEl={anchorElNav}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                      open={Boolean(anchorElNav)}
+                      onClose={handleCloseNavMenu}
+                      sx={{
+                        display: { xs: "flex", md: "none" },
+                        flexDirection: "column",
+                      }}
+                    >
+                      <Link to="/usuarios">
+                        <MenuItem key={"usuarios"} onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center">Usuarios</Typography>
+                        </MenuItem>
+                      </Link>
+                      <Link to="/usuarios/crear">
+                        <MenuItem
+                          key={"crearUsuario"}
+                          onClick={handleCloseNavMenu}
+                        >
+                          <Typography textAlign="center">
+                            Crear Usuario
+                          </Typography>
+                        </MenuItem>
+                      </Link>
+                      <Link to="/usuarios/resetPass">
+                        <MenuItem
+                          key={"resetearContraseña"}
+                          onClick={handleCloseNavMenu}
+                        >
+                          <Typography textAlign="center">
+                            Resetear Contraseñas
+                          </Typography>
+                        </MenuItem>
+                      </Link>
+                    </Menu>
+                    <IconButton
+                      size="large"
+                      aria-label="account of current user"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      onClick={handleOpenNavMenu}
+                      color="inherit"
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                  </Box>
+                  {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
-                        <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorElNav}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                        open={Boolean(anchorElNav)}
-                        onClose={handleCloseNavMenu}
+                  <Box
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "none", md: "flex" },
+                      justifyContent: "start",
+                    }}
+                  >
+                    <Link to="/usuarios" onClick={handleCloseNavMenu}>
+                      <Button
+                        key={"inicio"}
                         sx={{
-                            display: { xs: 'flex', md: 'none' },
-                            flexDirection: 'column'
+                          my: 2,
+                          color: "#0E315A",
+                          display: "block",
+                          marginRight: "20px",
+                          marginLeft: "30px",
+                          fontSize: "18px",
                         }}
-                        >
-                            <Link to='/usuarios'>
-                                <MenuItem key={'usuarios'} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">Usuarios</Typography>
-                                </MenuItem>
-                            </Link>
-                            <Link to='/usuarios/crear'>
-                                <MenuItem key={'crearUsuario'} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">Crear Usuario</Typography>
-                                </MenuItem>
-                            </Link>
-                            <Link to='/usuarios/resetPass'>
-                                <MenuItem key={'resetearContraseña'} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">Resetear Contraseñas</Typography>
-                                </MenuItem>
-                            </Link>
-                        </Menu>
-                        <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleOpenNavMenu}
-                        color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    </Box>
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-                    
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
-                        <Link to='/usuarios' onClick={handleCloseNavMenu}>
-                            <Button
-                                key={'inicio'}
-                                sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
-                                        marginLeft: "30px",
-                                        fontSize: "18px", }}
-                            >
-                                USUARIOS
-                            </Button>
-                        </Link>
-                        <Link to='/usuarios/crear' onClick={handleCloseNavMenu}>
-                            <Button
-                                key={'inicio2'}
-                                sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
-                                        fontSize: "18px", }}
-                            >
-                                CREAR USUARIO
-                            </Button>
-                        </Link>
-                        <Link to='/usuarios/resetPass'  onClick={handleCloseNavMenu}>
-                            <Button
-                                key={'inicio2'}
-                                sx={{ my: 2, color: '#0E315A', display: 'block', marginRight: "20px",
-                                        fontSize: "18px", }}
-                            >
-                                RESETEAR CONTRASEÑAS
-                            </Button>
-                        </Link>
+                      >
+                        USUARIOS
+                      </Button>
+                    </Link>
+                    <Link to="/usuarios/crear" onClick={handleCloseNavMenu}>
+                      <Button
+                        key={"inicio2"}
+                        sx={{
+                          my: 2,
+                          color: "#0E315A",
+                          display: "block",
+                          marginRight: "20px",
+                          fontSize: "18px",
+                        }}
+                      >
+                        CREAR USUARIO
+                      </Button>
+                    </Link>
+                    <Link to="/usuarios/resetPass" onClick={handleCloseNavMenu}>
+                      <Button
+                        key={"inicio2"}
+                        sx={{
+                          my: 2,
+                          color: "#0E315A",
+                          display: "block",
+                          marginRight: "20px",
+                          fontSize: "18px",
+                        }}
+                      >
+                        RESETEAR CONTRASEÑAS
+                      </Button>
+                    </Link>
 
-                        {userInfo && !userInfo.nombre && 
-                            <Link to='/login' onClick={handleCloseNavMenu}>
-                                <Button
-                                    key={'inicio6'}
-                                    sx={{ my: 2, color: '#0E315A', display: 'block' }}
-                                >
-                                
-                                    LOGIN
-                                </Button>
-                            </Link>
-                        } 
-                      
-                    </Box>
-                            {userInfo && userInfo.nombre && (
-                                <Typography variant="body" my="auto" align='center' width={{xs:'90%', sm:'auto'}} pr={{xs:0,sm:8}} fontSize="18px">
-                                    Hola {userInfo.nombre}!
-                                </Typography>
-                            )}
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar>
-                                <SettingsIcon />
-                            </Avatar>
-                        </IconButton>
-                        </Tooltip>
-                        <Menu
-                        sx={{ mt: '45px' }}
+                    {userInfo && !userInfo.nombre && (
+                      <Link to="/login" onClick={handleCloseNavMenu}>
+                        <Button
+                          key={"inicio6"}
+                          sx={{ my: 2, color: "#0E315A", display: "block" }}
+                        >
+                          LOGIN
+                        </Button>
+                      </Link>
+                    )}
+                  </Box>
+                  {userInfo && userInfo.nombre && (
+                    <Typography
+                      variant="body"
+                      my="auto"
+                      align="center"
+                      width={{ xs: "90%", sm: "auto" }}
+                      pr={{ xs: 0, sm: 8 }}
+                      fontSize={{ xs: "12px", sm: "25px" }}
+                    >
+                      Hola {userInfo.nombre}!
+                    </Typography>
+                  )}
+                  <Box sx={{ flexGrow: 0 }}>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar>
+                          <SettingsIcon />
+                        </Avatar>
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      sx={{ mt: "45px" }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      <Menu
+                        sx={{ mt: "45px" }}
                         id="menu-appbar"
                         anchorEl={anchorElUser}
                         anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                         keepMounted
                         transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
-                        >
-                        
-                                    <Menu
-                                        sx={{ mt: "45px" }}
-                                        id="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: "top",
-                                            horizontal: "right",
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: "top",
-                                            horizontal: "right",
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        {/* <MenuItem
+                      >
+                        {/* <MenuItem
                                             key={"inicio4"}
                                             onClick={handleCloseNavMenu}
                                             sx={{ my: 2, color: "#0E315A", display: "block" }}
                                         >
                                             CAMBIAR CONTRASEÑA
                                         </MenuItem> */}
-                                        <MenuItem
-                                            key={"inicio5"}
-                                            onClick={() => closeSession()}
-                                            sx={{ my: 2, color: "#0E315A", display: "block" }}
-                                        >
-                                            CERRAR SESION
-                                        </MenuItem>
-                                    </Menu>
-                        
-                        </Menu>
-                    </Box>
-
-                    
-                    </Toolbar>
-
-                </Container>
-                </AppBar>
-            </>
-        
+                        <MenuItem
+                          key={"inicio5"}
+                          onClick={() => closeSession()}
+                          sx={{ my: 2, color: "#0E315A", display: "block" }}
+                        >
+                          CERRAR SESION
+                        </MenuItem>
+                      </Menu>
+                    </Menu>
+                  </Box>
+                </Toolbar>
+              </Container>
+            </AppBar>
+          </>
         );
 }
 

@@ -12,7 +12,8 @@ const platformController = {
   locals: function (req, res) {},
 
   arrivals: function (req, res) {
-    const diaHoy = moment();
+    const diaHoy = moment().add(-1, "days");
+    console.log("🚀 ~ file: platform.js:16 ~ diaHoy", diaHoy)
     const diaAyer = diaHoy.add(-1, "days");
     let registroArribos = db.RegistroAdministrativo.findAll({
       include: [
@@ -21,12 +22,13 @@ const platformController = {
         { association: "registro_servicio" },
         { association: "registro_tipo_tv" },
       ],
+      order: [["hora_ingreso", "DESC"]],
       where: {
         [Op.and]: [
           { tipo_tv_id: 1 },
           {
             fecha_ingreso: {
-              [Op.gt]: diaAyer,
+              [Op.gte]: diaHoy,
             },
           },
         ],
@@ -41,7 +43,8 @@ const platformController = {
   },
 
   departures: function (req, res) {
-    const diaHoy = moment();
+    const diaHoy = moment().add(-1, "days");
+    console.log("🚀 ~ file: platform.js:46 ~ diaHoy", diaHoy)
     const diaAyer = diaHoy.add(-1, "days");
     let registroPartidas = db.RegistroAdministrativo.findAll({
       include: [
@@ -50,12 +53,13 @@ const platformController = {
         { association: "registro_servicio" },
         { association: "registro_tipo_tv" },
       ],
+      order: [["hora_salida", "DESC"]],
       where: {
         [Op.and]: [
           { tipo_tv_id: 2 },
           {
             fecha_ingreso: {
-              [Op.gt]: diaAyer,
+              [Op.gt]: diaHoy,
             },
           },
         ],

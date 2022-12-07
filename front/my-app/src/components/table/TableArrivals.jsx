@@ -113,8 +113,8 @@ export default function GenericTable( {props} ) {
                 <StyledTableCell align="center">{row.destino}</StyledTableCell>
                 <StyledTableCell align="center">{row.registro_empresa.empresa}</StyledTableCell>
                 <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
-                <StyledTableCell align="center">
-                  Plat. {row.plataformas_id}
+                <StyledTableCell align="center" fontSize={{ xs: 10 }}>
+                 {row.plataformas_id}
                 </StyledTableCell>
                 {/* <StyledTableCell align="center">
                   {row.hora_salida}

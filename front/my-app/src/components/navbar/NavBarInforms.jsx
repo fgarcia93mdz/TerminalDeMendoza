@@ -89,7 +89,6 @@ const NavBarInforms = ({ name }) => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -185,7 +184,7 @@ const NavBarInforms = ({ name }) => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "#0E315A", display: "block" }}
                 >
-                  Arribos 
+                  Arribos
                 </Button>
               </Link>
               <Link to="/informes/partidas">
@@ -209,7 +208,14 @@ const NavBarInforms = ({ name }) => {
               )} */}
             </Box>
             {userInfo && userInfo.nombre && (
-              <Typography variant="body" my="auto" align='center' width={{xs:'90%', sm:'auto'}} pr={{xs:0,sm:8}} fontSize="18px">
+              <Typography
+                variant="body"
+                my="auto"
+                align="center"
+                width={{ xs: "20%", sm: "auto" }}
+                pr={{ xs: 0, sm: 8 }}
+                fontSize={{ xs: "12px", sm: "25px" }}
+              >
                 Hola {userInfo.nombre}!
               </Typography>
             )}

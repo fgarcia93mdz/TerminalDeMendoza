@@ -118,7 +118,7 @@ export default function GenericTable( {props} ) {
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
                 <StyledTableCell align="center">
-                 Plat. {row.plataformas_id}
+                 {row.plataformas_id}
                 </StyledTableCell>
                 <StyledTableCell align="center">
                     <div className="box" style={styles.cajaFoto}>
