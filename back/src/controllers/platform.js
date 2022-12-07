@@ -12,7 +12,7 @@ const platformController = {
   locals: function (req, res) {},
 
   arrivals: function (req, res) {
-    const diaHoy = moment().add(-1, "days");
+    const diaHoy = moment()
     const diaAyer = diaHoy.add(-1, "days");
     let registroArribos = db.RegistroAdministrativo.findAll({
       include: [
@@ -27,7 +27,7 @@ const platformController = {
           { tipo_tv_id: 1 },
           {
             fecha_ingreso: {
-              [Op.gt]: diaHoy,
+              [Op.gte]: diaAyer,
             },
           },
         ],
@@ -57,7 +57,7 @@ const platformController = {
           { tipo_tv_id: 2 },
           {
             fecha_ingreso: {
-              [Op.gt]: diaHoy,
+              [Op.eq]: diaHoy,
             },
           },
         ],
