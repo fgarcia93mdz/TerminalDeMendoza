@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import ArrivalsBoard from "./pages/board-tv/ArrivalsBoard";
-import DeparturesBoard from "./pages/board-tv/DeparturesBoard";
+import ArrivalsBoard2 from "./pages/board-tv/ArrivalsBoard2";
+import DeparturesBoard2 from "./pages/board-tv/DeparturesBoard2";
 import AppWebRouter from "./AppWebRouter";
 
 
@@ -12,8 +12,8 @@ function App() {
   return (
     <div className="App">
         <Routes>
-          <Route exact path="/arribos" element={<ArrivalsBoard />} />
-          <Route exact path="/partidas" element={<DeparturesBoard />} />
+          <Route exact path="/arribos" element={<ArrivalsBoard2 />} />
+          <Route exact path="/partidas" element={<DeparturesBoard2 />} />
           <Route path="*" element={<AppWebRouter />} />
           {/* <Route component={AppWebRouter}/> */}
         </Routes>

@@ -12,7 +12,7 @@ const platformController = {
   locals: function (req, res) {},
 
   arrivals: function (req, res) {
-    const diaHoy = moment()
+    const diaHoy = moment().add(-1, "days");
     const diaAyer = diaHoy.add(-1, "days");
     let registroArribos = db.RegistroAdministrativo.findAll({
       include: [
@@ -27,7 +27,7 @@ const platformController = {
           { tipo_tv_id: 1 },
           {
             fecha_ingreso: {
-              [Op.gte]: diaAyer,
+              [Op.gte]: diaHoy
             },
           },
         ],
@@ -57,18 +57,18 @@ const platformController = {
           { tipo_tv_id: 2 },
           {
             fecha_ingreso: {
-              [Op.eq]: diaHoy,
+              [Op.gte]: diaHoy
             },
           },
         ],
       },
     });
 
-    registroPartidas
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((error) => console.log(error));
+   registroPartidas
+     .then((data) => {
+       res.json(data);
+     })
+     .catch((error) => console.log(error));
   },
 
   createTicket: function (req, res) {

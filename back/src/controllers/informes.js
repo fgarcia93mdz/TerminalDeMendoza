@@ -163,6 +163,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
       if (
         ingreso.estado_id === 1 ||
         ingreso.estado_id === 2 ||
+        ingreso.estado_id === 3 ||
         ingreso.estado_id === 4
       ) {
         respuesta.ingresandoSeguridad.push(data);

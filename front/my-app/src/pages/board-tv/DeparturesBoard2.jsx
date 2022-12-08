@@ -30,6 +30,20 @@ const DeparturesBoard = () => {
     <>
       <div className="containerBoard">
         <div>
+          {/* ACA VA ARRIBOS O PARTIDAS EN ESPANOL O INGLES, SOLO PARA LOS TELEVISORES ME PIDIO MI VIEJO */}
+          <Typography
+            textAlign="left"
+            fontSize={{ xs: "15px", sm: "20px", md: "30px" }}
+            marginLeft={{ xs: "5%", sm: "2%" }}
+            fontFamily="Roboto"
+            textTransform=" uppercase"
+          >
+            Partidas - Departures
+          </Typography>
+          {/* ACA TENDRIA QUE IR EL RELOJ QUE PIDIERON DEL LADO DERECHO. */}
+        </div>
+
+        <div>
           {partidas.length === 0 && (
             <Stack
               justifyContent={"center"}

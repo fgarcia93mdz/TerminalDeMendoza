@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import imgCompany from "../../assets/img/empresas/iselin.png"
-
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import imgCompany from "../../assets/img/empresas/iselin.png";
+import Typography from "@mui/material/Typography";
 // import { useSelector } from 'react-redux';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -23,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: "white",
     fontWeight: "bold",
     padding: "10px",
-    marginLeft: '2rem'
+    marginLeft: "2rem",
   },
 }));
 const StyledTableCell2 = styled(TableCell)(({ theme }) => ({
@@ -38,7 +38,7 @@ const StyledTableCell2 = styled(TableCell)(({ theme }) => ({
     color: "white",
     fontWeight: "bold",
     padding: "10px",
-    marginLeft: '2rem'
+    marginLeft: "2rem",
   },
 }));
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -52,32 +52,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
-  height: '77px',
-  paddingLeft: '2rem'
+  height: "77px",
+  paddingLeft: "2rem",
 }));
-
 
 const styles = {
   cajaFoto: {
-    width: '152px',
-    height: '56px',
-    border: '1px solid white',
-    color: 'black',
-    margin: 'auto',
-    overflow: 'hidden'
-  }
-}
+    width: "152px",
+    height: "56px",
+    border: "1px solid white",
+    color: "black",
+    margin: "auto",
+    overflow: "hidden",
+  },
+};
 
-
-export default function GenericTable( {props} ) {
-  
-  // const HOUR_ESTIMATED 
+export default function GenericTable({ props }) {
+  // const HOUR_ESTIMATED
   // const HOUR_ARRIVAL
   // const HOUR_DEPARTURE
   // const COMPANY
   // const IMG
   // const STATE
-
 
   // const colectivosRedux  = useSelector(state => state.estado);
 
@@ -85,52 +81,81 @@ export default function GenericTable( {props} ) {
   // if(props){
   //   // console.log('PROPSS table:', props)
   // }
-  
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ fontSize: '20px' }} aria-label="customized table">
+      <Table sx={{ fontSize: "20px" }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell2 align="center">ORIGEN</StyledTableCell2>
-            <StyledTableCell2 align="center">EMPRESA</StyledTableCell2>
-            <StyledTableCell2 align="center">ESTADO</StyledTableCell2>
-            <StyledTableCell2 align="center">PLAT</StyledTableCell2>
-            {/* <StyledTableCell align="center">
-              HORARIO<br></br>SALIDA
-            </StyledTableCell> */}
-            <StyledTableCell align="center">
-            </StyledTableCell>
-            <StyledTableCell2 align="center">INTERNO</StyledTableCell2>
-            
+            <StyledTableCell2 align="center">
+              {" "}
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                ORIGEN
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                EMPRESA
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                ESTADO
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                PLAT
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell align="center"></StyledTableCell>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                INTERNO
+              </Typography>
+            </StyledTableCell2>
           </TableRow>
         </TableHead>
-        <TableBody >
-          
+        <TableBody>
           {props &&
             props.map((row) => (
               <StyledTableRow key={row.id}>
-                <StyledTableCell align="center">{row.destino}</StyledTableCell>
-                <StyledTableCell align="center">{row.registro_empresa.empresa}</StyledTableCell>
-                <StyledTableCell align="center">{row.registro_estado.tipo}</StyledTableCell>
-                <StyledTableCell align="center" fontSize={{ xs: 10 }}>
-                 {row.plataformas_id}
-                </StyledTableCell>
-                {/* <StyledTableCell align="center">
-                  {row.hora_salida}
-                </StyledTableCell> */}
                 <StyledTableCell align="center">
-                    {row.registro_empresa.img != null &&
-                      <div className="box" style={styles.cajaFoto}>
-                        <img
-                          src={require("../../assets/img/empresas/" + row.registro_empresa.img)}
-                          alt=""
-                        />
-                      </div>
-                    }
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.destino}
+                  </Typography>
                 </StyledTableCell>
-                <StyledTableCell align="center">{row.interno}</StyledTableCell>
-                
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.registro_empresa.empresa}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.registro_estado.tipo}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center" fontSize={{ xs: 10 }}>
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.plataformas_id}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.registro_empresa.img != null && (
+                    <div className="box" style={styles.cajaFoto}>
+                      <img
+                        src={require("../../assets/img/empresas/" +
+                          row.registro_empresa.img)}
+                        alt=""
+                      />
+                    </div>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.interno}
+                  </Typography>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
         </TableBody>

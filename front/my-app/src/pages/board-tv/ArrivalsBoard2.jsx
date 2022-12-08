@@ -34,6 +34,19 @@ const ArrivalsBoard = () => {
   return (
     <>
       <div className="containerBoard">
+        {/* ACA VA ARRIBOS O PARTIDAS EN ESPANOL O INGLES, SOLO PARA LOS TELEVISORES ME PIDIO MI VIEJO */}
+        <div>
+          <Typography
+            textAlign="left"
+            fontSize={{xs: "15px", sm:"20px", md: "30px" }}
+            marginLeft={{xs:"5%", sm:"2%"}}
+            fontFamily="Roboto"
+            textTransform=" uppercase"
+          >
+            Arribos - Arrivals
+          </Typography>
+          {/* ACA TENDRIA QUE IR EL RELOJ QUE PIDIERON DEL LADO DERECHO.         */}
+        </div>
         <div>
           {arribos.length === 0 && (
             <Stack

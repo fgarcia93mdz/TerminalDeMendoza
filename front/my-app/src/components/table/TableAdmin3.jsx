@@ -1,27 +1,27 @@
-
 /* TABLERO DE SEGURIDAD */
 
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Box } from '@mui/material';
-import { Link } from 'react-router-dom';
-import SettingsIcon from '@mui/icons-material/Settings';
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import SettingsIcon from "@mui/icons-material/Settings";
 import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
-
-
+import Typography from "@mui/material/Typography";
 
 export default function TableAdmin3({ data, edit }) {
   // edit. if edit is true so the table will have a column with edit button
 
-  const day = `Registro de ingresantes en informes_${new Date().toJSON().slice(0, 10)}`;
+  const day = `Registro de ingresantes en informes_${new Date()
+    .toJSON()
+    .slice(0, 10)}`;
 
-  console.log('data table admin:', data)
+  console.log("data table admin:", data);
 
   return (
     <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
@@ -29,20 +29,45 @@ export default function TableAdmin3({ data, edit }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table" id="informes">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Fecha de ingreso</TableCell>
-              <TableCell align="center">
-                Horario <br></br> de ingreso
+              <TableCell align="left">
+                <Typography textTransform="uppercase">
+                  Fecha de ingreso
+                </Typography>
               </TableCell>
-              <TableCell align="center">Destino/Origen/Servicio</TableCell>
-              <TableCell align="center">Interno</TableCell>
-              <TableCell align="center">Empresa</TableCell>
-              <TableCell align="center">Fecha Salida</TableCell>
               <TableCell align="center">
-                Horario <br></br>Salida
+                <Typography textTransform="uppercase">
+                  {" "}
+                  Horario <br></br> de ingreso
+                </Typography>
               </TableCell>
-              <TableCell align="center">Plat</TableCell>
-              <TableCell align="center">Estado</TableCell>
-              <TableCell align="center">TV</TableCell>
+              <TableCell align="center">
+                <Typography textTransform="uppercase">
+                  Destino/Origen/Servicio
+                </Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">Interno</Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">Empresa</Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">Fecha Salida</Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">
+                  Horario <br></br>Salida
+                </Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">Plat</Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">Estado</Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">TV</Typography>
+              </TableCell>
               {edit && <TableCell align="right">Editar</TableCell>}
             </TableRow>
           </TableHead>
