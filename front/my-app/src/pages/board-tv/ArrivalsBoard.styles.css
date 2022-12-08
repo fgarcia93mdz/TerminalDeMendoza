@@ -32,3 +32,15 @@
     color: #1C40C0;
     font-weight: 400;
   }
+
+  h3 {
+  font-family: "Roboto";
+  font-size: 35px;
+  text-align: right;
+  margin: 5px 40px 0 0;
+}
+.div_reloj{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

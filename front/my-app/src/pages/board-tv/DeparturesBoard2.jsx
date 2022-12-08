@@ -1,13 +1,22 @@
+import React, { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { Stack } from "@mui/system";
 import axios from "axios";
-import React, { useEffect } from "react";
 import GenericTable from "../../components/table/TableDepartures";
 import Typography from "@mui/material/Typography";
-
+import Greating from "../../components/clock2/Greating";
 import "./ArrivalsBoard.styles.css";
 
 const DeparturesBoard = () => {
+  const [time, changeTime] = useState(new Date().toLocaleTimeString());
+  /*const ap = ( time < 12) ? "<span>AM</span>":"<span>PM</span>";*/
+
+  useEffect(function () {
+    setInterval(() => {
+      changeTime(new Date().toLocaleTimeString()).format("HH:mm");
+    }, 1000);
+  }, []);
+
   const [partidas, setPArtidas] = React.useState([]);
 
   const getPartidas = () => {
@@ -29,7 +38,7 @@ const DeparturesBoard = () => {
   return (
     <>
       <div className="containerBoard">
-        <div>
+        <div className="div_reloj">
           {/* ACA VA ARRIBOS O PARTIDAS EN ESPANOL O INGLES, SOLO PARA LOS TELEVISORES ME PIDIO MI VIEJO */}
           <Typography
             textAlign="left"
@@ -40,7 +49,8 @@ const DeparturesBoard = () => {
           >
             Partidas - Departures
           </Typography>
-          {/* ACA TENDRIA QUE IR EL RELOJ QUE PIDIERON DEL LADO DERECHO. */}
+          {/* RELOJ */}
+          <Greating text={time} />
         </div>
 
         <div>
