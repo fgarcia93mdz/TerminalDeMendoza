@@ -13,7 +13,7 @@ const user = {
     apellido: "", // '12:00'
     rol: "", // 123
     usuario: "", // 2
-    password: "", // 2
+    password: "1234", // 2
 }
 
 
@@ -132,7 +132,7 @@ const FormCreateUser = () => {
                             helperText={formik.errors.usuario}
                         />
                     </Grid>
-                    <Grid item  display={{ xs: 'block', sm: 'flex'}}  alignItems='center' gap={2} xs={12} sm={6} my={2}>
+                    <Grid item  hidden  alignItems='center' gap={2} xs={12} sm={6} my={2}>
                         <Typography variant='subtitle1' color='white' mb={{xs: 1, sm: 0}}>Contraseña:</Typography>
                         <TextField
                             sx={{
@@ -148,7 +148,8 @@ const FormCreateUser = () => {
                                 type: "text",
                             }}
                             name='password'
-                            value={formik.values.password}
+                            defaultValue='1234'
+                            value='1234'
                             onChange={formik.handleChange}
                             error={formik.errors.password}
                             helperText={formik.errors.password}

@@ -31,6 +31,7 @@ const login = async (req, res) => {
           usuario: userToLogin.dataValues.usuario,
           rol: userToLogin.dataValues.roles_id,
           id: userToLogin.dataValues.id,
+          estado_password: userToLogin.dataValues.estado_password,
         };
         const token = generateAccessToken(usuario);
        
