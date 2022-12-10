@@ -8,6 +8,7 @@ import Greating from "../../components/clock2/Greating";
 import Typography from "@mui/material/Typography";
 
 import "./ArrivalsBoard.styles.css";
+import TicketCard from "../../components/ticketCards/TicketCard";
 
 // import { useSelector } from 'react-redux';
 

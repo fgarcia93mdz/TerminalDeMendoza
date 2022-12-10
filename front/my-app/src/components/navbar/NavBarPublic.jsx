@@ -39,6 +39,29 @@ const NavBarPublic = () => {
     setAnchorElNav(null);
   };
 
+  const mobileNavbarStyle = {
+    background: 'white',
+    height: '60px',
+    width: '100%',
+    position: 'fixed',
+    bottom: '0',
+    zIndex: '99',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  }
+
+  const mobileNavbarIconStyle = {
+    width: "45px",
+    padding: '13px'
+    
+  }
+
+  const mobileNavbarIconContainer = {
+    background: 'white',
+    borderRadius: '42%'
+  }
+
   // const handleOpenUserMenu = (event) => {
   //     setAnchorElUser(event.currentTarget);
   // };
@@ -48,6 +71,7 @@ const NavBarPublic = () => {
 
   return (
     <>
+    <Box display={{xs: 'none', sm: 'block'}}>
       <Marquee
         gradient={false}
         style={{
@@ -200,9 +224,6 @@ const NavBarPublic = () => {
                 </Button>
               </a>
             </Box>
-            {/* <Button variant="contained">
-                            <Link to='/login'> Iniciar sesión </Link>
-                        </Button>  */}
 
             {/* <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
@@ -236,6 +257,22 @@ const NavBarPublic = () => {
           </Toolbar>
         </Container>
       </AppBar>
+    </Box>
+
+    <Box display={{xs: 'flex', sm:'none'}} style={mobileNavbarStyle} >
+      <span>partidas</span>
+      <Box style={mobileNavbarIconContainer} mt={-3}>
+        <Box
+          component="img"
+          src={require("../../assets/img/icono-colectivo.png")}
+          alt="colectivo azul icono terminal de mendoza"
+          
+          style={mobileNavbarIconStyle}
+        />
+      </Box>          
+      <span>arribos</span>
+    </Box>
+
     </>
   );
 };

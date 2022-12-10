@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Stack } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
@@ -8,6 +8,7 @@ import GenericTable from "../../components/table/TableArrivals";
 import Typography from "@mui/material/Typography";
 
 import "./ArrivalsBoard.styles.css";
+import TicketCard from "../../components/ticketCards/TicketCard";
 
 // import { useSelector } from 'react-redux';
 
@@ -44,7 +45,17 @@ const ArrivalsBoard = () => {
               <CircularProgress />
             </Stack>
           )}
-          {arribos.length > 0 && <GenericTable props={arribos} />}
+          {arribos.length > 0 && 
+            <Box display={{xs:'none', sm:'block'}}>
+              <GenericTable props={arribos} />
+            </Box>
+          }
+          {arribos.length > 0 && 
+            arribos.map( ticket => <TicketCard />)}
+          {arribos.length > 0 && 
+            arribos.map( ticket => <TicketCard />)}
+            {arribos.length > 0 && 
+            arribos.map( ticket => <TicketCard />)}
         </div>
       </div>
     </>
