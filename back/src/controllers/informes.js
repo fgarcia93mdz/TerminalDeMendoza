@@ -118,6 +118,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         "registro_plataforma",
         "registro_estado",
         "registro_tipo_tv",
+        "registro_servicio",
       ],
       order: [["hora_ingreso"]],
       where: {
@@ -143,6 +144,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         destino: ingreso.destino,
         interno: ingreso.interno,
         empresa: ingreso.registro_empresa.dataValues.empresa,
+        servicio: ingreso.registro_servicio.dataValues.tipo_servicio,
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
         fecha_salida: ingreso.fecha_salida,

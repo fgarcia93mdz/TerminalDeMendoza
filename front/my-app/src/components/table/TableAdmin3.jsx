@@ -57,6 +57,9 @@ export default function TableAdmin3({ data, edit }) {
                 <Typography textTransform="uppercase">Empresa</Typography>
               </TableCell>
               <TableCell align="center" textTransform="uppercase">
+                <Typography textTransform="uppercase">Servicio</Typography>
+              </TableCell>
+              <TableCell align="center" textTransform="uppercase">
                 <Typography textTransform="uppercase">Fecha Salida</Typography>
               </TableCell>
               <TableCell align="center" textTransform="uppercase">
@@ -92,6 +95,7 @@ export default function TableAdmin3({ data, edit }) {
                   </TableCell>
                   <TableCell align="center">{row.interno}</TableCell>
                   <TableCell align="center">{row.empresa}</TableCell>
+                  <TableCell align="center">{row.servicio}</TableCell>
                   <TableCell align="center"> {row.fecha_salida} </TableCell>
                   <TableCell align="center"> {row.horario_salida} </TableCell>
                   <TableCell align="center">{row.plataforma}</TableCell>
