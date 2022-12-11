@@ -119,7 +119,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         "registro_estado",
         "registro_tipo_tv",
       ],
-      order: [["hora_salida", "DESC"]],
+      order: [["hora_ingreso"]],
       where: {
         fecha_ingreso: {
           [Op.gte]: diaHoy

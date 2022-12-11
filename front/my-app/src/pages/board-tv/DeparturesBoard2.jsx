@@ -13,7 +13,7 @@ const DeparturesBoard = () => {
 
   useEffect(function () {
     setInterval(() => {
-      changeTime(new Date().toLocaleTimeString()).format("HH:mm");
+      changeTime(new Date().toLocaleTimeString());
     }, 1000);
   }, []);
 
