@@ -92,7 +92,7 @@ const FormTicket = () => {
                             InputProps={{
                                 type: "number"
                             }} 
-                            defaultValue={1}
+                            defaultValue={3}
                             name='tipo_tv_id'
                         />
                     </Grid>

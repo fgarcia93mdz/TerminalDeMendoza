@@ -31,7 +31,6 @@ const FormEditTicketOnPlatform = ({ ticket }) => {
 
     const PLATAFORMAS = [
       "Sin asignar",
-      1,
       2,
       3,
       4,

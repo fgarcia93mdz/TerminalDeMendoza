@@ -14,7 +14,7 @@ const FormTicket = () => {
   // const navigate = useNavigate()
   const token = sessionStorage.getItem("jwt");
   const config = { headers: { authorization: `Bearer ${token}` } };
-  
+
   // Fecha actual
   const dateNow = new Date(); // Creating a new date object with the current date and time
   const year = dateNow.getFullYear(); // Getting current year from the created Date object
@@ -27,12 +27,13 @@ const FormTicket = () => {
     dateNow.getUTCDate().toString().length < 2 // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
       ? `0${dateNow.getUTCDate()}`
       : dateNow.getUTCDate();
-
+  
   // HORA ACTUAL
-  const hours = dateNow.getHours();
+  const hours = dateNow.getHours()
   const minutes = dateNow.getMinutes();
-  const minutess = `${minutes}` < 10 ? "0" + `${minutes}` : `${minutes}`;
-
+  const minutess = (`${minutes}` < 10) ? "0" + `${minutes}` : `${minutes}`;
+ 
+  
   const initialTicket = {
     fecha_ingreso: `${year}-${month}-${date}`, // '01-01-2022'
     hora_ingreso: `${hours}:${minutess}`, // '12:00'
@@ -61,6 +62,7 @@ const FormTicket = () => {
       .get(url, config)
       .then((response) => setDataDropdown(response.data))
       .catch((error) => console.log("error jwt:", error.response.data.mensaje));
+
   }, [token]);
 
   const formik = useFormik({
@@ -71,8 +73,8 @@ const FormTicket = () => {
       const data = formik.values;
       console.log("data form create ticket", data);
 
-      axios
-        .post(url, data, config)
+      
+      axios.post(url, data, config)
         .then((res) => {
           if (res.status === 200) {
             setOpenModal(true);
@@ -81,6 +83,7 @@ const FormTicket = () => {
         .catch(function (error) {
           console.log("Error:", error);
         });
+
     },
   });
 
@@ -431,8 +434,8 @@ const FormTicket = () => {
             //   marginRight: { xs: 0, sm: 8 },
             // }}
             xs={12}
-            align="center"
-            pt={{ xs: 4, sm: 6 }}
+            align='center'
+            pt={{xs: 4, sm: 6}}
           >
             <Button
               variant="contained"

@@ -57,18 +57,18 @@ const addInforme = async (req, res) => {
       tipo_tv_id,
     };
 
-    if (rol === 5) {
-      const { fecha_salida, hora_salida, plataformas_id, tipo_tv_id } = data;
+    // if (rol === 5) {
+    //   const { fecha_salida, hora_salida, plataformas_id, tipo_tv_id } = data;
 
-      if (!fecha_salida || !hora_salida || !tipo_tv_id || !plataformas_id) {
-        return res.status(400).json({ mensaje: "faltan datos" });
-      }
+    //   if (!fecha_salida || !hora_salida || !tipo_tv_id || !plataformas_id) {
+    //     return res.status(400).json({ mensaje: "faltan datos" });
+    //   }
 
-      dataAingresar.fecha_salida = fecha_salida;
-      dataAingresar.hora_salida = hora_salida;
-      dataAingresar.plataformas_id = plataformas_id;
-      dataAingresar.tipo_tv_id = tipo_tv_id;
-    }
+    //   dataAingresar.fecha_salida = fecha_salida;
+    //   dataAingresar.hora_salida = hora_salida;
+    //   dataAingresar.plataformas_id = plataformas_id;
+    //   dataAingresar.tipo_tv_id = tipo_tv_id;
+    // }
     //console.log(dataAingresar);
     await RegistroTorre.create(dataAingresar);
 
