@@ -33,7 +33,7 @@ const pages = ['Inicio', 'Pantallas', 'Carga de ingreso', 'Cambiar contraseña',
 
 // import { Box, Stack } from '@mui/system';
 
-const NavBarAccountant = ({ name }) => {
+const NavBarSupervisor = ({ name }) => {
     const navigate = useNavigate()
     const [ anchorElNav, setAnchorElNav ] = React.useState(null);
     const [ anchorElUser, setAnchorElUser ] = React.useState(null);
@@ -145,7 +145,7 @@ const NavBarAccountant = ({ name }) => {
                                 sx={{ my: 2, color: '#0E315A', display: 'block' }}
                             >
                                 
-                                'contabilidad' INICIO
+                                'supervisor' INICIO
                                 
                             </Button>
                         </Link>
@@ -248,4 +248,4 @@ const NavBarAccountant = ({ name }) => {
         );
 }
 
-export default NavBarAccountant;
+export default NavBarSupervisor;

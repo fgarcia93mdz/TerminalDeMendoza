@@ -323,7 +323,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `rol`, `borrado`) VALUES
 (1, 'Administración', 0),
 (2, 'Recursos Humanos', 0),
-(3, 'Contabilidad', 0),
+(3, 'Supervisor', 0),
 (4, 'Operador de Seguridad', 0),
 (5, 'Informes', 0);
 

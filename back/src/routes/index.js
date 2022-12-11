@@ -68,9 +68,9 @@ router.get('/ingreso/sector/seguridad', ControllerInicioUsuario.informe);
 router.post('/ingreso/sector/seguridad/:id/registroInforme', ControllerInicioUsuario.registroInforme);
 router.get('/ingreso/sector/seguridad/ingresos', ControllerInicioUsuario.ingresos);
 
-// Contabilidad
-router.get('/ingreso/sector/contabilidad', ControllerInicioUsuario.contabilidad)
-router.get('/ingreso/sector/contabilidad/empresa', ControllerInicioUsuario.empresa)
+// Supervisor
+router.get('/ingreso/sector/supervisor', ControllerInicioUsuario.supervisor)
+router.get('/ingreso/sector/supervisor/empresa', ControllerInicioUsuario.empresa)
 
 // Informes
 router.get('/ingreso/informes/listadoDeIngresos', ControllerInicioUsuario.informesListado);

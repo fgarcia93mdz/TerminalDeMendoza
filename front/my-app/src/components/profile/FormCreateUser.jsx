@@ -186,7 +186,7 @@ const FormCreateUser = () => {
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
                             <MenuItem key={'Administracion'} value={1}>Administracion</MenuItem>
                             <MenuItem key={'Recursos Humanos'} value={2}>Recursos Humanos</MenuItem>
-                            <MenuItem key={'Contabilidad'} value={3}>Contabilidad</MenuItem>
+                            <MenuItem key={'Supervisor'} value={3}>Supervisor</MenuItem>
                             <MenuItem key={'Operador de Seguridad'} value={4}>Operador de Seguridad</MenuItem>
                             <MenuItem key={'Informes'} value={5}>Informes</MenuItem>
                         </TextField>

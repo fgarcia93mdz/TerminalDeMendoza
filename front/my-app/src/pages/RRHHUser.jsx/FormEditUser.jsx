@@ -213,7 +213,7 @@ const FormEditUser = () => {
                             {/* <MenuItem value={'default'} disabled >Seleccione una opcion</MenuItem> */}
                             {/* <MenuItem value={1}>Administracion</MenuItem>
                             <MenuItem value={2}>Recursos Humanos</MenuItem>
-                            <MenuItem value={3}>Contabilidad</MenuItem>
+                            <MenuItem value={3}>Supervisor</MenuItem>
                             <MenuItem value={4}>Operador de Seguridad</MenuItem>
                             <MenuItem value={5}>Informes</MenuItem> */}
                         </TextField>

@@ -5,13 +5,13 @@ import jwt_decode from "jwt-decode";
 // import NavBarSecurity from './NavBarSecurity'
 // import NavBarRRHH from './NavBarRRHH'
 // import NavBarInforms from './NavBarInforms';
-// import NavBarAccountant from './NavBarAccountant';
+// import NavBarSupervisor from './NavBarSupervisor';
 
 const NavBarPublic = React.lazy(() => import('./NavBarPublic'))
 const NavBarSecurity = React.lazy(() => import('./NavBarSecurity'))
 const NavBarRRHH = React.lazy(() => import('./NavBarRRHH'))
 const NavBarInforms = React.lazy(() => import('./NavBarInforms'))
-const NavBarAccountant = React.lazy(() => import('./NavBarAccountant'))
+const NavBarSupervisor = React.lazy(() => import('./NavBarSupervisor'))
 
 
 
@@ -45,9 +45,9 @@ const NavBarContainer = () => {
               // RRHH
               case 2 : 
                 return <NavBarRRHH name={name} />
-              // Contabilidad
+              // Supervisor
               case 3 :
-                return <NavBarAccountant name={name}/>
+                return <NavBarSupervisor name={name}/>
               // Seguridad  
               case 4 :
                 return <NavBarSecurity name={name} />

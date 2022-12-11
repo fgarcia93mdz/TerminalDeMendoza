@@ -120,7 +120,7 @@ const ControllerInicioUsuario = {
     } else if (userLogged.roles_id === 2) {
       res.redirect("/ingreso/sector/recursosHumanos");
     } else if (userLogged.roles_id === 3) {
-      res.redirect("/ingreso/sector/contabilidad");
+      res.redirect("/ingreso/sector/supervisor");
     } else if (userLogged.roles_id === 4) {
       res.redirect("/ingreso/sector/seguridad");
     } else if (userLogged.roles_id === 5) {
@@ -480,8 +480,8 @@ const ControllerInicioUsuario = {
     });
   },
 
-  // Comienza la parte de contabilidad, la cual es la que manipula los datos que se van a agregar a las tablas de uso de la torre
-  contabilidad: (req, res) => {
+  // Comienza la parte de supervisor, la cual es la que manipula los datos que se van a agregar a las tablas de uso de la torre
+  supervisor: (req, res) => {
     const userLogged = req.session.userLogged;
     let usuario = Usuario.findOne({
       where: {
@@ -509,7 +509,7 @@ const ControllerInicioUsuario = {
       hora,
     ]).then(
       ([usuarios, usuario, empresas, servicio, plataforma, estado, hora]) => {
-        res.render("usuarios/contabilidad", {
+        res.render("usuarios/supervisor", {
           usuarios,
           usuario,
           empresas,
