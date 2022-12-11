@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import GenericTable from "../../components/table/TableArrivals";
 
 // inicio
-import Typography from "@mui/material/Typography";
 
 import "./ArrivalsBoard.styles.css";
 import TicketCard from "../../components/ticketCards/TicketCard";

@@ -88,5 +88,3 @@ const Footer = () => {
 }
 
 export default Footer;
-
-{/* <img style={{maxWidth: '85%', height:'auto'}} className="icon" src={require("../../assets/img/icono-colectivo.png")} alt="icono colectivo" /></div> */ }

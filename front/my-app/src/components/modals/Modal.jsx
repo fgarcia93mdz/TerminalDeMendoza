@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useNavigate } from "react-router-dom";
-import { fontSize } from '@mui/system';
+
 import { Stack } from '@mui/material';
 
 const style = {
@@ -36,7 +35,7 @@ const closeSession = () => {
 };
 export default function BasicModal({ title , message, openModal }) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   console.log('openModal', openModal)

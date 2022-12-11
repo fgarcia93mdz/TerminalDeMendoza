@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -27,7 +26,6 @@ const validationSchema = yup.object({
 
 const FormCreateUser = () => {
     const [ openModal, setOpenModal ] = useState(false)
-    const navigate = useNavigate()
     const token = sessionStorage.getItem('jwt')
 
     
