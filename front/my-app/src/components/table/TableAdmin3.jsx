@@ -31,6 +31,11 @@ export default function TableAdmin3({ data, edit }) {
             <TableRow>
               <TableCell align="left">
                 <Typography textTransform="uppercase">
+                  Nº de <br></br> Registro
+                </Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography textTransform="uppercase">
                   Fecha de ingreso
                 </Typography>
               </TableCell>
@@ -79,6 +84,7 @@ export default function TableAdmin3({ data, edit }) {
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
+                  <TableCell align="left">{row.id}</TableCell>
                   <TableCell align="left">{row.fecha_ingreso}</TableCell>
                   <TableCell align="center">{row.horario_ingreso}</TableCell>
                   <TableCell component="th" scope="row" align="center">

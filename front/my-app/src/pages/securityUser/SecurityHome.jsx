@@ -34,11 +34,13 @@ const SecurityHome = () => {
         width: '100%',
         background: '#0e315a',
         color: 'white',
+        paddingBottom: '32px'
     }
 
     const typographyStyles = {
         paddingBlock: '2vh'
     }
+    
 
     return (
         <Stack >
