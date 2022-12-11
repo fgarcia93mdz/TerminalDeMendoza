@@ -39,7 +39,7 @@ const TicketCard = ({ ticket }) => {
                     5
                 </Typography>
                 <Typography variant='caption'>
-                    Interno:
+                    Interno: 
                 </Typography>
                 <Typography variant='h5' fontWeight='bold'>
                     5526

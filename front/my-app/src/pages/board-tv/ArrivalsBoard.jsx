@@ -7,7 +7,9 @@ import GenericTable from "../../components/table/TableArrivals";
 // inicio
 
 import "./ArrivalsBoard.styles.css";
-import TicketCard from "../../components/ticketCards/TicketCard";
+import TicketCardArrivals from "../../components/ticketCards/TicketCardArrivals";
+
+
 
 // import { useSelector } from 'react-redux';
 
@@ -50,11 +52,10 @@ const ArrivalsBoard = () => {
             </Box>
           }
           {arribos.length > 0 && 
-            arribos.map( ticket => <TicketCard />)}
-          {arribos.length > 0 && 
-            arribos.map( ticket => <TicketCard />)}
-            {arribos.length > 0 && 
-            arribos.map( ticket => <TicketCard />)}
+            <Box display={{xs:'block', sm:'none'}}>
+            <TicketCardArrivals props={arribos}/>
+            </Box>
+          }
         </div>
       </div>
     </>

@@ -5,7 +5,9 @@ import React, { useEffect } from "react";
 import GenericTable from "../../components/table/TableDepartures";
 import Typography from "@mui/material/Typography";
 
+import TicketCardDepartures from "../../components/ticketCards/TicketCardDepartures";
 import "./ArrivalsBoard.styles.css";
+import Box from "@mui/material/Box";
 
 const DeparturesBoard = () => {
   const [partidas, setPArtidas] = React.useState([]);
@@ -39,7 +41,16 @@ const DeparturesBoard = () => {
               <CircularProgress />
             </Stack>
           )}
-          {partidas.length > 0 && <GenericTable props={partidas} />}
+          {partidas.length > 0 && 
+            <Box display={{xs:'none', sm:'block'}}>
+              <GenericTable props={partidas} />
+            </Box>
+          }
+          {partidas.length > 0 && 
+            <Box display={{xs:'block', sm:'none'}}>
+            <TicketCardDepartures props={partidas}/>
+            </Box>
+          }
         </div>
       </div>
     </>
