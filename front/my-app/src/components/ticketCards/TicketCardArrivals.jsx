@@ -12,8 +12,9 @@ export default function TicketCard ({ props }) {
         width:'90%',
         margin: 'auto',
         color: 'white',
-      marginBlock: '10px',
-        paddingBottom: "50px"
+        marginBlock: '10px',
+        paddingBottom: "50px",
+        boxShadow: "rgb(0 0 0 / 35%) 1px 2px 6px 2px"
 
     }
 

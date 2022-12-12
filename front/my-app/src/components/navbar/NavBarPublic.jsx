@@ -48,18 +48,23 @@ const NavBarPublic = () => {
     zIndex: '99',
     textAlign: 'center',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
+    boxShadow: '0px -3px 9px 0px #0000004d',
+
   }
 
   const mobileNavbarIconStyle = {
     width: "45px",
-    padding: '13px'
+    padding: '13px',
+
     
   }
 
   const mobileNavbarIconContainer = {
     background: 'white',
-    borderRadius: '42%'
+    borderRadius: '42%',
+    boxShadow: '0px -3px 9px 0px #0000004d',
+
   }
 
   // const handleOpenUserMenu = (event) => {
@@ -274,7 +279,7 @@ const NavBarPublic = () => {
         <span>
           <Link to="/tablero-partidas">
             <MenuItem key={"/tablero-partidas"} onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">PARTIDAS</Typography>
+              <Typography textAlign="center" fontWeight='bold' color='#0e315a'>PARTIDAS</Typography>
             </MenuItem>
           </Link>
         </span>
@@ -293,7 +298,7 @@ const NavBarPublic = () => {
           <Link to="/tablero-arribos">
             <MenuItem key={"/tablero-arribos"} onClick={handleCloseNavMenu}>
               {/* <ArrowDownwardIcon /> */}
-              <Typography textAlign="center">ARRIBOS</Typography>
+              <Typography textAlign="center" fontWeight='bold' color='#0e315a' >ARRIBOS</Typography>
             </MenuItem>
           </Link>
         </span>
