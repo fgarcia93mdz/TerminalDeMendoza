@@ -29,7 +29,9 @@ const platformController = {
             fecha_ingreso: {
               [Op.gte]: diaHoy
             },
-          },
+          }, {
+            estado_id: 1
+          }
         ],
       },
     });
@@ -57,8 +59,11 @@ const platformController = {
           { tipo_tv_id: 2 },
           {
             fecha_ingreso: {
-              [Op.gte]: diaHoy
+              [Op.gte]: diaHoy,
             },
+          },
+          {
+            estado_id: 1,
           },
         ],
       },
