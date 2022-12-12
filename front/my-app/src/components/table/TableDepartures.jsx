@@ -90,59 +90,91 @@ export default function GenericTable( {props} ) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ fontSize: '20px' }} aria-label="customized table">
+      <Table sx={{ fontSize: "20px" }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell2 align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>DESTINO
-</Typography></StyledTableCell2>
-            <StyledTableCell2 align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>EMPRESA
-</Typography></StyledTableCell2>
-            <StyledTableCell2 align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>HORARIO<br></br>SALIDA
-</Typography>
-              
-            </StyledTableCell2>
-            <StyledTableCell2 align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>ESTADO
-</Typography></StyledTableCell2>
-            <StyledTableCell2 align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>PLAT
-</Typography></StyledTableCell2>
             <StyledTableCell2 align="center">
-              
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                DESTINO
+              </Typography>
             </StyledTableCell2>
-            <StyledTableCell2 align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>INTERNO
-</Typography></StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                EMPRESA
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                HORARIO<br></br>SALIDA
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                ESTADO
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                PLAT
+              </Typography>
+            </StyledTableCell2>
+            <StyledTableCell2 align="center"></StyledTableCell2>
+            <StyledTableCell2 align="center">
+              <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                INTERNO
+              </Typography>
+            </StyledTableCell2>
           </TableRow>
         </TableHead>
         <TableBody>
-          
           {props &&
             props.map((row) => (
               <StyledTableRow key={row.id}>
-                <StyledTableCell align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>{row.destino}
-</Typography></StyledTableCell>
-                <StyledTableCell align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>{row.registro_empresa.empresa}
-</Typography></StyledTableCell>
-                <StyledTableCell align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}> {row.hora_salida}
-</Typography>
-                 
-                </StyledTableCell>
-                <StyledTableCell align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>{row.registro_estado.tipo}
-</Typography></StyledTableCell>
-                <StyledTableCell align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>{row.plataformas_id}
-</Typography>
-                 
+                <StyledTableCell align="center">
+                  <Typography
+                    fontSize={{ xs: "10px", sm: "15px", md: "20px" }}
+                    textTransform="uppercase"
+                  >
+                    {row.destino}
+                  </Typography>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                      {row.registro_empresa.img != null && (
-                    <div className="box" style={styles.cajaFoto}>
-                        <img
-                          src={require("../../assets/img/empresas/" + row.registro_empresa.img)}
-                          alt=""
-                        />
-                    </div>
-            )}
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.registro_empresa.empresa}
+                  </Typography>
                 </StyledTableCell>
-                <StyledTableCell align="center"><Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>{row.interno}
-</Typography></StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {" "}
+                    {row.hora_salida}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.registro_estado.tipo}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.plataformas_id}
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.registro_empresa.img != null && (
+                    <div className="box" style={styles.cajaFoto}>
+                      <img
+                        src={require("../../assets/img/empresas/" +
+                          row.registro_empresa.img)}
+                        alt=""
+                      />
+                    </div>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                    {row.interno}
+                  </Typography>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
         </TableBody>
