@@ -12,7 +12,8 @@ export default function TicketCard ({ props }) {
         width:'90%',
         margin: 'auto',
         color: 'white',
-        marginBlock: '10px'
+        marginBlock: '10px',
+        boxShadow: "rgb(0 0 0 / 35%) 1px 2px 6px 2px"
 
     }
 
@@ -63,7 +64,7 @@ export default function TicketCard ({ props }) {
               <Typography variant="h5" fontWeight="bold">
                 {row.plataformas_id}
               </Typography>
-              <Typography variant="caption">Hoa de salida:</Typography>
+              <Typography variant="caption">Hora de salida:</Typography>
               <Typography variant="h5" fontWeight="bold">
                 {row.hora_salida}
               </Typography>
