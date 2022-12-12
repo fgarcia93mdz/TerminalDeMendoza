@@ -279,12 +279,15 @@ const NavBarPublic = () => {
           </Link>
         </span>
         <Box style={mobileNavbarIconContainer} mt={-3}>
+          <Link to="/login">
           <Box
             component="img"
+
             src={require("../../assets/img/icono-colectivo.png")}
             alt="colectivo azul icono terminal de mendoza"
             style={mobileNavbarIconStyle}
           />
+          </Link>
         </Box>
         <span>
           <Link to="/tablero-arribos">
