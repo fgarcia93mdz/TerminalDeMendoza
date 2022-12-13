@@ -194,17 +194,6 @@ const NavBarRRHH = ({ name }) => {
                   RESETEAR CONTRASEÑAS
                 </Button>
               </Link>
-
-              {userInfo && !userInfo.nombre && (
-                <Link to="/login" onClick={handleCloseNavMenu}>
-                  <Button
-                    key={"inicio6"}
-                    sx={{ my: 2, color: "#0E315A", display: "block" }}
-                  >
-                    LOGIN
-                  </Button>
-                </Link>
-              )}
             </Box>
             {userInfo && userInfo.nombre && (
               <Typography

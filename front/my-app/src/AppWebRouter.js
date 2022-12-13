@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from "react-router-dom";
 
 import ArrivalsBoard from "./pages/board-tv/ArrivalsBoard";
 import DeparturesBoard from "./pages/board-tv/DeparturesBoard";
@@ -16,25 +16,23 @@ import ListUsers from "./pages/RRHHUser.jsx/ListUsers";
 import jwt_decode from "jwt-decode";
 import NavBarContainer from "./components/navbar/NavBarContainer";
 import Footer from "./components/footer/Footer";
-import NotFoundPage from './pages/not-found/NotFound';
+import NotFoundPage from "./pages/not-found/NotFound";
 import PageResetPassword from "./pages/RRHHUser.jsx/PageResetPassword";
 import WritePassword from "./components/forms/FormChangePassword";
 import InformsEditTicket from "./pages/informsUser/InformsEditTicketEntry";
 import InformsEditTicketOnPlatform from "./pages/informsUser/InformsEditTicketOnPlatform";
 
-
 const AppWebRouter = () => {
-     // aca voy a crear que segun el tipo de usuario que se renderice diferentes navbars
+  // aca voy a crear que segun el tipo de usuario que se renderice diferentes navbars
   // navbars adminitrativo/seguridad y navbar de cliente/publico normal
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [userId, setUserId] = useState(null);
-//   const [ tokenState, setTokenState ] = useState(null);
+  //   const [ tokenState, setTokenState ] = useState(null);
 
+  const token = window.sessionStorage.getItem("jwt");
 
-    const token = window.sessionStorage.getItem("jwt");
-
-React.useEffect(() => {
+  React.useEffect(() => {
     // if (token.length > 0) { setTokenState(token) }
     if (token === undefined || token === null) {
       setIsLoggedIn(false);
@@ -50,155 +48,272 @@ React.useEffect(() => {
     }
   }, [userRole, isLoggedIn, token]);
 
+  return (
+    <>
+      <NavBarContainer />
 
-    return (
-      <>
-        <NavBarContainer />
+      <Routes>
+        <Route exact path="/" element={<ArrivalsBoard />} />
+        <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
+        <Route path="/tablero-partidas" element={<DeparturesBoard />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route
+          exact
+          path="/ingreso"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <Ingreso />
+            </Protected>
+          }
+        />
+        <Route
+          path="/perfil/editar"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormEditUser />
+            </Protected>
+          }
+        />
+        <Route
+          path="/perfil/password"
+          element={
+            // <Protected isLoggedIn={isLoggedIn}>
+            <WritePassword />
+            // </Protected>
+          }
+        />
 
-        <Routes>
-          <Route exact path="/" element={<ArrivalsBoard />} />
-          <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
-          <Route path="/tablero-partidas" element={<DeparturesBoard />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route 
-            exact 
-            path="/ingreso" 
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <Ingreso />
-              </Protected>
-          } />
-          <Route 
-            path="/perfil/editar" 
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                  <FormEditUser />
-              </Protected>
-            } />
-          <Route 
-            path="/perfil/password" 
-            element={
-              // <Protected isLoggedIn={isLoggedIn}>
-                <WritePassword />
-              // </Protected>
-          } />
+        <Route
+          exact
+          path="/supervisor/seguridad"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <SecurityHome />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/ticket/crear"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormTicket id={userId} />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/informes"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <InformsHome />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/arribos"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ArrivalsBoard />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/partidas"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <DeparturesBoard />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/informes/editar/ingreso/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <InformsEditTicket />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/informes/editar/en-plataforma/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <InformsEditTicketOnPlatform />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/usuarios"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ListUsers />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/usuarios/crear"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormCreateUser />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/usuarios/resetPass"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <PageResetPassword token={token} />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/supervisor/usuarios/editar/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormEditUser />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/seguridad"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <SecurityHome />
-              </Protected>
-            }
-          />
+        <Route
+          exact
+          path="/seguridad"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <SecurityHome />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/seguridad/ticket/crear"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormTicket />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/seguridad/arribos"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ArrivalsBoard />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/seguridad/partidas"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <DeparturesBoard />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/seguridad/ticket/crear"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <FormTicket />
-              </Protected>
-            }
-          />
+        <Route
+          exact
+          path="/informes"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <InformsHome />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/seguridad/arribos"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <ArrivalsBoard />
-              </Protected>
-            }
-          />
-          <Route
-            exact
-            path="/seguridad/partidas"
-            element={<DeparturesBoard />}
-          />
+        <Route
+          exact
+          path="/informes/ticket/crear"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormTicket id={userId} />
+            </Protected>
+          }
+        />
 
-          <Route 
-            exact 
-            path="/informes" 
-            element={<InformsHome />} 
-          />
+        <Route
+          exact
+          path="/informes/arribos"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ArrivalsBoard />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/informes/ticket/crear"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <FormTicket id={userId} />
-              </Protected>
-            }
-          />
+        <Route exact path="/informes/partidas" element={<DeparturesBoard />} />
 
-          <Route
-            exact
-            path="/informes/arribos"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <ArrivalsBoard />
-              </Protected>
-            }
-          />
+        <Route
+          exact
+          path="/informes/editar/ingreso/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <InformsEditTicket />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/informes/partidas"
-            element={<DeparturesBoard />}
-          />
+        <Route
+          exact
+          path="/informes/editar/en-plataforma/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <InformsEditTicketOnPlatform />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/informes/editar/ingreso/:id"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <InformsEditTicket />
-              </Protected>
-            }
-          />
+        <Route
+          exact
+          path="/usuarios"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ListUsers />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/usuarios/crear"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormCreateUser />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/usuarios/resetPass"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <PageResetPassword token={token} />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/usuarios/editar/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <FormEditUser />
+            </Protected>
+          }
+        />
 
-          <Route
-            exact
-            path="/informes/editar/en-plataforma/:id"
-            element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <InformsEditTicketOnPlatform />
-              </Protected>
-            }
-          />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <Footer />
+    </>
+  );
+};
 
-          <Route 
-            exact 
-            path="/usuarios" 
-            element={<ListUsers />} 
-          />
-
-          <Route 
-            exact 
-            path="/usuarios/crear" 
-            element={<FormCreateUser />} 
-          />
-
-          <Route
-            exact
-            path="/usuarios/resetPass"
-            element={<PageResetPassword token={token} />}
-          />
-
-          <Route 
-            exact 
-            path="/usuarios/editar/:id" 
-            element={<FormEditUser />} 
-          />
-
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-      </>
-    );
-}
-
-export default AppWebRouter
+export default AppWebRouter;
