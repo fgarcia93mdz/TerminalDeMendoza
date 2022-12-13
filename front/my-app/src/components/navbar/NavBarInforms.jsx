@@ -3,7 +3,7 @@ import "./NavBar.styles.css";
 // import { Link } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 // import jwt from 'jsonwebtoken'
 
 // inicio
@@ -32,7 +32,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 // import { Box, Stack } from '@mui/system';
 
 const NavBarInforms = ({ name }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [userInfo, setUserInfo] = React.useState({});
@@ -56,6 +56,12 @@ const NavBarInforms = ({ name }) => {
   const closeSession = () => {
     handleCloseUserMenu();
     setUserInfo({});
+    axios
+      .get("http://localhost:8080/auth/logout", {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.json())
+      .catch((err) => console.log("Error en logout:", err));
     window.sessionStorage.removeItem("jwt");
     navigate("/login");
     window.location.reload();
@@ -243,14 +249,14 @@ const NavBarInforms = ({ name }) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <Link to='/perfil/password'>
-                    <MenuItem
-                        key={"inicio4"}
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: "#0E315A", display: "block" }}
-                    >
-                        CAMBIAR CONTRASEÑA
-                    </MenuItem>
+                <Link to="/perfil/password">
+                  <MenuItem
+                    key={"inicio4"}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "#0E315A", display: "block" }}
+                  >
+                    CAMBIAR CONTRASEÑA
+                  </MenuItem>
                 </Link>
                 <MenuItem
                   key={"inicio5"}

@@ -415,8 +415,9 @@ const FormTicket = () => {
               }}
               InputLabelProps={{
                 style: { color: "#fff" },
+                textTransform: "uppercase"
               }}
-              label="Inserte destino..."
+              label="Inserte destino / origen / servicio"
               name="destino"
               value={formik.values.destino}
               onChange={formik.handleChange}

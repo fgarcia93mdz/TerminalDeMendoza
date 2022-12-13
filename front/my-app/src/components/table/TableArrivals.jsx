@@ -121,7 +121,7 @@ export default function GenericTable({ props }) {
             props.map((row) => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell align="center">
-                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
+                  <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }} textTransform="uppercase">
                     {row.destino}
                   </Typography>
                 </StyledTableCell>

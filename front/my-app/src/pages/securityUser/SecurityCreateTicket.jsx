@@ -415,8 +415,9 @@ const FormTicket = () => {
               }}
               InputLabelProps={{
                 style: { color: "#fff" },
+                textTransform: "uppercase",
               }}
-              label="Inserte destino..."
+              label="Inserte destino / origen / servicio"
               name="destino"
               value={formik.values.destino}
               onChange={formik.handleChange}
@@ -434,8 +435,8 @@ const FormTicket = () => {
             //   marginRight: { xs: 0, sm: 8 },
             // }}
             xs={12}
-            align='center'
-            pt={{xs: 4, sm: 6}}
+            align="center"
+            pt={{ xs: 4, sm: 6 }}
           >
             <Button
               variant="contained"
