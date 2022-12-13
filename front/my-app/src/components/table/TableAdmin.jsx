@@ -44,7 +44,6 @@ export default function TableAdmin({ data, edit = false }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {console.log('DATA en tabla admin..:', data)} */}
             {data.length > 0 &&
               data.reverse().map((row) => (
                 <TableRow

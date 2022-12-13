@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import TableAdmin from '../../components/table/TableAdmin';
 import TableAdmin2 from "../../components/table/TableAdmin2";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 
@@ -11,9 +12,15 @@ const InformsHome = () => {
   const [ingresando, setIngresando] = useState([])
     const [ enPlataforma, setEnPlataforma ] = useState([])
     const [ fueraDePlataforma, setFueraDePlataforma ] = useState([])
+    const navigate = useNavigate()
 
 
     const token = window.sessionStorage.getItem("jwt")
+
+    if(token.estado_password === '0'){
+      console.log('token.estado_password',token.estado_password)
+      navigate('/perfil/password')
+    }
 
     useEffect(()=> {
         // FETCH INGRESANTES

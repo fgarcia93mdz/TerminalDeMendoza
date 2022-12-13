@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import ArrivalsBoard from "./pages/board-tv/ArrivalsBoard";
 import DeparturesBoard from "./pages/board-tv/DeparturesBoard";
@@ -21,6 +21,7 @@ import PageResetPassword from "./pages/RRHHUser.jsx/PageResetPassword";
 import WritePassword from "./components/forms/FormChangePassword";
 import InformsEditTicket from "./pages/informsUser/InformsEditTicketEntry";
 import InformsEditTicketOnPlatform from "./pages/informsUser/InformsEditTicketOnPlatform";
+import AdminTable from "./pages/adminUser/AdminTable";
 
 
 const AppWebRouter = () => {
@@ -44,17 +45,23 @@ React.useEffect(() => {
       setUserRole(tokenDecoded.rol);
       setIsLoggedIn(true);
       setUserId(tokenDecoded.id);
+      // if(tokenDecoded.estado_password === 0){
+      //  return  window.location.replace('/perfil/password')
+      // }
+      
+      console.log('token estado password', tokenDecoded.estado_password)
       // setUserInfo(state => ({ ...state, tokenDecoded: tokenDecoded }));
       // console.log('decoded', userInfo);
       // console.log('decoded', userRole);
     }
-  }, [userRole, isLoggedIn, token]);
+  }, [token]);
+
+ 
 
 
     return (
       <>
         <NavBarContainer />
-
         <Routes>
           <Route exact path="/" element={<ArrivalsBoard />} />
           <Route path="/tablero-arribos" element={<ArrivalsBoard />} />
@@ -68,6 +75,16 @@ React.useEffect(() => {
                 <Ingreso />
               </Protected>
           } />
+          
+          <Route 
+            exact 
+            path="/admin/ingresos" 
+            element={
+              // <Protected isLoggedIn={isLoggedIn}>
+                <AdminTable />
+              // </Protected>
+          } />
+
           <Route 
             path="/perfil/editar" 
             element={
@@ -147,7 +164,11 @@ React.useEffect(() => {
           <Route
             exact
             path="/informes/partidas"
-            element={<DeparturesBoard />}
+            element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <DeparturesBoard />
+            </Protected>
+          }
           />
 
           <Route
@@ -173,25 +194,41 @@ React.useEffect(() => {
           <Route 
             exact 
             path="/usuarios" 
-            element={<ListUsers />} 
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <ListUsers />
+              </Protected>
+            } 
           />
 
           <Route 
             exact 
             path="/usuarios/crear" 
-            element={<FormCreateUser />} 
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <FormCreateUser />
+              </Protected>          
+          } 
           />
 
           <Route
             exact
             path="/usuarios/resetPass"
-            element={<PageResetPassword token={token} />}
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <PageResetPassword token={token} />
+              </Protected>          
+          }
           />
 
           <Route 
             exact 
             path="/usuarios/editar/:id" 
-            element={<FormEditUser />} 
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <FormEditUser />
+              </Protected>          
+          } 
           />
 
           <Route path="*" element={<NotFoundPage />} />

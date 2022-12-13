@@ -1,5 +1,4 @@
 import React from 'react';
-import './Footer.styles.css'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -13,8 +12,8 @@ import { Box } from '@mui/system';
 const style = {
     color: '#0b2748', 
     backgroundColor: 'white', 
-    position:'absolute', 
-    // bottom: '0', 
+    position:'relative', 
+    bottom: '0', 
     right: '0', 
     left: '0',
 }
