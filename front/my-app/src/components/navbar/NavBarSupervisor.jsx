@@ -64,8 +64,8 @@ const NavBarSupervisor = ({ name }) => {
         .then( res => res.json())
         .catch( err => console.log('Error en logout:', err))
         window.sessionStorage.removeItem("jwt")
-        
-        return navigate('/')
+        navigate("/login");
+        window.location.reload();
     }
     
     React.useEffect(() => {
