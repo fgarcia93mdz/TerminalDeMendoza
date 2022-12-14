@@ -1,4 +1,11 @@
 /*  == PLATFORM CONTROLLER == */
+
+
+//NO CONFUNDIR CON PLATAFORMAS.JS
+//NO CONFUNDIR CON PLATAFORMAS.JS
+//NO CONFUNDIR CON PLATAFORMAS.JS
+//NO CONFUNDIR CON PLATAFORMAS.JS
+
 const path = require("path");
 const fs = require("fs");
 const { Op } = require("sequelize");
