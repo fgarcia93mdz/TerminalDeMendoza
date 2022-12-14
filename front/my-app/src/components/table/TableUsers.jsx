@@ -16,7 +16,7 @@ const day = `Informe de ingresos_${new Date().toJSON().slice(0, 10)}`;
 
 export default function TableUsers({ data }) {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{borderRadius: '30px'}}>
       <Box px={4}>
         <Table
           sx={{ minWidth: 650 }}
@@ -59,7 +59,7 @@ export default function TableUsers({ data }) {
       </Box>
         <br />
         <br />
-        <div>
+        <Box pl={3}>
           <ReactHTMLTableToExcel
             id="test-table-xls-button"
             className="download-table-xls-button"
@@ -68,7 +68,7 @@ export default function TableUsers({ data }) {
             sheet="Usuarios"
             buttonText="Descargar Excel"
           />
-      </div>
+      </Box>
       <br />
     </TableContainer>
   );

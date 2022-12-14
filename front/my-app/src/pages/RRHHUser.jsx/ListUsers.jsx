@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import TableUsers from '../../components/table/TableUsers';
 
 import axios from 'axios'
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const ListUsers = () => {
     const token = sessionStorage.getItem('jwt')
@@ -26,10 +26,10 @@ const ListUsers = () => {
     
 
     return (
-        <>
+        <Box px={3} pb={4} sx={{ background:'#0b2748'}}>
             <Typography variant='h4' style={style}>Listado de usuarios</Typography>
             <TableUsers data={users} />
-        </>
+        </Box>
     )
 }
 

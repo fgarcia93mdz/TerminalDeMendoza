@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ArrivalsBoard from "./pages/board-tv/ArrivalsBoard";
 import DeparturesBoard from "./pages/board-tv/DeparturesBoard";
@@ -68,7 +68,7 @@ const AppWebRouter = () => {
           exact
           path="/ingreso"
           element={
-            <Protected isLoggedIn={isLoggedIn}>
+            <Protected isLoggedIn={isLoggedIn} >
               <Ingreso />
             </Protected>
           }
@@ -95,7 +95,7 @@ const AppWebRouter = () => {
           path="/perfil/password"
           element={
             // <Protected isLoggedIn={isLoggedIn}>
-            <WritePassword />
+              <WritePassword />
             // </Protected>
           }
         />

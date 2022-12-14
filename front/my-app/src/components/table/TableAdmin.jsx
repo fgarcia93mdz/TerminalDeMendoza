@@ -21,7 +21,7 @@ export default function TableAdmin({ data, edit = false }) {
   console.log('data table admin:', data)
 
   return (
-    <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
+    <TableContainer component={Paper} sx={{ width: "98%", margin: "auto", borderRadius: '30px' }}>
       <Box px={2}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table" id="informes">
           <TableHead>
@@ -77,7 +77,7 @@ export default function TableAdmin({ data, edit = false }) {
       </Box>
       <br />
       <br />
-      <div>
+      <Box pl={3} >
         <ReactHTMLTableToExcel
           id="test-table-xls-button"
           className="download-table-xls-button"
@@ -86,7 +86,7 @@ export default function TableAdmin({ data, edit = false }) {
           sheet="ingresos"
           buttonText="Descargar Reporte"
         />
-      </div>
+      </Box>
       <br />
     </TableContainer>
   );
