@@ -76,7 +76,7 @@ const AppWebRouter = () => {
           
           <Route 
             exact 
-            path="/admin/ingresos" 
+            path="/admin/registro" 
             element={
               // <Protected isLoggedIn={isLoggedIn}>
                 <AdminTable />
