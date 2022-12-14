@@ -110,7 +110,7 @@ const getDataDropdown = async (req, res) => {
 const informesListadoSeparadosPorEstado = async (req, res) => {
   try {
     let diaHoy = moment().add(-1, "days");
-    let diaAyer = diaHoy 
+    let diaAyer = diaHoy;
     let hora = diaHoy.format("HH:mm");
     let ingresos = await RegistroTorre.findAll({
       include: [
@@ -128,7 +128,6 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
       },
     });
 
-  
     const respuesta = {
       fueraDePlataforma: [],
       enPlataforma: [],
@@ -215,6 +214,68 @@ const informesListado = async (req, res) => {
         horario_salida: ingreso.hora_salida,
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
+      });
+    });
+
+    return res.status(200).json({
+      respuesta,
+      hora,
+    });
+  } catch (error) {
+    return res.status(400).json({ mensaje: error });
+  }
+};
+
+const informesListadoPorRangoDeFechas = async (req, res) => {
+  try {
+    let { fechaDesde, fechaHasta } = req.query;
+    let diaHoy = moment();
+    let hora = diaHoy.format("HH:mm");
+
+    if (
+      fechaDesde.match(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/) ===
+        null ||
+      fechaHasta.match(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/) ===
+        null
+    ) {
+      return res.status(400).json({ mensaje: "Error de fechas" });
+    }
+
+    fechaDesde = new Date(fechaDesde);
+    fechaHasta = new Date(fechaHasta);
+
+    let ingresos = await RegistroTorre.findAll({
+      include: [
+        "registro_empresa",
+        "registro_plataforma",
+        "registro_estado",
+        "registro_tipo_tv",
+        "registro_servicio",
+      ],
+      where: {
+        fecha_ingreso: {
+          [Op.lte]: fechaHasta,
+          [Op.gte]: fechaDesde,
+        },
+      },
+      order: [["hora_salida", "DESC"]],
+    });
+
+    const respuesta = [];
+
+    ingresos.forEach((ingreso) => {
+      respuesta.push({
+        id: ingreso.id,
+        fecha_ingreso: ingreso.fecha_ingreso,
+        hora_ingreso: ingreso.hora_ingreso,
+        destino: ingreso.destino,
+        interno: ingreso.interno,
+        empresa: ingreso.registro_empresa?.dataValues?.empresa,
+        fecha_saldia: ingreso.hora_salida,
+        hora_salida: ingreso.hora_salida,
+        plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
+        estado: ingreso.registro_estado?.dataValues?.tipo,
+        servicio: ingreso.registro_servicio?.dataValues?.siglas,
       });
     });
 
@@ -323,7 +384,7 @@ const modificarInforme = async (req, res) => {
       // console.log(modificacion);
       return res.status(200).json({ mensaje: "Modificacion exitosa" });
     } else {
-      return res.status(400).json({mensaje: "Informe no encontrado"});
+      return res.status(400).json({ mensaje: "Informe no encontrado" });
     }
   } catch (error) {
     return res.status(400).json({ mensaje: "Consulte administrador" });
@@ -337,4 +398,5 @@ module.exports = {
   addInforme,
   getDataDropdown,
   informesListadoSeparadosPorEstado,
+  informesListadoPorRangoDeFechas,
 };

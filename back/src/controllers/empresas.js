@@ -98,7 +98,7 @@ const addNewEmpresa = async (req, res) => {
   }
 
   try {
-    Empresa.create({
+    await Empresa.create({
       empresa: req.body.empresa,
       siglas: req.body.siglas,
       img: req.body.img,

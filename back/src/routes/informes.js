@@ -7,6 +7,7 @@ const {
   addInforme,
   getDataDropdown,
   informesListadoSeparadosPorEstado,
+  informesListadoPorRangoDeFechas,
 } = require("../controllers/informes");
 const { authenticateToken } = require("../middlewares/authenticateToken.js");
 const verifyRoles = require("../middlewares/verifyRoles");
@@ -56,6 +57,12 @@ router.get(
 //falta agregar middleware de roles
 //GET localhost:8080/informes/listado
 //authorization Bearer token...
+
+router.get("/listadoFechas",informesListadoPorRangoDeFechas);
+//GET localhost:8080/informes/listadoFechas
+//QUERY PARAMETERS
+//fechaDesde 2022-12-12
+//fechaHasta 2022-12-15
 
 router.get(
   "/listadoSeparado",
