@@ -41,6 +41,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const plataformasRouter = require('./routes/plataformas');
 
 // Home 
 const homeRouter = require('./routes/index');
@@ -65,6 +66,7 @@ app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/informes', informesRouter);
 app.use('/empresas', empresasRouter);
+app.use('/plataformas', plataformasRouter);
 
 
 // Catch 404 and forward to error handler
