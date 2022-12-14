@@ -31,6 +31,7 @@ router.post("/nueva", authenticateToken, addNewPlataforma);
 //authorization Bearer token...
 
 router.patch("/:id", authenticateToken, updatePlataforma);
+//PATCH localhost:8080/plataformas/4
 //JSON
 //{
 //   "plataforma" : "plataforma",

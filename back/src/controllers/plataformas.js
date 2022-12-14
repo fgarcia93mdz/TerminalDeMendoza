@@ -66,6 +66,11 @@ const addNewPlataforma = async (req, res) => {
 const updatePlataforma = async (req, res) => {
   let plataformaId = req.params.id;
   try {
+    const { plataforma, serviciosId } = req.body;
+    if (!plataforma || !serviciosId) {
+      return res.status(400).json({ mensaje: "faltan datos" });
+    }
+
     const plataformaEncontrada = await Plataforma.findOne({
       where: {
         borrado: {
@@ -80,8 +85,6 @@ const updatePlataforma = async (req, res) => {
     }
 
     const dataACambiar = {};
-
-    const { plataforma, serviciosId } = req.body;
 
     if (plataforma != null) dataACambiar.plataforma = plataforma;
     if (serviciosId != null) dataACambiar.servicios_id = serviciosId;
@@ -110,6 +113,19 @@ const deletePlataforma = async (req, res) => {
   let plataformaId = req.params.id;
 
   try {
+    const plataformaEncontrada = await Plataforma.findOne({
+      where: {
+        borrado: {
+          [Op.eq]: "0",
+        },
+        id: plataformaId,
+      },
+    });
+
+    if (plataformaEncontrada == null) {
+      return res.status(400).json({ mensaje: "plataforma no encontrada" });
+    }
+
     const resultado = await Plataforma.update(
       { borrado: "1" },
       {
@@ -120,9 +136,9 @@ const deletePlataforma = async (req, res) => {
     );
 
     if (resultado[0] === 0) {
-        return res.status(400).json({
-          mensaje: "no se pudo borrar",
-        });
+      return res.status(400).json({
+        mensaje: "no se pudo borrar",
+      });
     }
 
     return res.status(200).json({
