@@ -7,9 +7,11 @@ import { Box, Typography } from '@mui/material';
 const ListUsers = () => {
     const token = sessionStorage.getItem('jwt')
     const [ users, setUsers ] = useState([])
-
+    
+    const config = { headers: {"authorization": `Bearer ${token}` }}
+    
     useEffect(() => {
-        axios.get('http://localhost:8080/users', { headers: {"authorization": `Bearer ${token}` }} )
+        axios.get('http://localhost:8080/users', config )
         .then(data => {
             console.log(data.data.usuarios)
             setUsers(data.data.usuarios)})

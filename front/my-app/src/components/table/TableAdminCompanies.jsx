@@ -11,12 +11,12 @@ import { Link } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ReactHTMLTableToExcel from "@goodev/react-html-table-to-excel";
 
+import image from '../../assets/img/empresas/chevallier-1.png'
 
-
-export default function TableAdmin({ data }) {   
+export default function TableAdminCompanies({ data }) {   
   // edit. if edit is true so the table will have a column with edit button
 
-  const day = `Registro de ingresantes en informes_${new Date().toJSON().slice(0, 10)}`;
+  const day = `Registro de Listado de Empresas ${new Date().toJSON().slice(0, 10)}`;
 
   console.log('data table admin:', data)
 
@@ -26,48 +26,40 @@ export default function TableAdmin({ data }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table" id="informes">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Fecha de ingreso</TableCell>
-              <TableCell align="center">
-                Horario <br></br> de ingreso
-              </TableCell>
-              <TableCell align="center">Destino/Origen/Servicio</TableCell>
-              <TableCell align="center">Interno</TableCell>
-              <TableCell align="center">Empresa</TableCell>
-              <TableCell align="center">Fecha Salida</TableCell>
-              <TableCell align="center">
-                Horario <br></br>Salida
-              </TableCell>
-              <TableCell align="center">Plat</TableCell>
-              <TableCell align="center">Estado</TableCell>
-              <TableCell align="center">TV</TableCell>
+              <TableCell align="left">ID</TableCell>
+              <TableCell align="center">Nombre</TableCell>
+              <TableCell align="center">Siglas</TableCell>
+              <TableCell align="center">Imagen</TableCell>
+              <TableCell align="center">CUIT</TableCell>
               <TableCell align="right">Editar</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.length > 0 &&
-              data.reverse().map((row) => (
+              data.map((row) => 
+                
+              (
                 <TableRow
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                <TableCell align="left">{row.fecha_ingreso}</TableCell>
-                <TableCell align="center">{row.horario_ingreso}</TableCell>
-                <TableCell component="th" scope="row" align="center">
-                {row.destino}{" "}
-                </TableCell>
-                <TableCell align="center">{row.interno}</TableCell>
-                <TableCell align="center">{row.empresa}</TableCell>
-                <TableCell align="center"> {row.fecha_salida} </TableCell>
-                <TableCell align="center"> {row.horario_salida} </TableCell>
-                <TableCell align="center">{row.plataforma}</TableCell>
-                <TableCell align="center">{row.estado}</TableCell>
-                <TableCell align="center">{row.tipo_tv}</TableCell>
-                <TableCell align="right">
-                    <Link to={`/informes/editar/ingreso/${row.id}`}>
-                    {" "}
-                    <SettingsIcon />{" "}
-                    </Link>
-                </TableCell>
+                    <TableCell align="left">{row.id}</TableCell>
+                    <TableCell align="center">{row.empresa}</TableCell>
+                    <TableCell component="th" scope="row" align="center">{row.siglas}</TableCell>
+                    <TableCell align="center">
+                        {/* {row.img !== undefined && <Box 
+                            component="img" 
+                            src={require(`../../assets/img/empresas/${row.img}`)}
+                            sx={{ width: '150px', height: '100px' }} />} */}
+                            {row.img}
+                    </TableCell>
+                    <TableCell align="center">{row.cuit}</TableCell>
+                    <TableCell align="right">
+                        <Link to={`/empresas/editar/${row.id}`}>
+                        {" "}
+                        <SettingsIcon />{" "}
+                        </Link>
+                    </TableCell>
                 </TableRow>
               ))}
           </TableBody>
@@ -81,8 +73,8 @@ export default function TableAdmin({ data }) {
           className="download-table-xls-button"
           table="informes"
           filename={day}
-          sheet="ingresos"
-          buttonText="Descargar Reporte"
+          sheet="Listado Empresas"
+          buttonText="Descargar Listado Empresas"
         />
       </Box>
       <br />
