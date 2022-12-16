@@ -22,6 +22,7 @@ import WritePassword from "./components/forms/FormChangePassword";
 import InformsEditTicket from "./pages/informsUser/InformsEditTicketEntry";
 import InformsEditTicketOnPlatform from "./pages/informsUser/InformsEditTicketOnPlatform";
 import AdminTable from "./pages/adminUser/AdminTable";
+import AdminCompaniesList from "./pages/adminUser/AdminCompaniesList";
 
 const AppWebRouter = () => {
   // aca voy a crear que segun el tipo de usuario que se renderice diferentes navbars
@@ -336,13 +337,19 @@ const AppWebRouter = () => {
           exact
           path="/usuarios/editar/:id"
           element={
-              <Protected isLoggedIn={isLoggedIn}>
-                
             <Protected isLoggedIn={isLoggedIn}>
               <FormEditUser />
-              </Protected>          
-          
-            </Protected>
+            </Protected>          
+          }
+        />
+
+        <Route
+          exact
+          path="/empresas"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <AdminCompaniesList />
+            </Protected>          
           }
         />
 

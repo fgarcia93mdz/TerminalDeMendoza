@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
+import NavBarAdmin from './NavBarAdmin';
 
 // import NavBarPublic from './NavBarPublic'
 // import NavBarSecurity from './NavBarSecurity'
@@ -27,6 +28,7 @@ const NavBarContainer = () => {
             const tokenDecoded = jwt_decode(token);
             setRol(tokenDecoded.rol)
             setName(tokenDecoded.nombre)
+            console.log('token decoded', tokenDecoded)
         } else if (token === null){
             return null
         }
@@ -41,7 +43,9 @@ const NavBarContainer = () => {
         <>
         {(() => {
             switch (rol) {
-
+              // RRHH
+              case 1 : 
+                return <NavBarAdmin name={name} />
               // RRHH
               case 2 : 
                 return <NavBarRRHH name={name} />
