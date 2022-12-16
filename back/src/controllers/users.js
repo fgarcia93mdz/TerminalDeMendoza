@@ -174,13 +174,20 @@ const deleteUser = async (req, res) => {
 
 const getDataInfoToCreateNewUser = async (req, res) => {
   try {
-    const roles = await Rol.findAll();
+    const roles = await Rol.findAll({
+      where: {
+        borrado: {
+          [Op.eq]: "0",
+        }
+      },
+  });
     let rolesDisponibles = [];
     for (let rol of roles) {
       if (rol.id !== 1) {
         rolesDisponibles.push(rol);
       }
     }
+    return res.status(200).json({ rolesDisponibles });
   } catch (error) {
     return res.status(400).json({ mensaje: "error al obtener info de roles" });
   }

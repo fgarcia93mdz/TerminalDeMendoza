@@ -84,9 +84,21 @@ const getDataDropdown = async (req, res) => {
   try {
     const { rol } = req.usuario;
 
-    const empresas = await Empresa.findAll();
+    const empresas = await Empresa.findAll({
+      where: {
+        borrado: {
+          [Op.eq]: "0",
+        },
+      },
+    });
     const tipo_tv = await Tipo_tv.findAll();
-    const servicios = await Servicio.findAll();
+    const servicios = await Servicio.findAll({
+      where: {
+        borrado: {
+          [Op.eq]: "0",
+        },
+      },
+    });
     let estados = await Estado.findAll();
 
     if (rol === 4) {
@@ -196,11 +208,6 @@ const informesListado = async (req, res) => {
       order: [["hora_salida", "DESC"]],
     });
 
-    // where: {
-    //   fecha_ingreso: {
-    //     [Op.gt]: diaAyer,
-    //   },
-    // },
     const respuesta = [];
 
     console.log("ingresos controller:", ingresos);
