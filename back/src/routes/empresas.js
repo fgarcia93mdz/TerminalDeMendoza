@@ -33,6 +33,7 @@ router.post("/nueva", authenticateToken, addNewEmpresa);
 //authorization Bearer token...
 
 router.patch("/:id", authenticateToken, updateEmpresa);
+//PATCH localhost:8080/empresas/:id
 // {
 //   "empresa": "Rutamar2",
 //   "siglas": "RTM2",

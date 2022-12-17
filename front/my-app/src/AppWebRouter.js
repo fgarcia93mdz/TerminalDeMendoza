@@ -23,6 +23,7 @@ import InformsEditTicket from "./pages/informsUser/InformsEditTicketEntry";
 import InformsEditTicketOnPlatform from "./pages/informsUser/InformsEditTicketOnPlatform";
 import AdminTable from "./pages/adminUser/AdminTable";
 import AdminCompaniesList from "./pages/adminUser/AdminCompaniesList";
+import AdminCompaniesEdit from "./pages/adminUser/AdminCompaniesEdit";
 
 const AppWebRouter = () => {
   // aca voy a crear que segun el tipo de usuario que se renderice diferentes navbars
@@ -33,6 +34,7 @@ const AppWebRouter = () => {
   //   const [ tokenState, setTokenState ] = useState(null);
 
   const token = window.sessionStorage.getItem("jwt");
+  console.log('token', token)
 
   React.useEffect(() => {
     // if (token.length > 0) { setTokenState(token) }
@@ -349,6 +351,15 @@ const AppWebRouter = () => {
           element={
             <Protected isLoggedIn={isLoggedIn}>
               <AdminCompaniesList />
+            </Protected>          
+          }
+        />
+
+        <Route
+          path="/empresas/editar/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <AdminCompaniesEdit /> 
             </Protected>          
           }
         />

@@ -39,7 +39,7 @@ const updateEmpresa = async (req, res) => {
     });
 
     if (empresaEncontrada == null) {
-      return res.status(400).json({ mensaje: "empresa no encontrada" });
+      return res.status(400).json({ mensaje: "Empresa no encontrada" });
     }
 
     const dataACambiar = {};
@@ -54,7 +54,7 @@ const updateEmpresa = async (req, res) => {
     if (Object.keys(dataACambiar).length === 0) {
       return res
         .status(400)
-        .json({ mensaje: "se require al menos un dato a modificar" });
+        .json({ mensaje: "Se require al menos un dato a modificar" });
     }
 
     await Empresa.update(dataACambiar, {
@@ -64,7 +64,7 @@ const updateEmpresa = async (req, res) => {
     });
 
     return res.status(200).json({
-      mensaje: "empresa modificada"
+      mensaje: "Empresa modificada"
     });
   } catch (error) {
     return res.status(400).json({ mensaje: error });

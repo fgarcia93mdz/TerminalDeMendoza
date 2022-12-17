@@ -28,9 +28,10 @@ const NavBarContainer = () => {
             const tokenDecoded = jwt_decode(token);
             setRol(tokenDecoded.rol)
             setName(tokenDecoded.nombre)
-            console.log('token decoded', tokenDecoded)
+            // console.log('token decoded', tokenDecoded)
         } else if (token === null){
-            return null
+            setRol(null)
+            setName(null)
         }
 
         return () => {
