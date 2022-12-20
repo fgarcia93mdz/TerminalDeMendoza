@@ -34,8 +34,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.resolve('src/views'));
 app.use(methodOverride('_method'));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
@@ -56,7 +58,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, `../empresas_img/`)));
 
 
 // Routes
@@ -77,16 +79,20 @@ app.use(function(req, res, next) {
 });
 
 // Error handler
-app.use(function(err, req, res, next) {
-  // Set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// app.use(function(err, req, res, next) {
+//   // Set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // Render the error page
-  res.status(err.status || 500);
-  res.render('error');
+//   // Render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
+
+app.use(function (err, req, res, next) {
+  // logic
+  return res.status(500).json({error: err});
 });
-
 
 app.listen(8080, () => {
   console.log('API Routes Availables')
