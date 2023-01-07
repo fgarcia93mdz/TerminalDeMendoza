@@ -18,7 +18,7 @@ const validationSchema = yup.object({
     cuit: yup.string().required('Campo requerido'),
   });
 
-const FormCompanyEdit = ({ company }) => { 
+const FormCompany = ({ company }) => { 
     const [ openModal, setOpenModal ] = useState(false)
     const [ dataDropdown, setDataDropdown ] = useState({})
     // const navigate = useNavigate()
@@ -287,4 +287,4 @@ const FormCompanyEdit = ({ company }) => {
 
 }
 
-export default FormCompanyEdit
+export default FormCompany

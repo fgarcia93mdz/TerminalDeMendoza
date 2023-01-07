@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import FormCompanyEdit from '../../components/forms/FormCompanyEdit'
+import FormCompany from '../../components/forms/FormCompany'
 
 const AdminCompaniesEdit = () => {
     const [ company, setCompany ] = React.useState(null)
@@ -28,7 +28,7 @@ const AdminCompaniesEdit = () => {
     }, [])
 
     return (
-        <FormCompanyEdit company={company} />
+        <FormCompany company={company} />
     )
 }
 
