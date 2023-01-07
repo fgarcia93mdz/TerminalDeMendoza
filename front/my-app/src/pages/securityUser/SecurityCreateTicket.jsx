@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 // import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
@@ -11,6 +11,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 const FormTicket = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dataDropdown, setDataDropdown] = useState({});
+  const [ company, setCompany ] = useState("");
   // const navigate = useNavigate()
   const token = sessionStorage.getItem("jwt");
   const config = { headers: { authorization: `Bearer ${token}` } };
@@ -27,12 +28,13 @@ const FormTicket = () => {
     dateNow.getUTCDate().toString().length < 2 // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
       ? `0${dateNow.getUTCDate()}`
       : dateNow.getUTCDate();
+      
   
   // HORA ACTUAL
   const hours = dateNow.getHours()
   const minutes = dateNow.getMinutes();
   const minutess = (`${minutes}` < 10) ? "0" + `${minutes}` : `${minutes}`;
- 
+
   
   const initialTicket = {
     fecha_ingreso: `${year}-${month}-${date}`, // '01-01-2022'
@@ -240,18 +242,58 @@ const FormTicket = () => {
             alignItems="center"
             gap={2}
             xs={12}
-            md={6}
+            sm={6}
             my={2}
+            
           >
             <Typography
               variant="subtitle1"
               color="white"
               mb={{ xs: 1, sm: 0 }}
-              display={{ xs: "none", sm: "block" }}
+              // display={{ xs: "none", sm: "block" }}
             >
               Empresa:
             </Typography>
-            <TextField
+            {/* {console.log('dataDropdown.empresas', dataDropdown.empresas)} */}
+            
+            {dataDropdown.empresas && 
+              <Autocomplete fullWidth
+                          options={dataDropdown.empresas}
+                          autoHighlight
+                          sx={{
+                            ".MuiOutlinedInput-notchedOutline": {
+                              borderColor: "white",
+                            },
+                            ".MuiInputBase-root": {
+                              color: "white",
+                            },
+                            "& .MuiSvgIcon-root": {
+                              color: "white",
+                            },
+                            ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                              color: "white",
+                            },
+                        
+                          }}
+                          onChange={(event, newValue) => {
+                            // console.log('event:', event, 'newValue:', newValue)
+                            formik.setFieldValue('empresa_id', newValue.id)
+                          }}
+                          getOptionLabel={(option) => option.empresa}
+                          renderInput={(params) => 
+                            <TextField 
+                              error={formik.errors.empresa_id}
+
+                              {...params} 
+                              label='Busque una empresa' 
+                              style={{
+                                color: 'white',
+                              }}
+                            />}
+              />
+            }
+           
+            {/* <TextField
               select
               label="Seleccione Empresa"
               sx={{
@@ -286,7 +328,7 @@ const FormTicket = () => {
                   {empresa.empresa}{" "}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
           </Grid>
           <Grid
             item
@@ -300,7 +342,6 @@ const FormTicket = () => {
             <Typography
               variant="subtitle1"
               color="white"
-              display={{ xs: "none", sm: "block" }}
             >
               Tipo de servicio:
             </Typography>
@@ -352,7 +393,6 @@ const FormTicket = () => {
             <Typography
               variant="subtitle1"
               color="white"
-              display={{ xs: "none", sm: "block" }}
             >
               Estado:
             </Typography>
@@ -400,7 +440,7 @@ const FormTicket = () => {
             <Typography
               variant="subtitle1"
               color="white"
-              display={{ xs: "none", sm: "block" }}
+              sx={{ marginBottom:'3px' }}
             >
               Destino / Origen / Servicio:
             </Typography>
@@ -415,7 +455,7 @@ const FormTicket = () => {
               }}
               InputLabelProps={{
                 style: { color: "#fff" },
-                textTransform: "uppercase",
+                texttransform: "uppercase",
               }}
               label="Inserte destino / origen / servicio"
               name="destino"
