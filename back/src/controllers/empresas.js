@@ -1,6 +1,9 @@
 const db = require("../database/models");
 const Empresa = db.Empresa;
 const { Op } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
+const { empresa } = require("./inicio");
 
 const getEmpresa = async (req, res) => {
   let empresaId = req.params.id;
@@ -16,6 +19,10 @@ const getEmpresa = async (req, res) => {
 
     if (empresa == null) {
       return res.status(400).json({ mensaje: "empresa no encontrada" });
+    }
+
+    if (empresa.img !== null) {
+      empresa.img = req.protocol + "://" + req.get("host") + "/" + empresa.img;
     }
 
     return res.status(200).json({
@@ -44,12 +51,12 @@ const updateEmpresa = async (req, res) => {
 
     const dataACambiar = {};
 
-    const { empresa, siglas, img, cuit } = req.body;
-
-    if (empresa != null) dataACambiar.empresa = empresa;
-    if (siglas != null) dataACambiar.siglas = siglas;
-    if (img != undefined) dataACambiar.img = img;
-    if (cuit != null) dataACambiar.cuit = cuit;
+    const { empresa, siglas, cuit } = req.body;
+    if (empresa != null && empresa != '') dataACambiar.empresa = empresa;
+    if (siglas != null && siglas != "") dataACambiar.siglas = siglas;
+    if (req.file?.filename != undefined && req.file?.filename != "")
+      dataACambiar.img = req.file?.filename;
+    if (cuit != null && cuit != "") dataACambiar.cuit = cuit;
 
     if (Object.keys(dataACambiar).length === 0) {
       return res
@@ -62,9 +69,16 @@ const updateEmpresa = async (req, res) => {
         id: empresaId,
       },
     });
+    
+    if (req.file?.filename != undefined) {
+      fs.unlinkSync(
+        path.join(__dirname, `../../empresas_img/${empresaEncontrada.img}`)
+      );
+    }
+      
 
     return res.status(200).json({
-      mensaje: "Empresa modificada"
+      mensaje: "Empresa modificada",
     });
   } catch (error) {
     return res.status(400).json({ mensaje: error });
@@ -80,7 +94,13 @@ const getAllEmpresas = async (req, res) => {
         },
       },
     });
-    console.log(empresas);
+    // console.log(empresas);
+    empresas.forEach(empresa => {
+      if (empresa.img !== null) {
+        empresa.img =
+          req.protocol + "://" + req.get("host") + "/" + empresa.img;
+      }
+    });
     return res.status(200).json({
       empresas,
     });
@@ -90,20 +110,27 @@ const getAllEmpresas = async (req, res) => {
 };
 
 const addNewEmpresa = async (req, res) => {
-  //console.log(req.body);
 
-  const { empresa, siglas, img, cuit } = req.body;
-  if (!empresa || !siglas || !img || !cuit) {
+  const { empresa, siglas, cuit } = req.body;
+  if (!empresa || !siglas || !cuit) {
     return res.status(400).json({ mensaje: "faltan datos" });
+  }
+  let img = null;
+
+  if (req.file?.filename !== undefined) {
+    img = req.file?.filename;
   }
 
   try {
     await Empresa.create({
       empresa: req.body.empresa,
       siglas: req.body.siglas,
-      img: req.body.img,
+      img,
       cuit: req.body.cuit,
     });
+
+ 
+
     return res.status(200).json({
       mensaje: "empresa creada correctamente",
     });
@@ -124,6 +151,7 @@ const deleteEmpresa = async (req, res) => {
         },
       }
     );
+
     return res.status(200).json({
       mensaje: "empresa borrada",
     });
