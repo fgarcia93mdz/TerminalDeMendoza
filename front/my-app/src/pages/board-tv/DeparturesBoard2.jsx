@@ -36,7 +36,8 @@ const DeparturesBoard = () => {
   }, []);
 
   return (
-      <Box className="containerBoard" sx={{writingMode: 'sideways-lr'}}>
+      <Box className="containerBoard" sx={{textOrientation: 'sideways-right',
+        writingMode: 'tb-rl'}}>
         <div className="div_reloj">
           {/* ACA VA ARRIBOS O PARTIDAS EN ESPANOL O INGLES, SOLO PARA LOS TELEVISORES ME PIDIO MI VIEJO */}
           <Typography
