@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Stack } from "@mui/system";
 import axios from "axios";
 import GenericTable from "../../components/table/TableDepartures";
@@ -36,8 +36,7 @@ const DeparturesBoard = () => {
   }, []);
 
   return (
-    <>
-      <div className="containerBoard">
+      <Box className="containerBoard" sx={{writingMode: 'sideways-lr'}}>
         <div className="div_reloj">
           {/* ACA VA ARRIBOS O PARTIDAS EN ESPANOL O INGLES, SOLO PARA LOS TELEVISORES ME PIDIO MI VIEJO */}
           <Typography
@@ -65,8 +64,7 @@ const DeparturesBoard = () => {
           )}
           {partidas.length > 0 && <GenericTable props={partidas} />}
         </div>
-      </div>
-    </>
+      </Box>
   );
 };
 

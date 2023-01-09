@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Stack } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -42,8 +42,8 @@ const ArrivalsBoard = () => {
   }, []);
 
   return (
-    <>
-      <div className="containerBoard">
+   
+      <Box className="containerBoard" sx={{writingMode: 'sideways-lr'}}>
         {/* ACA VA ARRIBOS O PARTIDAS EN ESPANOL O INGLES, SOLO PARA LOS TELEVISORES ME PIDIO MI VIEJO */}
         <div className="div_reloj">
           <Typography
@@ -70,8 +70,8 @@ const ArrivalsBoard = () => {
           )}
           {arribos.length > 0 && <GenericTable props={arribos} />}
         </div>
-      </div>
-    </>
+      </Box>
+    
   );
 };
 

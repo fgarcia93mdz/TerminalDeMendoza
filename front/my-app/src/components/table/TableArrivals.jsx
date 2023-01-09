@@ -141,7 +141,7 @@ export default function GenericTable({ props }) {
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.registro_empresa.img != null && (
+                  {/* {row.registro_empresa.img != null && (
                     <div className="box" style={styles.cajaFoto}>
                       <img
                         src={require("../../assets/img/empresas/" +
@@ -149,7 +149,7 @@ export default function GenericTable({ props }) {
                         alt=""
                       />
                     </div>
-                  )}
+                  )} */}
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <Typography fontSize={{ xs: "10px", sm: "15px", md: "20px" }}>
