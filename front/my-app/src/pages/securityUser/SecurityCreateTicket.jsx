@@ -11,7 +11,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 const FormTicket = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dataDropdown, setDataDropdown] = useState({});
-  const [ company, setCompany ] = useState("");
   // const navigate = useNavigate()
   const token = sessionStorage.getItem("jwt");
   const config = { headers: { authorization: `Bearer ${token}` } };
@@ -50,7 +49,7 @@ const FormTicket = () => {
   const validationSchema = yup.object({
     fecha_ingreso: yup.string().required("Campo requerido"),
     hora_ingreso: yup.string().required("Campo requerido"),
-    interno: yup.number().notRequired(),
+    interno: yup.number().required("Campo requerido"),
     empresa_id: yup.number().required("Campo requerido"),
     servicios_id: yup.number().required("Campo requerido"),
     estado_id: yup.string().required("Campo requerido"),
@@ -68,6 +67,7 @@ const FormTicket = () => {
   }, [token]);
 
   const formik = useFormik({
+    validateOnChange: true,
     initialValues: initialTicket,
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -109,7 +109,7 @@ const FormTicket = () => {
             gap={2}
             xs={12}
             sm={12}
-            my={2}
+            my={2}                 
           >
             <Typography variant="subtitle1" color="white" mb={{ xs: 1, sm: 0 }}>
               Interno:
@@ -131,7 +131,7 @@ const FormTicket = () => {
               onChange={formik.handleChange}
               // error={formik.errors.interno?.length > 0}
               error={formik.errors.interno}
-              helperText={formik.errors?.interno}
+              helperText={formik.errors.interno ? 'Campo requerido': null}
             />
           </Grid>
           <Grid
@@ -238,12 +238,13 @@ const FormTicket = () => {
 
           <Grid
             item
-            display={{ xs: "block", md: "flex" }}
+            // display={{ xs: "block", md: "flex" }}
             alignItems="center"
             gap={2}
             xs={12}
             sm={6}
             my={2}
+            pr={{xs:0,md:8}}
             
           >
             <Typography
@@ -251,6 +252,7 @@ const FormTicket = () => {
               color="white"
               mb={{ xs: 1, sm: 0 }}
               // display={{ xs: "none", sm: "block" }}
+              style={{marginBottom:'3px'}}
             >
               Empresa:
             </Typography>
@@ -273,6 +275,9 @@ const FormTicket = () => {
                             ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
                               color: "white",
                             },
+                            "input:hover": {
+                              background:'transparent'
+                            }
                         
                           }}
                           onChange={(event, newValue) => {
@@ -287,65 +292,38 @@ const FormTicket = () => {
                               {...params} 
                               label='Busque una empresa' 
                               style={{
-                                color: 'white',
+                                color: "#f5f5f0",
+                              }}
+                              sx={{
+                                ".css-1sumxir-MuiFormLabel-root-MuiInputLabel-root": {
+                                  color: "#f5f5f0",
+                                },
                               }}
                             />}
               />
             }
            
-            {/* <TextField
-              select
-              label="Seleccione Empresa"
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                "& .MuiSvgIcon-root": {
-                  color: "white",
-                },
-                minWidth: "200px",
-              }}
-              InputLabelProps={{
-                style: { color: "#fff" },
-              }}
-              name="empresa_id"
-              value={formik.values.empresa_id}
-              onChange={formik.handleChange}
-              // error={formik.errors.length > 0}
-              error={formik.errors?.empresa_id}
-              helperText={formik.errors?.empresa_id}
-            >
-              {dataDropdown.empresas?.map((empresa) => (
-                <MenuItem
-                  value={empresa.id}
-                  key={empresa.empresa}
-                  selected={true}
-                >
-                  {" "}
-                  {empresa.empresa}{" "}
-                </MenuItem>
-              ))}
-            </TextField> */}
+          
           </Grid>
           <Grid
             item
-            display={{ xs: "block", md: "flex" }}
+            // display={{ xs: "block", md: "flex" }}
             alignItems="center"
             gap={2}
             xs={12}
             md={6}
             my={2}
+            pr={{xs:0,md:2}}
           >
             <Typography
               variant="subtitle1"
+              style={{marginBottom:'3px'}}
               color="white"
             >
               Tipo de servicio:
             </Typography>
             <TextField
+              fullWidth
               select
               label="Seleccione tipo de servicio"
               sx={{
@@ -358,7 +336,8 @@ const FormTicket = () => {
                 "& .MuiSvgIcon-root": {
                   color: "white",
                 },
-                minWidth: "260px",
+
+                // minWidth: "260px",
               }}
               InputLabelProps={{
                 style: { color: "#fff" },
@@ -383,21 +362,23 @@ const FormTicket = () => {
           </Grid>
           <Grid
             item
-            display={{ xs: "block", md: "flex" }}
             alignItems="center"
             gap={2}
             xs={12}
+            pr={{xs:0,md:8}}
             sm={6}
             my={2}
           >
             <Typography
               variant="subtitle1"
+              style={{ marginBottom:'3px' }}
               color="white"
             >
               Estado:
             </Typography>
             <TextField
               select
+              fullWidth
               label="Seleccione estado"
               InputLabelProps={{
                 style: { color: "#fff" },
@@ -412,7 +393,7 @@ const FormTicket = () => {
                 "& .MuiSvgIcon-root": {
                   color: "white",
                 },
-                minWidth: "250px",
+                // minWidth: "250px",
               }}
               name="estado_id"
               value={formik.values.estado_id}
@@ -430,21 +411,23 @@ const FormTicket = () => {
           </Grid>
           <Grid
             item
-            display={{ xs: "block", md: "flex" }}
+            // display={{ xs: "block", md: "flex" }}
             alignItems="center"
             gap={2}
             xs={12}
             md={6}
+            pr={{xs:0,md:2}}
             my={2}
           >
             <Typography
               variant="subtitle1"
               color="white"
-              sx={{ marginBottom:'3px' }}
+              style={{ marginBottom:'3px' }}
             >
               Destino / Origen / Servicio:
             </Typography>
             <TextField
+              fullWidth
               sx={{
                 ".MuiOutlinedInput-notchedOutline": {
                   borderColor: "white",
@@ -452,6 +435,7 @@ const FormTicket = () => {
                 ".MuiInputBase-root": {
                   color: "white",
                 },
+                
               }}
               InputLabelProps={{
                 style: { color: "#fff" },
@@ -469,11 +453,6 @@ const FormTicket = () => {
 
           <Grid
             item
-            // sx={{
-            //   display: "flex",
-            //   justifyContent: "flex-end",
-            //   marginRight: { xs: 0, sm: 8 },
-            // }}
             xs={12}
             align="center"
             pt={{ xs: 4, sm: 6 }}
@@ -496,6 +475,7 @@ const FormTicket = () => {
               />
               message="Registro creado con éxito"
               openModal={openModal}
+              redirectTo={'/seguridad/ticket/crear'}
             />
           )}
         </Grid>
