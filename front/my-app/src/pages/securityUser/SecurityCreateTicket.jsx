@@ -34,6 +34,11 @@ const FormTicket = () => {
   const minutes = dateNow.getMinutes();
   const minutess = (`${minutes}` < 10) ? "0" + `${minutes}` : `${minutes}`;
 
+  const resetForm = () => {
+
+    formik.setValues(initialTicket);
+  }
+
   
   const initialTicket = {
     fecha_ingreso: `${year}-${month}-${date}`, // '01-01-2022'
@@ -58,12 +63,10 @@ const FormTicket = () => {
 
   React.useEffect(() => {
     const url = "http://localhost:8080/informes/dataDropdown";
-
     axios
       .get(url, config)
       .then((response) => setDataDropdown(response.data))
       .catch((error) => console.log("error jwt:", error.response.data.mensaje));
-
   }, [token]);
 
   const formik = useFormik({
@@ -85,6 +88,8 @@ const FormTicket = () => {
         .catch(function (error) {
           console.log("Error:", error);
         });
+
+      
 
     },
   });
@@ -118,10 +123,34 @@ const FormTicket = () => {
               sx={{
                 ".MuiOutlinedInput-notchedOutline": {
                   borderColor: "white",
+                  transition: '250ms all ease'
                 },
                 ".MuiInputBase-root": {
                   color: "white",
                 },
+                ".MuiSvgIcon-root": {
+                  color: "white",
+                },
+                ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                  color: "white",
+                },
+                "input:hover": {
+                  background:'transparent',
+                  color: "#29507e",
+                  fontWeight: 500,
+                },
+                ".MuiInputBase-root:hover ":{
+                  backgroundColor: "rgb(255, 255, 255)",
+                  border:'none',
+                  color: "#29507e",
+                  fontWeight: 500
+                },
+                ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+                  color: "rgb(19, 46, 77)",
+                },
+                ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+                  border:'none'
+                }
               }}
               InputProps={{
                 type: "text",
@@ -159,6 +188,7 @@ const FormTicket = () => {
                 ".MuiInputBase-root": {
                   color: "white",
                 },
+                
               }}
               InputProps={{
                 type: "number",
@@ -188,6 +218,11 @@ const FormTicket = () => {
                 ".MuiInputBase-root": {
                   color: "white",
                 },
+                'input:hover':{
+                  backgroundColor: "rgb(255 255 255)",
+                  color: "#29507e",
+                  fontWeight: '500'
+                }
               }}
               InputProps={{
                 type: "date",
@@ -223,6 +258,11 @@ const FormTicket = () => {
                 "& .MuiSvgIcon-root": {
                   color: "white",
                 },
+                'input:hover':{
+                  backgroundColor: "rgb(255 255 255)",
+                  color: "#29507e",
+                  fontWeight: '500'
+                }
               }}
               InputProps={{
                 type: "time",
@@ -261,23 +301,39 @@ const FormTicket = () => {
             {dataDropdown.empresas && 
               <Autocomplete fullWidth
                           options={dataDropdown.empresas}
-                          autoHighlight
+                          // autoHighlight
                           sx={{
                             ".MuiOutlinedInput-notchedOutline": {
                               borderColor: "white",
+                              transition: '250ms all ease'
                             },
                             ".MuiInputBase-root": {
                               color: "white",
                             },
-                            "& .MuiSvgIcon-root": {
+                            ".MuiSvgIcon-root": {
                               color: "white",
                             },
                             ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
                               color: "white",
                             },
                             "input:hover": {
-                              background:'transparent'
-                            }
+                              background:'transparent',
+                              color: "#29507e",
+                              fontWeight: 500,
+                            },
+                            ".MuiInputBase-root:hover ":{
+                              backgroundColor: "rgb(255, 255, 255)",
+                              border:'none',
+                              color: "#29507e",
+                              fontWeight: 500
+                            },
+                            ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+                              color: "rgb(19, 46, 77)",
+                            },
+                            ".MuiAutocomplete-endAdornment:hover .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root ":{
+                              color: "rgb(19, 46, 77)",
+                            },
+                            
                         
                           }}
                           onChange={(event, newValue) => {
@@ -326,18 +382,50 @@ const FormTicket = () => {
               fullWidth
               select
               label="Seleccione tipo de servicio"
+              // sx={{
+              //   ".MuiOutlinedInput-notchedOutline": {
+              //     borderColor: "white",
+              //   },
+              //   ".MuiInputBase-root": {
+              //     color: "white",
+              //   },
+              //   "& .MuiSvgIcon-root": {
+              //     color: "white",
+              //   },
+
+              //   // minWidth: "260px",
+              // }}
               sx={{
                 ".MuiOutlinedInput-notchedOutline": {
                   borderColor: "white",
+                  transition: '250ms all ease'
                 },
                 ".MuiInputBase-root": {
                   color: "white",
                 },
-                "& .MuiSvgIcon-root": {
+                ".MuiSvgIcon-root": {
                   color: "white",
                 },
-
-                // minWidth: "260px",
+                ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                  color: "white",
+                },
+                "input:hover": {
+                  background:'transparent',
+                  color: "#29507e",
+                  fontWeight: 500,
+                },
+                ".MuiInputBase-root:hover ":{
+                  backgroundColor: "rgb(255, 255, 255)",
+                  border:'none',
+                  color: "#29507e",
+                  fontWeight: 500
+                },
+                ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+                  color: "rgb(19, 46, 77)",
+                },
+                ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+                  border:'none'
+                }
               }}
               InputLabelProps={{
                 style: { color: "#fff" },
@@ -383,17 +471,38 @@ const FormTicket = () => {
               InputLabelProps={{
                 style: { color: "#fff" },
               }}
+             
               sx={{
                 ".MuiOutlinedInput-notchedOutline": {
                   borderColor: "white",
+                  transition: '250ms all ease'
                 },
                 ".MuiInputBase-root": {
                   color: "white",
                 },
-                "& .MuiSvgIcon-root": {
+                ".MuiSvgIcon-root": {
                   color: "white",
                 },
-                // minWidth: "250px",
+                ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                  color: "white",
+                },
+                "input:hover": {
+                  background:'transparent',
+                  color: "#29507e",
+                  fontWeight: 500,
+                },
+                ".MuiInputBase-root:hover ":{
+                  backgroundColor: "rgb(255, 255, 255)",
+                  border:'none',
+                  color: "#29507e",
+                  fontWeight: 500
+                },
+                ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+                  color: "rgb(19, 46, 77)",
+                },
+                ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+                  border:'none'
+                }
               }}
               name="estado_id"
               value={formik.values.estado_id}
@@ -457,6 +566,16 @@ const FormTicket = () => {
             align="center"
             pt={{ xs: 4, sm: 6 }}
           >
+            <Button
+              variant="outlined"
+              onClick={resetForm}
+              py={2}
+              my={4}
+              mx={4}
+              sx={{ color:'white' }}
+            >
+              Limpiar registro
+            </Button>
             <Button
               variant="contained"
               type="submit"
