@@ -93,6 +93,7 @@ const getAllEmpresas = async (req, res) => {
           [Op.eq]: "0",
         },
       },
+      order: [["empresa", "ASC"]],
     });
     // console.log(empresas);
     empresas.forEach(empresa => {

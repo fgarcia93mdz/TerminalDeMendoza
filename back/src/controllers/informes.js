@@ -90,6 +90,7 @@ const getDataDropdown = async (req, res) => {
           [Op.eq]: "0",
         },
       },
+      order: [["empresa", "ASC"]],
     });
     const tipo_tv = await Tipo_tv.findAll();
     const servicios = await Servicio.findAll({
