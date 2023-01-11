@@ -30,15 +30,17 @@ const titulo = {
 // isOpen: true boolean abre el modal
 
 
-const closeSession = () => {
-  window.location.reload();
-};
+
 export default function BasicModal({ title , message, openModal }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => setOpen(false);
 
-  console.log('openModal', openModal)
+  console.log('openModal', openModal);
+
+  const closeSession = () => {
+    setOpen(false)
+  };
 
   React.useEffect(() => {
     setOpen(openModal)

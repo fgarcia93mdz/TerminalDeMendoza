@@ -12,6 +12,7 @@ const FormTicket = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dataDropdown, setDataDropdown] = useState({});
   // const navigate = useNavigate()
+  const [ valueEmpresa, setValueEmpresa ] = useState(null)
   const token = sessionStorage.getItem("jwt");
   const config = { headers: { authorization: `Bearer ${token}` } };
 
@@ -34,22 +35,24 @@ const FormTicket = () => {
   const minutes = dateNow.getMinutes();
   const minutess = (`${minutes}` < 10) ? "0" + `${minutes}` : `${minutes}`;
 
-  const resetForm = () => {
-
-    formik.setValues(initialTicket);
-  }
+  console.log('minutess',minutess, 'hours:', hours, 'minutes:', minutes)
 
   
   const initialTicket = {
     fecha_ingreso: `${year}-${month}-${date}`, // '01-01-2022'
     hora_ingreso: `${hours}:${minutess}`, // '12:00'
     interno: "", // 123
-    empresa_id: "", // 2
+    empresa_id: valueEmpresa, // 2
     servicios_id: "", // 2
     estado_id: "", // '0'
     destino: "", // 'Mar de Ajo'
     tipo_tv_id: 3,
   };
+
+  const resetForm = () => {
+    formik.resetForm();
+    setValueEmpresa(null)
+  }
 
   const validationSchema = yup.object({
     fecha_ingreso: yup.string().required("Campo requerido"),
@@ -76,23 +79,60 @@ const FormTicket = () => {
     onSubmit: (values) => {
       const url = "http://localhost:8080/informes/nuevo";
       const data = formik.values;
-      console.log("data form create ticket", data);
+      // console.log("data form create ticket", data);
 
       
       axios.post(url, data, config)
         .then((res) => {
           if (res.status === 200) {
             setOpenModal(true);
+            resetForm();
+
           }
         })
         .catch(function (error) {
           console.log("Error:", error);
         });
 
-      
-
     },
   });
+
+  const inputStyle = {
+    ".MuiOutlinedInput-notchedOutline": {
+      borderColor: "#fff",
+      transition: '250ms all ease'
+    },
+    ".MuiInputBase-root": {
+      color: "white",
+      transition:'250ms all ease'
+    },
+    ".MuiSvgIcon-root": {
+      color: "white",
+    },
+    ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+      color: "white",
+    },
+    "input:hover": {
+      background:'transparent',
+      // color: "#29507e",
+    },
+    ".MuiInputBase-root:hover ":{
+      // backgroundColor: "rgb(255, 255, 255)",
+      // color: "#29507e",
+      boxShadow:' inset 0 0 9px rgb(63, 100, 143)'
+    },
+    ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+      color: "rgb(19, 46, 77)",
+      border:'none'
+
+    },
+    ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+      border:'none'
+    },
+    ".css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+      borderColor:'white'
+    }
+  }
 
   return (
     <Stack
@@ -120,38 +160,7 @@ const FormTicket = () => {
               Interno:
             </Typography>
             <TextField
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                  transition: '250ms all ease'
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                ".MuiSvgIcon-root": {
-                  color: "white",
-                },
-                ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
-                  color: "white",
-                },
-                "input:hover": {
-                  background:'transparent',
-                  color: "#29507e",
-                  fontWeight: 500,
-                },
-                ".MuiInputBase-root:hover ":{
-                  backgroundColor: "rgb(255, 255, 255)",
-                  border:'none',
-                  color: "#29507e",
-                  fontWeight: 500
-                },
-                ".MuiInputBase-root:hover .MuiSvgIcon-root":{
-                  color: "rgb(19, 46, 77)",
-                },
-                ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
-                  border:'none'
-                }
-              }}
+              sx={inputStyle}
               InputProps={{
                 type: "text",
               }}
@@ -211,19 +220,18 @@ const FormTicket = () => {
               Fecha de ingreso:
             </Typography>
             <TextField
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                'input:hover':{
-                  backgroundColor: "rgb(255 255 255)",
-                  color: "#29507e",
-                  fontWeight: '500'
-                }
-              }}
+              // sx={{
+              //   ".MuiOutlinedInput-notchedOutline": {
+              //     borderColor: "white",
+              //   },
+              //   ".MuiInputBase-root": {
+              //     color: "white",
+              //   },
+              //   'input:hover':{
+              //     backgroundColor: "#ffffff8",
+              //   }
+              // }}
+              sx={inputStyle}
               InputProps={{
                 type: "date",
               }}
@@ -248,22 +256,23 @@ const FormTicket = () => {
               Hora de ingreso:
             </Typography>
             <TextField
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                "& .MuiSvgIcon-root": {
-                  color: "white",
-                },
-                'input:hover':{
-                  backgroundColor: "rgb(255 255 255)",
-                  color: "#29507e",
-                  fontWeight: '500'
-                }
-              }}
+              // sx={{
+              //   ".MuiOutlinedInput-notchedOutline": {
+              //     borderColor: "white",
+              //   },
+              //   ".MuiInputBase-root": {
+              //     color: "white",
+              //   },
+              //   "& .MuiSvgIcon-root": {
+              //     color: "white",
+              //   },
+              //   'input:hover':{
+              //     backgroundColor: "rgb(255 255 255)",
+              //     color: "#29507e",
+              //     fontWeight: '500'
+              //   }
+              // }}
+              sx={inputStyle}
               InputProps={{
                 type: "time",
               }}
@@ -299,52 +308,58 @@ const FormTicket = () => {
             {/* {console.log('dataDropdown.empresas', dataDropdown.empresas)} */}
             
             {dataDropdown.empresas && 
-              <Autocomplete fullWidth
+              <Autocomplete
+                          fullWidth
+                          clearOnEscape
+                          value={valueEmpresa}
                           options={dataDropdown.empresas}
+                          
                           // autoHighlight
-                          sx={{
-                            ".MuiOutlinedInput-notchedOutline": {
-                              borderColor: "white",
-                              transition: '250ms all ease'
-                            },
-                            ".MuiInputBase-root": {
-                              color: "white",
-                            },
-                            ".MuiSvgIcon-root": {
-                              color: "white",
-                            },
-                            ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
-                              color: "white",
-                            },
-                            "input:hover": {
-                              background:'transparent',
-                              color: "#29507e",
-                              fontWeight: 500,
-                            },
-                            ".MuiInputBase-root:hover ":{
-                              backgroundColor: "rgb(255, 255, 255)",
-                              border:'none',
-                              color: "#29507e",
-                              fontWeight: 500
-                            },
-                            ".MuiInputBase-root:hover .MuiSvgIcon-root":{
-                              color: "rgb(19, 46, 77)",
-                            },
-                            ".MuiAutocomplete-endAdornment:hover .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root ":{
-                              color: "rgb(19, 46, 77)",
-                            },
-                            
-                        
-                          }}
+                          // sx={{
+                          //   ".MuiOutlinedInput-notchedOutline": {
+                          //     borderColor: "white",
+                          //     transition: '250ms all ease'
+                          //   },
+                          //   ".MuiInputBase-root": {
+                          //     color: "white",
+                          //   },
+                          //   ".MuiSvgIcon-root": {
+                          //     color: "white",
+                          //   },
+                          //   ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                          //     color: "white",
+                          //   },
+                          //   "input:hover": {
+                          //     background:'transparent',
+                          //     color: "#29507e",
+                          //     fontWeight: 500,
+                          //   },
+                          //   ".MuiInputBase-root:hover ":{
+                          //     backgroundColor: "rgb(255, 255, 255)",
+                          //     border:'none',
+                          //     color: "#29507e",
+                          //     fontWeight: 500
+                          //   },
+                          //   ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+                          //     color: "rgb(19, 46, 77)",
+                          //   },
+                          //   ".MuiAutocomplete-endAdornment:hover .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root ":{
+                          //     color: "rgb(19, 46, 77)",
+                          //   },
+                          // }}
+                          sx={inputStyle}
+                          // onChange={(event, newValue) => {
+                          //   // console.log('event:', event, 'newValue:', newValue)
+                          //   formik.setFieldValue('empresa_id', newValue.id)
+                          // }}
                           onChange={(event, newValue) => {
-                            // console.log('event:', event, 'newValue:', newValue)
+                            setValueEmpresa(newValue);
                             formik.setFieldValue('empresa_id', newValue.id)
                           }}
                           getOptionLabel={(option) => option.empresa}
                           renderInput={(params) => 
                             <TextField 
                               error={formik.errors.empresa_id}
-
                               {...params} 
                               label='Busque una empresa' 
                               style={{
@@ -395,38 +410,39 @@ const FormTicket = () => {
 
               //   // minWidth: "260px",
               // }}
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                  transition: '250ms all ease'
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                ".MuiSvgIcon-root": {
-                  color: "white",
-                },
-                ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
-                  color: "white",
-                },
-                "input:hover": {
-                  background:'transparent',
-                  color: "#29507e",
-                  fontWeight: 500,
-                },
-                ".MuiInputBase-root:hover ":{
-                  backgroundColor: "rgb(255, 255, 255)",
-                  border:'none',
-                  color: "#29507e",
-                  fontWeight: 500
-                },
-                ".MuiInputBase-root:hover .MuiSvgIcon-root":{
-                  color: "rgb(19, 46, 77)",
-                },
-                ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
-                  border:'none'
-                }
-              }}
+              sx={inputStyle}
+              // sx={{
+              //   ".MuiOutlinedInput-notchedOutline": {
+              //     borderColor: "white",
+              //     transition: '250ms all ease'
+              //   },
+              //   ".MuiInputBase-root": {
+              //     color: "white",
+              //   },
+              //   ".MuiSvgIcon-root": {
+              //     color: "white",
+              //   },
+              //   ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+              //     color: "white",
+              //   },
+              //   "input:hover": {
+              //     background:'transparent',
+              //     color: "#29507e",
+              //     fontWeight: 500,
+              //   },
+              //   ".MuiInputBase-root:hover ":{
+              //     backgroundColor: "rgb(255, 255, 255)",
+              //     border:'none',
+              //     color: "#29507e",
+              //     fontWeight: 500
+              //   },
+              //   ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+              //     color: "rgb(19, 46, 77)",
+              //   },
+              //   ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+              //     border:'none'
+              //   }
+              // }}
               InputLabelProps={{
                 style: { color: "#fff" },
               }}
@@ -472,38 +488,39 @@ const FormTicket = () => {
                 style: { color: "#fff" },
               }}
              
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                  transition: '250ms all ease'
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                ".MuiSvgIcon-root": {
-                  color: "white",
-                },
-                ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
-                  color: "white",
-                },
-                "input:hover": {
-                  background:'transparent',
-                  color: "#29507e",
-                  fontWeight: 500,
-                },
-                ".MuiInputBase-root:hover ":{
-                  backgroundColor: "rgb(255, 255, 255)",
-                  border:'none',
-                  color: "#29507e",
-                  fontWeight: 500
-                },
-                ".MuiInputBase-root:hover .MuiSvgIcon-root":{
-                  color: "rgb(19, 46, 77)",
-                },
-                ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
-                  border:'none'
-                }
-              }}
+              // sx={{
+              //   ".MuiOutlinedInput-notchedOutline": {
+              //     borderColor: "white",
+              //     transition: '250ms all ease'
+              //   },
+              //   ".MuiInputBase-root": {
+              //     color: "white",
+              //   },
+              //   ".MuiSvgIcon-root": {
+              //     color: "white",
+              //   },
+              //   ".css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+              //     color: "white",
+              //   },
+              //   "input:hover": {
+              //     background:'transparent',
+              //     color: "#29507e",
+              //     fontWeight: 500,
+              //   },
+              //   ".MuiInputBase-root:hover ":{
+              //     backgroundColor: "rgb(255, 255, 255)",
+              //     border:'none',
+              //     color: "#29507e",
+              //     fontWeight: 500
+              //   },
+              //   ".MuiInputBase-root:hover .MuiSvgIcon-root":{
+              //     color: "rgb(19, 46, 77)",
+              //   },
+              //   ".css-md26zr-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+              //     border:'none'
+              //   }
+              // }}
+              sx={inputStyle}
               name="estado_id"
               value={formik.values.estado_id}
               // error={formik.errors.length > 0}
@@ -537,15 +554,15 @@ const FormTicket = () => {
             </Typography>
             <TextField
               fullWidth
-              sx={{
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "white",
-                },
-                ".MuiInputBase-root": {
-                  color: "white",
-                },
-                
-              }}
+              sx={
+                // ".MuiOutlinedInput-notchedOutline": {
+                //   borderColor: "white",
+                // },
+                // ".MuiInputBase-root": {
+                //   color: "white",
+                // },
+                inputStyle
+              }
               InputLabelProps={{
                 style: { color: "#fff" },
                 texttransform: "uppercase",
@@ -565,6 +582,7 @@ const FormTicket = () => {
             xs={12}
             align="center"
             pt={{ xs: 4, sm: 6 }}
+            
           >
             <Button
               variant="outlined"
@@ -572,6 +590,7 @@ const FormTicket = () => {
               py={2}
               my={4}
               mx={4}
+              
               sx={{ color:'white' }}
             >
               Limpiar registro
