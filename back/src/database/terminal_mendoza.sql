@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 04-12-2022 a las 17:25:45
+-- Tiempo de generación: 12-01-2023 a las 18:45:26
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -29,7 +29,6 @@ USE `terminal_mendoza`;
 -- Estructura de tabla para la tabla `empresa`
 --
 
-DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE `empresa` (
   `id` int(11) NOT NULL,
   `empresa` varchar(45) NOT NULL,
@@ -94,7 +93,6 @@ INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`, `cuit`, `borrado`) VALU
 -- Estructura de tabla para la tabla `estado`
 --
 
-DROP TABLE IF EXISTS `estado`;
 CREATE TABLE `estado` (
   `id` int(11) NOT NULL,
   `tipo` varchar(45) DEFAULT NULL
@@ -116,7 +114,6 @@ INSERT INTO `estado` (`id`, `tipo`) VALUES
 -- Estructura de tabla para la tabla `operacion`
 --
 
-DROP TABLE IF EXISTS `operacion`;
 CREATE TABLE `operacion` (
   `id` int(11) NOT NULL,
   `tipo_operacion` varchar(45) NOT NULL
@@ -137,7 +134,6 @@ INSERT INTO `operacion` (`id`, `tipo_operacion`) VALUES
 -- Estructura de tabla para la tabla `plataformas`
 --
 
-DROP TABLE IF EXISTS `plataformas`;
 CREATE TABLE `plataformas` (
   `id` int(11) NOT NULL,
   `plataforma` varchar(45) DEFAULT NULL,
@@ -223,7 +219,6 @@ INSERT INTO `plataformas` (`id`, `plataforma`, `servicios_id`, `borrado`) VALUES
 -- Estructura de tabla para la tabla `prueba`
 --
 
-DROP TABLE IF EXISTS `prueba`;
 CREATE TABLE `prueba` (
   `idprueba` int(11) NOT NULL,
   `insert` varchar(45) DEFAULT NULL
@@ -235,7 +230,6 @@ CREATE TABLE `prueba` (
 -- Estructura de tabla para la tabla `registro_administrativo`
 --
 
-DROP TABLE IF EXISTS `registro_administrativo`;
 CREATE TABLE `registro_administrativo` (
   `id` int(11) NOT NULL,
   `fecha_ingreso` date NOT NULL,
@@ -249,34 +243,32 @@ CREATE TABLE `registro_administrativo` (
   `fecha_salida` date DEFAULT NULL,
   `hora_salida` time DEFAULT NULL,
   `destino` varchar(45) DEFAULT NULL,
-  `tipo_tv_id` int(11) DEFAULT '3'
+  `tipo_tv_id` int(11) DEFAULT '3',
+  `interurbano` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Disparadores `registro_administrativo`
 --
-DROP TRIGGER IF EXISTS `registro_administrativo_INSERT`;
 DELIMITER $$
 CREATE TRIGGER `registro_administrativo_INSERT` AFTER INSERT ON `registro_administrativo` FOR EACH ROW INSERT INTO registro_administrativo_log (
-fecha_ingreso, hora_ingreso, interno, empresa_id, servicios_id,usuarios_id, plataformas_id, estado_id, fecha_salida, hora_salida, id_registro, updated_at, operacion_id 
+fecha_ingreso, hora_ingreso, interno, empresa_id, servicios_id,usuarios_id, plataformas_id, estado_id, fecha_salida, hora_salida, id_registro, updated_at, operacion_id, interurbano 
 ) VALUES (NEW.fecha_ingreso, NEW.hora_ingreso, NEW.interno, NEW.empresa_id, NEW.servicios_id, NEW.usuarios_id, 
-NEW.plataformas_id, NEW.estado_id, NEW.fecha_salida, NEW.hora_salida, NEW.id, CURRENT_TIMESTAMP(),1)
+NEW.plataformas_id, NEW.estado_id, NEW.fecha_salida, NEW.hora_salida, NEW.id, CURRENT_TIMESTAMP(),1, NEW.interurbano)
 $$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `registro_administrativo_UPDATE`;
 DELIMITER $$
 CREATE TRIGGER `registro_administrativo_UPDATE` AFTER UPDATE ON `registro_administrativo` FOR EACH ROW INSERT INTO registro_administrativo_log (
-fecha_ingreso, hora_ingreso, interno, empresa_id, servicios_id,usuarios_id, plataformas_id, estado_id, fecha_salida, hora_salida, id_registro, updated_at, operacion_id 
+fecha_ingreso, hora_ingreso, interno, empresa_id, servicios_id,usuarios_id, plataformas_id, estado_id, fecha_salida, hora_salida, id_registro, updated_at, operacion_id, interurbano 
 ) VALUES (NEW.fecha_ingreso, NEW.hora_ingreso, NEW.interno, NEW.empresa_id, NEW.servicios_id, NEW.usuarios_id, 
-NEW.plataformas_id, NEW.estado_id, NEW.fecha_salida, NEW.hora_salida, NEW.id, CURRENT_TIMESTAMP(),2)
+NEW.plataformas_id, NEW.estado_id, NEW.fecha_salida, NEW.hora_salida, NEW.id, CURRENT_TIMESTAMP(),2, NEW.interurbano)
 $$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `registro_administrativo_delete`;
 DELIMITER $$
 CREATE TRIGGER `registro_administrativo_delete` AFTER DELETE ON `registro_administrativo` FOR EACH ROW INSERT INTO registro_administrativo_log (
-fecha_ingreso, hora_ingreso, interno, empresa_id, servicios_id,usuarios_id, plataformas_id, estado_id, fecha_salida, hora_salida, id_registro, updated_at, operacion_id 
+fecha_ingreso, hora_ingreso, interno, empresa_id, servicios_id,usuarios_id, plataformas_id, estado_id, fecha_salida, hora_salida, id_registro, updated_at, operacion_id, interurbano 
 ) VALUES (OLD.fecha_ingreso, OLD.hora_ingreso, OLD.interno, OLD.empresa_id, OLD.servicios_id, OLD.usuarios_id, 
-OLD.plataformas_id, OLD.estado_id, OLD.fecha_salida, OLD.hora_salida, OLD.id, CURRENT_TIMESTAMP(),3)
+OLD.plataformas_id, OLD.estado_id, OLD.fecha_salida, OLD.hora_salida, OLD.id, CURRENT_TIMESTAMP(),3,interurbano)
 $$
 DELIMITER ;
 
@@ -286,7 +278,6 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `registro_administrativo_log`
 --
 
-DROP TABLE IF EXISTS `registro_administrativo_log`;
 CREATE TABLE `registro_administrativo_log` (
   `id` int(11) NOT NULL,
   `fecha_ingreso` date NOT NULL,
@@ -302,14 +293,16 @@ CREATE TABLE `registro_administrativo_log` (
   `destino` varchar(45) DEFAULT NULL,
   `updated_at` datetime NOT NULL,
   `operacion_id` int(11) NOT NULL,
-  `id_registro` int(11) DEFAULT NULL
+  `id_registro` int(11) DEFAULT NULL,
+  `interurbano` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
   `rol` varchar(45) NOT NULL,
@@ -333,7 +326,6 @@ INSERT INTO `roles` (`id`, `rol`, `borrado`) VALUES
 -- Estructura de tabla para la tabla `servicios`
 --
 
-DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE `servicios` (
   `id` int(11) NOT NULL,
   `siglas` varchar(45) NOT NULL,
@@ -358,7 +350,6 @@ INSERT INTO `servicios` (`id`, `siglas`, `tipo_servicio`, `borrado`) VALUES
 -- Estructura de tabla para la tabla `tipo_tv`
 --
 
-DROP TABLE IF EXISTS `tipo_tv`;
 CREATE TABLE `tipo_tv` (
   `id` int(11) NOT NULL,
   `tipo` varchar(45) DEFAULT NULL
@@ -379,7 +370,6 @@ INSERT INTO `tipo_tv` (`id`, `tipo`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
@@ -406,7 +396,6 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `password`, `role
 -- Estructura de tabla para la tabla `usuarios_log`
 --
 
-DROP TABLE IF EXISTS `usuarios_log`;
 CREATE TABLE `usuarios_log` (
   `id` int(11) NOT NULL,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -420,7 +409,6 @@ CREATE TABLE `usuarios_log` (
 -- Estructura de tabla para la tabla `usuario_eliminado`
 --
 
-DROP TABLE IF EXISTS `usuario_eliminado`;
 CREATE TABLE `usuario_eliminado` (
   `id` int(11) NOT NULL,
   `motivo` varchar(100) NOT NULL,

@@ -5,27 +5,24 @@ module.exports = (sequelize, dataTypes) => {
     id: {
       type: dataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     fecha_ingreso: {
       type: dataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     hora_ingreso: {
       type: dataTypes.TIME,
-      allowNull: false
+      allowNull: false,
     },
     interno: {
       type: dataTypes.INTEGER,
-
     },
     fecha_salida: {
       type: dataTypes.DATE,
-
     },
     hora_salida: {
       type: dataTypes.TIME,
-
     },
     destino: {
       type: dataTypes.STRING(45),
@@ -35,11 +32,13 @@ module.exports = (sequelize, dataTypes) => {
     usuarios_id: dataTypes.BIGINT(11),
     plataformas_id: {
       type: dataTypes.BIGINT(11),
-      allowNull: true
+      allowNull: true,
     },
     estado_id: dataTypes.BIGINT(11),
     tipo_tv_id: dataTypes.BIGINT(11),
-
+    interurbano: {
+      type: dataTypes.STRING(1),
+    },
   };
   let config = {
     tableName: 'registro_administrativo',
