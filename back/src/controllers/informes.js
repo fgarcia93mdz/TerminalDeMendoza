@@ -30,6 +30,7 @@ const addInforme = async (req, res) => {
       estado_id,
       destino,
       tipo_tv_id,
+      interurbano,
     } = data;
 
     if (
@@ -55,6 +56,7 @@ const addInforme = async (req, res) => {
       destino,
       usuarios_id,
       tipo_tv_id,
+      interurbano,
     };
 
     // if (rol === 5) {
@@ -69,7 +71,7 @@ const addInforme = async (req, res) => {
     //   dataAingresar.plataformas_id = plataformas_id;
     //   dataAingresar.tipo_tv_id = tipo_tv_id;
     // }
-    //console.log(dataAingresar);
+    soloLSoNull(dataAingresar.interurbano);
     await RegistroTorre.create(dataAingresar);
 
     return res.status(200).json({
@@ -78,6 +80,24 @@ const addInforme = async (req, res) => {
   } catch (error) {
     return res.status(400).json({ mensaje: "error al generar ingreso" });
   }
+};
+
+const soloLSoNull = (interurbano) => {
+  if (typeof interurbano === "string") {
+    if (
+      interurbano.toUpperCase() !== "L" &&
+      interurbano.toUpperCase() !== "S"
+    ) {
+      interurbano = null;
+    } else {
+      interurbano = interurbano.toUpperCase();
+    }
+  }
+
+  if (interurbano === undefined || typeof interurbano === "number") {
+    interurbano = null;
+  }
+  return interurbano;
 };
 
 const getDataDropdown = async (req, res) => {
@@ -140,7 +160,6 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         },
       },
     });
-
     const respuesta = {
       fueraDePlataforma: [],
       enPlataforma: [],
@@ -162,6 +181,7 @@ const informesListadoSeparadosPorEstado = async (req, res) => {
         fecha_salida: ingreso.fecha_salida,
         horario_salida: ingreso.hora_salida,
         tipo_tv: ingreso.registro_tipo_tv.dataValues.tipo,
+        interurbano: ingreso.interurbano,
       };
 
       if (ingreso.estado_id === 2) {
@@ -222,6 +242,7 @@ const informesListado = async (req, res) => {
         horario_salida: ingreso.hora_salida,
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado.dataValues.tipo,
+        interurbano: ingreso.interurbano,
       });
     });
 
@@ -284,6 +305,7 @@ const informesListadoPorRangoDeFechas = async (req, res) => {
         plataforma: ingreso.registro_plataforma?.dataValues?.plataforma,
         estado: ingreso.registro_estado?.dataValues?.tipo,
         servicio: ingreso.registro_servicio?.dataValues?.siglas,
+        interurbano: ingreso.interurbano,
       });
     });
 
@@ -301,7 +323,9 @@ const getInforme = async (req, res) => {
     const ingresoId = req.params.id;
     const diaHoy = moment();
 
-    const ingresos = await RegistroTorre.findAll({
+    console.log(ingresoId);
+
+    const ingresos = await RegistroTorre.findByPk(ingresoId, {
       include: [
         "registro_empresa",
         "registro_servicio",
@@ -309,10 +333,17 @@ const getInforme = async (req, res) => {
         "registro_estado",
         "registro_tipo_tv",
       ],
-      where: {
-        id: ingresoId,
-      },
+      // where: {
+      //   id: ingresoId,
+      // },
     });
+
+    if (!ingresos) {
+      return res.status(404).json({
+        mensaje: "informe no encontrado",
+      });
+    }
+
     const empresa = await Empresa.findAll();
     const servicio = await Servicio.findAll();
     const plataforma = await Plataforma.findAll();
@@ -351,6 +382,7 @@ const modificarInforme = async (req, res) => {
       servicios_id: servicio,
       usuario,
       tipo_tv,
+      interurbano,
     } = req.body;
 
     // console.log("req.body:", req.body);
@@ -376,6 +408,8 @@ const modificarInforme = async (req, res) => {
       if (empresa != null) dataACambiar.empresa_id = empresa;
       if (servicio != null) dataACambiar.servicios_id = servicio;
       if (usuario != null) dataACambiar.usuarios_id = usuario;
+      if (interurbano !== undefined)
+        dataACambiar.interurbano = soloLSoNull(interurbano);
 
       if (Object.keys(dataACambiar).length === 0) {
         return res
