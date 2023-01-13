@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 12-01-2023 a las 18:45:26
+-- Tiempo de generación: 13-01-2023 a las 03:11:15
 -- Versión del servidor: 5.7.34
 -- Versión de PHP: 8.0.8
 
@@ -45,47 +45,48 @@ CREATE TABLE `empresa` (
 INSERT INTO `empresa` (`id`, `empresa`, `siglas`, `img`, `cuit`, `borrado`) VALUES
 (1, 'Andesmar', 'AND', 'andesmar.png', '1544-45555-47', 0),
 (2, 'Iselin', 'ISL', 'iselin.png', '20-4457-88', 0),
-(3, 'Autotransportes San Juan', 'SJV', 'autsanjuan.png', '20-379955-74', 0),
-(4, 'Cata', 'CAT', NULL, '0', 0),
-(5, 'Central Argentino', 'CCA', NULL, '0', 0),
-(6, 'Flechabus', 'DER', NULL, '0', 0),
-(7, 'El Rápido', 'ERI', NULL, '0', 0),
-(8, 'Buses Lep', 'LEP', NULL, '0', 0),
-(9, 'La Unión', 'LUN', NULL, '0', 0),
-(10, 'Chevallier', 'NCH', NULL, '0', 0),
-(11, 'Rutamar', 'RTM', NULL, '0', 0),
-(12, 'San Juan Mar del Plata', 'SJM', NULL, '0', 0),
-(13, 'Del Sur y Media Agua', 'SMA', NULL, '0', 0),
-(14, 'Sendas', 'SND', NULL, '0', 0),
-(15, 'Tramat', 'TRA', NULL, '0', 0),
-(16, 'Vallecito', 'VLL', NULL, '0', 0),
-(17, 'Viento Sur', 'VTS', NULL, '0', 0),
-(18, 'SOL Y VALLE', 'SYV', NULL, '0', 0),
-(19, '20 DE JUNIO', '20J', '20dejunio_88c96fe543.jpg', '0', 0),
-(20, 'Ahumada', 'AHU', 'ahumada_1bfb06b4e4.jpg', '0', 0),
-(21, 'Chiar', 'CHI', NULL, '0', 0),
-(22, 'Coitram', 'COI', NULL, '0', 0),
-(23, 'El Quirquincho', 'QQC', NULL, '0', 0),
-(24, 'General Artigas', 'EGA', NULL, '0', 0),
-(25, 'Fenix', 'FEN', NULL, '0', 0),
-(26, 'Nevada', 'NEV', NULL, '0', 0),
-(27, 'Ohigins', 'OHI', NULL, '0', 0),
-(28, 'Radiomóvil', 'RAD', NULL, '0', 0),
-(29, 'Tas Choapa', 'TCH', NULL, '0', 0),
-(30, 'Turbus', 'TBU', NULL, '0', 0),
-(31, 'Ormeño', 'ORM', NULL, '0', 0),
-(32, 'Buttini', 'BUT', NULL, '0', 0),
-(33, 'Bartolomé Mitre', 'GBM', NULL, '0', 0),
-(34, 'Cacique', 'CCQ', NULL, '0', 0),
-(35, 'Dicetour', 'DIC', NULL, '0', 0),
-(36, 'El Triunfo', 'TRI', NULL, '0', 0),
-(37, 'Maipú', 'MAI', NULL, '0', 0),
-(38, 'Nueva Generación', 'NGE', NULL, '0', 0),
-(39, 'Prestaciones', 'PTC', NULL, '0', 0),
-(40, 'Remis', 'REM', NULL, '0', 0),
-(41, 'Andesmar Cargas', 'CAE', NULL, '0', 0),
-(42, 'Cata Cargas', 'CCE', NULL, '0', 0),
-(43, 'Servicio externo', 'SE', NULL, '0', 0);
+(3, 'Autotransportes San Juan', 'SJV', 'atsj-1.png', '20-379955-74', 0),
+(4, 'Cata', 'CAT', 'cata-1.png', '0', 0),
+(5, 'Central Argentino', 'CCA', 'central-argentino-1.png', '0', 0),
+(6, 'Flechabus', 'DER', 'flechabus-1.png', '0', 0),
+(7, 'El Rápido', 'ERI', 'elrapido-1.png', '0', 0),
+(8, 'Buses Lep', 'LEP', 'empresas-sin-imagen-1.png', '0', 0),
+(9, 'La Unión', 'LUN', 'empresas-sin-imagen-1.png', '0', 0),
+(10, 'Chevallier', 'NCH', 'chevallier-1.png', '0', 0),
+(11, 'Rutamar', 'RTM', 'empresas-sin-imagen-1.png', '0', 0),
+(12, 'San Juan Mar del Plata', 'SJM', 'sjmdl-1.png', '0', 0),
+(13, 'Del Sur y Media Agua', 'SMA', 'delsur-1.png', '0', 0),
+(14, 'Sendas', 'SND', 'sendas-1.png', '0', 0),
+(15, 'Tramat', 'TRA', 'empresas-sin-imagen-1.png', '0', 0),
+(16, 'Vallecito', 'VLL', 'vallecito-1.png', '0', 0),
+(17, 'Viento Sur', 'VTS', 'empresas-sin-imagen-1.png', '0', 0),
+(18, 'SOL Y VALLE', 'SYV', 'empresas-sin-imagen-1.png', '0', 0),
+(19, '20 DE JUNIO', '20J', '20dejunio_88c96fe543.png', '0', 0),
+(20, 'Ahumada', 'AHU', 'ahumada_1bfb06b4e4.png', '0', 0),
+(21, 'Chiar', 'CHI', 'empresas-sin-imagen-1.png', '0', 0),
+(22, 'Coitram', 'COI', 'coitram-1.png', '0', 0),
+(23, 'El Quirquincho', 'QQC', 'empresas-sin-imagen-1.png', '0', 0),
+(24, 'General Artigas', 'EGA', 'empresas-sin-imagen-1.png', '0', 0),
+(25, 'Fenix', 'FEN', 'fenix-1.png', '0', 0),
+(26, 'Nevada', 'NEV', 'empresas-sin-imagen-1.png', '0', 0),
+(27, 'Ohigins', 'OHI', 'empresas-sin-imagen-1.png', '0', 0),
+(28, 'Radiomóvil', 'RAD', 'empresas-sin-imagen-1.png', '0', 0),
+(29, 'Tas Choapa', 'TCH', 'taschoapa-1.png', '0', 0),
+(30, 'Turbus', 'TBU', 'turbus-1.png', '0', 0),
+(31, 'Ormeño', 'ORM', 'empresas-sin-imagen-1.png', '0', 0),
+(32, 'Buttini', 'BUT', 'Butini-1.png', '0', 0),
+(33, 'Bartolomé Mitre', 'GBM', 'empresas-sin-imagen-1.png', '0', 0),
+(34, 'Cacique', 'CCQ', 'empresas-sin-imagen-1.png', '0', 0),
+(35, 'Dicetour', 'DIC', 'dicetours-1.png', '0', 0),
+(36, 'El Triunfo', 'TRI', 'empresas-sin-imagen-1.png', '0', 0),
+(37, 'Maipú', 'MAI', 'empresas-sin-imagen-1.png', '0', 0),
+(38, 'Nueva Generación', 'NGE', 'nuevageneracion-1.png', '0', 0),
+(39, 'Prestaciones', 'PTC', 'empresas-sin-imagen-1.png', '0', 0),
+(40, 'Remis', 'REM', 'empresas-sin-imagen-1.png', '0', 0),
+(41, 'Andesmar Cargas', 'CAE', 'andesmar-carga-1', '0', 0),
+(42, 'Cata Cargas', 'CCE', 'cata-cargo-1.png', '0', 0),
+(43, 'Servicio externo', 'SE', 'empresas-sin-imagen-1.png', '0', 0),
+(44, 'Turismo', 'TUR', 'empresas-sin-imagen-1.png', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -403,6 +404,14 @@ CREATE TABLE `usuarios_log` (
   `usuario_log` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `usuarios_log`
+--
+
+INSERT INTO `usuarios_log` (`id`, `createdAt`, `tipo_de_estado`, `usuario_log`) VALUES
+(1, '2023-01-13 02:18:30', 'Egreso', 'frgarcia'),
+(2, '2023-01-13 02:18:33', 'Ingreso', 'agaitan');
+
 -- --------------------------------------------------------
 
 --
@@ -452,16 +461,6 @@ ALTER TABLE `plataformas`
 --
 ALTER TABLE `prueba`
   ADD PRIMARY KEY (`idprueba`);
-
---
--- Indices de la tabla `registro_administrativo`
---
-ALTER TABLE `registro_administrativo`
-  ADD PRIMARY KEY (`id`,`empresa_id`,`servicios_id`,`usuarios_id`,`estado_id`),
-  ADD KEY `fk_registro_administrativo_empresa1_idx` (`empresa_id`),
-  ADD KEY `fk_registro_administrativo_servicios1_idx` (`servicios_id`),
-  ADD KEY `fk_registro_administrativo_estado1_idx` (`estado_id`),
-  ADD KEY `fk_registro_administrativo_tipo_tv1_idx` (`tipo_tv_id`);
 
 --
 -- Indices de la tabla `registro_administrativo_log`
@@ -518,7 +517,7 @@ ALTER TABLE `usuario_eliminado`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -539,16 +538,10 @@ ALTER TABLE `plataformas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
--- AUTO_INCREMENT de la tabla `registro_administrativo`
---
-ALTER TABLE `registro_administrativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `registro_administrativo_log`
 --
 ALTER TABLE `registro_administrativo_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -578,7 +571,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios_log`
 --
 ALTER TABLE `usuarios_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_eliminado`
@@ -595,15 +588,6 @@ ALTER TABLE `usuario_eliminado`
 --
 ALTER TABLE `plataformas`
   ADD CONSTRAINT `fk_plataformas_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `registro_administrativo`
---
-ALTER TABLE `registro_administrativo`
-  ADD CONSTRAINT `fk_registro_administrativo_empresa1` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registro_administrativo_estado1` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registro_administrativo_servicios1` FOREIGN KEY (`servicios_id`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registro_administrativo_tipo_tv1` FOREIGN KEY (`tipo_tv_id`) REFERENCES `tipo_tv` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `registro_administrativo_log`
